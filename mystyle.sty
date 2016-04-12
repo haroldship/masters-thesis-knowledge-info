@@ -1,0 +1,56 @@
+%
+% Separate out the preamble
+%
+
+\ProvidesPackage{mystyle}
+
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor} % allow text colors
+
+\usepackage{pdfpages}
+
+\usepackage[layout=a4paper,left=3cm,right=2cm,top=2cm,bottom=2cm]{geometry} % margins
+
+\usepackage{amsfonts} % for mathbb
+\usepackage{amsmath} % math
+\usepackage{fixmath} % fix greek letters
+
+\usepackage{amsthm} % theorems
+
+\usepackage{fouriernc}
+\usepackage[T1]{fontenc}
+
+\usepackage{setspace} % allows 1.5 and double spacing
+\usepackage{microtype} % resizes letters to fill lines better
+\usepackage[english]{babel} % hyphenation
+
+\usepackage{url} % urls
+\usepackage[natbibapa]{apacite} % APA citation format
+\bibliographystyle{apacite} % use the style
+
+\usepackage[intoc,prefix,refpage]{nomencl} % nomenclature (notataio)
+
+\usepackage[pdftex,plainpages=false,pdfpagelabels]{hyperref} % links
+
+%
+% End of packages
+%
+
+% Set up research question label, override equation label to use brackets (autoref)
+\newtheorem{researchquestion}{Research question}
+\providecommand*{\researchquestionautorefname}{Research~question}
+
+
+% widow and orphan control
+\widowpenalty10000
+\clubpenalty10000
+
+% math shortcuts and styles
+\newcommand{\mymathit}[1]{\ensuremath{\mbox{\itshape #1}}} % in math mode make words tight
+\newcommand{\norm}[1]{\ensuremath{\lVert#1\rVert}} % vector norm
+\newcommand{\transpose}[1]{\ensuremath{#1}^{\mathrm{T}}}
+\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}} % vector as bold
+
+\renewcommand\nomname{Notation} % change the title from nomenclature to notation
+\renewcommand{\pagedeclaration}[1]{, \hyperlink{page.#1}{page\nobreakspace#1}}
+
+

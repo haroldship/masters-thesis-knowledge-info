@@ -1,0 +1,35 @@
+% !TEX root = scanstatistics_article.tex
+
+\subsection*{What are scan statistics?}
+
+Scan statistics are used to test if a point process is purely random or not, and to detect clusters \citep{naus1965clustering}.
+In general, it works by scanning a subregion called a window over the area of interest, and counting how many of the points are contained in the window.
+If and when the number of points within the window is large enough that the probability is small, a cluster is detected. \citep{schabenberger2004statistical}
+
+The algorithm of \citep{kulldorff1997spatial} extends this idea, by using a circular window, and allowing the area of the window to vary.
+He further extends the idea to allow for inhomogeneous Poisson or Bernoulli processes with \emph{known} intensity function.
+It is evaluated using a likelihood ratio test that compares the likelihood detecting that number of points within the window with the likelihood of constant intensity.
+
+\subsection*{How are they computed?}
+
+Given a region $G$ in $\mathbb{R}^2$ containing $N$ points $(x_1,y_1), \ldots, (x_N, y_N)$, and a zone $Z \subset G$ compute the likelihood function $\mathfrak{L}~(Z)$ according to either the Bernoulli or Poisson model.
+This function expresses the likelihood that that $k_Z$ events are in $Z$ and $N-k_Z$ events are in $Z^c$, i.e. that the rates inside and outside $Z$ are as per the sample.
+The zone $\hat{Z}$ that maximizes the likelihood is the \emph{most likely cluster}.
+Take the ratio of this with the likelihood that the rate inside and outside $Z$ is the same.
+This is computed using Monte Carlo simulations -- need to figure this bit out.
+\citep{schabenberger2004statistical,kulldorff1997spatial}
+
+\subsection*{Is it used for chronic disease epidemiology?}
+
+
+\citep[Section 6.4]{costa2009applications} describe several studies of cancer that used spatial scan statistics to look for clusters.
+Not all of these found statistically significant clusters using this method.
+However, \citep{viel2000soft} found a statistically significant cluster of soft-tissue sarcoma and non-Hodgkins lymphoma clusters around a municipal solid waste incinerator with high dioxin emission levels in France.
+In this study they used circular windows with some modification to allow for certain geographic features (cantons, presence of pollution source).
+The radius was allowed to vary from $0$ to $30\%$ of the \emph{population}.
+
+\subsection*{Other}
+
+\citep{perone2009false} discuss multiple testing and controlling false discovery of clusters.
+ 
+
