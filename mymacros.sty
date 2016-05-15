@@ -1,0 +1,28 @@
+% !TEX root = thesis.tex
+
+%
+% Separate out the preamble
+%
+
+\ProvidesPackage{mymacros}
+
+% Set up research question label, override equation label to use brackets (autoref)
+\newtheorem{researchquestion}{Research question}
+\providecommand*{\researchquestionautorefname}{Research~question}
+
+
+% widow and orphan control
+\widowpenalty10000
+\clubpenalty10000
+
+% math shortcuts and styles
+\newcommand{\mymathit}[1]{\ensuremath{\mbox{\itshape #1}}} % in math mode make words tight
+\newcommand{\norm}[1]{\ensuremath{\lVert#1\rVert}} % vector norm
+\newcommand{\transpose}[1]{\ensuremath{#1}^{\mathrm{T}}}
+\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}} % vector as bold
+
+\renewcommand\nomname{Notation} % change the title from nomenclature to notation
+\renewcommand{\pagedeclaration}[1]{, \hyperlink{page.#1}{page\nobreakspace#1}}
+
+\makenomenclature % build the nomenclature
+

@@ -1,3 +1,5 @@
+% !TEX root = thesis.tex
+
 %
 % Separate out the preamble
 %
@@ -5,6 +7,29 @@
 \ProvidesPackage{mystyle}
 
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor} % allow text colors
+
+\usepackage{subcaption} % subfigures
+
+\usepackage{fancyhdr} % headers
+\fancypagestyle{plain}{%
+	\fancyhf{}
+	\fancyfoot[L]{\docversion}
+	\fancyfoot[C]{\hspace{3cm}\thepage}
+	\renewcommand{\headrulewidth}{0pt}
+}
+\fancypagestyle{front}{%
+	\fancyhf{}
+	\fancyfoot[L]{\docversion}
+	\fancyfoot[C]{\hspace{3cm}\thepage}
+	\renewcommand{\headrulewidth}{0pt}
+}
+\fancypagestyle{main}{%
+	\fancyhf{}
+	\fancyfoot[L]{\docversion}
+	\fancyfoot[C]{\hspace{3cm}\thepage}
+	\renewcommand{\headrulewidth}{0pt}
+}
+\pagestyle{fancy}
 
 \usepackage{pdfpages}
 
@@ -16,7 +41,13 @@
 
 \usepackage{amsthm} % theorems
 
-\usepackage{fouriernc}
+% URW Century Schoolbook with Fourier Math fonts
+%\usepackage{fouriernc}
+%\usepackage[T1]{fontenc}
+
+% Garamond
+\usepackage{garamondx}
+\usepackage[garamondx,cmbraces]{newtxmath}
 \usepackage[T1]{fontenc}
 
 \usepackage{setspace} % allows 1.5 and double spacing
@@ -26,6 +57,7 @@
 \usepackage{url} % urls
 \usepackage[natbibapa]{apacite} % APA citation format
 \bibliographystyle{apacite} % use the style
+\usepackage[nottoc]{tocbibind} % include bibliography in TOC
 
 \usepackage[intoc,prefix,refpage]{nomencl} % nomenclature (notataio)
 
@@ -34,23 +66,4 @@
 %
 % End of packages
 %
-
-% Set up research question label, override equation label to use brackets (autoref)
-\newtheorem{researchquestion}{Research question}
-\providecommand*{\researchquestionautorefname}{Research~question}
-
-
-% widow and orphan control
-\widowpenalty10000
-\clubpenalty10000
-
-% math shortcuts and styles
-\newcommand{\mymathit}[1]{\ensuremath{\mbox{\itshape #1}}} % in math mode make words tight
-\newcommand{\norm}[1]{\ensuremath{\lVert#1\rVert}} % vector norm
-\newcommand{\transpose}[1]{\ensuremath{#1}^{\mathrm{T}}}
-\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}} % vector as bold
-
-\renewcommand\nomname{Notation} % change the title from nomenclature to notation
-\renewcommand{\pagedeclaration}[1]{, \hyperlink{page.#1}{page\nobreakspace#1}}
-
 

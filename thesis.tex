@@ -1,0 +1,55 @@
+% !TEX root = thesis.tex
+
+\immediate\write18{makeindex -s nomencl.ist -o "\jobname.nls" "\jobname.nlo"}
+
+\documentclass[a4paper,12pt,titlepage,oneside,openany]{book}
+
+\usepackage{graphicx}
+\graphicspath{ {img/} }
+\usepackage{ifpdf}
+\ifpdf
+	% put here packages only for the PDF:
+	\DeclareGraphicsExtensions{.pdf,.png,.jpg,.mps}
+	\usepackage{pdfsync} % sync with pdf viewers to make editing easier
+\else
+	% put here packages only for the DVI:
+\fi
+
+%
+% Most of the preamble is in mystyle.sty
+%
+\usepackage{mystyle}
+\usepackage{mymacros}
+
+\title{Investigating the Statistical Properties of the Double Kernel Density Estimator and its Applicability to a Multivariate Analysis of Real World Health Data}
+\author{Harold Ship}
+\date{\today}
+
+% will appear in footer
+\newcommand\docversion{Draft 0.1}
+
+
+%
+% Main document
+%
+\begin{document}
+
+\frontmatter                            % only in book class (roman page #s)
+\maketitle                              % Print title page.
+\tableofcontents                        % Print table of contents
+
+\clearpage
+\listoftables
+\clearpage
+\listoffigures
+\clearpage
+\printnomenclature
+\clearpage
+
+\mainmatter                             % only in book class (arabic page #s)
+\setstretch{1.1}						% some space around text
+
+\chapter{Outline}
+\include{outline}
+
+\end{document}
