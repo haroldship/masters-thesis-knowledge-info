@@ -1,6 +1,6 @@
 % !TEX root = amise_derivation_only.tex
 
-\section{Single-variable Asymptotic Mean Integrated Squared Error}
+\section{Single-variable AMISE}
 
 Derivation of the Asymptotic Mean Integrated Squared Error of the kernel density estimator, based on \citep{wand1994kernel}
 
@@ -122,7 +122,7 @@ Substituting \autoref{eq:MISE-2} in \autoref{eq:MISE-1}, gives the following for
     & \qquad + \int{ f^2(x)\,\mathrm{d}x} \label{eq:MISE} &&
 \end{align}
 
-\subsubsection{Asymptotic Mean Squared Error}
+\subsection{Asymptotic Mean Integrated Squared Error}
 
 The equation we derived for MISE, \autoref{eq:MISE}, depends on the bandwidth in such a way as to make it difficult to compute.
 In this section we will derive an approximation, using Taylor's Theorem, that is far easier to compute.
@@ -130,9 +130,9 @@ In this section we will derive an approximation, using Taylor's Theorem, that is
 There are 3 assumptions that we make, as described in (\citep[pp. 19-20]{wand1994kernel}:
 
 \begin{enumerate}
-    \item The true density $f$ has a second derivative $f^{\prime\prime}$ that is continous, square integrable, and ultimately monotone .
-    \item There is a sequence of bandwidths, \mbox{$\{h_n : 1 < n < \infty\}$} such that each \mbox{$h_n > 0$, $\lim_{n \to \infty} h_n = 0$} and \mbox{$\lim_{n \to \infty} nh = \infty$}.
-    \item $K$ is a bounded probability density with a finite fourth moment and symmetry about the origin.
+    \item \label{asm:second_deriv} The true density $f$ has a second derivative $f^{\prime\prime}$ that is continous, square integrable, and ultimately monotone.
+    \item \label{asm:h_to_zero} There is a sequence of bandwidths, \mbox{$\{h_n : 1 < n < \infty\}$} such that each \mbox{$h_n > 0$, $\lim_{n \to \infty} h_n = 0$} and \mbox{$\lim_{n \to \infty} nh = \infty$}.
+    \item \label{asm:K_pdf} $K$ is a bounded probability density with a finite fourth moment and symmetry about the origin.
 \end{enumerate}
 
 Starting with \autoref{eq:E_f_hat}, we see:
@@ -151,7 +151,7 @@ f(x-hz) & = f(x) - hzf^\prime(x) + \sfrac{1}{2}h^2z^2f^{\prime\prime}(x) + o(h^2
 
 Since $K$ is a pdf, $\int{K(z)\,\mathrm{d}z}=1$.
 Since $K$ is symmetric about the origin, $\int{zK(z)\,\mathrm{d}z}=0$.
-By our assumption, $\int{z^2K(z)\,\mathrm{d}z} < \infty$.
+By our assumption \ref{asm:K_pdf}, $\int{z^2K(z)\,\mathrm{d}z} < \infty$.
 Therefore,
 
 \begin{align}
@@ -168,7 +168,7 @@ Using the same change of variables in \autoref{eq:MSE}, and using the notation $
 
 \begin{align}
 \mbox{Var}(f(x;h)) & = (nh)^{-1} \int{K(z)^2f(x - hz)\,\mathrm{d}z} - n^{-1} [E(\hat{f}(x;h))]^2 && \nonumber \\
-    & = (nh)^{-1} \int{K(z)^2[f(x) + o(1)]\,\mathrm{d}z} - n^{-1}[f(x) + o(1)]^2 && \nonumber
+    & = (nh)^{-1} \int{K(z)^2[f(x) + o(1)]\,\mathrm{d}z} - n^{-1}[f(x) + o(1)]^2 && \nonumber \\
     & = (nh)^{-1} \int{K(z)^2f(x)\,\mathrm{d}z} + \int{K(z)^2o(1)\,\mathrm{d}z} + o(n^{-2})  && \nonumber \\
     & = (nh)^{-1} \int{K(z)^2f(x)\,\mathrm{d}z} + o((nh)^{-1}) + o((nh)^{-1}) && \nonumber \\
     & = (nh)^{-1} \int{K(z)^2f(x)\,\mathrm{d}z} + o((nh)^{-1}) && \label{eq:AVar}
@@ -177,7 +177,7 @@ Using the same change of variables in \autoref{eq:MSE}, and using the notation $
 Adding the approximations of the square of the bias from \autoref{eq:ABias} and the variance from \autoref{eq:AVar}, we get:
 
 \begin{align}
-\mbox{MSE}(\hat{f}(x;h)) & = (nh)^{-1} \int{K^2}f(x) + \sfrac{1}{4}h^4\left(\int{z^2K}\right)^2f^{\prime\prime}(x)^2 + o((nh)^{-1} + h^4) && \label{eq:AMSE}
+\mbox{MSE}(\hat{f}(x;h)) & = (nh)^{-1} \int{K^2}f(x) + \sfrac{1}{4}h^4\left(\int{z^2K}\right)^2f^{\prime\prime}(x)^2 + o((nh)^{-1} + h^4) && \label{eq:EMSE}
 \end{align}
 
 The mean integrated squared error is obtained by integrating \autoref{eq:EMSE}:
