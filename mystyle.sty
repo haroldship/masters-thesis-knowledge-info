@@ -42,13 +42,13 @@
 \usepackage{amsthm} % theorems
 
 % URW Century Schoolbook with Fourier Math fonts
-%\usepackage{fouriernc}
-%\usepackage[T1]{fontenc}
+\usepackage{fouriernc}
+\usepackage[T1]{fontenc}
 
 % Garamond
-\usepackage{garamondx}
-\usepackage[garamondx,cmbraces]{newtxmath}
-\usepackage[T1]{fontenc}
+% \usepackage{garamondx}
+%\usepackage[garamondx,cmbraces]{newtxmath}
+% \usepackage[T1]{fontenc}
 
 \usepackage{setspace} % allows 1.5 and double spacing
 \usepackage{microtype} % resizes letters to fill lines better
@@ -62,6 +62,12 @@
 \usepackage[intoc,prefix,refpage]{nomencl} % nomenclature (notataio)
 
 \usepackage[pdftex,plainpages=false,pdfpagelabels]{hyperref} % links
+
+\renewcommand\nomname{Notation} % change the title from nomenclature to notation
+\renewcommand{\pagedeclaration}[1]{, \hyperlink{page.#1}{page\nobreakspace#1}}
+
+\makenomenclature % build the nomenclature
+
 
 %
 % End of packages

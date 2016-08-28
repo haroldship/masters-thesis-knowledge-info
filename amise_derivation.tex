@@ -17,19 +17,75 @@ K_h(x) & = h^{-1} K(x/h) &&
 
 \subsection{Mean Squared Error}
 
-For a statistical parameter $\theta$, the mean squared error (MSE) of an estimator $\hat{\theta}$ is an indicator of how well the estimator approximates the true parameter. It can be broken down into the sum of the variance and the squared bias.
+For a statistical parameter $\theta$, the mean squared error (MSE) of an estimator $\hat{\theta}$ is an indicator of how well the estimator approximates the true parameter.
+It can be broken down into the sum of the variance and the squared bias.
 
 \begin{align}
-    \mymathit{MSE}(\hat{\theta}) & =  E(\hat{\theta} - \theta)^2 && \nonumber \\
+    \mbox{MSE}(\hat{\theta}) & =  E(\hat{\theta} - \theta)^2 && \nonumber \\
                 & = E\theta^2 - 2\theta E\hat{\theta} + \theta^2 && \nonumber \\
                 & = [E\theta^2 - (E\hat{\theta})^2] + [(E\hat{\theta})^2 - 2\theta E\hat{\theta} + \theta^2] && \nonumber \\
                 & = [E\theta^2 - (E\hat{\theta})^2] + [(E\hat{\theta}) - \theta]^2 && \nonumber \\
-                & = \mymathit{Var}(\hat{\theta}) + \mymathit{Bias}(\hat{\theta})^2
+                & = \mbox{Var}(\hat{\theta}) + \mbox{Bias}(\hat{\theta})^2
 \end{align}
 
-For the kernel density estimator, we have, for a random variable $X$ having density function $f$,
+For the kernel density estimator at a given point $x$,
 
 \begin{align}
     E\hat{f}(x;h) & = E K_h(x-X) && \nonumber \\
-        & = \int{K_h(x-y)f(y)dy}
+        & = \int{K_h(x-y)f(y)\,\mathrm{d}y} && \nonumber \\
+        & = \conv{K_h}{f}(x)
 \end{align}
+
+where $X$ is a random variable having density function $f$.
+
+\subsubsection{Bias of the estimator}
+
+\begin{align}
+\mbox{Bias}(\hat{f}(x;h)) & = E \hat{f}(x;h) - f(x) && \nonumber \\
+    & = \conv{K_h}{f}(x) - f(x) &&
+\end{align}
+
+\subsubsection{Variance of the estimator}
+
+\begin{align}
+\mbox{Var}(\hat{f}(x;h) & = E\hat{f}(x;h))^2 - [E\hat{f}(x;h)]^2 && \nonumber \\
+    & = E[n^{-1}\sum{K_h(x - X_i)}]^2 - [\conv{K_h}{f}(x)]^2 && \nonumber \\
+    & = n^{-1} E K_h(x - X)^2 + n^{-2} E \sum_{i \neq j}{K_h(x-X_i)K_h(x-X_j)} - [\conv{K_h}{f}(x)]^2 && \nonumber \\
+    & = n^{-1} \conv{K_h^2}{f}(x) + n(n - 1) / n^2 E K_h(x - X)^2 - n^2 / n^2 [\conv{K_h}{f}(x)]^2 && \nonumber \\
+    & = n^{-1} \conv{K_h^2}{f}(x) - n^{-1} [\conv{K_h}{f}(x)]^2 && \nonumber \\
+    & = n^{-1} [\conv{K_h^2}{f}(x) - \conv{K_h}{f}]^2(x)]
+\end{align}
+
+\subsubsection{MSE at a point}
+
+At a given point $x$, the variance of the kernel density estimator is:
+
+\begin{align}
+\mbox{MSE}(\hat{f}(x;h)) & = \mbox{Var}(\hat{f}(x;h)) + \mbox{Bias}^2(\hat{f}(x;h)) && \nonumber \\
+    & = n^{-1} [\conv{K_h^2}{f}(x) - \conv{K_h}{f}]^2(x)] + [\conv{K_h}{f}(x) - f(x)]^2 \label{eq:MSE}
+\end{align}
+
+\subsection{Mean Integrated Squared Error}
+
+MSE gives an evaluation of the estimator at one point.
+However, it is usually preferable to evaluate the estimator over the whole real line.
+For this, we use the \textit{integrated} squared error (ISE).
+In particular, we calculed the squared $\mathfrak{L}_2$ distance of the estimator $\hat{f}$ from the true function value at that point.
+
+\begin{align}
+\mbox{ISE}(\hat{f}(.;h)) & = \int{\{ \hat{f}(x;h) - f(x) \} ^2 }\,\mathrm{d}x && \nonumber
+\end{align}
+
+Since this is a random quantity, dependent upon the given sample, we prefer to compute its expected value.
+This quantity is known as the \textit{mean integrated squared error} or MISE.
+
+\begin{align}
+\mbox{MISE}(\hat{f}(.;h)) & = E \int{\{ \hat{f}(x;h) - f(x) \} ^2 }\,\mathrm{d}x && \nonumber \\
+    & = \int{ E \{ \hat{f}(x;h) - f(x) \} ^2 }\,\mathrm{d}x && \nonumber \\
+    & = \int{ \mbox{MSE}(\hat{f}(x;h))\, \mathrm{d}x} & \text{change the order of integration} & \nonumber \\
+    & = n^{-1} \int{ [ \conv{K_h^2}{f}(x) - \conv{K_h}{f}^2(x) ]\,\mathrm{d}x } \nonumber \\
+    & \qquad + \int{ [ \conv{K_h}{f}(x) - f(x) ]^2\,\mathrm{d}x} & \text{by \eqref{eq:MSE}} \nonumber
+\end{align}
+
+
+
