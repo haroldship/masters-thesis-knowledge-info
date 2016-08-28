@@ -1,6 +1,8 @@
 % !TEX root = amise_derivation_only.tex
 
-\section{Single-variable Asymptotic Mean Squared Error}
+\section{Single-variable Asymptotic Mean Integrated Squared Error}
+
+Derivation of the Asymptotic Mean Integrated Squared Error of the kernel density estimator, based on \citep{wand1994kernel}
 
 Define the kernel density estimator.
 
@@ -84,8 +86,52 @@ This quantity is known as the \textit{mean integrated squared error} or MISE.
     & = \int{ E \{ \hat{f}(x;h) - f(x) \} ^2 }\,\mathrm{d}x && \nonumber \\
     & = \int{ \mbox{MSE}(\hat{f}(x;h))\, \mathrm{d}x} & \text{change the order of integration} & \nonumber \\
     & = n^{-1} \int{ [ \conv{K_h^2}{f}(x) - \conv{K_h}{f}^2(x) ]\,\mathrm{d}x } \nonumber \\
-    & \qquad + \int{ [ \conv{K_h}{f}(x) - f(x) ]^2\,\mathrm{d}x} & \text{by \eqref{eq:MSE}} \nonumber
+    & \qquad + \int{ [ \conv{K_h}{f}(x) - f(x) ]^2\,\mathrm{d}x} & \text{by \autoref{eq:MSE}} \nonumber
 \end{align}
 
+Simplify it.
 
+\begin{align}
+\mbox{MISE}(\hat{f}(.;h)) & = n^{-1} \int{ [ \conv{K_h^2}{f}(x) - \conv{K_h}{f}^2(x) ]\,\mathrm{d}x } && \nonumber \\
+    & \qquad + \int{ [ \conv{K_h}{f}(x) - f(x) ]^2\,\mathrm{d}x} && \nonumber \\
+    & = n^{-1} \int{ \conv{K_h^2}{f}(x)\,\mathrm{d}x } - n^{-1} \int{\conv{K_h}{f}^2(x)\,\mathrm{d}x } && \nonumber \\
+    & \qquad + \int{ \conv{K_h}{f}^2(x)\,\mathrm{d}x} - 2\int{\conv{K_h}{f}(x) f(x)\,\mathrm{d}x } && \nonumber \\
+    & \qquad + \int{ f^2(x)\,\mathrm{d}x} && \nonumber \\
+    & = n^{-1} \int{ \conv{K_h^2}{f}(x)\,\mathrm{d}x } && \nonumber \\
+    & \qquad + (1 - n^{-1}) \int{\conv{K_h}{f}^2(x)\,\mathrm{d}x } && \nonumber \\
+    & \qquad - 2\int{\conv{K_h}{f}(x) f(x)\,\mathrm{d}x } && \nonumber \\
+    & \qquad + \int{ f^2(x)\,\mathrm{d}x} \label{eq:MISE-1} &&
+\end{align}
+
+Looking at the first term of \autoref{eq:MISE-1}, and using a change of variables $t = (x - y) / h$, so that $\mathrm{d}x = h \mathrm{d}t$
+
+\begin{align}
+n^{-1} \int{ \conv{K_h^2}{f}(x)\,\mathrm{d}x } & = n^{-1} \int{ \int {K_h^2(x-y)f(y)\,\mathrm{d}y} \,\mathrm{d}x } && \nonumber \\
+    & = n^{-1} \int{ \int {h^{-2} K^2( (x-y)/h )f(y)\,\mathrm{d}y} \,\mathrm{d}x } && \nonumber \\
+    & = n^{-1} \int{ \int {h^{-1} K^2(t)f(y)\,\mathrm{d}y} \,\mathrm{d}t } && \nonumber \\
+    & = n^{-1} \int{ h^{-1} K^2(t) \int {f(y)\,\mathrm{d}y} \,\mathrm{d}t } && \nonumber \\
+    & = (nh)^{-1} \int{ K^2(t) \,\mathrm{d}t } \label{eq:MISE-2} && \text{since f is a density}
+\end{align}
+
+Substituting \autoref{eq:MISE-2} in \autoref{eq:MISE-1}, gives the following formula for MISE:
+
+\begin{align}
+\mbox{MISE}(\hat{f}(.;h)) & = (nh)^{-1} \int{ K^2(x) \,\mathrm{d}x } && \nonumber \\
+    & \qquad + (1 - n^{-1}) \int{\conv{K_h}{f}^2(x)\,\mathrm{d}x } && \nonumber \\
+    & \qquad - 2\int{\conv{K_h}{f}(x) f(x)\,\mathrm{d}x } && \nonumber \\
+    & \qquad + \int{ f^2(x)\,\mathrm{d}x} \label{eq:MISE} &&
+\end{align}
+
+\subsubsection{Asymptotic Mean Squared Error}
+
+The equation we derived for MISE, \autoref{eq:MISE}, depends on the bandwidth in such a way as to make it difficult to compute.
+In this section we will derive an approximation, using Taylor's Theorem, that is far easier to compute.
+
+There are 3 assumptions that we make:
+
+\begin{enumerate}
+    \item The true density $f$ has a second derivative $f\prime\prime$ that is continous, square integrable, and ultimately monotone as described in (\citep{wand1994kernel}.
+    \item There is a sequence of bandwidths, \mbox{$\{h_n : 1 < n < \infty\}$} such that each \mbox{$h_n > 0$, $\lim_{n \to \infty} h_n = 0$} and \mbox{$\lim_{n \to \infty} nh = \infty$}.
+    \item $K$ is a bounded probability density with a finite fourth moment and symmetry about the origin.
+\end{enumerate}
 
