@@ -35,7 +35,7 @@ For the kernel density estimator at a given point $x$,
 \begin{align}
     E\hat{f}(x;h) & = E K_h(x-X) && \nonumber \\
         & = \int{K_h(x-y)f(y)\,\mathrm{d}y} && \nonumber \\
-        & = \conv{K_h}{f}(x)
+        & = \conv{K_h}{f}(x) \label{eq:E_f_hat} &&
 \end{align}
 
 where $X$ is a random variable having density function $f$.
@@ -127,11 +127,70 @@ Substituting \autoref{eq:MISE-2} in \autoref{eq:MISE-1}, gives the following for
 The equation we derived for MISE, \autoref{eq:MISE}, depends on the bandwidth in such a way as to make it difficult to compute.
 In this section we will derive an approximation, using Taylor's Theorem, that is far easier to compute.
 
-There are 3 assumptions that we make:
+There are 3 assumptions that we make, as described in (\citep[pp. 19-20]{wand1994kernel}:
 
 \begin{enumerate}
-    \item The true density $f$ has a second derivative $f\prime\prime$ that is continous, square integrable, and ultimately monotone as described in (\citep{wand1994kernel}.
+    \item The true density $f$ has a second derivative $f^{\prime\prime}$ that is continous, square integrable, and ultimately monotone .
     \item There is a sequence of bandwidths, \mbox{$\{h_n : 1 < n < \infty\}$} such that each \mbox{$h_n > 0$, $\lim_{n \to \infty} h_n = 0$} and \mbox{$\lim_{n \to \infty} nh = \infty$}.
     \item $K$ is a bounded probability density with a finite fourth moment and symmetry about the origin.
 \end{enumerate}
+
+Starting with \autoref{eq:E_f_hat}, we see:
+
+\begin{align}
+E\hat{f}(x;h) & = \int{K_h(x - y)f(y)\,\mathrm{d}y} && \nonumber \\
+    & = \int{h^{-1}K(x-y)f(y)\,\mathrm{d}y} && \nonumber \\
+    & = \int{K(z)f(x-hz)\,\mathrm{d}z} && \text{substituting } z=y/h
+\end{align}
+
+By Taylor's Theorem:
+
+\begin{align}
+f(x-hz) & = f(x) - hzf^\prime(x) + \sfrac{1}{2}h^2z^2f^{\prime\prime}(x) + o(h^2) && \nonumber
+\end{align}
+
+Since $K$ is a pdf, $\int{K(z)\,\mathrm{d}z}=1$.
+Since $K$ is symmetric about the origin, $\int{zK(z)\,\mathrm{d}z}=0$.
+By our assumption, $\int{z^2K(z)\,\mathrm{d}z} < \infty$.
+Therefore,
+
+\begin{align}
+E\hat{f}(x;h) & = f(x) + \sfrac{1}{2}h^2f^{\prime\prime}(x)\int{z^2K(z)\,\mathrm{d}z} + o(h^2) && \nonumber
+\end{align}
+
+This leads to the following approximation of the bias:
+
+\begin{align}
+\mbox{Bias}(f(x;h)) & = \sfrac{1}{2}h^2f^{\prime\prime}(x)\int{z^2K(z)\,\mathrm{d}z} + o(h^2) && \label{eq:ABias}
+\end{align}
+
+Using the same change of variables in \autoref{eq:MSE}, and using the notation $o(1)$ to indicate $\to 0$ as $n \to \infty$,
+
+\begin{align}
+\mbox{Var}(f(x;h)) & = (nh)^{-1} \int{K(z)^2f(x - hz)\,\mathrm{d}z} - n^{-1} [E(\hat{f}(x;h))]^2 && \nonumber \\
+    & = (nh)^{-1} \int{K(z)^2[f(x) + o(1)]\,\mathrm{d}z} - n^{-1}[f(x) + o(1)]^2 && \nonumber
+    & = (nh)^{-1} \int{K(z)^2f(x)\,\mathrm{d}z} + \int{K(z)^2o(1)\,\mathrm{d}z} + o(n^{-2})  && \nonumber \\
+    & = (nh)^{-1} \int{K(z)^2f(x)\,\mathrm{d}z} + o((nh)^{-1}) + o((nh)^{-1}) && \nonumber \\
+    & = (nh)^{-1} \int{K(z)^2f(x)\,\mathrm{d}z} + o((nh)^{-1}) && \label{eq:AVar}
+\end{align}
+
+Adding the approximations of the square of the bias from \autoref{eq:ABias} and the variance from \autoref{eq:AVar}, we get:
+
+\begin{align}
+\mbox{MSE}(\hat{f}(x;h)) & = (nh)^{-1} \int{K^2}f(x) + \sfrac{1}{4}h^4\left(\int{z^2K}\right)^2f^{\prime\prime}(x)^2 + o((nh)^{-1} + h^4) && \label{eq:AMSE}
+\end{align}
+
+The mean integrated squared error is obtained by integrating \autoref{eq:EMSE}:
+
+\begin{align}
+\mbox{MISE}(\hat{f}) & = (nh)^{-1} \int{K^2}\int{f} + \sfrac{1}{4}h^4\left(\int{z^2K}\right)^2 \int{ (f^{\prime\prime})^2 } + o((nh)^{-1} + h^4) && \label{eq:EMISE}
+\end{align}
+
+We then obtain the formula for asymptotic mean integrated squared error (AMISE) as:
+
+\begin{align}
+\mbox{AMISE}(\hat{f}) & = (nh)^{-1} \int{K^2}\int{f} + \sfrac{1}{4}h^4\left(\int{z^2K}\right)^2 \int{ (f^{\prime\prime})^2 } && \label{eq:AMISE}
+\end{align}
+
+
 
