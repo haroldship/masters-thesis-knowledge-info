@@ -1,0 +1,35 @@
+% !TEX root = amise_derivation_only.tex
+
+\section{Single-variable Asymptotic Mean Squared Error}
+
+Define the kernel density estimator.
+
+\begin{align}
+    \hat{f}(x;h) & = (nh)^{-1} \sum_{i=1}^{n}{K\{(x-X_i)/h\}} && \\
+        & = n^{-1} \sum_{i=1}^n{K_h(x-X_i)} &&
+\end{align}
+
+where:
+
+\begin{align}
+K_h(x) & = h^{-1} K(x/h) &&
+\end{align}
+
+\subsection{Mean Squared Error}
+
+For a statistical parameter $\theta$, the mean squared error (MSE) of an estimator $\hat{\theta}$ is an indicator of how well the estimator approximates the true parameter. It can be broken down into the sum of the variance and the squared bias.
+
+\begin{align}
+    \mymathit{MSE}(\hat{\theta}) & =  E(\hat{\theta} - \theta)^2 && \nonumber \\
+                & = E\theta^2 - 2\theta E\hat{\theta} + \theta^2 && \nonumber \\
+                & = [E\theta^2 - (E\hat{\theta})^2] + [(E\hat{\theta})^2 - 2\theta E\hat{\theta} + \theta^2] && \nonumber \\
+                & = [E\theta^2 - (E\hat{\theta})^2] + [(E\hat{\theta}) - \theta]^2 && \nonumber \\
+                & = \mymathit{Var}(\hat{\theta}) + \mymathit{Bias}(\hat{\theta})^2
+\end{align}
+
+For the kernel density estimator, we have, for a random variable $X$ having density function $f$,
+
+\begin{align}
+    E\hat{f}(x;h) & = E K_h(x-X) && \nonumber \\
+        & = \int{K_h(x-y)f(y)dy}
+\end{align}
