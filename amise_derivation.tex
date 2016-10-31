@@ -60,7 +60,7 @@ where $X$ is a random variable having density function $f$.
 
 \subsubsection{MSE at a point}
 
-At a given point $x$, the variance of the kernel density estimator is:
+At a given point $x$, the mean squared error of the kernel density estimator is:
 
 \begin{align}
 \mbox{MSE}(\hat{f}(x;h)) & = \mbox{Var}(\hat{f}(x;h)) + \mbox{Bias}^2(\hat{f}(x;h)) && \nonumber \\
@@ -83,8 +83,8 @@ This quantity is known as the \textit{mean integrated squared error} or MISE.
 
 \begin{align}
 \mbox{MISE}(\hat{f}(.;h)) & = E \int{\{ \hat{f}(x;h) - f(x) \} ^2 }\,\mathrm{d}x && \nonumber \\
-    & = \int{ E \{ \hat{f}(x;h) - f(x) \} ^2 }\,\mathrm{d}x && \nonumber \\
-    & = \int{ \mbox{MSE}(\hat{f}(x;h))\, \mathrm{d}x} & \text{change the order of integration} & \nonumber \\
+    & = \int{ E \{ \hat{f}(x;h) - f(x) \} ^2 }\,\mathrm{d}x & \text{by Fubini's Theorem} & \nonumber \\
+    & = \int{ \mbox{MSE}(\hat{f}(x;h))\, \mathrm{d}x} & & \nonumber \\
     & = n^{-1} \int{ [ \conv{K_h^2}{f}(x) - \conv{K_h}{f}^2(x) ]\,\mathrm{d}x } \nonumber \\
     & \qquad + \int{ [ \conv{K_h}{f}(x) - f(x) ]^2\,\mathrm{d}x} & \text{by \autoref{eq:MSE}} \nonumber
 \end{align}
@@ -146,8 +146,19 @@ E\hat{f}(x;h) & = \int{K_h(x - y)f(y)\,\mathrm{d}y} && \nonumber \\
 By Taylor's Theorem:
 
 \begin{align}
-f(x-hz) & = f(x) - hzf^\prime(x) + \sfrac{1}{2}h^2z^2f^{\prime\prime}(x) + o(h^2) && \nonumber
+f(x-hz) & = f(x) - hzf^\prime(x) + \sfrac{1}{2}h^2z^2f^{\prime\prime}(x) + R_2(h) && \nonumber
 \end{align}
+where
+\begin{align}
+\lim_{h \to 0} \dfrac{R_2(h)}{h^2} = 0
+\end{align}
+
+Substituting, we get:
+\begin{align}
+E\hat{f}(x;h) & = \int{K(z) \left[ f(x) - hzf^\prime(x) + \sfrac{1}{2}h^2z^2f^{\prime\prime}(x) + R_2(h) \right] \,\mathrm{d}z} && \nonumber \\
+    & = f(x)\int{K(z)\mathrm{d}z} - hf^\prime(x)\int{K(z)\mathrm{d}z} + \sfrac{1}{2}h^2f^{\prime\prime}(x)\int{z^2K(z)\mathrm{d}z} + R_2(h)\int{K(z)\mathrm{d}z} && \nonumber
+\end{align}
+
 
 Since $K$ is a pdf, $\int{K(z)\,\mathrm{d}z}=1$.
 Since $K$ is symmetric about the origin, $\int{zK(z)\,\mathrm{d}z}=0$.
@@ -155,13 +166,13 @@ By our assumption \ref{asm:K_pdf}, $\int{z^2K(z)\,\mathrm{d}z} < \infty$.
 Therefore,
 
 \begin{align}
-E\hat{f}(x;h) & = f(x) + \sfrac{1}{2}h^2f^{\prime\prime}(x)\int{z^2K(z)\,\mathrm{d}z} + o(h^2) && \nonumber
+E\hat{f}(x;h) & = f(x) + \sfrac{1}{2}h^2f^{\prime\prime}(x)\int{z^2K(z)\,\mathrm{d}z} + R_2(h) && \nonumber
 \end{align}
 
 This leads to the following approximation of the bias:
 
 \begin{align}
-\mbox{Bias}(f(x;h)) & = \sfrac{1}{2}h^2f^{\prime\prime}(x)\int{z^2K(z)\,\mathrm{d}z} + o(h^2) && \label{eq:ABias}
+\mbox{Bias}(f(x;h)) & = \sfrac{1}{2}h^2f^{\prime\prime}(x)\int{z^2K(z)\,\mathrm{d}z} + R_2(h) && \label{eq:ABias}
 \end{align}
 
 Using the same change of variables in \autoref{eq:MSE}, and using the notation $o(1)$ to indicate $\to 0$ as $n \to \infty$,
