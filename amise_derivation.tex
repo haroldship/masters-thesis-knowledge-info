@@ -204,8 +204,23 @@ The mean integrated squared error is obtained by integrating \autoref{eq:EMSE}:
 We then obtain the formula for asymptotic mean integrated squared error (AMISE) as:
 
 \begin{align}
-\mbox{AMISE}(\hat{f}) & = (nh)^{-1} \int{K^2}\int{f} + \sfrac{1}{4}h^4\left(\int{z^2K}\right)^2 \int{ (f^{\prime\prime})^2 } && \label{eq:AMISE}
+\mbox{AMISE}(\hat{f}) & = (nh)^{-1} \int{K^2} + \sfrac{1}{4}h^4\left(\int{z^2K}\right)^2 \int{ (f^{\prime\prime})^2 } && \label{eq:AMISE}
 \end{align}
 
+\subsection{Asymptotically optimal bandwidth}
 
+We differentiate \autoref{eq:AMISE} with respect to $h$ in order to find the asymptotically optimal bandwidth.
+
+\begin{align}
+\mbox{AMISE}(\hat{f}) & = (nh)^{-1} \int{K^2} + \sfrac{1}{4}h^4\left(\int{z^2K}\right)^2 \int{ (f^{\prime\prime})^2 } && \nonumber \\
+\dfrac{\mathrm{d}\mbox{AMISE}(\hat{f})}{\mathrm{d}h} & = -n^{-1}h^{-2} \int{K^2} + h^3 \left(\int{z^2K}\right)^2 && \label{eq:AMISE_prime}
+\end{align}
+
+Setting \autoref{eq:AMISE_prime} equal to 0 gives:
+
+\begin{align}
+n^{-1}h_{\mbox{a}}^{-2} \int{K^2} & = h_{\mbox{a}}^3 \left(\int{z^2K}\right)^2 \int{ (f^{\prime\prime})^2 } && \nonumber \\
+\dfrac{\int{K^2}}{n \left(\int{z^2K}\right)^2 \int{ (f^{\prime\prime})^2 }} & = h_{\mbox{a}}^5 && \nonumber \\
+h_{\mbox{a}} & = \left( \dfrac{\int{K^2}}{n \left(\int{z^2K}\right)^2 \int{ (f^{\prime\prime})^2 }} \right)^{1/5} && \label{eq:H_AMISE}
+\end{align}
 
