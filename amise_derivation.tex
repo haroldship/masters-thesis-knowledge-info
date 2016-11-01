@@ -55,7 +55,7 @@ where $X$ is a random variable having density function $f$.
     & = n^{-1} E K_h(x - X)^2 + n^{-2} E \sum_{i \neq j}{K_h(x-X_i)K_h(x-X_j)} - [\conv{K_h}{f}(x)]^2 && \nonumber \\
     & = n^{-1} \conv{K_h^2}{f}(x) + n(n - 1) / n^2 E K_h(x - X)^2 - n^2 / n^2 [\conv{K_h}{f}(x)]^2 && \nonumber \\
     & = n^{-1} \conv{K_h^2}{f}(x) - n^{-1} [\conv{K_h}{f}(x)]^2 && \nonumber \\
-    & = n^{-1} [\conv{K_h^2}{f}(x) - \conv{K_h}{f}]^2(x)]
+    & = n^{-1} [\conv{K_h^2}{f}(x) - \conv{K_h}{f}^2(x)] \label{eq:VarEst}
 \end{align}
 
 \subsubsection{MSE at a point}
@@ -64,7 +64,7 @@ At a given point $x$, the mean squared error of the kernel density estimator is:
 
 \begin{align}
 \mbox{MSE}(\hat{f}(x;h)) & = \mbox{Var}(\hat{f}(x;h)) + \mbox{Bias}^2(\hat{f}(x;h)) && \nonumber \\
-    & = n^{-1} [\conv{K_h^2}{f}(x) - \conv{K_h}{f}]^2(x)] + [\conv{K_h}{f}(x) - f(x)]^2 \label{eq:MSE}
+    & = n^{-1} [\conv{K_h^2}{f}(x) - \conv{K_h}{f}^2(x)] + [\conv{K_h}{f}(x) - f(x)]^2 \label{eq:MSE}
 \end{align}
 
 \subsection{Mean Integrated Squared Error}
@@ -135,6 +135,8 @@ There are 3 assumptions that we make, as described in (\citep[pp. 19-20]{wand199
     \item \label{asm:K_pdf} $K$ is a bounded probability density with a finite fourth moment and symmetry about the origin.
 \end{enumerate}
 
+\subsubsection{Asymptotic Bias}
+
 Starting with \autoref{eq:E_f_hat}, we see:
 
 \begin{align}
@@ -146,11 +148,11 @@ E\hat{f}(x;h) & = \int{K_h(x - y)f(y)\,\mathrm{d}y} && \nonumber \\
 By Taylor's Theorem:
 
 \begin{align}
-f(x-hz) & = f(x) - hzf^\prime(x) + \sfrac{1}{2}h^2z^2f^{\prime\prime}(x) + R_2(h) && \nonumber
+f(x-hz) & = f(x) - hzf^\prime(x) + \sfrac{1}{2}h^2z^2f^{\prime\prime}(x) + R_2(h) &&
 \end{align}
 where
 \begin{align}
-\lim_{h \to 0} \dfrac{R_2(h)}{h^2} = 0
+\lim_{h \to 0} \dfrac{R_2(h)}{h^2} = 0 && \nonumber
 \end{align}
 
 Substituting, we get:
@@ -158,7 +160,6 @@ Substituting, we get:
 E\hat{f}(x;h) & = \int{K(z) \left[ f(x) - hzf^\prime(x) + \sfrac{1}{2}h^2z^2f^{\prime\prime}(x) + R_2(h) \right] \,\mathrm{d}z} && \nonumber \\
     & = f(x)\int{K(z)\mathrm{d}z} - hf^\prime(x)\int{K(z)\mathrm{d}z} + \sfrac{1}{2}h^2f^{\prime\prime}(x)\int{z^2K(z)\mathrm{d}z} + R_2(h)\int{K(z)\mathrm{d}z} && \nonumber
 \end{align}
-
 
 Since $K$ is a pdf, $\int{K(z)\,\mathrm{d}z}=1$.
 Since $K$ is symmetric about the origin, $\int{zK(z)\,\mathrm{d}z}=0$.
@@ -175,12 +176,15 @@ This leads to the following approximation of the bias:
 \mbox{Bias}(f(x;h)) & = \sfrac{1}{2}h^2f^{\prime\prime}(x)\int{z^2K(z)\,\mathrm{d}z} + R_2(h) && \label{eq:ABias}
 \end{align}
 
-Using the same change of variables in \autoref{eq:MSE}, and using the notation $o(1)$ to indicate $\to 0$ as $n \to \infty$,
+\subsubsection{Asymptotic Variance}
+
+Let's start with \autoref{eq:MSE},
 
 \begin{align}
-\mbox{Var}(f(x;h)) & = (nh)^{-1} \int{K(z)^2f(x - hz)\,\mathrm{d}z} - n^{-1} [E(\hat{f}(x;h))]^2 && \nonumber \\
+\mbox{Var}(f(x;h)) & = n^{-1} \int{\left[\conv{K_h^2}{f}(x) - \conv{K_h}{f}^2(x)\right]\mathrm{d}x} && \nonumber \\
+    & = (nh)^{-1} \int{K(z)^2f(x - hz)\,\mathrm{d}z} - n^{-1} [E(\hat{f}(x;h))]^2 && \nonumber \\
     & = (nh)^{-1} \int{K(z)^2[f(x) + o(1)]\,\mathrm{d}z} - n^{-1}[f(x) + o(1)]^2 && \nonumber \\
-    & = (nh)^{-1} \int{K(z)^2f(x)\,\mathrm{d}z} + \int{K(z)^2o(1)\,\mathrm{d}z} + o(n^{-2})  && \nonumber \\
+    & = (nh)^{-1} \int{K(z)^2f(x)\mathrm{d}z} + \int{K(z)^2o(1)\,\mathrm{d}z} + o(n^{-2})  && \nonumber \\
     & = (nh)^{-1} \int{K(z)^2f(x)\,\mathrm{d}z} + o((nh)^{-1}) + o((nh)^{-1}) && \nonumber \\
     & = (nh)^{-1} \int{K(z)^2f(x)\,\mathrm{d}z} + o((nh)^{-1}) && \label{eq:AVar}
 \end{align}
