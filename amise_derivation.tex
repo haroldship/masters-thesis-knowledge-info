@@ -178,27 +178,41 @@ This leads to the following approximation of the bias:
 
 \subsubsection{Asymptotic Variance}
 
+Note: From Taylor's Therem:
+
+\begin{align}
+f(x - hz) & = f(x) - R_0(h) && \label{eq:R0}
+\end{align}
+where 
+\begin{align}
+\lim_{h \to 0}{R_0(h)} = 0 && \nonumber
+\end{align}
+
+
 Let's start with \autoref{eq:MSE},
 
 \begin{align}
 \mbox{Var}(f(x;h)) & = n^{-1} \int{\left[\conv{K_h^2}{f}(x) - \conv{K_h}{f}^2(x)\right]\mathrm{d}x} && \nonumber \\
-    & = (nh)^{-1} \int{K(z)^2f(x - hz)\,\mathrm{d}z} - n^{-1} [E(\hat{f}(x;h))]^2 && \nonumber \\
-    & = (nh)^{-1} \int{K(z)^2[f(x) + o(1)]\,\mathrm{d}z} - n^{-1}[f(x) + o(1)]^2 && \nonumber \\
-    & = (nh)^{-1} \int{K(z)^2f(x)\mathrm{d}z} + \int{K(z)^2o(1)\,\mathrm{d}z} + o(n^{-2})  && \nonumber \\
-    & = (nh)^{-1} \int{K(z)^2f(x)\,\mathrm{d}z} + o((nh)^{-1}) + o((nh)^{-1}) && \nonumber \\
-    & = (nh)^{-1} \int{K(z)^2f(x)\,\mathrm{d}z} + o((nh)^{-1}) && \label{eq:AVar}
+    & = (nh)^{-1} \int{K(z)^2f(x - hz)\mathrm{d}z} - n^{-1} [E(\hat{f}(x;h))]^2 && \nonumber \\
+    & = (nh)^{-1} \int{K(z)^2[f(x) + R_0(h)]\mathrm{d}z} - n^{-1}[f(x) + Bias(\hat{f}(x))]^2 & \text{Substituting \autoref{eq:R0}} & \nonumber \\
+    & = (nh)^{-1} \int{K(z)^2f(x)\mathrm{d}z} + (nh)^{-1} \int{K(z)R_0(h)\mathrm{d}z} + R_1(n) && \nonumber \\
+    & = (nh)^{-1} \int{K(z)^2f(x)\mathrm{d}z} + (nh)^{-1} R_0(h) + R_1(n) & \text{K is a density} & \label{eq:AVar}
+\end{align}
+where
+\begin{align}
+\lim_{n \to \infty} \dfrac{R_1(n)}{n} = C < \infty & \nonumber
 \end{align}
 
 Adding the approximations of the square of the bias from \autoref{eq:ABias} and the variance from \autoref{eq:AVar}, we get:
 
 \begin{align}
-\mbox{MSE}(\hat{f}(x;h)) & = (nh)^{-1} \int{K^2}f(x) + \sfrac{1}{4}h^4\left(\int{z^2K}\right)^2f^{\prime\prime}(x)^2 + o((nh)^{-1} + h^4) && \label{eq:EMSE}
+\mbox{MSE}(\hat{f}(x;h)) & \approx (nh)^{-1} \int{K^2}f(x) + \sfrac{1}{4}h^4\left(\int{z^2K}\right)^2f^{\prime\prime}(x)^2 && \label{eq:EMSE}
 \end{align}
 
-The mean integrated squared error is obtained by integrating \autoref{eq:EMSE}:
+The mean integrated squared error is obtained by integrating \autoref{eq:EMSE} over the real line with respect to $x$:
 
 \begin{align}
-\mbox{MISE}(\hat{f}) & = (nh)^{-1} \int{K^2}\int{f} + \sfrac{1}{4}h^4\left(\int{z^2K}\right)^2 \int{ (f^{\prime\prime})^2 } + o((nh)^{-1} + h^4) && \label{eq:EMISE}
+\mbox{MISE}(\hat{f}) & \approx (nh)^{-1} \int{K^2}\int{f} + \sfrac{1}{4}h^4\left(\int{z^2K}\right)^2 \int{ (f^{\prime\prime})^2 } && \label{eq:EMISE}
 \end{align}
 
 We then obtain the formula for asymptotic mean integrated squared error (AMISE) as:
