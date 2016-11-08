@@ -7,14 +7,14 @@ Derivation of the Asymptotic Mean Integrated Squared Error of the kernel density
 Define the kernel density estimator.
 
 \begin{align}
-    \hat{f}(x;h) & = (nh)^{-1} \sum_{i=1}^{n}{K\{(x-X_i)/h\}} && \\
-        & = n^{-1} \sum_{i=1}^n{K_h(x-X_i)} &&
+    \hat{f}(x;h) & = (nh)^{-1} \sum_{i=1}^{n}{K\{(x-X_i)/h\}} && \nonumber \\
+        & = n^{-1} \sum_{i=1}^n{K_h(x-X_i)} && \nonumber
 \end{align}
 
 where:
 
 \begin{align}
-K_h(x) & = h^{-1} K(x/h) &&
+K_h(x) & = h^{-1} K(x/h) && \nonumber
 \end{align}
 
 \subsection{Mean Squared Error}
@@ -238,3 +238,35 @@ n^{-1}h_{\mbox{a}}^{-2} \int{K^2} & = h_{\mbox{a}}^3 \left(\int{z^2K}\right)^2 \
 h_{\mbox{a}} & = \left( \dfrac{\int{K^2}}{n \left(\int{z^2K}\right)^2 \int{ (f^{\prime\prime})^2 }} \right)^{1/5} && \label{eq:H_AMISE}
 \end{align}
 
+\subsection{AMISE and optimal bandwidth for intensity}
+
+Kernel smoothing can be used to estimate the intensity $\lambda(x)$ of a Poisson process \citep{brooks1991asymptotic}.
+The main differences are that the estimator is not normalized by $n$, the number of observed events, and that $n$ is also a random variable.
+
+The estimate $\hat{\lambda}(x;h)$ for $\lambda(x)$ for a given bandwidth $h$ is:
+
+\begin{align}
+    \hat{\lambda}(x;h) & = h^{-1} \sum_{i=1}^{n}{K\{(x-X_i)/h\}} && \nonumber \\
+        & = \sum_{i=1}^n{K_h(x-X_i)} &&
+\end{align}
+
+Note that $\int{\lambda(x)dx}$ is the expected number of events.
+
+Similar calculations to above, result in the following:
+
+\begin{align}
+\mbox{AMISE}(\hat{\lambda}) & = h^{-1} \int{K^2}\int{\lambda} + \sfrac{1}{4}h^4\left(\int{z^2K}\right)^2 \int{ (\lambda^{\prime\prime})^2 } && \label{eq:AMISE_I}
+\end{align}
+
+Once again, we differentiate with respect to $h$ and set to zero:
+
+\begin{align}
+\dfrac{\mathrm{d}\mbox{AMISE}(\hat{\lambda})}{\mathrm{d}h} & = - h^{-2} \int{K^2}\int{\lambda} - h^5\left(\int{z^2K}\right)^2 \int{ (\lambda^{\prime\prime})^2 } &&
+\end{align}
+
+Setting this to zero, we get 
+\begin{align}
+h_{\mbox{a}}^{-2} \int{K^2} \int{\lambda} & = h_{\mbox{a}}^3 \left(\int{z^2K}\right)^2 \int{ (\lambda^{\prime\prime})^2 } && \nonumber \\
+\dfrac{\int{K^2}}{\left(\int{z^2K}\right)^2 \int{ (\lambda^{\prime\prime})^2 \int{\lambda} }} & = h_{\mbox{a}}^5 && \nonumber \\
+h_{\mbox{a}} & = \left( \dfrac{\int{K^2} \int{\lambda}}{\left(\int{z^2K}\right)^2 \int{ (\lambda^{\prime\prime})^2 }} \right)^{1/5} && \label{eq:H_AMISE}
+\end{align}
