@@ -1,0 +1,36 @@
+% !TEX root = cross_validation_only.tex
+
+\section{From AMISE to CV formula}
+
+\newcommand{\se}[2]{\ensuremath{(\hat{#1}_h{#2} - #1#2)^2}} % squared error
+\newcommand{\dbint}[5]{\ensuremath{\int_{#2}^{#3}\int_{#4}^{#5}{#1}\mathrm{d}x\mathrm{d}y}}
+\newcommand{\fhhat}{\hat{f}_h}
+\newcommand{\fhhatj}{\hat{f}_{h,j}}
+
+Let \( \mu = \dbint{f(x,y)}{0}{T}{0}{T} \).
+Then \( f = \mu \lambda \) where \( \lambda \) is a probability density over the plane.
+Note that \( \mu \approx N \).
+Let also \(X_i = (x_i, y_i), i = 1, \ldots, N \) be the observed locations of the events.
+
+\begin{align*}
+\mbox{MISE}(h) & = \dbint{\se{f}{(x,y)}}{0}{T}{0}{T} && \\
+     & = \dbint{f^2(x,y)}{0}{T}{0}{T} - 2\dbint{\fhhat(x,y)f(x,y)}{0}{T}{0}{T} + \dbint{\fhhat^2(x,y)}{0}{T}{0}{T} && \\
+     & = \dbint{f^2(x,y)}{0}{T}{0}{T} - 2 \mu \dbint{\fhhat(x,y)\lambda(x,y)}{0}{T}{0}{T} + \dbint{\fhhat^2(x,y)}{0}{T}{0}{T} && \\
+     & = \dbint{f^2(x,y)}{0}{T}{0}{T} - 2 \mu E\left\{\fhhat(X)\right\} + \dbint{\fhhat^2(x,y)}{0}{T}{0}{T} && \\
+     & \approx \dbint{f^2(x,y)}{0}{T}{0}{T} - 2 \mu \frac{1}{N} \sum_{i=1}^N{\fhhat(x_i,y_i)} + \dbint{\fhhat^2(x,y)}{0}{T}{0}{T} && \\
+     & \approx \dbint{f^2(x,y)}{0}{T}{0}{T} - 2 \sum_{i=1}^N{\fhhat(x_i,y_i)} + \dbint{\fhhat^2(x,y)}{0}{T}{0}{T} &&
+\end{align*}
+
+We need the approximations because, in general, we do not know \(f\).
+The first term does not depend on \(h\), so we can ignore it.
+To compute the cross-validation error, will use the cross-validation version of the sum,
+that is we replace \( \sum_{i=1}^N{\fhhat(x_i,y_i)} \) with \( \sum_{i \ne j}{\fhhatj(x_i,y_i)} \)
+where \( \fhhatj(x_i,y_i) \) is the estimate of \(\hat{f}\) with observation \(j\) left out.
+The cross validation error \( \mbox{CV}(h) \) can then be defined as
+\( \mbox{CV}(h) = \dbint{\fhhat^2(x,y)}{0}{T}{0}{T} - 2 \sum_{i \ne j}{\fhhatj(x_i,y_i)} \).
+The goal is to find the value of \(h\) that minimizes \( \mbox{CV}(h) \).
+We therefore define:
+
+\begin{equation}
+    h_{cv} = \argmin_h{CV(h)} = \argmin_h{\dbint{\fhhat^2(x,y)}{0}{T}{0}{T} - 2 \sum_{i \ne j}{\fhhatj(x_i,y_i)}}
+\end{equation}
