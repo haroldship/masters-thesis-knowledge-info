@@ -1,0 +1,10 @@
+[1] "Oracle bandwidth: ( 2 , 1.4 )"
+[1] "Actual number of incidents: 101"
+[1] "True Peak Height: 0.0541597308444004"
+[1] "Oracle Peak Height: 0.0423651651047329"
+[1] "Oracle Centroid Height: 0.0416311886133206"
+[1] "Silverman Peak Height: 0.052081302548355"
+[1] "Silverman Centroid Height: 0.0491978437117541"
+[1] "CV Peak Height: 0.052049511464965"
+[1] "CV Centroid Height: 0.0491820830936955"
+
