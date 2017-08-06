@@ -4,13 +4,57 @@
 
 describe the results generally
 
-\subsection{Control case - uniform intensity and uniform population}
+\subsection{Control case - uniform risk on a uniform population}
 
 \input{results/unif_100_1_unif/output/mean_table.tex}
 
 \begin{figure}[tb]
     \centering
-    \includegraphics[width=0.95\textwidth]{results/unif_100_1_unif/output/ise-relative-histogram}
-    \caption[Relative ISE: uniform on uniform]{Relative integrated squared error for uniform intensity on a uniform population, 100 cases.}
-    \label{fig:rise_unif_100_1_unif}
+    \begin{subfigure}[t]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{results/unif_100_1_unif/output/true_intensity_heatmap}
+    \caption{True intensity}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{results/unif_100_1_unif/output/oracle_intensity_heatmap}
+    \caption{Oracle estimate}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{results/unif_100_1_unif/output/silverman_intensity_heatmap}
+    \caption{Silverman estimate}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{results/unif_100_1_unif/output/CV_intensity_heatmap}
+    \caption{Cross-validation estimate}
+    \end{subfigure}
+    \label{fig:cases_unif_100_unif}
+    \caption{Example cases: uniform intensity on uniform population, 100 cases}
 \end{figure}
+
+\begin{figure}[tb]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{results/unif_100_1_unif/output/ise-relative-histogram}
+    \caption{Relative ISE}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{results/unif_100_1_unif/output/ise-histogram}
+    \caption{Absolute ISE}
+    \end{subfigure}
+    \caption[ISE: uniform on uniform]{Integrated squared error histogram for uniform intensity on a uniform population, 100 cases}
+    \label{fig:ise_unif_100_1_unif}
+\end{figure}
+
+\subsection{Single-peak risk on a uniform population}
+
+\subsection{Varying the number of cases}
+
+\subsection{Varying the size of the population}
+
+\subsection{Varying the decay of the risk function}
+
+\subsection{Varying the decay of the population density}
+
+\subsection{Varying the number of peaks in the risk function}
+
+\subsection{Varying the distance between peaks}
+
