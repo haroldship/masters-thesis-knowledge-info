@@ -361,7 +361,7 @@ stddevdf <- data.frame(
 rownames(stddevdf) <- measures
 
 std_table <- xtable(stddevdf, digits=6, caption="Standard deviation of error rates", label="tbl:stddev_error_rates")
-sink(paste(outdir, "mean_table.tex", sep="/"))
+sink(paste(outdir, "std_table.tex", sep="/"))
 print(std_table, include.rownames=TRUE)
 sink()
 
