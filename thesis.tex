@@ -2,7 +2,7 @@
 
 \immediate\write18{makeindex -s nomencl.ist -o "\jobname.nls" "\jobname.nlo"}
 
-\documentclass[a4paper,12pt,titlepage,oneside,openany]{book}
+\documentclass[a4paper,12pt,titlepage,twoside,openany]{book}
 
 \usepackage{graphicx}
 \graphicspath{ {img/} }
@@ -51,5 +51,14 @@
 
 \chapter{Outline}
 \include{outline}
+
+\chapter{Results}
+\input{results}
+
+\begin{appendices}
+\chapter{Results tables}
+\input{appendix_tables}
+\end{appendices}
+
 
 \end{document}
