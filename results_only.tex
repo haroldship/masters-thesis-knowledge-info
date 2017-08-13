@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper]{article}
+\documentclass[12pt,a4paper]{book}
 
 \title{Results}
 \author{
@@ -11,13 +11,18 @@
 \usepackage{mystyle}
 \usepackage{mymacros}
 
-\newcommand\docversion{Draft 0.1}
-
+\newcommand\docversion{Draft 0.2}
 
 \begin{document}
 \maketitle
 
+\chapter{Results}
 \input{results}
+
+\begin{appendices}
+\chapter{Results tables}
+\input{appendix_tables}
+\end{appendices}
 
 \bibliographystyle{apacite}
 \bibliography{thesis}
