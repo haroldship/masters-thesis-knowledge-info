@@ -2,8 +2,10 @@
 
 This chapter describes the results of several experimental setups.
 First, we ran a control case, using a uniform population and a uniform intensity.
-The results for the control case are described in \autoref{sec:results:unif_100_1_1h}.
+The results for the control case are described in \cref{sec:results:unif_100_unif}.
 We then made ran several sets of experiments while changing one parameter at a time.
+\Cref{sec:results:unif_NCases_1h} compares the results obtained by varying the number of cases.
+\Cref{sec:results:unifNpop_100_1h} compares the results obtained by varying the number of cases.
 
 
 \section{Control case - uniform risk on a uniform population}
@@ -45,12 +47,9 @@ We then made ran several sets of experiments while changing one parameter at a t
     \label{fig:ise:unif_100_unif}
 \end{figure}
 
-\section{Single-peak risk on a uniform population}
-\label{sec:results:unif_100_1_1h}
-
-\input{results/unif_100_1_1h/output/mean_table.tex}
 
 \section{Varying the number of cases}
+\label{sec:results:unif_NCases_1h}
 
 \subsection{50 cases}
 \input{results/unif_50_1_1h/output/mean_table.tex}
@@ -68,6 +67,7 @@ We then made ran several sets of experiments while changing one parameter at a t
 \input{results/unif_1000_1_1h/output/mean_table.tex}
 
 \section{Varying the size of the population}
+\label{sec:results:unifNpop_100_1h}
 
 \subsection{100 cases from 10,000}
 \input{results/unif_100_1_1h/output/mean_table.tex}
