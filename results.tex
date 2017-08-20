@@ -1,47 +1,53 @@
 % !TEX root = results_only.tex
 
+This chapter describes the results of several experimental setups.
+First, we ran a control case, using a uniform population and a uniform intensity.
+The results for the control case are described in \autoref{sec:results:unif_100_1_1h}.
+We then made ran several sets of experiments while changing one parameter at a time.
 
-describe the results generally
 
 \section{Control case - uniform risk on a uniform population}
+\label{sec:results:unif_100_unif}
 
 \begin{figure}[tb]
     \centering
     \begin{subfigure}[t]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_1_unif/output/true_intensity_heatmap}
+    \includegraphics[width=\textwidth]{results/unif_100_unif/output/true_intensity_heatmap}
     \caption{True intensity}
     \end{subfigure}
     \begin{subfigure}[t]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_1_unif/output/oracle_intensity_heatmap}
+    \includegraphics[width=\textwidth]{results/unif_100_unif/output/oracle_intensity_heatmap}
     \caption{Oracle estimate}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_1_unif/output/silverman_intensity_heatmap}
+    \includegraphics[width=\textwidth]{results/unif_100_unif/output/silverman_intensity_heatmap}
     \caption{Silverman estimate}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_1_unif/output/CV_intensity_heatmap}
+    \includegraphics[width=\textwidth]{results/unif_100_unif/output/CV_intensity_heatmap}
     \caption{Cross-validation estimate}
     \end{subfigure}
-    \label{fig:cases_unif_100_unif}
+    \label{fig:cases:unif_100_unif}
     \caption{Example cases: uniform intensity on uniform population, 100 cases}
 \end{figure}
 
 \begin{figure}[tb]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_1_unif/output/ise-relative-histogram}
+    \includegraphics[width=\textwidth]{results/unif_100_unif/output/ise-relative-histogram}
     \caption{Relative ISE}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_1_unif/output/ise-histogram}
+    \includegraphics[width=\textwidth]{results/unif_100_unif/output/ise-histogram}
     \caption{Absolute ISE}
     \end{subfigure}
     \caption[ISE: uniform on uniform]{Integrated squared error histogram for uniform intensity on a uniform population, 100 cases}
-    \label{fig:ise_unif_100_1_unif}
+    \label{fig:ise:unif_100_unif}
 \end{figure}
 
 \section{Single-peak risk on a uniform population}
+\label{sec:results:unif_100_1_1h}
+
 \input{results/unif_100_1_1h/output/mean_table.tex}
 
 \section{Varying the number of cases}
