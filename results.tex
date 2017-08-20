@@ -5,11 +5,33 @@ First, we ran a control case, using a uniform population and a uniform intensity
 The results for the control case are described in \cref{sec:results:unif_100_unif}.
 We then made ran several sets of experiments while changing one parameter at a time.
 \Cref{sec:results:unif_NCases_1h} compares the results obtained by varying the number of cases.
-\Cref{sec:results:unifNpop_100_1h} compares the results obtained by varying the number of cases.
+\Cref{sec:results:unifNpop_100_1h} compares the results obtained by varying the size of the population.
 
 
 \section{Control case - uniform risk on a uniform population}
 \label{sec:results:unif_100_unif}
+
+\Cref{tbl:errors:unif_100_unif} lists the mean error rates obtained for a uniform intensity with factor of 100, over a uniform population of 10,000.
+The columns represent the errors observed by using the three different methods for computing the smoothing bandwidth:
+the Oracle, the Silverman rule of thumb, and least-squares cross validation.
+
+Each row represents a different measure of error.
+The first row, MISE, is the mean integrated squared error.
+Relative MISE is the mean integrated relative squared error, where the relative squared error is computed in the following manner:
+\[ RSE(x) = \left(\frac{\hat{f}(x)-f(x)}{f(x)}\right)^2 \]
+The next row is the mean integrated absolute error (MIAE), which is followed by Relative MIAE which is computed analogously to Relative MISE.
+This is followed by the Maximum error, which is the greatest absolute error over the study area.
+The error measures mentioned above each compare the closeness of the estimated intensity function to the true funcition.
+The following error measures, on the other hand, relate the closeness of the \textit{peak} of the estimate to the true peak.
+The peak bias is the empirical expectation of \(\max{\{\hat{f}(x)\}} - \max{\{f(x)\}}\).
+
+
+\begin{table}[H]
+\centering
+\input{results/unif_100_unif/output/mean_table.tex}
+\caption{Mean error rates for uniform population, uniform intensity of factor 100}
+\label{tbl:errors:unif_100_unif}
+\end{table}
 
 \begin{figure}[tb]
     \centering
