@@ -1,29 +1,46 @@
 % !TEX root = results_only.tex
 
 %% results tables appendix
-\section{Single-peak risk on a uniform population}
+\section{Uniform risk on a uniform population}
 
 
 \begin{table}[H]
 \centering
 
-\begin{subtable}{0.9\textwidth}
-\input{results/unif_100_unif/output/mean_table.tex}
-\caption{Means} 
-\end{subtable}
+    \begin{subtable}{0.9\textwidth}
+    \input{results/unif_100_unif/output/mean_table.tex}
+    \caption{Means} 
+    \end{subtable}
 
-\begin{subtable}{0.9\textwidth}
-\input{results/unif_100_unif/output/std_table.tex}
-\caption{Standard deviations} 
-\end{subtable}
+    \begin{subtable}{0.9\textwidth}
+    \input{results/unif_100_unif/output/std_table.tex}
+    \caption{Standard deviations} 
+    \end{subtable}
 
 \caption{Error rates for uniform population, uniform intensity of factor 100}
 \label{tbl:mean_error_rates:unif_100_unif}
 \end{table}
 
 
+\section{Single-peak risk on a uniform population}
+
 \subsection{50 cases}
-\input{results/unif_50_1_1h/output/mean_table.tex}
+\begin{table}[H]
+\centering
+
+    \begin{subtable}{0.9\textwidth}
+    \input{results/unif_50_1_1h/output/mean_table.tex}
+    \caption{Means} 
+    \end{subtable}
+
+    \begin{subtable}{0.9\textwidth}
+    \input{results/unif_50_1_1h/output/std_table.tex}
+    \caption{Standard deviations} 
+    \end{subtable}
+
+\caption{Error rates for uniform population, single peak intensity of factor 100}
+\label{tbl:mean_error_rates:unif_100_unif}
+\end{table}
 
 \subsection{100 cases}
 \input{results/unif_100_1_1h/output/mean_table.tex}
