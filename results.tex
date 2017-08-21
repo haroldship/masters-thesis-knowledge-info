@@ -80,20 +80,19 @@ However, instead of comparing the true peak to the peak of the estimate, they co
 \section{Varying the number of cases}
 \label{sec:results:unif_NCases_1h}
 
-\subsection{50 cases}
-\input{results/unif_50_1_1h/output/mean_table.tex}
-
-\subsection{100 cases}
-\input{results/unif_100_1_1h/output/mean_table.tex}
-
-\subsection{200 cases}
-\input{results/unif_200_1_1h/output/mean_table.tex}
-
-\subsection{500 cases}
-\input{results/unif_500_1_1h/output/mean_table.tex}
-
-\subsection{1000 cases}
-\input{results/unif_1000_1_1h/output/mean_table.tex}
+\begin{figure}[tb]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{results/by_num_cases/MISE-vs-cases}
+    \caption{MISE}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{results/by_num_cases/RMISE-vs-cases}
+    \caption{Relative MISE}
+    \end{subfigure}
+    \caption[MISE: by number of cases]{Mean Integrated Squared Error compared vs. number of cases}
+    \label{fig:ise:unif_100_unif}
+\end{figure}
 
 \section{Varying the size of the population}
 \label{sec:results:unifNpop_100_1h}
