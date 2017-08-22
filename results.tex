@@ -40,7 +40,7 @@ However, instead of comparing the true peak to the peak of the estimate, they co
 \label{tbl:errors:unif_100_unif}
 \end{table}
 
-\begin{figure}[tb]
+\begin{figure}[htb]
     \centering
     \begin{subfigure}[t]{0.45\textwidth}
     \includegraphics[width=\textwidth]{results/unif_100_unif/output/true_intensity_heatmap}
@@ -62,7 +62,7 @@ However, instead of comparing the true peak to the peak of the estimate, they co
     \caption{Example cases: uniform intensity on uniform population, 100 cases}
 \end{figure}
 
-\begin{figure}[tb]
+\begin{figure}[htb]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{results/unif_100_unif/output/ise-relative-histogram}
@@ -80,15 +80,19 @@ However, instead of comparing the true peak to the peak of the estimate, they co
 \section{Varying the number of cases}
 \label{sec:results:unif_NCases_1h}
 
-\begin{figure}[tb]
+\begin{figure}[htb]
     \centering
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\textwidth]{results/by_num_cases/MISE-vs-cases}
     \caption{MISE}
     \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\textwidth]{results/by_num_cases/RMISE-vs-cases}
     \caption{Relative MISE}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/by_num_cases/RMISE-vs-cases-log-log}
+    \caption{Relative MISE log-log}
     \end{subfigure}
     \caption[MISE: by number of cases]{Mean Integrated Squared Error compared vs. number of cases}
     \label{fig:ise:unif_100_unif}
