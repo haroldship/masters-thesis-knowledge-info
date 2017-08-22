@@ -3,6 +3,8 @@ library(ggplot2)
 setwd("/Users/harold/Dropbox/MA_Knowledge_and_Info/Thesis/thesis/results/by_num_cases")
 
 Cases <- c(50, 100, 200, 500, 1000)
+Dirs <- sapply(Cases, function(case) paste('../unif_', case, '_1_1h/output/', sep=''))
+Files <- sapply(Dirs, function(dir) paste(dir, 'mean_table.tex', sep=''))
 
 dfO <- data.frame(Case=Cases,
                   Bandwidth="Oracle",
