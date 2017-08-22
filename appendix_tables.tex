@@ -22,7 +22,7 @@
 \end{table}
 
 
-\section{Single-peak risk on a uniform population}
+\section{Varying the number of cases for fixed population of 10,000}
 
 \subsection{50 cases}
 \begin{table}[H]
@@ -38,7 +38,7 @@
     \caption{Standard deviations} 
     \end{subtable}
 
-\caption{Error rates for uniform population, single peak intensity of factor 50}
+\caption{Error rates for uniform population of 10,000, single peak intensity of factor 50}
 \label{tbl:mean_error_rates:unif_50_1_1h}
 \end{table}
 
@@ -56,7 +56,7 @@
     \caption{Standard deviations} 
     \end{subtable}
 
-\caption{Error rates for uniform population, single peak intensity of factor 100}
+\caption{Error rates for uniform population of 10,000, single peak intensity of factor 100}
 \label{tbl:mean_error_rates:unif_100_1_1h}
 \end{table}
 
@@ -74,7 +74,7 @@
     \caption{Standard deviations} 
     \end{subtable}
 
-\caption{Error rates for uniform population, single peak intensity of factor 200}
+\caption{Error rates for uniform population of 10,000, single peak intensity of factor 200}
 \label{tbl:mean_error_rates:unif_200_1_1h}
 \end{table}
 
@@ -92,7 +92,7 @@
     \caption{Standard deviations} 
     \end{subtable}
 
-\caption{Error rates for uniform population, single peak intensity of factor 500}
+\caption{Error rates for uniform population of 10,000, single peak intensity of factor 500}
 \label{tbl:mean_error_rates:unif_500_1_1h}
 \end{table}
 
@@ -110,6 +110,126 @@
     \caption{Standard deviations} 
     \end{subtable}
 
-\caption{Error rates for uniform population, single peak intensity of factor 1000}
+\caption{Error rates for uniform population of 10,000, single peak intensity of factor 1000}
 \label{tbl:mean_error_rates:unif_1000_1_1h}
 \end{table}
+
+\section{Varying population and cases together}
+
+\subsection{100 cases from 10,000}
+\begin{table}[H]
+\centering
+\scriptsize
+
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif_100_1_1h/output/mean_table.tex}
+    \caption{Means} 
+    \end{subtable}%
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif_100_1_1h/output/std_table.tex}
+    \caption{Standard deviations} 
+    \end{subtable}
+
+\caption{Error rates for uniform population of 10,000, single peak intensity of factor 100}
+\label{tbl:mean_error_rates:unif_100_1_1h}
+\end{table}
+
+\subsection{200 cases from 20,000}
+\begin{table}[H]
+\centering
+\scriptsize
+
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif20k_200_1_1h/output/mean_table.tex}
+    \caption{Means} 
+    \end{subtable}%
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif20k_200_1_1h/output/std_table.tex}
+    \caption{Standard deviations} 
+    \end{subtable}
+
+\caption{Error rates for uniform population of 20,000, single peak intensity of factor 200}
+\label{tbl:mean_error_rates:unif20k_200_1_1h}
+\end{table}
+
+\subsection{400 cases from 40,000}
+\begin{table}[H]
+\centering
+\scriptsize
+
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif40k_400_1_1h/output/mean_table.tex}
+    \caption{Means} 
+    \end{subtable}%
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif40k_400_1_1h/output/std_table.tex}
+    \caption{Standard deviations} 
+    \end{subtable}
+
+\caption{Error rates for uniform population of 40,000, single peak intensity of factor 400}
+\label{tbl:mean_error_rates:unif40k_400_1_1h}
+\end{table}
+
+\subsection{600 cases from 60,000}
+\begin{table}[H]
+\centering
+\scriptsize
+
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif60k_600_1_1h/output/mean_table.tex}
+    \caption{Means} 
+    \end{subtable}%
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif60k_600_1_1h/output/std_table.tex}
+    \caption{Standard deviations} 
+    \end{subtable}
+
+\caption{Error rates for uniform population of 60,000, single peak intensity of factor 600}
+\label{tbl:mean_error_rates:unif60k_600_1_1h}
+\end{table}
+
+\subsection{800 cases from 80,000}
+\begin{table}[H]
+\centering
+\scriptsize
+
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif80k_800_1_1h/output/mean_table.tex}
+    \caption{Means} 
+    \end{subtable}%
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif80k_800_1_1h/output/std_table.tex}
+    \caption{Standard deviations} 
+    \end{subtable}
+
+\caption{Error rates for uniform population of 80,000, single peak intensity of factor 800}
+\label{tbl:mean_error_rates:unif80k_800_1_1h}
+\end{table}
+
+\subsection{1000 cases from 100,000}
+\begin{table}[H]
+\centering
+\scriptsize
+
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif100k_1000_1_1h/output/mean_table.tex}
+    \caption{Means} 
+    \end{subtable}%
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif100k_1000_1_1h/output/std_table.tex}
+    \caption{Standard deviations} 
+    \end{subtable}
+
+\caption{Error rates for uniform population of 100,000, single peak intensity of factor 1000}
+\label{tbl:mean_error_rates:unif100k_1000_1_1h}
+\end{table}
+
+\section{Varying the decay of the risk function}
+
+\section{Varying the decay of the population density}
+
+\section{Varying the distance between two peaks}
+
+\section{Varying the distance between the population and risk function peaks}
+
+

@@ -76,7 +76,6 @@ However, instead of comparing the true peak to the peak of the estimate, they co
     \label{fig:ise:unif_100_unif}
 \end{figure}
 
-
 \section{Varying the number of cases}
 \label{sec:results:unif_NCases_1h}
 
@@ -95,64 +94,28 @@ However, instead of comparing the true peak to the peak of the estimate, they co
     \caption{Relative MISE log-log}
     \end{subfigure}
     \caption[MISE: by number of cases]{Mean Integrated Squared Error compared vs. number of cases}
-    \label{fig:ise:unif_100_unif}
+    \label{fig:ise:unif_NCases_1h}
 \end{figure}
 
 \section{Varying the size of the population}
-\label{sec:results:unifNpop_100_1h}
+\label{sec:results:unifNpop_1h}
 
-\subsection{100 cases from 10,000}
-\input{results/unif_100_1_1h/output/mean_table.tex}
-
-\subsection{1000 cases from 100,000}
-\input{results/unif100k_1000_1_1h/output/mean_table.tex}
-
-\section{Varying the decay of the risk function}
-
-\subsection{100 cases with decay rate 0.5}
-\input{results/unif_100_0.5_1h/output/mean_table.tex}
-
-\subsection{100 cases with decay rate 0.7}
-\input{results/unif_100_0.7_1h/output/mean_table.tex}
-
-\subsection{100 cases with decay rate 1.0}
-\input{results/unif_100_1_1h/output/mean_table.tex}
-
-\subsection{100 cases with decay rate 1.4}
-\input{results/unif_100_1.4_1h/output/mean_table.tex}
-
-\subsection{100 cases with decay rate 2.0}
-\input{results/unif_100_2_1h/output/mean_table.tex}
-
-\section{Varying the decay of the population density}
-
-\subsection{100 cases with uniform population}
-\input{results/unif_100_1_1h/output/mean_table.tex}
-
-\subsection{100 cases with population decay rate 2.0}
-\input{results/p2.0_100_1_1h/output/mean_table.tex}
-
-\subsection{100 cases with population decay rate 1.4}
-\input{results/p1.4_100_1_1h/output/mean_table.tex}
-
-\subsection{100 cases with population decay rate 1.0}
-\input{results/p1.0_100_1_1h/output/mean_table.tex}
-
-\subsection{100 cases with population decay rate 0.7}
-\input{results/p0.7_100_1_1h/output/mean_table.tex}
-
-\section{Varying the distance between two peaks}
-
-\subsection{100 cases in 2 peaks separated by 1}
-\input{results/unif_100_1_2h_1/output/mean_table.tex}
-
-\subsection{100 cases in 2 peaks separated by 2}
-\input{results/unif_100_1_2h_2/output/mean_table.tex}
-
-\subsection{100 cases in 2 peaks separated by 3}
-\input{results/unif_100_1_2h_3/output/mean_table.tex}
-
-\subsection{100 cases in 2 peaks separated by 4}
-\input{results/unif_100_1_2h_4/output/mean_table.tex}
+\begin{figure}[htb]
+    \centering
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/by_pop_size/MISE-vs-population}
+    \caption{MISE}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/by_pop_size/RMISE-vs-population}
+    \caption{Relative MISE}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/by_pop_size/RMISE-vs-population-log-log}
+    \caption{Relative MISE log-log}
+    \end{subfigure}
+    \caption[MISE: by population size]{Mean Integrated Squared Error compared vs. population size}
+    \label{fig:ise:unifNpop_1h}
+\end{figure}
 
 
