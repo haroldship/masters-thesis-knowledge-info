@@ -104,7 +104,7 @@ However, instead of comparing the true peak to the peak of the estimate, they co
     \includegraphics[width=\textwidth]{results/by_num_cases/RMISE-vs-cases-log-log}
     \caption{Relative MISE log-log}
     \end{subfigure}
-    \caption[MISE: by number of cases]{Mean Integrated Squared Error compared vs. number of cases}
+    \caption[MISE: by number of cases]{Mean Integrated Squared Error vs. number of cases}
     \label{fig:ise:unif_NCases_1h}
 \end{figure}
 
@@ -128,7 +128,7 @@ However, instead of comparing the true peak to the peak of the estimate, they co
     \includegraphics[width=\textwidth]{results/by_pop_size/RMISE-vs-population-log-log}
     \caption{Relative MISE log-log}
     \end{subfigure}
-    \caption[MISE: by population size]{Mean Integrated Squared Error compared vs. population size}
+    \caption[MISE: by population size]{Mean Integrated Squared Error vs. population size}
     \label{fig:ise:unifNpop_1h}
 \end{figure}
 
@@ -138,6 +138,23 @@ However, instead of comparing the true peak to the peak of the estimate, they co
 \section{Varying the decay of the risk function}
 \label{sec:results:unif_100_SD}
 
+\begin{figure}[htb]
+    \centering
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/by_cases_decay/MISE-vs-risk-decay}
+    \caption{MISE}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/by_cases_decay/RMISE-vs-risk-decay}
+    \caption{Relative MISE}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/by_cases_decay/RMISE-vs-risk-decay-log-log}
+    \caption{Relative MISE log-log}
+    \end{subfigure}
+    \caption[MISE: by risk decay]{Mean Integrated Squared Error vs. risk decay rate}
+    \label{fig:ise:unif_100_SD}
+\end{figure}
 
 %%
 %% Section
