@@ -62,17 +62,28 @@ dfC$Bandwidth <- "CV"
 df <- rbind(dfO, dfS, dfC)
 df$Bandwidth <- as.factor(df$Bandwidth)
 
+coefO <- coef(lm(log(dfO$`Relative MISE`) ~ log(dfO$Pop)))
+coefS <- coef(lm(log(dfS$`Relative MISE`) ~ log(dfS$Pop)))
+coefC <- coef(lm(log(dfC$`Relative MISE`) ~ log(dfC$Pop)))
+
+
 pdf(file="MISE-vs-population.pdf")
 ggplot(df) +
-  geom_line(aes(x=Pop, y=MISE, colour=Bandwidth))
+  geom_point(aes(x=Pop, y=MISE, colour=Bandwidth, shape=Bandwidth))
 dev.off()
 pdf(file="RMISE-vs-population.pdf")
 ggplot(df) +
-  geom_line(aes(x=Pop, y=`Relative MISE`, colour=Bandwidth))
+  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(9000,110000)) +
+  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(9000,110000)) +
+  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(9000,110000)) +
+  geom_point(aes(x=Pop, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth))
 dev.off()
 pdf(file="RMISE-vs-population-log-log.pdf")
 ggplot(df) +
-  geom_point(aes(x=Pop, y=`Relative MISE`, colour=Bandwidth)) +
+  geom_point(aes(x=Pop, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth)) +
+  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(9000,110000)) +
+  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(9000,110000)) +
+  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(9000,110000)) +
   coord_trans(x='log10', y='log10') +
   annotation_logticks(scaled=FALSE)
 dev.off()

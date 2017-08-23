@@ -61,17 +61,27 @@ dfC$Bandwidth <- "CV"
 df <- rbind(dfO, dfS, dfC)
 df$Bandwidth <- as.factor(df$Bandwidth)
 
+coefO <- coef(lm(log(dfO$`Relative MISE`) ~ log(dfO$Case)))
+coefS <- coef(lm(log(dfS$`Relative MISE`) ~ log(dfS$Case)))
+coefC <- coef(lm(log(dfC$`Relative MISE`) ~ log(dfC$Case)))
+
 pdf(file="MISE-vs-cases.pdf")
 ggplot(df) +
-  geom_line(aes(x=Case, y=MISE, colour=Bandwidth))
+  geom_point(aes(x=Case, y=MISE, colour=Bandwidth, shape=Bandwidth), size=3)
 dev.off()
 pdf(file="RMISE-vs-cases.pdf")
 ggplot(df) +
-  geom_line(aes(x=Case, y=`Relative MISE`, colour=Bandwidth))
+  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(45,1100)) +
+  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(45,1100)) +
+  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(45,1100)) +
+  geom_point(aes(x=Case, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth), size=3)
 dev.off()
 pdf(file="RMISE-vs-cases-log-log.pdf")
 ggplot(df) +
-  geom_point(aes(x=Case, y=`Relative MISE`, colour=Bandwidth)) +
+  geom_point(aes(x=Case, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
+  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(45,1100)) +
+  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(45,1100)) +
+  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(45,1100)) +
   coord_trans(x='log10', y='log10') +
   annotation_logticks(scaled=FALSE)
 dev.off()
