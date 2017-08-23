@@ -159,6 +159,33 @@ However, instead of comparing the true peak to the peak of the estimate, they co
 %%
 %% Section
 \section{Varying the decay of the population density}
+\label{sec:results:pSD_100_1h}
+
+\begin{table}[htb]
+\centering
+\input{results/p0.7_100_1_1h/output/mean_table.tex}
+\caption{Error rates for uniform population of 10,000, single peak intensity of factor 100 and decay rate 0.7}
+\label{tbl:results:p0.7_100_1_1h}
+\end{table}
+
+
+\begin{figure}[htb]
+    \centering
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/by_population_decay/MISE-vs-population-decay}
+    \caption{MISE}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/by_population_decay/RMISE-vs-population-decay}
+    \caption{Relative MISE}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/by_population_decay/RMISE-vs-population-decay-log-log}
+    \caption{Relative MISE log-log}
+    \end{subfigure}
+    \caption[MISE: by risk decay]{Mean Integrated Squared Error vs. population decay rate}
+    \label{fig:ise:pSD_100_1h}
+\end{figure}
 
 
 %%
