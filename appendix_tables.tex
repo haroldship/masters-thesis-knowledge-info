@@ -1,8 +1,14 @@
 % !TEX root = appendix_tables_only.tex
 
+%%
+%%
 %% results tables appendix
-\section{Uniform risk on a uniform population}
+%%
+%%
 
+%%
+%% Section
+\section{Uniform risk on a uniform population}
 
 \begin{table}[H]
 \centering
@@ -17,11 +23,13 @@
     \caption{Standard deviations} 
     \end{subtable}
 
-\caption{Error rates for uniform population, uniform intensity of factor 100}
+\caption{Error rates for uniform population of 10,000, uniform intensity of factor 100}
 \label{tbl:mean_error_rates:unif_100_unif}
 \end{table}
 
 
+%%
+%% Section
 \section{Varying the number of cases for fixed population of 10,000}
 
 \subsection{50 cases}
@@ -114,9 +122,15 @@
 \label{tbl:mean_error_rates:unif_1000_1_1h}
 \end{table}
 
+
+%%
+%% Section
 \section{Varying population and cases together}
 
 \subsection{100 cases from 10,000}
+
+This is the same as \cref{tbl:mean_error_rates:unif_100_1_1h}.
+
 \begin{table}[H]
 \centering
 \scriptsize
@@ -131,7 +145,7 @@
     \end{subtable}
 
 \caption{Error rates for uniform population of 10,000, single peak intensity of factor 100}
-\label{tbl:mean_error_rates:unif_100_1_1h}
+\label{tbl:mean_error_rates:unif_100_1_1h:2}
 \end{table}
 
 \subsection{200 cases from 20,000}
@@ -224,12 +238,156 @@
 \label{tbl:mean_error_rates:unif100k_1000_1_1h}
 \end{table}
 
+
+%%
+%% Section
 \section{Varying the decay of the risk function}
 
+
+\subsection{100 cases from 10,000 with no decay (uniform)}
+
+This is the same as \Cref{tbl:mean_error_rates:unif_100_unif}.
+
+\begin{table}[H]
+\centering
+\scriptsize
+
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif_100_unif/output/mean_table.tex}
+    \caption{Means} 
+    \end{subtable}%
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif_100_unif/output/std_table.tex}
+    \caption{Standard deviations} 
+    \end{subtable}
+
+\caption{Error rates for uniform population of 10,000, single peak intensity of factor 100 and no decay (uniform)}
+\label{tbl:mean_error_rates:unif_100_unif:2}
+\end{table}
+
+\subsection{100 cases from 10,000 with decay rate 2.0}
+\begin{table}[H]
+\centering
+\scriptsize
+
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif_100_2_1h/output/mean_table.tex}
+    \caption{Means} 
+    \end{subtable}%
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif_100_2_1h/output/std_table.tex}
+    \caption{Standard deviations} 
+    \end{subtable}
+
+\caption{Error rates for uniform population of 10,000, single peak intensity of factor 100 and decay rate 2.0}
+\label{tbl:mean_error_rates:unif_100_2_1h}
+\end{table}
+
+\subsection{100 cases from 10,000 with decay rate 1.4}
+\begin{table}[H]
+\centering
+\scriptsize
+
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif_100_1.4_1h/output/mean_table.tex}
+    \caption{Means} 
+    \end{subtable}%
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif_100_1.4_1h/output/std_table.tex}
+    \caption{Standard deviations} 
+    \end{subtable}
+
+\caption{Error rates for uniform population of 10,000, single peak intensity of factor 100 and decay rate 1.4}
+\label{tbl:mean_error_rates:unif_100_1.4_1h}
+\end{table}
+
+\subsection{100 cases from 10,000 with decay rate 1.4}
+\begin{table}[H]
+\centering
+\scriptsize
+
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif_100_1.4_1h/output/mean_table.tex}
+    \caption{Means} 
+    \end{subtable}%
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif_100_1.4_1h/output/std_table.tex}
+    \caption{Standard deviations} 
+    \end{subtable}
+
+\caption{Error rates for uniform population of 10,000, single peak intensity of factor 100 and decay rate 1.4}
+\label{tbl:mean_error_rates:unif_100_1.4_1h}
+\end{table}
+
+\subsection{100 cases from 10,000 with decay rate 1.0}
+
+This is the same as \cref{tbl:mean_error_rates:unif_100_1_1h}
+\begin{table}[H]
+\centering
+\scriptsize
+
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif_100_1_1h/output/mean_table.tex}
+    \caption{Means} 
+    \end{subtable}%
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif_100_1_1h/output/std_table.tex}
+    \caption{Standard deviations} 
+    \end{subtable}
+
+\caption{Error rates for uniform population of 10,000, single peak intensity of factor 100 and decay rate 1.0}
+\label{tbl:mean_error_rates:unif_100_1_1h:3}
+\end{table}
+
+\subsection{100 cases from 10,000 with decay rate 0.7}
+\begin{table}[H]
+\centering
+\scriptsize
+
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif_100_0.7_1h/output/mean_table.tex}
+    \caption{Means} 
+    \end{subtable}%
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif_100_0.7_1h/output/std_table.tex}
+    \caption{Standard deviations} 
+    \end{subtable}
+
+\caption{Error rates for uniform population of 10,000, single peak intensity of factor 100 and decay rate 0.7}
+\label{tbl:mean_error_rates:unif_100_0.7_1h}
+\end{table}
+
+\subsection{100 cases from 10,000 with decay rate 0.5}
+\begin{table}[H]
+\centering
+\scriptsize
+
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif_100_0.5_1h/output/mean_table.tex}
+    \caption{Means} 
+    \end{subtable}%
+    \begin{subtable}{0.5\textwidth}
+    \input{results/unif_100_0.5_1h/output/std_table.tex}
+    \caption{Standard deviations} 
+    \end{subtable}
+
+\caption{Error rates for uniform population of 10,000, single peak intensity of factor 100 and decay rate 0.5}
+\label{tbl:mean_error_rates:unif_100_0.5_1h}
+\end{table}
+
+
+%%
+%% Section
 \section{Varying the decay of the population density}
 
+
+%%
+%% Section
 \section{Varying the distance between two peaks}
 
+
+%%
+%% Section
 \section{Varying the distance between the population and risk function peaks}
 
 
