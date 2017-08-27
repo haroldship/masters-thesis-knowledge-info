@@ -191,10 +191,28 @@ However, instead of comparing the true peak to the peak of the estimate, they co
 %%
 %% Section
 \section{Varying the distance between two peaks}
+\label{sec:results:p1.4_100_G}
 
 
 %%
 %% Section
 \section{Varying the distance between the population and risk function peaks}
 
+\begin{figure}[htb]
+    \centering
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/by_pop_risk_distance/MISE-vs-population-risk-gap}
+    \caption{MISE}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/by_pop_risk_distance/RMISE-vs-population-risk-gap}
+    \caption{Relative MISE}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/by_pop_risk_distance/RMISE-vs-population-risk-gap-log-log}
+    \caption{Relative MISE log-log}
+    \end{subfigure}
+    \caption[MISE: by risk decay]{Mean Integrated Squared Error vs. distance between population and risk peaks}
+    \label{fig:ise:p1.4_100_G}
+\end{figure}
 

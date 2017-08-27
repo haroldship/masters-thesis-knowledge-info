@@ -49,12 +49,12 @@ for (i in 1:N) {
 dfO <- as.data.frame(matO)
 dfO$DecayRate <- DecayRates
 dfO$Bandwidth <- "Oracle"
-dfO <- dfO[dfO$DecayRate!=0.7,]
+#dfO <- dfO[dfO$DecayRate!=0.7,]
 
 dfS <- as.data.frame(matS)
 dfS$DecayRate <- DecayRates
 dfS$Bandwidth <- "Silverman"
-dfS <- dfS[dfS$DecayRate!=0.7,]
+#dfS <- dfS[dfS$DecayRate!=0.7,]
 
 dfC <- as.data.frame(matC)
 dfC$DecayRate <- DecayRates
