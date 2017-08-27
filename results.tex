@@ -16,7 +16,7 @@ We then made ran several sets of experiments while changing one parameter at a t
 
 %%
 %% Section
-\section{Control case - uniform risk on a uniform population}
+\section{Uniform risk on a uniform population}
 \label{sec:results:unif_100_unif}
 
 \autoref{tbl:errors:unif_100_unif} lists the mean error rates obtained for a uniform intensity with factor of 100, over a uniform population of 10,000.
@@ -193,6 +193,23 @@ However, instead of comparing the true peak to the peak of the estimate, they co
 \section{Varying the distance between two peaks}
 \label{sec:results:p1.4_100_G}
 
+\begin{figure}[htb]
+    \centering
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/by_two_peaks/MISE-vs-risk-peak-gap}
+    \caption{MISE}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/by_two_peaks/RMISE-vs-risk-peak-gap}
+    \caption{Relative MISE}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/by_two_peaks/RMISE-vs-risk-peak-gap-log-log}
+    \caption{Relative MISE log-log}
+    \end{subfigure}
+    \caption[MISE: by risk decay]{Mean Integrated Squared Error vs. distance between two risk peaks}
+    \label{fig:ise:p1.4_100_G}
+\end{figure}
 
 %%
 %% Section
