@@ -58,6 +58,7 @@ Relative MISE is the mean integrated relative squared error, where the relative 
 \[ \mbox{RSE}(x) = \left(\frac{\hat{f}(x)-f(x)}{f(x)}\right)^2 .\]
 More generally, the relative error at a point \(x\) is computed as
 \[ \mbox{RE}(x) =  \frac{\hat{f}(x)-f(x)}{f(x)} .\]
+\autoref{fig:ise:unif_100_unif} shows the empirical distribution of the MISE and RMISE for the uniform intensity on uniform population.
 The next row is the mean integrated absolute error (MIAE), which is followed by Relative MIAE which is computed analogously to Relative MISE.
 This is followed by the Maximum error, which is the greatest absolute error over the study area.
 Complete results can be found in \autoref{tbl:mean_error_rates:unif_100_unif} in \autoref{chp:results_tables}.
@@ -141,13 +142,37 @@ However, instead of comparing the true peak to the peak of the estimate, they co
 
 In this section we examine and compare the results of experiments where the number of incidents is varied, while keeping the population size constant at 10,000, distributed uniformly throughout the study area.
 Sample used in this section were 50, 100, 200, 500, and 1,000.
-Complete results can be found in \autoref{tbl:mean_error_rates:unif_50_1_1h}, \autoref{tbl:mean_error_rates:unif_100_1_1h}, \autoref{tbl:mean_error_rates:unif_200_1_1h}, \autoref{tbl:mean_error_rates:unif_500_1_1h}, and \autoref{tbl:mean_error_rates:unif_100_1_1h} in \autoref{chp:results_tables}.
+The full set of error measures for these cases can be found in \autoref{tbl:mean_error_rates:unif_50_1_1h}, \autoref{tbl:mean_error_rates:unif_100_1_1h}, \autoref{tbl:mean_error_rates:unif_200_1_1h}, \autoref{tbl:mean_error_rates:unif_500_1_1h}, and \autoref{tbl:mean_error_rates:unif_100_1_1h} in \autoref{chp:results_tables}.
 
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/unif_100_1_1h/output/bandwidths-silverman}
+    \caption{Silverman}
+    \label{fig:bandwidths_x1:unif_NCases_1h:c}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/unif_100_1_1h/output/bandwidths-x1}
+    \caption{Cross-validation, \(X_1\)}
+    \label{fig:bandwidths_x1:unif_NCases_1h:c}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/unif_100_1_1h/output/bandwidths-x2}
+    \caption{Cross-validation, \(X_2\)}
+    \label{fig:bandwidths_x1:unif_NCases_1h:c}
+    \end{subfigure}
+    \caption{Bandwidth histograms for 100 incidents in a single peak from population of 10,000}
+\end{figure}
 
 \autoref{fig:one_sample:unif_NCases_1h} shows how one sample of incidents, distributed over the population, for sample sizes of 100 and 500.
 This is done by multiplying the single-peak risk function by a constant in order to control the expected number of incidents per simulation.
 \autoref{fig:ise:unif_NCases_1h} shows the effect on the MISE and RMISE:
 \autoref{fig:ise:unif_NCases_1h:a} shows how MISE increases with expected incidents per patient.
+One might expect the error to associated with estimating a function to \textit{decrease} as the number of incidents increases.
+However, the expected number of incidents increases linearly with the intensity function value.
+For example, double the number of incidents corresponds to an intensity of twice the value.
+This makes comparing the MISE of estimates of intensity functions difficult, as the errors will also rise in the same direction.
+In order to facilitate the comparison of intensity functions that have different expected number of incidents, we use the RMISE.
 \autoref{fig:ise:unif_NCases_1h:b} shows how RMISE decreases with expected incidents per patient.
 \autoref{fig:ise:unif_NCases_1h:c} is a log-log graph, showing a linear relationship between the logarithm of RMISE and the logarithm of the number of cases.
 The values of the intercept and slope are -2.3525396 and -0.7316768 for the Oracle bandwidth; -1.8623772 and -0.7356884 for the Silverman bandwidth; and -1.5308541 and -0.8103349 for the cross-validation bandwidth.
