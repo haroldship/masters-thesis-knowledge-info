@@ -202,6 +202,21 @@ The corresponding equations for RMISE are:
 
 \textcolor{red}{TBD: chart of bandwidth vs. no. cases}
 
+\begin{table}
+\centering
+\begin{tabular}{rrrr}
+    \hline
+    Decay Rate & Oracle & Silverman & CV \\ 
+    \hline
+    1.0 & -0.8180 & -0.7445 & 4.2668 \\
+    1.4 & -0.7501 & -0.7224 & -0.5711 \\
+    2.0 & -0.7548 & -0.7253 & -0.8425 \\
+    \( \infty \) & -0.7317 & -0.7357 & -0.8103
+\end{tabular}
+\caption{Convergence power for different population decay rates}
+\label{tbl:convergence_vs_decay}
+\end{table}
+
 %%
 %% Section
 \section{Varying the sample size for fixed intensity}
@@ -261,6 +276,10 @@ the standard deviation of the Gaussian risk function is varied.
 %% Section
 \section{Varying the decay of the population density}
 \label{sec:results:pSD_100_1h}
+
+In this section, we compare the effect of different population distributions on the estimation of a single, fixed risk function.
+The population s
+The risk function has an expansion factor of 100.
 
 \begin{table}[htbp]
 \centering

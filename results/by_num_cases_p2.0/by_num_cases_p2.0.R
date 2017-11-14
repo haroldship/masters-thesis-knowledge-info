@@ -1,10 +1,9 @@
 library(ggplot2)
 
-setwd("/Users/harold/Dropbox/MA_Knowledge_and_Info/Thesis/thesis/results/by_num_cases")
+setwd("/Users/harold/Dropbox/MA_Knowledge_and_Info/Thesis/thesis/results/by_num_cases_p2.0")
 
-#Cases <- c(50, 100, 200, 500, 1000)
-Cases <- c(50, 100, 200, 1000)
-Dirs <- sapply(Cases, function(case) paste('../p1.0_', case, '_1_1h/output/', sep=''))
+Cases <- c(50, 100, 200, 500, 1000)
+Dirs <- sapply(Cases, function(case) paste('../p2.0_', case, '_1_1h/output/', sep=''))
 Files <- sapply(Dirs, function(dir) paste(dir, 'mean_table.tex', sep=''))
 
 N <- length(Cases)
