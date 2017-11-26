@@ -311,6 +311,26 @@ For this set of experiments, the population is uniformly distributed and the ris
 \section{Varying the decay of the risk function}
 \label{sec:results:unif_100_SD}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Parameter table
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[htbp]
+\centering
+\begin{tabular}{ll}
+\hline
+Parameter & Value \\
+\hline
+Population size & 10,000 \\
+Population decay rate & uniform \\
+Incident risk factor & 100 \\
+Incident decay rate & 0.7, 1.0, 1.4, 2.0 \\
+Incident center & (0,0) \\
+\hline
+\end{tabular}
+\caption{Parameters used for varying the decay rate of the risk function}
+\label{tbl:params:unif_100_SD}
+\end{table}
+
 In this section, we compare the effect of the decay rate of the risk function on the estimate.
 The population distribution is uniform, and the expansion factor remains constant at 100, but
 the standard deviation of the Gaussian risk function is varied.
@@ -414,4 +434,14 @@ The risk function has an expansion factor of 100.
     \caption[MISE: by risk decay]{Mean Integrated Squared Error vs. distance between population and risk peaks}
     \label{fig:ise:p1.4_Gap_risk}
 \end{figure}
+
+%%
+%% Discussion
+%%
+
+\section{Discussion}
+\label{sec:discussion}
+
+
+
 
