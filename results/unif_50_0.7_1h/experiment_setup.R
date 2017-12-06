@@ -14,5 +14,5 @@ experiment <- Experiment(
   sigma1=2.0,
   sigma2=2.0,
   rho=0,
-  incident_rate=genhill(sigma=1.0)
+  incident_rate=genhill(sigma=0.7)
 )

@@ -7,12 +7,12 @@ experiment <- Experiment(
   grid.by=0.1,
   buffer=0.5,
   N.p=10000,
-  EN.i=50,
+  EN.i=1000,
   bandwidths=seq(0.3, 2.8, 0.1),
   #c1=0.0,
   #c2=0.0,
   sigma1=2.0,
   sigma2=2.0,
   rho=0,
-  incident_rate=genhill(sigma=1.0)
+  incident_rate=genhill(sigma=1.4)
 )
