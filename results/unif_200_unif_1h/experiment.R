@@ -26,10 +26,10 @@ MC.oracle <- 49
 MC <- 1000
 
 # 2. Compute the Oracle bandwidth
-oracle.result <- oracle(experiment, MC=MC.oracle, nCores=1)
+oracle.result <- oracle(experiment, MC=MC.oracle, nCores=detectCores()-1)
 
 # 3. Run the simulations
-compare_peaks.result <- compare_peaks(experiment, oracle.result, MC=MC, nCores=1)
+compare_peaks.result <- compare_peaks(experiment, oracle.result, MC=MC, nCores=detectCores()-1)
 
 # 4. Compute the mean and standard deviation of the measures from the simulation output
 mean_values <- data.frame(
