@@ -458,3 +458,23 @@ The risk function was kept the same.
 This is analogous to extending the time frame of the study.
 We observed that both the absolue and relative mean integrated squared error fell with increasing the number of incidents, in a negative polynomial order.
 
+\[
+    \mbox{RMISE} = K n^{\alpha}
+\]
+
+
+\begin{table}[htbp]
+\begin{tabular}{l*6c}
+  \toprule
+  & \multicolumn{2}{c}{Oracle} & \multicolumn{2}{c}{Silverman} & \multicolumn{2}{c}{CV} \\ 
+  decay & K & \( \alpha \) & K & \( \alpha \) & K & \( \alpha \) \\ 
+  \midrule
+  0.7000 & -5.1305 & -0.3011 & -3.9831 & -0.4310 & -3.9296 & -0.4545 \\ 
+  1.0000 & -2.3525 & -0.7317 & -1.8624 & -0.7357 & -1.5309 & -0.8103 \\ 
+  1.4000 & -1.9569 & -0.6657 & -1.3159 & -0.7012 & -1.2255 & -0.7216 \\ 
+  2.0000 & -1.6753 & -0.6036 & -0.8370 & -0.6518 & -0.7970 & -0.6609 \\ 
+  \( \infty \) & -0.6438 & -0.3273 & -0.3175 & -0.3774 & -0.3170 & -0.3775 \\ 
+  \bottomrule
+\end{tabular}
+\end{table}
+
