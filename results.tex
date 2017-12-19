@@ -6,9 +6,10 @@
 %%
 %%
 
-This chapter describes the results of several experimental setups.
+This chapter describes the results of several experiments, each run with a variation of the setup.
 In each case, we compare the results of 1,000 simulations using several error functions.
-The results of the first experiment, uniform population and a uniform intensity, are described in \autoref{sec:results:unif_100_unif}.
+The results of the first experiment, uniform population and a uniform intensity,
+are described in \autoref{sec:results:unif_100_unif}.
 We then made ran several sets of experiments while changing one parameter at a time.
 \autoref{sec:results:unif_NCases_1h} compares the results obtained by varying the number of cases.
 \autoref{sec:results:unifNpop_1h} compares the results obtained by varying the size of the population.
@@ -39,9 +40,12 @@ Incident center & -- \\
 \label{tbl:params:unif_100_unif}
 \end{table}
 
-In this section, we describe the results of 1,000 simulations conducted for a population of 10,000 points, distributed uniformly throughout the study area.
-\autoref{fig:cases:unif_100_unif} shows the uniform intensity function, together with three estimated intensity functions of a single simulation,
-computed using three bandwidths: the oracle bandwidth, the Silverman rule of thumb bandwidth, and the cross-validation bandwidth.
+In this section, we describe the results of 1,000 simulations conducted for a population of 10,000 points,
+distributed uniformly throughout the study area.
+\autoref{fig:cases:unif_100_unif} shows the true uniform intensity function,
+together with three estimated intensity functions of a single simulation,
+computed using three bandwidths: the oracle bandwidth, the Silverman rule of thumb bandwidth,
+and the cross-validation bandwidth.
 
 \begin{figure}[htbp]
     \centering
@@ -67,10 +71,38 @@ computed using three bandwidths: the oracle bandwidth, the Silverman rule of thu
     \label{fig:cases:unif_100_unif}
 \end{figure}
 
+\begin{table}[htbp]
+\centering
+\input{results/unif_100_unif/output/mean_table.tex}
+\caption{Mean error rates for uniform population, uniform intensity of factor 100}
+\label{tbl:errors:unif_100_unif}
+\end{table}
 
-\autoref{tbl:errors:unif_100_unif} lists the mean error rates obtained for a uniform intensity with factor of 100, over a uniform population of 10,000.
+\autoref{tbl:errors:unif_100_unif} lists the mean error rates obtained for a uniform intensity with factor of 100,
+over a uniform population of 10,000.
 The columns represent the errors observed by using the three different methods for computing the smoothing bandwidth:
 the Oracle, the Silverman rule of thumb, and least-squares cross validation.
+Each row represents a different measure of error.
+Relative MISE is the mean integrated relative squared error,
+where the relative squared error is computed in the following manner:
+\[ \mbox{RSE}(x) = \left(\frac{\hat{f}(x)-f(x)}{f(x)}\right)^2 .\]
+More generally, the relative error at a point \(x\) is computed as
+\[ \mbox{RE}(x) =  \frac{\hat{f}(x)-f(x)}{f(x)} .\]
+The next row is the mean integrated absolute error (MIAE),
+which is followed by Relative MIAE which is computed analogously to Relative MISE.
+This is followed by the Maximum error, which is the greatest absolute error over the study area.
+Complete results can be found in \autoref{tbl:mean_error_rates:unif_100_unif} in \autoref{chp:results_tables}.
+
+The error measures mentioned above each compare the closeness of the estimated intensity function to the true funcition.
+The following error measures, on the other hand, relate the closeness of the \textit{peak} of the estimate to the true peak.
+The \textit{peak bias} is the average difference between the computed and true maxima,
+that is the empirical expectation of \(\max{\{\hat{f}(x)\}} - \max{\{f(x)\}}\).
+The Relative peak bias is peak bias expressed relative to the true maximum.
+The \textit{peak drift} is the Euclidean distance between the estimated peak and the true peak.
+The Relative peak drift is the peak drift, expressed relative to the width of the study area.
+
+The next four measures, \textit{centroid bias} and \textit{drift}, and the relative versions of them, are analogous to the peak error measures.
+However, instead of comparing the true peak to the peak of the estimate, they compare it to the location and value of the estimate, calculated at the centroid of the top five percent of the estimated function.
 
 \begin{figure}[htbp]
     \centering
@@ -86,33 +118,9 @@ the Oracle, the Silverman rule of thumb, and least-squares cross validation.
     \label{fig:ise:unif_100_unif}
 \end{figure}
 
-Each row represents a different measure of error.
-Relative MISE is the mean integrated relative squared error, where the relative squared error is computed in the following manner:
-\[ \mbox{RSE}(x) = \left(\frac{\hat{f}(x)-f(x)}{f(x)}\right)^2 .\]
-More generally, the relative error at a point \(x\) is computed as
-\[ \mbox{RE}(x) =  \frac{\hat{f}(x)-f(x)}{f(x)} .\]
 \autoref{fig:ise:unif_100_unif} shows the empirical distribution of the MISE and RMISE for the uniform intensity on uniform population.
-The next row is the mean integrated absolute error (MIAE), which is followed by Relative MIAE which is computed analogously to Relative MISE.
-This is followed by the Maximum error, which is the greatest absolute error over the study area.
-Complete results can be found in \autoref{tbl:mean_error_rates:unif_100_unif} in \autoref{chp:results_tables}.
-
-The error measures mentioned above each compare the closeness of the estimated intensity function to the true funcition.
-The following error measures, on the other hand, relate the closeness of the \textit{peak} of the estimate to the true peak.
-The \textit{peak bias} is the average difference between the computed and true maxima,
-that is the empirical expectation of \(\max{\{\hat{f}(x)\}} - \max{\{f(x)\}}\).
-The Relative peak bias is peak bias expressed relative to the true maximum.
-The \textit{peak drift} is the Euclidean distance between the estimated peak and the true peak.
-The Relative peak drift is the peak drift, expressed relative to the width of the study area.
-
-The next four measures, \textit{centroid bias} and \textit{drift}, and the relative versions of them, are analogous to the peak error measures.
-However, instead of comparing the true peak to the peak of the estimate, they compare it to the location and value of the estimate, calculated at the centroid of the top five percent of the estimated function.
-
-\begin{table}[htbp]
-\centering
-\input{results/unif_100_unif/output/mean_table.tex}
-\caption{Mean error rates for uniform population, uniform intensity of factor 100}
-\label{tbl:errors:unif_100_unif}
-\end{table}
+The similarity of the distributions for the Oracle, Silverman, and Cross-validation bandwidths
+reflects the relative ease with which the DKD can estimate a flat intensity function.
 
 \begin{figure}[htbp]
     \centering
