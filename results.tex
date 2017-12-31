@@ -14,15 +14,95 @@ We then made ran several sets of experiments while changing one parameter at a t
 \autoref{sec:results:unif_NCases_1h} compares the results obtained by varying the number of cases.
 \autoref{sec:results:unifNpop_1h} compares the results obtained by varying the size of the population.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Results template
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Results template}
+\label{sec:results:template}
+\graphicspath{{./results/unif_100_unif/}}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Parameter table - template
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[htbp]
+\centering
+\begin{tabular}{ll}
+\hline
+Parameter & Value \\
+\hline
+Population size & 10,000 \\
+Population decay rate & uniform \\
+Incident risk factor & 100 \\
+Incident decay rate & uniform \\
+Incident center & -- \\
+\hline
+\end{tabular}
+\caption{Parameters used in TEMPLATE}
+\label{tbl:params:template}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Example cases scatter - template
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[t]{0.32\textwidth}
+    \includegraphics[width=\textwidth]{output/population-heatmap}
+    \caption{Population distribution}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.32\textwidth}
+    \includegraphics[width=\textwidth]{output/population-points}
+    \caption{Population realization}
+    \end{subfigure}%
+    \begin{subfigure}[t]{0.32\textwidth}
+    \includegraphics[width=\textwidth]{output/population_and_incidents_scatter}
+    \caption{With incidents}
+    \end{subfigure}%
+    \caption[Uniform population distribution]
+        {Population distribution (a), realization (b), and sample incidents (c)}
+    \label{fig:cases:template}    
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Example cases heat map - template
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{output/true_intensity_heatmap}
+    \caption{True intensity}
+    \end{subfigure}%
+    \begin{subfigure}[t]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{output/oracle_intensity_heatmap}
+    \caption{Oracle bandwidth estimate}
+    \end{subfigure}
+
+
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{output/silverman_intensity_heatmap}
+    \caption{Silverman bandwidth estimate}
+    \end{subfigure}%
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{output/CV_intensity_heatmap}
+    \caption{Cross-validation bandwidth estimate}
+    \end{subfigure}
+    \caption[Example incidents: uniform intensity on uniform population, 100 cases]
+        {Example incidents: uniform intensity on uniform population, 100 cases}
+    \label{fig:cases:template}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% Section
+%% Uniform risk on uniform population section
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Uniform risk on a uniform population}
 \label{sec:results:unif_100_unif}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Parameter table
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Parameter table - template
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[htbp]
 \centering
 \begin{tabular}{ll}
