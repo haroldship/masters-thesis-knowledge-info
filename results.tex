@@ -20,6 +20,9 @@ We then made ran several sets of experiments while changing one parameter at a t
 \section*{Results template}
 \label{sec:results:template}
 \graphicspath{{./results/unif_100_unif/}}
+\makeatletter
+\def\input@path{{./results/unif_100_unif/}}
+\makeatother
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Parameter table - template
@@ -90,6 +93,60 @@ Incident center & -- \\
         {Example incidents: uniform intensity on uniform population, 100 cases}
     \label{fig:cases:template}
 \end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ISE distribution - template
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{output/ise-relative-histogram}
+    \caption{Relative ISE}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{output/ise-histogram}
+    \caption{Absolute ISE}
+    \end{subfigure}
+    \caption[ISE: uniform on uniform]{Integrated squared error histogram for uniform intensity on a uniform population, 100 cases}
+    \label{fig:ise:template}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% IAE distribution - template
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{output/iae-relative-histogram}
+    \caption{Relative IAE}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{output/iae-histogram}
+    \caption{Absolute IAE}
+    \end{subfigure}
+    \caption[ISE: uniform on uniform]{Integrated absolute error histogram for uniform intensity on a uniform population, 100 cases}
+    \label{fig:iae:template}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% IAE distribution - template
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.45\textwidth]{output/maxerr-histogram}
+    \caption[ISE: uniform on uniform]{Maximum error histogram for uniform intensity on a uniform population, 100 cases}
+    \label{fig:maxerr:template}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Mean errors - template
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[htbp]
+\centering
+\input{output/mean_table.tex}
+\caption{Mean error rates for uniform population, uniform intensity of factor 100}
+\label{tbl:errors:template}
+\end{table}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
