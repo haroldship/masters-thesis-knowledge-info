@@ -13,5 +13,34 @@
 
 \section{Guan}
 
+From \citet{guan2008consistent}
+
+\(N\) is a spatial point process.
+\(W \subset \mathbb{R}^2 \) is the study area (window).
+Intensity at \(\vec{s} \in \mathbb{R}^2\) is defined as:
+
+\[
+    \lambda (\vec{s}) = \lim_{|d\vec{s}| \to 0} \left\{ \frac{\mathbb{E}[N(d\vec{s})]}{|d\vec{s}|} \right\}
+\]
+
+And \(\lambda(\vec{s})|d\vec{s}|\) is the approximate probability of \(d\vec{s}\) containing a single incident.
+
+Goal of intensity estimate: approximate \(\lambda(s)\) on the study area.
+
+Kernel intensity estimator (my simplification):
+\[
+    \hat{\lambda}(\vec{s}; h) = \frac{1}{h} \sum_{\vec{x} \in N \cap W}{k((\vec{x}-\vec{s})/h)}
+\]
+
+{
+\color{red}
+\textbf{The kernel intensity estimator is not consistent.}
+This is because, although the kernel only uses local information around the point of interest to compute the estimate.
+The resulting estimate has bias that tends to zero.
+However it's variance does not diminish because the number of events in any fixed region is of order 1.
+}
+
+The paper develops a \textit{new nonparametric intensity estimator} that is consistent under ``some suitable yet reasonable conditions.''
+
 \section{PhD thesis}
 
