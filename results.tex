@@ -166,19 +166,46 @@ Incident center & -- \\
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Centroids - template
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{output/centroid-dist-histogram}
+    \caption{Centroid peak distance from truth}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{output/centroid-height-histogram}
+    \caption{Centroid peak heights}
+    \end{subfigure}
+    \caption[Centroids: uniform on uniform]{Centroid peak distance from truth and height histograms for uniform intensity on a uniform population, 100 cases}
+    \label{fig:iae:template}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bandwidths - template
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{output/bandwidths-x1}
-    \caption{CV Bandwidthds - \(X_1\)}
+    \caption{CV Bandwidths - \(X_1\)}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{output/bandwidths-x2}
-    \caption{CV Bandwidthds - \(X_2\)}
+    \caption{CV Bandwidths - \(X_2\)}
     \end{subfigure}
-    \caption[CV Bandwidths: uniform on uniform]{CV bandwidth histograms for uniform intensity on a uniform population, 100 cases}
+
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{output/bandwidths-difference}
+    \caption{Difference between \(X_1\) and \(X_2\) bandwidths}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{output/bandwidths-silverman}
+    \caption{Silverman Bandwidths}
+    \end{subfigure}
+    \caption[Bandwidths: uniform on uniform]{CV bandwidths: \(X_1\), \(X_2\) and difference and Silverman bandwidth
+        histograms for uniform intensity on a uniform population, 100 cases}
     \label{fig:iae:template}
 \end{figure}
 
