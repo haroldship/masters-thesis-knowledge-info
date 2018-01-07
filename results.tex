@@ -19,9 +19,9 @@ We then made ran several sets of experiments while changing one parameter at a t
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Results template}
 \label{sec:results:template}
-\graphicspath{{./results/unif_100_unif/}}
+\graphicspath{{./results/unif_100_unif_1h/}}
 \makeatletter
-\def\input@path{{./results/unif_100_unif/}}
+\def\input@path{{./results/unif_100_unif_1h/}}
 \makeatother
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -124,17 +124,17 @@ Incident center & -- \\
     \includegraphics[width=\textwidth]{output/iae-histogram}
     \caption{Absolute IAE}
     \end{subfigure}
-    \caption[ISE: uniform on uniform]{Integrated absolute error histogram for uniform intensity on a uniform population, 100 cases}
+    \caption[IAE: uniform on uniform]{Integrated absolute error histogram for uniform intensity on a uniform population, 100 cases}
     \label{fig:iae:template}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% IAE distribution - template
+% Max error distribution - template
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.45\textwidth]{output/maxerr-histogram}
-    \caption[ISE: uniform on uniform]{Maximum error histogram for uniform intensity on a uniform population, 100 cases}
+    \caption[Maximum error: uniform on uniform]{Maximum error histogram for uniform intensity on a uniform population, 100 cases}
     \label{fig:maxerr:template}
 \end{figure}
 
@@ -147,6 +147,40 @@ Incident center & -- \\
 \caption{Mean error rates for uniform population, uniform intensity of factor 100}
 \label{tbl:errors:template}
 \end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Peaks - template
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{output/peak-dist-histogram}
+    \caption{Peak distance from truth}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{output/peak-height-histogram}
+    \caption{Peak heights}
+    \end{subfigure}
+    \caption[Peaks: uniform on uniform]{Peak distance from truth and height histograms for uniform intensity on a uniform population, 100 cases}
+    \label{fig:iae:template}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bandwidths - template
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{output/bandwidths-x1}
+    \caption{CV Bandwidthds - \(X_1\)}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{output/bandwidths-x2}
+    \caption{CV Bandwidthds - \(X_2\)}
+    \end{subfigure}
+    \caption[CV Bandwidths: uniform on uniform]{CV bandwidth histograms for uniform intensity on a uniform population, 100 cases}
+    \label{fig:iae:template}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

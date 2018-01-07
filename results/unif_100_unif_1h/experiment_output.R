@@ -59,13 +59,13 @@ pdf(file=paste(outdir, "ise-relative-histogram.pdf", sep="/"))
 ggplot(compare_peaks.result) +
   ggtitle("Relative ISE") +
   geom_histogram(aes(x=cv.rise, fill="CV"), alpha=.5) +
-  geom_histogram(aes(x=oracle.rise, fill="Oracle"), alpha=.5) +
-  geom_histogram(aes(x=silverman.rise, fill="Silverman"), alpha=.5) +
+#  geom_histogram(aes(x=oracle.rise, fill="Oracle"), alpha=.5) +
+#  geom_histogram(aes(x=silverman.rise, fill="Silverman"), alpha=.5) +
   geom_vline(data=mean_values, aes(xintercept=oracle.rmise, colour="Oracle"),
              linetype="dashed", size=1, show.legend=FALSE) +
   geom_vline(data=mean_values, aes(xintercept=cv.rmise, colour="CV"),
-             linetype="dashed", size=1, show.legend=FALSE) +
-  geom_vline(data=mean_values, aes(xintercept=silverman.rmise, colour="Silverman"),
+#             linetype="dashed", size=1, show.legend=FALSE) +
+#  geom_vline(data=mean_values, aes(xintercept=silverman.rmise, colour="Silverman"),
              linetype="dashed", size=1, show.legend=FALSE)
 dev.off()
 
