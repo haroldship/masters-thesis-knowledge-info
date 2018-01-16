@@ -19,9 +19,9 @@ We then made ran several sets of experiments while changing one parameter at a t
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Results template}
 \label{sec:results:template}
-\graphicspath{{./results/unif_100_unif_1h/}}
+\graphicspath{{./results/unif_100_1.0_1h/}}
 \makeatletter
-\def\input@path{{./results/unif_100_unif_1h/}}
+\def\input@path{{./results/unif_100_1.0_1h/}}
 \makeatother
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -104,8 +104,8 @@ Incident center & -- \\
     \caption{Relative ISE}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{output/ise-histogram}
-    \caption{Absolute ISE}
+    \includegraphics[width=\textwidth]{output/ise-normalized-histogram}
+    \caption{Normalized absolute ISE}
     \end{subfigure}
     \caption[ISE: uniform on uniform]{Integrated squared error histogram for uniform intensity on a uniform population, 100 cases}
     \label{fig:ise:template}
@@ -368,17 +368,17 @@ Incident center & (0,0) \\
 
 In this section we examine and compare the results of experiments where the number of incidents is varied, while keeping the population size constant at 10,000, distributed uniformly throughout the study area.
 The expected incident sizes used in the experiments in this section were 50, 100, 200, 500, and 1,000.
-The full set of error measures for these cases can be found in \autoref{tbl:mean_error_rates:unif_50_1_1h}, \autoref{tbl:mean_error_rates:unif_100_1_1h}, \autoref{tbl:mean_error_rates:unif_200_1_1h}, \autoref{tbl:mean_error_rates:unif_500_1_1h}, and \autoref{tbl:mean_error_rates:unif_100_1_1h} in \autoref{chp:results_tables}.
+The full set of error measures for these cases can be found in \autoref{tbl:mean_error_rates:unif_50_1.0_1h}, \autoref{tbl:mean_error_rates:unif_100_1.0_1h}, \autoref{tbl:mean_error_rates:unif_200_1.0_1h}, \autoref{tbl:mean_error_rates:unif_500_1.0_1h}, and \autoref{tbl:mean_error_rates:unif_100_1.0_1h} in \autoref{chp:results_tables}.
 
 
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_1_1h/output/population_and_incidents_scatter}
+    \includegraphics[width=\textwidth]{results/unif_100_1.0_1h/output/population_and_incidents_scatter}
     \caption{100 incidents}
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_500_1_1h/output/population_and_incidents_scatter}
+    \includegraphics[width=\textwidth]{results/unif_500_1.0_1h/output/population_and_incidents_scatter}
     \caption{500 incidents}
     \end{subfigure}
     \caption{A single realization of different sizes from a single-peak risk on a uniform population}
@@ -409,19 +409,19 @@ The full set of error measures for these cases can be found in \autoref{tbl:mean
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_1_1h/output/bandwidths-silverman}
+    \includegraphics[width=\textwidth]{results/unif_100_1.0_1h/output/bandwidths-silverman}
     \caption{Silverman}
-    \label{fig:bandwidths_x1:unif_100_1_1h:s}
+    \label{fig:bandwidths_x1:unif_100_1.0_1h:s}
     \end{subfigure}
     \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_1_1h/output/bandwidths-x1}
+    \includegraphics[width=\textwidth]{results/unif_100_1.0_1h/output/bandwidths-x1}
     \caption{Cross-validation, \(X_1\)}
-    \label{fig:bandwidths_x1:unif_100_1_1h:x1}
+    \label{fig:bandwidths_x1:unif_100_1.0_1h:x1}
     \end{subfigure}
     \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_1_1h/output/bandwidths-x2}
+    \includegraphics[width=\textwidth]{results/unif_100_1.0_1h/output/bandwidths-x2}
     \caption{Cross-validation, \(X_2\)}
-    \label{fig:bandwidths_x1:unif_100_1_1h:x2}
+    \label{fig:bandwidths_x1:unif_100_1.0_1h:x2}
     \end{subfigure}
     \caption{Bandwidth histograms for 100 incidents in a single peak from population of 10,000}
 \end{figure}
@@ -572,7 +572,7 @@ The risk function has an expansion factor of 100.
 \centering
 \input{results/p0.7_100_1_1h/output/mean_table.tex}
 \caption{Error rates for uniform population of 10,000, single peak intensity of factor 100 and decay rate 0.7}
-\label{tbl:results:p0.7_100_1_1h}
+\label{tbl:results:p0.7_100_1.0_1h}
 \end{table}
 
 
