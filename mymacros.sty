@@ -21,8 +21,18 @@
 \newcommand{\transpose}[1]{\ensuremath{#1}^{\mathrm{T}}}
 \renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}} % vector as bold
 \newcommand{\conv}[2]{(\ensuremath{#1 \ast #2})}
-\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand*\diff{\mathop{}\!\mathrm{d}} % \diff for differentiator symbol 'd'
 
 \DeclareMathOperator*{\argmin}{\arg\!\min} % argmin
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[chapter] % reset theorem numbering for each chapter
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition} % definition numbers are dependent on theorem numbers
+\newtheorem{exmp}[thm]{Example} % same for example numbers
+
+
+
 
 

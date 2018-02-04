@@ -14,6 +14,52 @@ We then made ran several sets of experiments while changing one parameter at a t
 \autoref{sec:results:unif_NCases_1h} compares the results obtained by varying the number of cases.
 \autoref{sec:results:unifNpop_1h} compares the results obtained by varying the size of the population.
 
+\textbf{
+\color{red}
+This table shows that the method is not consistent.
+There is an issue with the CV using gradient descent.
+However, even the Oracle and Silverman bandwidths have INCREASING normalized error.
+Also note the bandwidths are getting smaller.
+}
+
+$$
+\lambda(\vec{x}) = \mu f\!(\vec{x})
+$$
+
+where $\mu$ is a constant multiplier.
+Normalized MISE is MISE divided by $\mu$.
+
+\textbf{
+    \color{red}
+    Also note that taking the average of the 2 Oracle bandwidths for $\mu=1$ is 1.35,
+    and $1.35 \mu^{-1/6}$ gives:
+    \\
+    1.5153238 \\
+    1.3500000 \\
+    1.2027133 \\
+    1.0323781 \\
+    0.9197443
+}
+
+% latex table generated in R 3.3.3 by xtable 1.8-2 package
+% Tue Jan 16 19:25:44 2018
+\begin{table}[ht]
+\centering
+\small
+\color{red}
+\begin{tabular}{rrrrrrr}
+  \hline
+mu & oracle.nmise & silverman.nmise & cv.nmise & oracle.best\_h1 & oracle.best\_h2 & silverman.mean\_h \\ 
+  \hline
+0.500000 & 0.000018 & 0.000029 & 0.000028 & 1.500000 & 1.500000 & 1.033278 \\ 
+  1.000000 & 0.000022 & 0.000035 & 0.000033 & 1.300000 & 1.400000 & 0.918091 \\ 
+  2.000000 & 0.000026 & 0.000042 & 0.000036 & 1.200000 & 1.200000 & 0.817562 \\ 
+  5.000000 & 0.000034 & 0.000053 & 0.000058 & 1.100000 & 1.000000 & 0.703114 \\ 
+  10.000000 & 0.000038 & 0.000062 & 0.000114 & 0.900000 & 0.900000 & 0.626736 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Results template
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
