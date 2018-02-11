@@ -30,8 +30,7 @@ MC <- 1000
 oracle.result <- oracle(experiment, MC=MC.oracle, nCores=detectCores()-1)
 
 # 3. Run the simulations
-compare_peaks.result <- compare_peaks(experiment, oracle.result, MC=MC, nCores=detectCores()-1,
-                                      num_steps=100, a=0.0005, mu=0.05)
+compare_peaks.result <- compare_peaks(experiment, oracle.result, MC=MC, nCores=detectCores()-1)
 
 compare_peaks.result$oracle.nise <- compare_peaks.result$oracle.ise / factor
 compare_peaks.result$silverman.nise <- compare_peaks.result$silverman.ise / factor

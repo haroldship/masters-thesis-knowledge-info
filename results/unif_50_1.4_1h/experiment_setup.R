@@ -11,8 +11,8 @@ experiment <- Experiment(
   bandwidths=seq(0.3, 2.8, 0.1),
   #c1=0.0,
   #c2=0.0,
-  sigma1=2.0,
-  sigma2=2.0,
+  sigma1=1.0,
+  sigma2=1.0,
   rho=0,
   incident_rate=genhill(sigma=1.4)
 )

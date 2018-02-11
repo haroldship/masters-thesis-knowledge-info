@@ -21,9 +21,13 @@ if (! dir.exists(outdir)) {
 
 # 1: create the experimental setup
 source("experiment_setup.R")
+factor <- experiment$EN.i / 100
 
 # 2-4: load previous experiment
 load("output/experiment.RData")
+compare_peaks.result$oracle.nise <- compare_peaks.result$oracle.ise / factor
+compare_peaks.result$silverman.nise <- compare_peaks.result$silverman.ise / factor
+compare_peaks.result$cv.nise <- compare_peaks.result$cv.ise / factor
 
 # 5. Output the results
 
@@ -58,71 +62,135 @@ dev.off()
 pdf(file=paste(outdir, "ise-relative-histogram.pdf", sep="/"))
 ggplot(compare_peaks.result) +
   ggtitle("Relative ISE") +
-  geom_histogram(aes(x=cv.rise, fill="CV"), alpha=.5) +
-  geom_histogram(aes(x=oracle.rise, fill="Oracle"), alpha=.5) +
-  geom_histogram(aes(x=silverman.rise, fill="Silverman"), alpha=.5) +
-  geom_vline(data=mean_values, aes(xintercept=oracle.rmise, colour="Oracle"),
-             linetype="dashed", size=1, show.legend=FALSE) +
-  geom_vline(data=mean_values, aes(xintercept=cv.rmise, colour="CV"),
-             linetype="dashed", size=1, show.legend=FALSE) +
-  geom_vline(data=mean_values, aes(xintercept=silverman.rmise, colour="Silverman"),
-             linetype="dashed", size=1, show.legend=FALSE)
+  theme_linedraw() +
+  theme(axis.ticks=element_blank(), axis.text.y=element_blank()) +
+  xlab("Relative ISE") +
+  ylab(NULL) +
+  geom_density(aes(x=oracle.rise, colour="Oracle", linetype="Oracle"), size=0.8) +
+  geom_density(aes(x=silverman.rise, colour="Silverman", linetype="Silverman"), size=0.8) +
+  geom_density(aes(x=cv.rise, colour="CV", linetype="CV"), size=0.8) +
+  geom_vline(data=mean_values, aes(xintercept=oracle.rmise, colour="Oracle", linetype="Oracle"),
+             size=0.8) +
+  geom_vline(data=mean_values, aes(xintercept=silverman.rmise, colour="Silverman", linetype="Silverman"),
+             size=0.8) +
+  geom_vline(data=mean_values, aes(xintercept=cv.rmise, colour="CV", linetype="CV"),
+             size=0.8) +
+  scale_linetype_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
+                        values=c("dashed", "solid", "dotted")) +
+  scale_colour_brewer(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
+                      palette="Dark2")
 dev.off()
+
+pdf(file=paste(outdir, "ise-normalized-histogram.pdf", sep="/"))
+ggplot(compare_peaks.result) +
+  ggtitle("Normalized ISE") +
+  theme_linedraw() +
+  theme(axis.ticks=element_blank(), axis.text.y=element_blank()) +
+  xlab("Normalized ISE") +
+  ylab(NULL) +
+  geom_density(aes(x=oracle.nise, colour="Oracle", linetype="Oracle"), size=0.8) +
+  geom_density(aes(x=silverman.nise, colour="Silverman", linetype="Silverman"), size=0.8) +
+  geom_density(aes(x=cv.nise, colour="CV", linetype="CV"), size=0.8) +
+  geom_vline(data=mean_values, aes(xintercept=oracle.mise/factor, colour="Oracle", linetype="Oracle"),
+             size=0.8) +
+  geom_vline(data=mean_values, aes(xintercept=silverman.mise/factor, colour="Silverman", linetype="Silverman"),
+             size=0.8) +
+  geom_vline(data=mean_values, aes(xintercept=cv.mise/factor, colour="CV", linetype="CV"),
+             size=0.8) +
+  scale_linetype_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
+                        values=c("dashed", "solid", "dotted")) +
+  scale_colour_brewer(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
+                      palette="Dark2")
+dev.off()
+
 
 pdf(file=paste(outdir, "ise-histogram.pdf", sep="/"))
 ggplot(compare_peaks.result) +
   ggtitle("ISE") +
-  geom_histogram(aes(x=cv.ise, fill="CV"), alpha=.5) +
-  geom_histogram(aes(x=oracle.ise, fill="Oracle"), alpha=.5) +
-  geom_histogram(aes(x=silverman.ise, fill="Silverman"), alpha=.5) +
-  geom_vline(data=mean_values, aes(xintercept=oracle.mise, colour="Oracle"),
-             linetype="dashed", size=1, show.legend=FALSE) +
-  geom_vline(data=mean_values, aes(xintercept=cv.mise, colour="CV"),
-             linetype="dashed", size=1, show.legend=FALSE) +
-  geom_vline(data=mean_values, aes(xintercept=silverman.mise, colour="Silverman"),
-             linetype="dashed", size=1, show.legend=FALSE)
+  theme_linedraw() +
+  theme(axis.ticks=element_blank(), axis.text.y=element_blank()) +
+  xlab("ISE") +
+  ylab(NULL) +
+  geom_density(aes(x=oracle.ise, colour="Oracle", linetype="Oracle"), size=0.8) +
+  geom_density(aes(x=silverman.ise, colour="Silverman", linetype="Silverman"), size=0.8) +
+  geom_density(aes(x=cv.ise, colour="CV", linetype="CV"), size=0.8) +
+  geom_vline(data=mean_values, aes(xintercept=oracle.mise, colour="Oracle", linetype="Oracle"),
+             size=0.8) +
+  geom_vline(data=mean_values, aes(xintercept=silverman.mise, colour="Silverman", linetype="Silverman"),
+             size=0.8) +
+  geom_vline(data=mean_values, aes(xintercept=cv.mise, colour="CV", linetype="CV"),
+             size=0.8) +
+  scale_linetype_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
+                        values=c("dashed", "solid", "dotted")) +
+  scale_colour_brewer(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
+                      palette="Dark2")
+
 dev.off()
 
 pdf(file=paste(outdir, "iae-relative-histogram.pdf", sep="/"))
 ggplot(compare_peaks.result) +
   ggtitle("Relative IAE") +
-  geom_histogram(aes(x=cv.riae, fill="CV"), alpha=.5) +
-  geom_histogram(aes(x=oracle.riae, fill="Oracle"), alpha=.5) +
-  geom_histogram(aes(x=silverman.riae, fill="Silverman"), alpha=.5) +
-  geom_vline(data=mean_values, aes(xintercept=oracle.rmiae, colour="Oracle"),
-             linetype="dashed", size=1, show.legend=FALSE) +
-  geom_vline(data=mean_values, aes(xintercept=cv.rmiae, colour="CV"),
-             linetype="dashed", size=1, show.legend=FALSE) +
-  geom_vline(data=mean_values, aes(xintercept=silverman.rmiae, colour="Silverman"),
-             linetype="dashed", size=1, show.legend=FALSE)
+  theme_linedraw() +
+  theme(axis.ticks=element_blank(), axis.text.y=element_blank()) +
+  xlab("Relative IAE") +
+  ylab(NULL) +
+  geom_density(aes(x=oracle.riae, colour="Oracle", linetype="Oracle"), size=0.8) +
+  geom_density(aes(x=silverman.riae, colour="Silverman", linetype="Silverman"), size=0.8) +
+  geom_density(aes(x=cv.riae, colour="CV", linetype="CV"), size=0.8) +
+  geom_vline(data=mean_values, aes(xintercept=oracle.rmiae, colour="Oracle", linetype="Oracle"),
+             size=0.8) +
+  geom_vline(data=mean_values, aes(xintercept=silverman.rmiae, colour="Silverman", linetype="Silverman"),
+             size=0.8) +
+  geom_vline(data=mean_values, aes(xintercept=cv.rmiae, colour="CV", linetype="CV"),
+             size=0.8) +
+  scale_linetype_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
+                        values=c("dashed", "solid", "dotted")) +
+  scale_colour_brewer(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
+                      palette="Dark2")
 dev.off()
 
 pdf(file=paste(outdir, "iae-histogram.pdf", sep="/"))
 ggplot(compare_peaks.result) +
   ggtitle("IAE") +
-  geom_histogram(aes(x=cv.iae, fill="CV"), alpha=.5) +
-  geom_histogram(aes(x=oracle.iae, fill="Oracle"), alpha=.5) +
-  geom_histogram(aes(x=silverman.iae, fill="Silverman"), alpha=.5) +
-  geom_vline(data=mean_values, aes(xintercept=oracle.miae, colour="Oracle"),
-             linetype="dashed", size=1, show.legend=FALSE) +
-  geom_vline(data=mean_values, aes(xintercept=cv.miae, colour="CV"),
-             linetype="dashed", size=1, show.legend=FALSE) +
-  geom_vline(data=mean_values, aes(xintercept=silverman.miae, colour="Silverman"),
-             linetype="dashed", size=1, show.legend=FALSE)
+  theme_linedraw() +
+  theme(axis.ticks=element_blank(), axis.text.y=element_blank()) +
+  xlab("IAE") +
+  ylab(NULL) +
+  geom_density(aes(x=oracle.iae, colour="Oracle", linetype="Oracle"), size=0.8) +
+  geom_density(aes(x=silverman.iae, colour="Silverman", linetype="Silverman"), size=0.8) +
+  geom_density(aes(x=cv.iae, colour="CV", linetype="CV"), size=0.8) +
+  geom_vline(data=mean_values, aes(xintercept=oracle.miae, colour="Oracle", linetype="Oracle"),
+             size=0.8) +
+  geom_vline(data=mean_values, aes(xintercept=silverman.miae, colour="Silverman", linetype="Silverman"),
+             size=0.8) +
+  geom_vline(data=mean_values, aes(xintercept=cv.miae, colour="CV", linetype="CV"),
+             size=0.8) +
+  scale_linetype_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
+                        values=c("dashed", "solid", "dotted")) +
+  scale_colour_brewer(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
+                      palette="Dark2")
 dev.off()
 
 pdf(file=paste(outdir, "maxerr-histogram.pdf", sep="/"))
 ggplot(compare_peaks.result) +
   ggtitle("Sup (Maximum)") +
-  geom_histogram(aes(x=cv.sup, fill="CV"), alpha=.5) +
-  geom_histogram(aes(x=oracle.sup, fill="Oracle"), alpha=.5) +
-  geom_histogram(aes(x=silverman.sup, fill="Silverman"), alpha=.5) +
-  geom_vline(data=mean_values, aes(xintercept=oracle.msup, colour="Oracle"),
-             linetype="dashed", size=1, show.legend=FALSE) +
-  geom_vline(data=mean_values, aes(xintercept=cv.msup, colour="CV"),
-             linetype="dashed", size=1, show.legend=FALSE) +
-  geom_vline(data=mean_values, aes(xintercept=silverman.msup, colour="Silverman"),
-             linetype="dashed", size=1, show.legend=FALSE)
+  theme_linedraw() +
+  theme(axis.ticks=element_blank(), axis.text.y=element_blank()) +
+  xlab("Sup (Maximum) Error") +
+  ylab(NULL) +
+  geom_density(aes(x=oracle.sup, colour="Oracle", linetype="Oracle"), size=0.8) +
+  geom_density(aes(x=silverman.sup, colour="Silverman", linetype="Silverman"), size=0.8) +
+  geom_density(aes(x=cv.sup, colour="CV", linetype="CV"), size=0.8) +
+  geom_vline(data=mean_values, aes(xintercept=oracle.msup, colour="Oracle", linetype="Oracle"),
+             size=0.8) +
+  geom_vline(data=mean_values, aes(xintercept=silverman.msup, colour="Silverman", linetype="Silverman"),
+             size=0.8) +
+  geom_vline(data=mean_values, aes(xintercept=cv.msup, colour="CV", linetype="CV"),
+             size=0.8) +
+  scale_linetype_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
+                        values=c("dashed", "solid", "dotted")) +
+  scale_colour_brewer(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
+                      palette="Dark2")
 dev.off()
 
 pdf(file=paste(outdir, "centroid-dist-histogram.pdf", sep="/"))
@@ -211,7 +279,7 @@ dev.off()
 max.val <- max(experiment$Rtrue)
 base <- experiment$region$x1.max - experiment$region$x1.min - 2*experiment$region$buffer
 
-measures <- c("MISE", "Relative MISE",
+measures <- c("MISE", "Relative MISE", "Normalized MISE",
               "MIAE", "Relative MIAE",
               "Max Error",
               "Peak bias", "Relative Peak bias",
@@ -221,6 +289,7 @@ measures <- c("MISE", "Relative MISE",
 
 meansdf <- data.frame(
   Oracle=c(mean_values$oracle.mise[1], mean_values$oracle.rmise[1],
+           mean_values$oracle.mise[1]/factor,
            mean_values$oracle.miae[1], mean_values$oracle.rmiae[1],
            mean_values$oracle.msup[1],
            mean_values$oracle.merr[1], mean_values$oracle.merr[1]/max.val,
@@ -228,6 +297,7 @@ meansdf <- data.frame(
            mean_values$oracle.mcerr[1], mean_values$oracle.mcerr[1]/max.val,
            mean_values$oracle.mcdist[1], mean_values$oracle.mcdist[1]/base),
   Silverman=c(mean_values$silverman.mise[1], mean_values$silverman.rmise[1],
+           mean_values$silverman.mise[1]/factor,
            mean_values$silverman.miae[1], mean_values$silverman.rmiae[1],
            mean_values$silverman.msup[1],
            mean_values$silverman.merr[1], mean_values$silverman.merr[1]/max.val,
@@ -235,6 +305,7 @@ meansdf <- data.frame(
            mean_values$silverman.mcerr[1], mean_values$silverman.mcerr[1]/max.val,
            mean_values$silverman.mcdist[1], mean_values$silverman.mcdist[1]/base),
   CV=c(mean_values$cv.mise[1], mean_values$cv.rmise[1],
+           mean_values$cv.mise[1]/factor,
            mean_values$cv.miae[1], mean_values$cv.rmiae[1],
            mean_values$cv.msup[1],
            mean_values$cv.merr[1], mean_values$cv.merr[1]/max.val,
@@ -251,6 +322,7 @@ sink()
 
 stddevdf <- data.frame(
   Oracle=c(sd_values$oracle.mise[1], sd_values$oracle.rmise[1],
+           sd_values$oracle.mise[1]/factor,
            sd_values$oracle.miae[1], sd_values$oracle.rmiae[1],
            sd_values$oracle.msup[1],
            sd_values$oracle.merr[1], sd_values$oracle.merr[1]/max.val,
@@ -258,19 +330,21 @@ stddevdf <- data.frame(
            sd_values$oracle.mcerr[1], sd_values$oracle.mcerr[1]/max.val,
            sd_values$oracle.mcdist[1], sd_values$oracle.mcdist[1]/base),
   Silverman=c(sd_values$silverman.mise[1], sd_values$silverman.rmise[1],
-              sd_values$silverman.miae[1], sd_values$silverman.rmiae[1],
-              sd_values$silverman.msup[1],
-              sd_values$silverman.merr[1], sd_values$silverman.merr[1]/max.val,
-              sd_values$silverman.mdist[1], sd_values$silverman.mdist[1]/base,
-              sd_values$silverman.mcerr[1], sd_values$silverman.mcerr[1]/max.val,
-              sd_values$silverman.mcdist[1], sd_values$silverman.mcdist[1]/base),
+           sd_values$silverman.mise[1]/factor,
+           sd_values$silverman.miae[1], sd_values$silverman.rmiae[1],
+           sd_values$silverman.msup[1],
+           sd_values$silverman.merr[1], sd_values$silverman.merr[1]/max.val,
+           sd_values$silverman.mdist[1], sd_values$silverman.mdist[1]/base,
+           sd_values$silverman.mcerr[1], sd_values$silverman.mcerr[1]/max.val,
+           sd_values$silverman.mcdist[1], sd_values$silverman.mcdist[1]/base),
   CV=c(sd_values$cv.mise[1], sd_values$cv.rmise[1],
-       sd_values$cv.miae[1], sd_values$cv.rmiae[1],
-       sd_values$cv.msup[1],
-       sd_values$cv.merr[1], sd_values$cv.merr[1]/max.val,
-       sd_values$cv.mdist[1], sd_values$cv.mdist[1]/base,
-       sd_values$cv.mcerr[1], sd_values$cv.mcerr[1]/max.val,
-       sd_values$cv.mcdist[1], sd_values$cv.mcdist[1]/base)#,
+           sd_values$cv.mise[1]/factor,
+           sd_values$cv.miae[1], sd_values$cv.rmiae[1],
+           sd_values$cv.msup[1],
+           sd_values$cv.merr[1], sd_values$cv.merr[1]/max.val,
+           sd_values$cv.mdist[1], sd_values$cv.mdist[1]/base,
+           sd_values$cv.mcerr[1], sd_values$cv.mcerr[1]/max.val,
+           sd_values$cv.mcdist[1], sd_values$cv.mcdist[1]/base)#,
 )
 rownames(stddevdf) <- measures
 
@@ -280,5 +354,6 @@ print(std_table, include.rownames=TRUE, floating=FALSE)
 sink()
 
 # print/plot one simulation
-x <- one_sim(experiment, oracle.result, plot=TRUE, outputdir=outdir)
+x <- one_sim(experiment, oracle.result, plot=TRUE, outputdir=outdir,
+             num_steps=100, a=0.0005, mu=0.05)
 

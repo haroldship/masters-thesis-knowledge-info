@@ -113,7 +113,7 @@ ggplot(compare_peaks.result) +
   ylab(NULL) +
   geom_density(aes(x=oracle.ise, colour="Oracle", linetype="Oracle"), size=0.8) +
   geom_density(aes(x=silverman.ise, colour="Silverman", linetype="Silverman"), size=0.8) +
-  geom_density(aes(x=cv.rise, colour="CV", linetype="CV"), size=0.8) +
+  geom_density(aes(x=cv.ise, colour="CV", linetype="CV"), size=0.8) +
   geom_vline(data=mean_values, aes(xintercept=oracle.mise, colour="Oracle", linetype="Oracle"),
              size=0.8) +
   geom_vline(data=mean_values, aes(xintercept=silverman.mise, colour="Silverman", linetype="Silverman"),
