@@ -354,6 +354,5 @@ print(std_table, include.rownames=TRUE, floating=FALSE)
 sink()
 
 # print/plot one simulation
-x <- one_sim(experiment, oracle.result, plot=TRUE, outputdir=outdir,
-             num_steps=100, a=0.0005, mu=0.05)
+x <- one_sim(experiment, oracle.result, plot=TRUE, outputdir=outdir)
 
