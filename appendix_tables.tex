@@ -2,30 +2,160 @@
 
 %%
 %%
-%% results tables appendix
+%% results tables and figures appendix
 %%
 %%
 
 %%
 %% Section
+%%
 \section{Uniform risk on a uniform population}
 
+%%
+%% Tables and figures for uniform population of 10,000, uniform intensity of factor 50
+%%
+\graphicspath{{./results/unif_50_unif/}}
+\makeatletter
+\def\input@path{{./results/unif_50_unif/}}
+\makeatother
+
 \begin{table}[H]
-\centering
-\scriptsize
+    \input{error_table_fragment}
+    \caption[]{Error rates for uniform population of 10,000, uniform intensity of factor 50}
+    \label{tbl:mean_error_rates:unif_50_unif}
+\end{table}
 
-    \begin{subtable}{0.5\textwidth}
-    \input{results/unif_100_unif/output/mean_table.tex}
-    \caption[]{Means} 
-    \end{subtable}%
-    \begin{subtable}{0.5\textwidth}
-    \input{results/unif_100_unif/output/std_table.tex}
-    \caption[]{Standard deviations} 
-    \end{subtable}
+\begin{figure}[H]
+    \input{distribution_figures_fragment}
+    \caption[]{Population distribution (a), true risk function (b), and sample population with incidents (c) for uniform population of 10,000, uniform intensity of factor 50}
+    \label{fig:distributions:unif_50_unif}    
+\end{figure}
 
+
+%%
+%% Tables and figures for uniform population of 10,000, uniform intensity of factor 100
+%%
+\graphicspath{{./results/unif_100_unif/}}
+\makeatletter
+\def\input@path{{./results/unif_100_unif/}}
+\makeatother
+
+\begin{table}[H]
+\input{error_table_fragment}
 \caption[]{Error rates for uniform population of 10,000, uniform intensity of factor 100}
 \label{tbl:mean_error_rates:unif_100_unif}
 \end{table}
 
+\begin{figure}[H]
+    \input{distribution_figures_fragment}
+    \caption[]{Population distribution (a), true risk function (b), and sample population with incidents (c) for uniform population of 10,000, uniform intensity of factor 100}
+    \label{fig:distributions:unif_100_unif}    
+\end{figure}
 
 
+%%
+%% Tables and figures for uniform population of 10,000, uniform intensity of factor 200
+%%
+\graphicspath{{./results/unif_200_unif/}}
+\makeatletter
+\def\input@path{{./results/unif_200_unif/}}
+\makeatother
+
+\begin{table}[H]
+\input{error_table_fragment}
+\caption[]{Error rates for uniform population of 10,000, uniform intensity of factor 200}
+\label{tbl:mean_error_rates:unif_200_unif}
+\end{table}
+
+\begin{figure}[H]
+    \input{distribution_figures_fragment}
+    \caption[]{Population distribution (a), true risk function (b), and sample population with incidents (c) for uniform population of 10,000, uniform intensity of factor 200}
+    \label{fig:distributions:unif_200_unif}    
+\end{figure}
+
+
+%%
+%% Tables and figures for uniform population of 10,000, uniform intensity of factor 500
+%%
+\graphicspath{{./results/unif_500_unif/}}
+\makeatletter
+\def\input@path{{./results/unif_500_unif/}}
+\makeatother
+
+\begin{table}[H]
+\input{error_table_fragment}
+\caption[]{Error rates for uniform population of 10,000, uniform intensity of factor 500}
+\label{tbl:mean_error_rates:unif_500_unif}
+\end{table}
+
+\begin{figure}[H]
+    \input{distribution_figures_fragment}
+    \caption[]{Population distribution (a), true risk function (b), and sample population with incidents (c) for uniform population of 10,000, uniform intensity of factor 500}
+    \label{fig:distributions:unif_500_unif}    
+\end{figure}
+
+
+%%
+%% Tables and figures for uniform population of 10,000, uniform intensity of factor 1,000
+%%
+\graphicspath{{./results/unif_1000_unif/}}
+\makeatletter
+\def\input@path{{./results/unif_1000_unif/}}
+\makeatother
+
+\begin{table}[H]
+\input{error_table_fragment}
+\caption[]{Error rates for uniform population of 10,000, uniform intensity of factor 1,000}
+\label{tbl:mean_error_rates:unif_1000_unif}
+\end{table}
+
+\begin{figure}[H]
+    \input{distribution_figures_fragment}
+    \caption[]{Population distribution (a), true risk function (b), and sample population with incidents (c) for uniform population of 10,000, uniform intensity of factor 1,000}
+    \label{fig:distributions:unif_1000_unif}    
+\end{figure}
+
+
+    % unif100k_1000_1.0_1h
+    % unif10k_100_1.0_1h
+    % unif20k_200_1.0_1h
+    % unif50k_500_1.0_1h
+    % unif5k_50_1.0_1h
+    % unif_1000_0.7_1h
+    % unif_1000_1.0_1h
+    % unif_1000_1.4_1h
+    % unif_1000_2.0_1h
+    % unif_1000_2.8_1h
+    % unif_100_0.7_1h
+    % unif_100_1.0_1h
+    % unif_100_1.4_1h
+    % unif_100_1_2h_1
+    % unif_100_1_2h_2
+    % unif_100_1_2h_3
+    % unif_100_1_2h_4
+    % unif_100_2.0_1h
+    % unif_100_2.8_1h
+    % unif_200_0.7_1h
+    % unif_200_1.0_1h
+    % unif_200_1.4_1h
+    % unif_200_2.0_1h
+    % unif_200_2.8_1h
+    % unif_500_0.7_1h
+    % unif_500_1.0_1h
+    % unif_500_1.4_1h
+    % unif_500_2.0_1h
+    % unif_500_2.8_1h
+    % unif_50_0.7_1h
+    % unif_50_1.0_1h
+    % unif_50_1.4_1h
+    % unif_50_2.0_1h
+    % unif_50_2.8_1h
+    % p0.7_100_1.0_1h
+    % p1.0_100_1.0_1h
+    % p1.4_100_1.0_1h
+    % p1.4_100_1_1h_1s
+    % p1.4_100_1_1h_2s
+    % p1.4_100_1_1h_3s
+    % p1.4_100_1_1h_4s
+    % p2.0_100_1.0_1h
+    % p2.8_100_1.0_1h
