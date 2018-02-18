@@ -7,12 +7,13 @@
 %%
 
 %%
-%% Section
+%% Section containing all uniform risk on uniform population
 %%
 \section{Uniform risk on a uniform population}
+\label{sec:app:results_unif_unif}
 
 %%
-%% Tables and figures for uniform population of 10,000, uniform intensity of factor 50
+%% Tables and figures for uniform population of 10,000, uniform risk of factor 50
 %%
 \graphicspath{{./results/unif_50_unif/}}
 \makeatletter
@@ -21,19 +22,19 @@
 
 \begin{table}[H]
     \input{error_table_fragment}
-    \caption[]{Error rates for uniform population of 10,000, uniform intensity of factor 50}
-    \label{tbl:mean_error_rates:unif_50_unif}
+    \caption[]{Error rates for uniform population of 10,000, uniform risk of factor 50}
+    \label{tab:mean_error_rates:unif_50_unif}
 \end{table}
 
 \begin{figure}[H]
     \input{distribution_figures_fragment}
-    \caption[]{Population distribution (a), true risk function (b), and sample population with incidents (c) for uniform population of 10,000, uniform intensity of factor 50}
+    \caption[]{Population distribution (a), true risk function (b), and sample population with incidents (c) for uniform population of 10,000, uniform risk of factor 50}
     \label{fig:distributions:unif_50_unif}    
 \end{figure}
 
 
 %%
-%% Tables and figures for uniform population of 10,000, uniform intensity of factor 100
+%% Tables and figures for uniform population of 10,000, uniform risk of factor 100
 %%
 \graphicspath{{./results/unif_100_unif/}}
 \makeatletter
@@ -42,19 +43,19 @@
 
 \begin{table}[H]
 \input{error_table_fragment}
-\caption[]{Error rates for uniform population of 10,000, uniform intensity of factor 100}
-\label{tbl:mean_error_rates:unif_100_unif}
+\caption[]{Error rates for uniform population of 10,000, uniform risk of factor 100}
+\label{tab:mean_error_rates:unif_100_unif}
 \end{table}
 
 \begin{figure}[H]
     \input{distribution_figures_fragment}
-    \caption[]{Population distribution (a), true risk function (b), and sample population with incidents (c) for uniform population of 10,000, uniform intensity of factor 100}
+    \caption[]{Population distribution (a), true risk function (b), and sample population with incidents (c) for uniform population of 10,000, uniform risk of factor 100}
     \label{fig:distributions:unif_100_unif}    
 \end{figure}
 
 
 %%
-%% Tables and figures for uniform population of 10,000, uniform intensity of factor 200
+%% Tables and figures for uniform population of 10,000, uniform risk of factor 200
 %%
 \graphicspath{{./results/unif_200_unif/}}
 \makeatletter
@@ -63,19 +64,19 @@
 
 \begin{table}[H]
 \input{error_table_fragment}
-\caption[]{Error rates for uniform population of 10,000, uniform intensity of factor 200}
-\label{tbl:mean_error_rates:unif_200_unif}
+\caption[]{Error rates for uniform population of 10,000, uniform risk of factor 200}
+\label{tab:mean_error_rates:unif_200_unif}
 \end{table}
 
 \begin{figure}[H]
     \input{distribution_figures_fragment}
-    \caption[]{Population distribution (a), true risk function (b), and sample population with incidents (c) for uniform population of 10,000, uniform intensity of factor 200}
+    \caption[]{Population distribution (a), true risk function (b), and sample population with incidents (c) for uniform population of 10,000, uniform risk of factor 200}
     \label{fig:distributions:unif_200_unif}    
 \end{figure}
 
 
 %%
-%% Tables and figures for uniform population of 10,000, uniform intensity of factor 500
+%% Tables and figures for uniform population of 10,000, uniform risk of factor 500
 %%
 \graphicspath{{./results/unif_500_unif/}}
 \makeatletter
@@ -84,19 +85,19 @@
 
 \begin{table}[H]
 \input{error_table_fragment}
-\caption[]{Error rates for uniform population of 10,000, uniform intensity of factor 500}
-\label{tbl:mean_error_rates:unif_500_unif}
+\caption[]{Error rates for uniform population of 10,000, uniform risk of factor 500}
+\label{tab:mean_error_rates:unif_500_unif}
 \end{table}
 
 \begin{figure}[H]
     \input{distribution_figures_fragment}
-    \caption[]{Population distribution (a), true risk function (b), and sample population with incidents (c) for uniform population of 10,000, uniform intensity of factor 500}
+    \caption[]{Population distribution (a), true risk function (b), and sample population with incidents (c) for uniform population of 10,000, uniform risk of factor 500}
     \label{fig:distributions:unif_500_unif}    
 \end{figure}
 
 
 %%
-%% Tables and figures for uniform population of 10,000, uniform intensity of factor 1,000
+%% Tables and figures for uniform population of 10,000, uniform risk of factor 1,000
 %%
 \graphicspath{{./results/unif_1000_unif/}}
 \makeatletter
@@ -105,14 +106,124 @@
 
 \begin{table}[H]
 \input{error_table_fragment}
-\caption[]{Error rates for uniform population of 10,000, uniform intensity of factor 1,000}
-\label{tbl:mean_error_rates:unif_1000_unif}
+\caption[]{Error rates for uniform population of 10,000, uniform risk of factor 1,000}
+\label{tab:mean_error_rates:unif_1000_unif}
 \end{table}
 
 \begin{figure}[H]
     \input{distribution_figures_fragment}
-    \caption[]{Population distribution (a), true risk function (b), and sample population with incidents (c) for uniform population of 10,000, uniform intensity of factor 1,000}
+    \caption[]{Population distribution (a), true risk function (b), and sample population with incidents (c) for uniform population of 10,000, uniform risk of factor 1,000}
     \label{fig:distributions:unif_1000_unif}    
+\end{figure}
+
+%%
+%% Section containing single-peak risk with decay rate 0.7 on uniform population
+%%
+\section{Single-peak risk with decay rate 0.7 on a uniform population}
+\label{sec:app:results_unif_0.7_1h}
+
+%%
+%% Tables and figures for uniform population of 10,000, single-peak risk of decay rate 0.7, factor 50
+%%
+\graphicspath{{./results/unif_50_0.7_1h/}}
+\makeatletter
+\def\input@path{{./results/unif_50_0.7_1h/}}
+\makeatother
+
+\begin{table}[H]
+    \input{error_table_fragment}
+    \caption[]{Error rates for uniform population of 10,000, single-peak risk of decay rate 0.7 and factor 50}
+    \label{tab:mean_error_rates:unif_50_0.7_1h}
+\end{table}
+
+\begin{figure}[H]
+    \input{distribution_figures_fragment}
+    \caption[]{Population distribution (a), true risk function (b), and sample population with incidents (c) for uniform population of 10,000, single-peak risk of decay rate 0.7 and factor 50}
+    \label{fig:distributions:unif_50_0.7_1h}    
+\end{figure}
+
+
+%%
+%% Tables and figures for uniform population of 10,000, single-peak risk of decay rate 0.7, factor 100
+%%
+\graphicspath{{./results/unif_100_0.7_1h/}}
+\makeatletter
+\def\input@path{{./results/unif_100_0.7_1h/}}
+\makeatother
+
+\begin{table}[H]
+\input{error_table_fragment}
+\caption[]{Error rates for uniform population of 10,000, single-peak risk of decay rate 0.7 and factor 100}
+\label{tab:mean_error_rates:unif_100_0.7_1h}
+\end{table}
+
+\begin{figure}[H]
+    \input{distribution_figures_fragment}
+    \caption[]{Population distribution (a), true risk function (b), and sample population with incidents (c) for uniform population of 10,000, single-peak risk of decay rate 0.7 and factor 100}
+    \label{fig:distributions:unif_100_0.7_1h}    
+\end{figure}
+
+
+%%
+%% Tables and figures for uniform population of 10,000, single-peak risk of decay rate 0.7, factor 200
+%%
+\graphicspath{{./results/unif_200_0.7_1h/}}
+\makeatletter
+\def\input@path{{./results/unif_200_0.7_1h/}}
+\makeatother
+
+\begin{table}[H]
+\input{error_table_fragment}
+\caption[]{Error rates for uniform population of 10,000, single-peak risk of decay rate 0.7 and factor 200}
+\label{tab:mean_error_rates:unif_200_0.7_1h}
+\end{table}
+
+\begin{figure}[H]
+    \input{distribution_figures_fragment}
+    \caption[]{Population distribution (a), true risk function (b), and sample population with incidents (c) for uniform population of 10,000, single-peak risk of decay rate 0.7 and factor 200}
+    \label{fig:distributions:unif_200_0.7_1h}    
+\end{figure}
+
+
+%%
+%% Tables and figures for uniform population of 10,000, single-peak risk of decay rate 0.7, factor 500
+%%
+\graphicspath{{./results/unif_500_0.7_1h/}}
+\makeatletter
+\def\input@path{{./results/unif_500_0.7_1h/}}
+\makeatother
+
+\begin{table}[H]
+\input{error_table_fragment}
+\caption[]{Error rates for uniform population of 10,000, single-peak risk of decay rate 0.7 and factor 500}
+\label{tab:mean_error_rates:unif_500_0.7_1h}
+\end{table}
+
+\begin{figure}[H]
+    \input{distribution_figures_fragment}
+    \caption[]{Population distribution (a), true risk function (b), and sample population with incidents (c) for uniform population of 10,000, single-peak risk of decay rate 0.7 and factor 500}
+    \label{fig:distributions:unif_500_0.7_1h}    
+\end{figure}
+
+
+%%
+%% Tables and figures for uniform population of 10,000, single-peak risk of decay rate 0.7, factor 1,000
+%%
+\graphicspath{{./results/unif_1000_0.7_1h/}}
+\makeatletter
+\def\input@path{{./results/unif_1000_0.7_1h/}}
+\makeatother
+
+\begin{table}[H]
+\input{error_table_fragment}
+\caption[]{Error rates for uniform population of 10,000, single-peak risk of decay rate 0.7 and factor 1,000}
+\label{tab:mean_error_rates:unif_1000_0.7_1h}
+\end{table}
+
+\begin{figure}[H]
+    \input{distribution_figures_fragment}
+    \caption[]{Population distribution (a), true risk function (b), and sample population with incidents (c) for uniform population of 10,000, single-peak risk of decay rate 0.7 and factor 1,000}
+    \label{fig:distributions:unif_1000_0.7_1h}    
 \end{figure}
 
 
@@ -121,12 +232,10 @@
     % unif20k_200_1.0_1h
     % unif50k_500_1.0_1h
     % unif5k_50_1.0_1h
-    % unif_1000_0.7_1h
     % unif_1000_1.0_1h
     % unif_1000_1.4_1h
     % unif_1000_2.0_1h
     % unif_1000_2.8_1h
-    % unif_100_0.7_1h
     % unif_100_1.0_1h
     % unif_100_1.4_1h
     % unif_100_1_2h_1
@@ -135,17 +244,14 @@
     % unif_100_1_2h_4
     % unif_100_2.0_1h
     % unif_100_2.8_1h
-    % unif_200_0.7_1h
     % unif_200_1.0_1h
     % unif_200_1.4_1h
     % unif_200_2.0_1h
     % unif_200_2.8_1h
-    % unif_500_0.7_1h
     % unif_500_1.0_1h
     % unif_500_1.4_1h
     % unif_500_2.0_1h
     % unif_500_2.8_1h
-    % unif_50_0.7_1h
     % unif_50_1.0_1h
     % unif_50_1.4_1h
     % unif_50_2.0_1h
