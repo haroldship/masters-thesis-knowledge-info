@@ -87,7 +87,7 @@ Incident center & -- \\
 \hline
 \end{tabular}
 \caption{Parameters used in TEMPLATE}
-\label{tbl:params:template}
+\label{tab:params:template}
 \end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -191,7 +191,7 @@ Incident center & -- \\
 \centering
 \input{output/mean_table.tex}
 \caption{Mean error rates for uniform population, uniform intensity of factor 100}
-\label{tbl:errors:template}
+\label{tab:errors:template}
 \end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -281,7 +281,7 @@ Incident center & -- \\
 \hline
 \end{tabular}
 \caption{Parameters used in uniform risk on a uniform population}
-\label{tbl:params:unif_100_unif}
+\label{tab:params:unif_100_unif}
 \end{table}
 
 In this section, we describe the results of 1,000 simulations conducted for a population of 10,000 points,
@@ -319,10 +319,10 @@ and the cross-validation bandwidth.
 \centering
 \input{results/unif_100_unif/output/mean_table.tex}
 \caption{Mean error rates for uniform population, uniform intensity of factor 100}
-\label{tbl:errors:unif_100_unif}
+\label{tab:errors:unif_100_unif}
 \end{table}
 
-\autoref{tbl:errors:unif_100_unif} lists the mean error rates obtained for a uniform intensity with factor of 100,
+\autoref{tab:errors:unif_100_unif} lists the mean error rates obtained for a uniform intensity with factor of 100,
 over a uniform population of 10,000.
 The columns represent the errors observed by using the three different methods for computing the smoothing bandwidth:
 the Oracle, the Silverman rule of thumb, and least-squares cross validation.
@@ -335,7 +335,7 @@ More generally, the relative error at a point \(x\) is computed as
 The next row is the mean integrated absolute error (MIAE),
 which is followed by Relative MIAE which is computed analogously to Relative MISE.
 This is followed by the Maximum error, which is the greatest absolute error over the study area.
-Complete results can be found in \autoref{tbl:mean_error_rates:unif_100_unif} in \autoref{chp:results_tables}.
+Complete results can be found in \autoref{tab:mean_error_rates:unif_100_unif} in \autoref{chp:results_tables}.
 
 The error measures mentioned above each compare the closeness of the estimated intensity function to the true funcition.
 The following error measures, on the other hand, relate the closeness of the \textit{peak} of the estimate to the true peak.
@@ -409,12 +409,12 @@ Incident center & (0,0) \\
 \hline
 \end{tabular}
 \caption{Parameters used for varying the number of incidents}
-\label{tbl:params:unif_NCases_1h}
+\label{tab:params:unif_NCases_1h}
 \end{table}
 
 In this section we examine and compare the results of experiments where the number of incidents is varied, while keeping the population size constant at 10,000, distributed uniformly throughout the study area.
 The expected incident sizes used in the experiments in this section were 50, 100, 200, 500, and 1,000.
-The full set of error measures for these cases can be found in \autoref{tbl:mean_error_rates:unif_50_1.0_1h}, \autoref{tbl:mean_error_rates:unif_100_1.0_1h}, \autoref{tbl:mean_error_rates:unif_200_1.0_1h}, \autoref{tbl:mean_error_rates:unif_500_1.0_1h}, and \autoref{tbl:mean_error_rates:unif_100_1.0_1h} in \autoref{chp:results_tables}.
+The full set of error measures for these cases can be found in \autoref{tab:mean_error_rates:unif_50_1.0_1h}, \autoref{tab:mean_error_rates:unif_100_1.0_1h}, \autoref{tab:mean_error_rates:unif_200_1.0_1h}, \autoref{tab:mean_error_rates:unif_500_1.0_1h}, and \autoref{tab:mean_error_rates:unif_100_1.0_1h} in \autoref{chp:results_tables}.
 
 
 \begin{figure}[htbp]
@@ -506,7 +506,7 @@ The corresponding equations for RMISE are:
     \( \infty \) & -0.7317 & -0.7357 & -0.8103
 \end{tabular}
 \caption{Convergence power for different population decay rates}
-\label{tbl:convergence_vs_decay}
+\label{tab:convergence_vs_decay}
 \end{table}
 
 %%
@@ -531,7 +531,7 @@ Incident center & (0,0) \\
 \hline
 \end{tabular}
 \caption{Parameters used for varying the sample size for fixed intensity}
-\label{tbl:params:unifNpop_1h}
+\label{tab:params:unifNpop_1h}
 \end{table}
 
 
@@ -580,7 +580,7 @@ Incident center & (0,0) \\
 \hline
 \end{tabular}
 \caption{Parameters used for varying the decay rate of the risk function}
-\label{tbl:params:unif_100_SD}
+\label{tab:params:unif_100_SD}
 \end{table}
 
 In this section, we compare the effect of the decay rate of the risk function on the estimate.
@@ -618,7 +618,7 @@ The risk function has an expansion factor of 100.
 \centering
 \input{results/p0.7_100_1.0_1h/output/mean_table.tex}
 \caption{Error rates for uniform population of 10,000, single peak intensity of factor 100 and decay rate 0.7}
-\label{tbl:results:p0.7_100_1.0_1h}
+\label{tab:results:p0.7_100_1.0_1h}
 \end{table}
 
 
@@ -717,16 +717,16 @@ We observed that both the absolute and relative mean integrated squared error fe
 
 \begin{table}[htbp]
 \begin{tabular}{l*6c}
-  \toprule
+  \hline
   & \multicolumn{2}{c}{Oracle} & \multicolumn{2}{c}{Silverman} & \multicolumn{2}{c}{CV} \\ 
   decay & K & \( \alpha \) & K & \( \alpha \) & K & \( \alpha \) \\ 
-  \midrule
+  \hline
   0.7000 & -5.1305 & -0.3011 & -3.9831 & -0.4310 & -3.9296 & -0.4545 \\ 
   1.0000 & -2.3525 & -0.7317 & -1.8624 & -0.7357 & -1.5309 & -0.8103 \\ 
   1.4000 & -1.9569 & -0.6657 & -1.3159 & -0.7012 & -1.2255 & -0.7216 \\ 
   2.0000 & -1.6753 & -0.6036 & -0.8370 & -0.6518 & -0.7970 & -0.6609 \\ 
   \( \infty \) & -0.6438 & -0.3273 & -0.3175 & -0.3774 & -0.3170 & -0.3775 \\ 
-  \bottomrule
+  \hline
 \end{tabular}
 \end{table}
 

@@ -6,11 +6,45 @@
 %%
 %%
 
-In this section, we describe the methods used to examine the statistical performance of the DKD.
+In this chapter, we describe the methods used to examine the statistical performance of the DKD.
 The basic unit is the \textit{experiment}, a set of simulations run with the same initial setup with the same measurements taken.
+There is a fixed setup for each experiment, with the following set of parameters.
 
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{ll}
+    Parameter name & Description \\
+    \hline
+    x1.min & Minimum value of the study area in the horizontal (\(X_1\)) direction \\
+    x1.max & Maximum value of the study area in the horizontal (\(X_1\)) direction  \\
+    x2.min & Minimum value of the study area in the vertical (\(X_2\)) direction \\
+    x2.max & Maximum value of the study area in the vertical (\(X_2\)) direction \\
+    grid.by & Space between grid points in the study area \\
+    buffer & Buffer around outside of study area \\
+    N.p & Size of population \\
+    EN.i & Expected number of incidents per simulation \\
+    c1 & (optional) \(X_1\) coordinate of the population peak \\
+    c2 & (optional) \(X_2\) coordinate of the population peak \\
+    sigma1 & (optional) \(X_1\) standard deviation of the population peak \\
+    sigma2 & (optional) \(X_2\) standard deviation of the population peak \\
+    rho & (optional) Correlation coefficient of \(X_1\) and \(X_2\) \\
+    bandwidths & List of bandwidths for evaluating the Oracle \\
+    incident\textunderscore rate & Risk function for generating incidents from population \\
+    \end{tabular}
+    \caption{Experimental parameters}
+    \label{tab:experimental_parameters}
+\end{table}
+
+\Cref{sec:method_experiment_structure} describes the steps of each experiment, together with the measurements taken.
 
 \section{Experiment structure}
+\label{sec:method_experiment_structure}
+
+Each experiment begins by setting the random number seed to the same fixed value (12).
+Next, a population is generated of size \textit{N.p}.
+When the \textit{c1} and \textit{c2} parameters are given, the population is distributed according to the parameters above.
+In particular, the distribution has bivariate normal shape with center (\textit{c1}, \textit{c2}),
+standard deviations \textit{sigma1}, \textit{sigma2}, and correlation \textit{rho}.
 
 \section{Verifying bandwidth selection dependency on size}
 
