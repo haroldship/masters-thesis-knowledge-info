@@ -40,11 +40,25 @@ There is a fixed setup for each experiment, with the following set of parameters
 \section{Experiment structure}
 \label{sec:method_experiment_structure}
 
-Each experiment begins by setting the random number seed to the same fixed value (12).
+In order to ensure repeatability of the experiements, we begin by setting the random number seed to the same fixed value (12).
+
+The first step in each experimental run is to define the study area. 
+The study area is always a 2-dimensional rectangle, with coordinates in the \(X_1\) and \(X_2\) directions set using the parameters \textit{x1.min}, \textit{x1.max}, \textit{x2.min}, and \textit{x2.max}.
+The study area is further restricted by the \textit{buffer} parameter.
+
 Next, a population is generated of size \textit{N.p}.
 When the \textit{c1} and \textit{c2} parameters are given, the population is distributed according to the parameters above.
 In particular, the distribution has bivariate normal shape with center (\textit{c1}, \textit{c2}),
 standard deviations \textit{sigma1}, \textit{sigma2}, and correlation \textit{rho}.
+
+Next, we adjust the incident rate function, \textit{incident\textunderscore rate} parameter, by scaling it so that the expected number of incidents is equal to the \textit{EN.i} parameter.
+Assuming the expected number of incidents generate by \textit{incident\textunderscore rate} by itself is 1, we have
+
+\[
+    R(\vec{x}) = \mbox{EN.i}~\times~\mbox{incident\textunderscore rate}(\vec{x}) \text{,}
+\]
+
+and we call \(R(\vec{x}\) is the \textit{true incident rate} for the experiment.
 
 \section{Verifying bandwidth selection dependency on size}
 
