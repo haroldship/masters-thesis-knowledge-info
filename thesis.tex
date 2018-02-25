@@ -1,6 +1,6 @@
 % !TEX root = thesis.tex
 
-\immediate\write18{makeindex -s nomencl.ist -o "\jobname.nls" "\jobname.nlo"}
+%\immediate\write18{makeindex -s nomencl.ist -o "\jobname.nls" "\jobname.nlo"}
 
 \documentclass[a4paper,12pt,titlepage,twoside,openany]{book}
 
@@ -42,9 +42,12 @@
 \listoftables
 \clearpage
 \listoffigures
-\clearpage
-\printnomenclature
-\clearpage
+\printglossaries
+%\printglossary[type=notation]
+%\printglossary[type=acronym]
+%\clearpage
+%\printnomenclature
+%\clearpage
 
 \mainmatter                             % only in book class (arabic page #s)
 \setstretch{1.1}                        % some space around text

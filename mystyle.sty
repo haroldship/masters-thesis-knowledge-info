@@ -11,31 +11,9 @@
 \usepackage{float} % force locations with [H]
 \usepackage[section]{placeins} % floats stay in section
 \usepackage{subcaption} % subfigures
+\captionsetup{subrefformat=parens}
 
 \usepackage[title]{appendix}
-
-% \usepackage{fancyhdr} % headers
-% \fancypagestyle{plain}{%
-%     \fancyhf{}
-%     \fancyhead[CE]{\leftmark}
-%     \fancyhead[CO]{\rightmark}
-%     \fancyfoot[L]{\docversion}
-%     \fancyfoot[C]{\hspace{3cm}\thepage}
-%     \renewcommand{\headrulewidth}{0pt}
-% }
-% \fancypagestyle{front}{%
-%     \fancyhf{}
-%     \fancyfoot[L]{\docversion}
-%     \fancyfoot[C]{\hspace{3cm}\thepage}
-%     \renewcommand{\headrulewidth}{0pt}
-% }
-% \fancypagestyle{main}{%
-%     \fancyhf{}
-%     \fancyfoot[L]{\docversion}
-%     \fancyfoot[C]{\hspace{3cm}\thepage}
-%     \renewcommand{\headrulewidth}{0pt}
-% }
-% \pagestyle{fancy}
 
 %% Headers
 \usepackage[automark]{scrlayer-scrpage}
@@ -75,18 +53,26 @@
 
 \usepackage{url} % urls
 \usepackage[natbibapa]{apacite} % APA citation format
-\bibliographystyle{apacite} % use the style
+\bibliographystyle{apacite} % use the style in the bibliography
 \usepackage[nottoc]{tocbibind} % include bibliography in TOC
 
-\usepackage[intoc,prefix,refpage]{nomencl} % nomenclature (notataio)
-
-\renewcommand\nomname{Notation} % change the title from nomenclature to notation
-\renewcommand{\pagedeclaration}[1]{, \hyperlink{page.#1}{page\nobreakspace#1}}
+\usepackage[toc,acronym]{glossaries} % use glossaries package for Notation
+\setacronymstyle{long-short} % show full phrase the first time then just acronym
+\newglossary[nlg]{notation}{not}{ntn}{Notation} % define a glossary for notation
 
 \usepackage{booktabs} % fancy tables
 
-\makenomenclature % build the nomenclature
+\loadglsentries{notation} % all notation and acronyms in here
+\makeglossaries % build the Notation
 
+%
+% contents of ~/.latexmkrc
+%
+% add_cus_dep('glo', 'gls', 0, 'makeglossaries');
+% add_cus_dep('acn', 'acr', 0, 'makeglossaries');
+% sub makeglossaries{
+%   system( "makeglossaries \"$_[0]\"" );
+% }
 
 %
 % End of packages
