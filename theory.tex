@@ -38,6 +38,9 @@ Kernel intensity estimator (my simplification):
 
 where \gls{mu} is ... and \gls{k} is ...
 
+%
+% Convergence and inconsistency
+%
 \section{Inconsistency of the kernel intensity estimator}
 
 From \citet{guan2008consistent}:
@@ -52,12 +55,15 @@ However it's variance does not diminish because the number of events in any fixe
 
 The paper develops a \textit{new nonparametric intensity estimator} that is consistent under ``some suitable yet reasonable conditions.''
 
+%
+% Bias and variance
+%
 \section{Bias and variance of kernel intensity estimator}
 
-If we let \(\lambda = \mu f\) where \(f\) is a probability density, then at a point \(\vec{x} \in \mathbb{R}^2\),
+If we let \(\gls{lambda} = \gls{mu} f\) where \(f\) is a probability density, then at a point \(\vec{x} \in \mathbb{R}^2\),
 \begin{align}
-\mbox{bias}(\hat{\lambda}(\vec{x};h)) & \approx \frac{1}{2} \mu h^2 \nabla^2~\left[ f(\vec{x}) \right] \int {z^2 K(\vec{z}) d\vec{z}} \\
-\mbox{var}(\hat{\lambda}(\vec{x};h)) & \approx h^{-2} \mu \int {K(\vec{z})^2d\vec{z}} f(\vec{x})
+\mbox{bias}(\gls{lambda_hat}(\vec{x};h)) & \approx \frac{1}{2} \mu h^2 \gls{grad}^2~\left[ f(\vec{x}) \right] \int {z^2 K(\vec{z}) \diff \vec{z}} \\
+\mbox{var}(\gls{lambda_hat}(\vec{x};h)) & \approx h^{-2} \mu \int {K(\vec{z})^2\diff \vec{z}} f(\vec{x})
 \end{align}
 
 Taking derivative by \(h\) and setting to \(0\), we get that \(h_{\mbox{opt}}\) is \(O(\mu^{-1/6})\).
