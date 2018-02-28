@@ -9,7 +9,41 @@
 This chapter describes the results of several experiments, each run with a variation of the setup.
 In each case, we compare the results of 1,000 simulations using several accuracy measures.
 Each section describes a set of experiments, which, together, examine the effect of changes to a single variable on the performance of the \gls{dkd}.
-A table describing the parameter ranges used in these experiments appears at the beginning of each section.
+A table similar to \cref{tab:params:template}, describing the parameter ranges used in these experiments appears at the beginning of each section.
+The first row in the table contains the \textit{population size} or \textit{sizes} used in the experiment.
+The second row contains the \textit{\gls{population decay rate}}, which is a factor that controls how quickly the population density drops from the peak.
+We use the standard deviation \(\sigma\) of the bivariate normal distribution for this.
+The third row in the the table contains the \textit{population center}, which is the point \((X_1, X_2)\) of the peak of the population distribution.
+For a uniform population distribution, the word ``uniform'' appears.
+The next row in the table is the \textit{incident risk factor}.
+This value is used to increase the expected number of cases for each simulation in the experiment.
+It is the same \gls{mu} found in \cref{ch:method}.
+The fifth row contains the \textit{\gls{incident decay rate}}, which is a factor that controls how quickly the incidence risk drops from the peak.
+We use the standard deviation \(\sigma\) of the bivariate normal distribution for this.
+The sixth and last row in the the table contains the \textit{incident center}, which is the point \((X_1, X_2)\) of the peak of the incident risk function.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Parameter table - template
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[htbp]
+\centering
+\begin{tabular}{ll}
+\hline
+Parameter & Value \\
+\hline
+Population size & 10,000 \\
+Population decay rate & 1.0 \\
+Population center & (0,0) \\
+Incident risk factor & 100, 200 \\
+Incident decay rate & 1.0 \\
+Incident center & (0,0) \\
+\hline
+\end{tabular}
+\caption{Experimental parameters and example values}
+\label{tab:params:template}
+\end{table}
+
+
 The results of the first experiment, uniform population and a uniform intensity,
 are described in \autoref{sec:results:unif_100_unif}.
 We then made ran several sets of experiments while changing one parameter at a time.
@@ -121,24 +155,24 @@ Incident center & -- \\
     \centering
     \begin{subfigure}[t]{0.45\textwidth}
     \includegraphics[width=\textwidth]{output/true_intensity_heatmap}
-    \caption{True intensity}
+    \caption{True incident risk function}
     \end{subfigure}%
     \begin{subfigure}[t]{0.45\textwidth}
     \includegraphics[width=\textwidth]{output/oracle_intensity_heatmap}
-    \caption{Oracle bandwidth estimate}
+    \caption{Incident risk estimate using Oracle bandwidth}
     \end{subfigure}
 
 
     \begin{subfigure}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{output/silverman_intensity_heatmap}
-    \caption{Silverman bandwidth estimate}
+    \caption{Incident risk estimate using Silverman bandwidth}
     \end{subfigure}%
     \begin{subfigure}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{output/CV_intensity_heatmap}
-    \caption{Cross-validation bandwidth estimate}
+    \caption{Incident risk estimate using Cross-validation bandwidth}
     \end{subfigure}
-    \caption[Example incidents: uniform intensity on uniform population, 100 cases]
-        {Example incidents: uniform intensity on uniform population, 100 cases}
+    \caption[Example incidents: uniform incident risk on uniform population, 100 cases]
+        {Example incidents: uniform incident risk on uniform population, 100 cases}
     \label{fig:cases_heatmap:template}
 \end{figure}
 
