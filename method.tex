@@ -39,20 +39,35 @@ There is a fixed setup for each experiment, with the following set of parameters
 \section{Measuring of accuracy of the DKD}
 \label{sec:method:accuracy}
 
-In order to describe the accuracy of the \gls{dkd}, we use the following accuracy measures:
-\gls{mise}, ...
+In order to describe the accuracy of the \gls{dkd} as a method of estimating the true risk function \(\lambda\),
+we use several accuracy measures.
 
 \subsection{MISE}
 \label{subsec:method:MISE}
 
-\Gls{mise} is a measure of the average squared difference between the estimated risk function \gls{lambda_hat} and the true risk function \gls{lambda}.
+\Gls{mise} is a measure of the expected squared difference between an estimated risk function \gls{lambda_hat},
+computed using the \gls{dkd}, and the true risk function \gls{lambda}.
 \Gls{mise} allows for additional analysis by being broken down into the mean integraged bias and mean integrated variance.
 It can also be easily approximated by cross-validation error.
 
-\begin{align}
-    \mbox{ISE} & = \int_0^{\infty} \int_0^{\infty} \left( \hat{\lambda} - \lambda \right) \diff{X_2} \diff{X_1} \\
-    \mbox{MISE} & = \E [\mbox{ISE}]
-\end{align}
+For any given data sample, we can use the \gls{dkd} to compute the estimated risk function \gls{lambda_hat}.
+We then integrate the squared error of the estimate over the plane to obtain the \gls{ise}.
+
+\begin{equation}
+    \mbox{ISE} = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \left( \hat{\lambda} - \lambda \right) \diff{X_2} \diff{X_1}
+\end{equation}
+
+We can then compute the expected value of the \gls{ise} to obtain the \gls{mise}.
+
+\begin{equation}
+    \mbox{MISE} = \E [\mbox{ISE}]
+\end{equation}
+
+In our experiments, we run \(M\) monte carlo simulations, and estimate the \gls{mise} by taking the empirical average of the \glspl{ise}.
+
+\begin{equation}
+    \hat{\mbox{MISE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{ISE}_i
+\end{equation}
 
 \section{Experiment structure}
 \label{sec:method:experiment_structure}
