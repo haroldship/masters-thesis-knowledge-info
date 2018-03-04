@@ -18,22 +18,31 @@ Let \(N\) be a \gls{spp}, and let \(W \subset \mathbb{R}^2 \) be the study area.
 The intensity \gls{lambda} at \(\vec{s} \in \mathbb{R}^2\) is defined as:
 
 \begin{equation}
-\label{eq:lambda}
-    \gls{lambda} (\vec{s}) = \lim_{|\ds| \to 0}
+\label{eq:lambda_differential}
+    \lambda (\vec{s}) = \lim_{|\ds| \to 0}
         \left\{
             \frac{\mathbb{E}[N(\ds)]}% /
             {|\ds|}
         \right\}
 \end{equation}
 
-And \(\gls{lambda}(\vec{s})|\ds\) is the approximate probability of \ds~ containing a single incident.
+And \(\lambda(\vec{s})|\ds\) is the approximate probability of \ds~ containing a single incident.
+Qualitatively, an intensity function differs from a probability density function in that it does not necessarily integrate to \(1\).
+In particular, we can write \(\lambda\) as a scaled probability density function:
+
+\begin{equation}
+\label{eq:lambda_mu}
+    \lambda(\vec{s}) = \mu f(\vec{s})
+\end{equation}
+
+where \(f\) is a probability density function and \gls{mu} is a constant.
 
 Goal of intensity estimate: obtain an estimate of the function \(\lambda(\vec{s})\) on the study area by inference on a data sample.
 
 Kernel intensity estimator (my simplification):
 \begin{equation}
 \label{eq:lambda_hat}
-    \gls{lambda_hat}(\vec{s}; h) = \frac{1}{h} \sum_{\vec{x} \in N \cap W}{k((\vec{x}-\vec{s})/h)}
+    \hat{\lambda}(\vec{s}; h) = \frac{1}{h} \sum_{\vec{x} \in N \cap W}{k((\vec{x}-\vec{s})/h)}
 \end{equation}
 
 where \gls{mu} is ... and \gls{k} is ...
