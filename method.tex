@@ -34,10 +34,28 @@ There is a fixed setup for each experiment, with the following set of parameters
     \label{tab:experimental_parameters}
 \end{table}
 
-\Cref{sec:method_experiment_structure} describes the steps of each experiment, together with the measurements taken.
+\Cref{sec:method:experiment_structure} describes the steps of each experiment, together with the measurements taken.
+
+\section{Measuring of accuracy of the DKD}
+\label{sec:method:accuracy}
+
+In order to describe the accuracy of the \gls{dkd}, we use the following accuracy measures:
+\gls{mise}, ...
+
+\subsection{MISE}
+\label{subsec:method:MISE}
+
+\Gls{mise} is a measure of the average squared difference between the estimated risk function \gls{lambda_hat} and the true risk function \gls{lambda}.
+\Gls{mise} allows for additional analysis by being broken down into the mean integraged bias and mean integrated variance.
+It can also be easily approximated by cross-validation error.
+
+\begin{align}
+    \mbox{ISE} & = \int_0^{\infty} \int_0^{\infty} \left( \hat{\lambda} - \lambda \right) \diff{X_2} \diff{X_1} \\
+    \mbox{MISE} & = \E [\mbox{ISE}]
+\end{align}
 
 \section{Experiment structure}
-\label{sec:method_experiment_structure}
+\label{sec:method:experiment_structure}
 
 In order to ensure repeatability of the experiements, we begin by setting the random number seed to the same fixed value (12).
 
