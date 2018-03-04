@@ -36,12 +36,20 @@ There is a fixed setup for each experiment, with the following set of parameters
 
 \Cref{sec:method:experiment_structure} describes the steps of each experiment, together with the measurements taken.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Section: accuracy measures
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Measuring of accuracy of the DKD}
 \label{sec:method:accuracy}
 
 In order to describe the accuracy of the \gls{dkd} as a method of estimating the true risk function \(\lambda\),
 we use several accuracy measures.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Subsection: MISE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{MISE}
 \label{subsec:method:MISE}
 
@@ -51,10 +59,10 @@ computed using the \gls{dkd}, and the true risk function \gls{lambda}.
 It can also be easily approximated by cross-validation error.
 
 For any given data sample, we can use the \gls{dkd} to compute the estimated risk function \gls{lambda_hat}.
-We then integrate the squared error of the estimate over the plane to obtain the \gls{ise}.
+We then integrate the squared error in the estimate over the plane to obtain the \gls{ise}.
 
 \begin{equation}
-    \mbox{ISE} = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \left( \hat{\lambda} - \lambda \right) \diff{X_2} \diff{X_1}
+    \mbox{ISE} = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \left( \hat{\lambda} - \lambda \right)^2 \diff{X_2} \diff{X_1}
 \end{equation}
 
 We can then compute the expected value of the \gls{ise} to obtain the \gls{mise}.
@@ -69,6 +77,42 @@ In our experiments, we run \(M\) monte carlo simulations, and estimate the \gls{
     \hat{\mbox{MISE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{ISE}_i
 \end{equation}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Subsection: MIAE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{MIAE}
+\label{subsec:method:MIAE}
+
+\Gls{miae} is a measure of the expected absolute difference between an estimated risk function \gls{lambda_hat},
+computed using the \gls{dkd}, and the true risk function \gls{lambda}.
+\Gls{miae} differs from \gls{mise} by on the one hand providing a more intuitive comparison,
+since we are comparing the absolute difference instead of the squared difference.
+On the other hand, it lacks some of the nice mathematical properties of the \gls{mise}.
+
+As we did in \autoref{subsec:method:MISE}, for any given data sample we use the \gls{dkd} to compute the estimated risk function \gls{lambda_hat}.
+We then integrate the absolute value of the error in the estimate over the plane to obtain the \gls{ise}.
+
+\begin{equation}
+    \mbox{IAE} = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \left| \hat{\lambda} - \lambda \right| \diff{X_2} \diff{X_1}
+\end{equation}
+
+We can then compute the expected value of the \gls{ise} to obtain the \gls{mise}.
+
+\begin{equation}
+    \mbox{MIAE} = \E [\mbox{IAE}]
+\end{equation}
+
+As above, we run \(M\) monte carlo simulations, and estimate the \gls{miae} by taking the empirical average of the \glspl{iae}.
+
+\begin{equation}
+    \hat{\mbox{MIAE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{IAE}_i
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Section: experiment structure
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experiment structure}
 \label{sec:method:experiment_structure}
 
