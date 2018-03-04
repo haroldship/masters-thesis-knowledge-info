@@ -93,7 +93,7 @@ As we did in \autoref{subsec:method:mise}, for any given data sample we use the 
 We then integrate the absolute value of the error in the estimate over the plane to obtain the \gls{ise}.
 
 \begin{equation}
-    \mbox{IAE}(\hat{lambda}) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \left| \hat{\lambda} - \lambda \right| \diff{X_2} \diff{X_1}
+    \mbox{IAE}(\hat{\lambda}) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \left| \hat{\lambda} - \lambda \right| \diff{X_2} \diff{X_1}
 \end{equation}
 
 We can then compute the expected value of the \gls{ise} to obtain the \gls{mise}.
@@ -115,8 +115,8 @@ As above, we run \(M\) monte carlo simulations, and estimate the \gls{miae} by t
 \label{subsec:method:sup_error}
 
 Whereas the previous two measures of accuracy describe how much the estimated intensity deviates from the truth over the whole plane,
-the supremum error looks at the worst case.
-We define the supremum error as follows:
+the \gls{supremum error} looks at the worst case.
+We define the \gls{supremum error} as follows:
 
 \begin{equation}
     \mbox{supremum error}(\hat{\lambda}) = \sup_{\vec{x} \in \RS} {\left| \hat{\lambda}(\vec{x}) - \lambda(\vec{x}) \right|}
@@ -127,6 +127,32 @@ As in the previous accuracy measures, we run \(M\) monte carlo simulations, and 
 \begin{equation}
     \hat{\mbox{Max Error}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{supremum error}_i
 \end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Subsection: Peak bias and drift
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Peak bias and peak drift}
+\label{subsec:method:peak_bias}
+
+The next two accuracy measures compare the estimated risk function's accuracy in computing the peak.
+The \gls{peak error} is difference between the maximum value of the \gls{dkd} estimate \gls{lambda_hat} and the maximum of the true risk function \gls{lambda}.
+We denote by \gls{peak bias} the mean over the monte carlo simulations of the \gls{peak error}.
+The \gls{peak bias} gives us a feel for how much the \gls{dkd} tends to over or underestimate the worst case of the true risk \gls{lambda}.
+
+The second measure associated with the peak we call the \gls{peak drift}.
+It is defined as the mean distance between the peak of \gls{lambda_hat} and \gls{lambda}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Subsection: Centroid bias and drift
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Centroid bias and peak drift}
+\label{subsec:method:centroid_bias}
+
+The final two accuracy measures also compare the estimated risk function's accuracy in computing the peak.
+In fact, they are nearly identical to the preceding two accuracy measures.
+However, unlike the \gls{peak error} and \gls{peak bias}, they do not use the exact peak of \gls{lambda_hat}.
+Instead, they use the centroid and average value of \gls{lambda_hat} over the 5\% of the study area where \gls{lambda_hat} is highest.
+We call the corresponding accuracy measures \gls{centroid bias} and \gls{centroid drift}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
