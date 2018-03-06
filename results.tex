@@ -11,14 +11,14 @@ In each case, we compare the results of 1,000 simulations using several accuracy
 Each section describes a set of experiments, which, together, examine the effect of changes to a single variable on the performance of the \gls{dkd}.
 A table similar to \cref{tab:params:template}, describing the parameter ranges used in these experiments appears at the beginning of each section.
 The first row in the table contains the \textit{population size} or \textit{sizes} used in the experiment.
-The second row contains the \textit{\gls{population decay rate}}, which is a factor that controls how quickly the population density drops from the peak.
+The second row contains the \textit{\gls{population decay rate}}, which controls how quickly the population density drops from the peak.
 We use the standard deviation \(\sigma\) of the bivariate normal distribution for this.
 The third row in the the table contains the \textit{population center}, which is the point \((X_1, X_2)\) of the peak of the population distribution.
 For a uniform population distribution, the word ``uniform'' appears.
-The next row in the table is the \textit{incident risk factor}.
+The next row in the table is the \gls{factor}.
 This value is used to increase the expected number of cases for each simulation in the experiment.
 It is the same \gls{mu} found in \cref{ch:method}.
-The fifth row contains the \textit{\gls{incident decay rate}}, which is a factor that controls how quickly the incidence risk drops from the peak.
+The fifth row contains the \textit{\gls{incident decay rate}}, which controls how quickly the incidence risk drops from the peak.
 We use the standard deviation \(\sigma\) of the bivariate normal distribution for this.
 The sixth and last row in the the table contains the \textit{incident center}, which is the point \((X_1, X_2)\) of the peak of the incident risk function.
 
@@ -34,7 +34,7 @@ Parameter & Value \\
 Population size & 10,000 \\
 Population decay rate & 1.0 \\
 Population center & (0,0) \\
-Incident risk factor & 100, 200 \\
+\Gls{factor} & 100, 200 \\
 Incident decay rate & 1.0 \\
 Incident center & (0,0) \\
 \hline
@@ -206,7 +206,7 @@ mu & oracle.nmise & silverman.nmise & cv.nmise & oracle.best\_h1 & oracle.best\_
 \begin{table}[htbp]
 \centering
 \input{output/mean_table.tex}
-\caption{Mean error rates for uniform population, uniform intensity of factor 100}
+\caption{Mean error rates for uniform population, uniform intensity of\gls{factor} 100}
 \label{tab:errors:template}
 \end{table}
 
@@ -291,7 +291,7 @@ Parameter & Value \\
 \hline
 Population size & 10,000 \\
 Population decay rate & uniform \\
-Incident risk factor & 100 \\
+\Gls{factor} & 100 \\
 Incident decay rate & uniform \\
 Incident center & -- \\
 \hline
@@ -334,11 +334,11 @@ and the cross-validation bandwidth.
 \begin{table}[htbp]
 \centering
 \input{results/unif_100_unif/output/mean_table.tex}
-\caption{Mean error rates for uniform population, uniform intensity of factor 100}
+\caption{Mean error rates for uniform population, uniform intensity of \gls{factor} 100}
 \label{tab:errors:unif_100_unif}
 \end{table}
 
-\autoref{tab:errors:unif_100_unif} lists the mean error rates obtained for a uniform intensity with factor of 100,
+\autoref{tab:errors:unif_100_unif} lists the mean error rates obtained for a uniform intensity with \gls{factor} of 100,
 over a uniform population of 10,000.
 The columns represent the errors observed by using the three different methods for computing the smoothing bandwidth:
 the Oracle, the Silverman rule of thumb, and least-squares cross validation.
@@ -419,7 +419,7 @@ Parameter & Value \\
 \hline
 Population size & 10,000 \\
 Population decay rate & uniform \\
-Incident risk factor & 50, 100, 200, 500, 1000 \\
+\Gls{factor} & 50, 100, 200, 500, 1000 \\
 Incident decay rate & 1.0 \\
 Incident center & (0,0) \\
 \hline
@@ -541,7 +541,7 @@ Parameter & Value \\
 \hline
 Population size & 10,000, 20,000, 40,000, 60,000, 80,000, 100,000 \\
 Population decay rate & uniform \\
-Incident risk factor & 100, 200, 400, 600, 800, 1000 \\
+\Gls{factor} & 100, 200, 400, 600, 800, 1000 \\
 Incident decay rate & 1.0 \\
 Incident center & (0,0) \\
 \hline
@@ -590,7 +590,7 @@ Parameter & Value \\
 \hline
 Population size & 10,000 \\
 Population decay rate & uniform \\
-Incident risk factor & 100 \\
+\Gls{factor} & 100 \\
 Incident decay rate & 0.7, 1.0, 1.4, 2.0 \\
 Incident center & (0,0) \\
 \hline
@@ -600,7 +600,7 @@ Incident center & (0,0) \\
 \end{table}
 
 In this section, we compare the effect of the decay rate of the risk function on the estimate.
-The population distribution is uniform, and the expansion factor remains constant at 100, but
+The population distribution is uniform, and the \gls{factor} remains constant at 100, but
 the standard deviation of the Gaussian risk function is varied.
 
 \begin{figure}[htbp]
@@ -628,12 +628,12 @@ the standard deviation of the Gaussian risk function is varied.
 
 In this section, we compare the effect of different population distributions on the estimation of a single, fixed risk function.
 The population s
-The risk function has an expansion factor of 100.
+The risk function has an \gls{factor} of 100.
 
 \begin{table}[htbp]
 \centering
 \input{results/p0.7_100_1.0_1h/output/mean_table.tex}
-\caption{Error rates for uniform population of 10,000, single peak intensity of factor 100 and decay rate 0.7}
+\caption{Error rates for uniform population of 10,000, single peak intensity of \gls{factor} 100 and decay rate 0.7}
 \label{tab:results:p0.7_100_1.0_1h}
 \end{table}
 
@@ -715,11 +715,11 @@ The DKD is computed by taking a kernel estimate of the disease incidence intensi
 We used several methods to estimate the error of the DKD estimate.
 We ran several scenarios to examine how variations in the incidence risk function, the population, and the sample size affect the accuracy of the estimation. 
 
-First, we varied the multiplication factor of the risk function.
+First, we varied the \gls{factor} of the risk function.
 Effectively, this resulted in increasing the number of incidents, while keeping the population constant.
 This is analogous to having a greater risk of getting a disease.
 We observed that the absolute mean integrated squared error rose as the number of incidents increased.
-However, the relative mean integrated squared error fell with increasing the multiplication factor, in a negative polynomial order.
+However, the relative mean integrated squared error fell with increasing the multiplication \gls{factor}, in a negative polynomial order.
 
 Second, we varied the number of incidents and the population by the same proportion.
 The risk function was kept the same.

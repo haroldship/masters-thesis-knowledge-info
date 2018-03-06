@@ -1,0 +1,14 @@
+% latex table generated in R 3.4.2 by xtable 1.8-2 package
+% Sat Feb 17 16:44:38 2018
+\begin{tabular}{lrrr}
+  \hline
+ & Oracle & Silverman & CV \\ 
+  \hline
+MISE & 0.000069 & 0.000069 & 0.000073 \\ 
+  Relative MISE & 0.006882 & 0.006908 & 0.007326 \\ 
+  Normalized MISE & 0.000007 & 0.000007 & 0.000007 \\ 
+  MIAE & 0.001410 & 0.001435 & 0.001477 \\ 
+  Relative MIAE & 0.014101 & 0.014354 & 0.014765 \\ 
+  Max Error & 0.004157 & 0.003862 & 0.004410 \\ 
+   \hline
+\end{tabular}
