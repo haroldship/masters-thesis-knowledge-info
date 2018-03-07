@@ -20,6 +20,8 @@
 \ofoot{\docversion}
 \cfoot{\pagemark}
 \ohead{} % clear outer header
+\ihead{} % clear inner header
+\chead{} % clear middle header
 
 \usepackage{pdfpages}
 
@@ -68,7 +70,7 @@
 \makeglossaries % build the Notation
 
 %
-% contents of ~/.latexmkrc
+% contents of latexmkrc
 %
 % add_cus_dep('glo', 'gls', 0, 'makeglossaries');
 % add_cus_dep('acn', 'acr', 0, 'makeglossaries');
