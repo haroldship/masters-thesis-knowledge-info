@@ -703,47 +703,4 @@ The risk function has an \gls{factor} of 100.
     \label{fig:ise:p1.4_Gap_risk}
 \end{figure}
 
-%%
-%% Discussion
-%%
-
-\section{Discussion}
-\label{sec:discussion}
-
-We are investigating the effectiveness of the DKD in estimating functions that return the incidence risk of chronic diseases. 
-The DKD is computed by taking a kernel estimate of the disease incidence intensity and dividing by a kernel estimate of the population density at any given point.
-We used several methods to estimate the error of the DKD estimate.
-We ran several scenarios to examine how variations in the incidence risk function, the population, and the sample size affect the accuracy of the estimation. 
-
-First, we varied the \gls{factor} of the risk function.
-Effectively, this resulted in increasing the number of incidents, while keeping the population constant.
-This is analogous to having a greater risk of getting a disease.
-We observed that the absolute mean integrated squared error rose as the number of incidents increased.
-However, the relative mean integrated squared error fell with increasing the multiplication \gls{factor}, in a negative polynomial order.
-
-Second, we varied the number of incidents and the population by the same proportion.
-The risk function was kept the same.
-This is analogous to extending the time frame of the study.
-We observed that both the absolute and relative mean integrated squared error fell with increasing the number of incidents, in a negative polynomial order.
-
-\[
-    \mbox{RMISE} = K n^{\alpha}
-\]
-
-
-\begin{table}[htbp]
-\begin{tabular}{l*6c}
-  \hline
-  & \multicolumn{2}{c}{Oracle} & \multicolumn{2}{c}{Silverman} & \multicolumn{2}{c}{CV} \\ 
-  decay & K & \( \alpha \) & K & \( \alpha \) & K & \( \alpha \) \\ 
-  \hline
-  0.7000 & -5.1305 & -0.3011 & -3.9831 & -0.4310 & -3.9296 & -0.4545 \\ 
-  1.0000 & -2.3525 & -0.7317 & -1.8624 & -0.7357 & -1.5309 & -0.8103 \\ 
-  1.4000 & -1.9569 & -0.6657 & -1.3159 & -0.7012 & -1.2255 & -0.7216 \\ 
-  2.0000 & -1.6753 & -0.6036 & -0.8370 & -0.6518 & -0.7970 & -0.6609 \\ 
-  \( \infty \) & -0.6438 & -0.3273 & -0.3175 & -0.3774 & -0.3170 & -0.3775 \\ 
-  \hline
-\end{tabular}
-\end{table}
-
 \graphicspath{{./}}
