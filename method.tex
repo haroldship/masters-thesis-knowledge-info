@@ -71,10 +71,10 @@ We can then compute the expected value of the \gls{ise} to obtain the \gls{mise}
     \mbox{MISE} = \E [\mbox{ISE}]
 \end{equation}
 
-In our experiments, we run \(M\) monte carlo simulations, and estimate the \gls{mise} by taking the empirical average of the \glspl{ise}.
+In our experiments, we run \(M\) monte carlo simulations, and approximate the \gls{mise} by taking the empirical average of the \glspl{ise}.
 
 \begin{equation}
-    \hat{\mbox{MISE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{ISE}_i
+    \widetilde{\mbox{MISE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{ISE}_i
 \end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -102,10 +102,10 @@ We can then compute the expected value of the \gls{ise} to obtain the \gls{mise}
     \mbox{MIAE} = \E [\mbox{IAE}]
 \end{equation}
 
-As above, we run \(M\) monte carlo simulations, and estimate the \gls{miae} by taking the empirical average of the \glspl{iae}.
+As above, we run \(M\) monte carlo simulations, and approximate the \gls{miae} by taking the empirical average of the \glspl{iae}.
 
 \begin{equation}
-    \hat{\mbox{MIAE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{IAE}_i
+    \widetilde{\mbox{MIAE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{IAE}_i
 \end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -122,10 +122,10 @@ We define the \gls{supremum error} as follows:
     \mbox{supremum error}(\hat{\lambda}) = \sup_{\vec{x} \in \RS} {\left| \hat{\lambda}(\vec{x}) - \lambda(\vec{x}) \right|}
 \end{equation}
 
-As in the previous accuracy measures, we run \(M\) monte carlo simulations, and estimate the Max Error, or mean supremum error by taking the empirical average of the supremum errors.
+As in the previous accuracy measures, we run \(M\) monte carlo simulations, and approximate the Max Error, or mean supremum error by taking the empirical average of the supremum errors.
 
 \begin{equation}
-    \hat{\mbox{Max Error}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{supremum error}_i
+    \widetilde{\mbox{Max Error}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{supremum error}_i
 \end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
