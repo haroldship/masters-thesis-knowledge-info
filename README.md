@@ -38,8 +38,9 @@
 ## To Do 7-3-2018
  - [ ] Method: add "relative" and "normalized" error measures
  - [ ] Method: more rigorous math
- - [ ] Method: use "approximate" instead of "estimate" for MISE, MIAE etc.
+ - [x] Method: use "approximate" instead of "estimate" for MISE, MIAE etc.
+ - [x] Method: use \widetilde instead of \hat on MISE, MIAE, etc.
  - [ ] use (x_1, x_2) instead of vector x
- - [ ] Discussion: move 5.8 to 6
+ - [x] Discussion: move 5.8 to 6
  - [ ] Method: mention parallelization and randomization algorithms and R packages, and AWS including which instance types and other details of execution
  - [ ] Introduction: define "statistical properties"
