@@ -11,14 +11,14 @@ In each case, we compare the results of 1,000 simulations using several accuracy
 Each section describes a set of experiments, which, together, examine the effect of changes to a single variable on the performance of the \gls{dkd}.
 A table similar to \cref{tab:params:template}, describing the parameter ranges used in these experiments appears at the beginning of each section.
 The first row in the table contains the \textit{population size} or \textit{sizes} used in the experiment.
-The second row contains the \textit{\gls{population decay rate}}, which controls how quickly the population density drops from the peak.
+The second row contains the \textit{population \gls{spread}}, which controls how quickly the population density drops from the peak.
 We use the standard deviation \(\sigma\) of the bivariate normal distribution for this.
 The third row in the the table contains the \textit{population center}, which is the point \((X_1, X_2)\) of the peak of the population distribution.
 For a uniform population distribution, the word ``uniform'' appears.
 The next row in the table is the \gls{factor}.
 This value is used to increase the expected number of cases for each simulation in the experiment.
 It is the same \gls{mu} found in \cref{ch:method}.
-The fifth row contains the \textit{\gls{incident decay rate}}, which controls how quickly the incidence risk drops from the peak.
+The fifth row contains the \textit{incident\gls{spread}}, which controls how quickly the incidence risk drops from the peak.
 We use the standard deviation \(\sigma\) of the bivariate normal distribution for this.
 The sixth and last row in the the table contains the \textit{incident center}, which is the point \((X_1, X_2)\) of the peak of the incident risk function.
 
@@ -32,10 +32,10 @@ The sixth and last row in the the table contains the \textit{incident center}, w
 Parameter & Value \\
 \hline
 Population size & 10,000 \\
-Population decay rate & 1.0 \\
+Population \gls{spread} & 1.0 \\
 Population center & (0,0) \\
 \Gls{factor} & 100, 200 \\
-Incident decay rate & 1.0 \\
+Incident \gls{spread} & 1.0 \\
 Incident center & (0,0) \\
 \hline
 \end{tabular}
@@ -290,9 +290,9 @@ mu & oracle.nmise & silverman.nmise & cv.nmise & oracle.best\_h1 & oracle.best\_
 Parameter & Value \\
 \hline
 Population size & 10,000 \\
-Population decay rate & uniform \\
+Population \gls{spread} & uniform \\
 \Gls{factor} & 100 \\
-Incident decay rate & uniform \\
+Incident \gls{spread} & uniform \\
 Incident center & -- \\
 \hline
 \end{tabular}
@@ -418,9 +418,9 @@ reflects the relative ease with which the DKD can estimate a flat intensity func
 Parameter & Value \\
 \hline
 Population size & 10,000 \\
-Population decay rate & uniform \\
+Population \gls{spread} & uniform \\
 \Gls{factor} & 50, 100, 200, 500, 1000 \\
-Incident decay rate & 1.0 \\
+Incident \gls{spread} & 1.0 \\
 Incident center & (0,0) \\
 \hline
 \end{tabular}
@@ -514,15 +514,15 @@ The corresponding equations for RMISE are:
 \centering
 \begin{tabular}{rrrr}
     \hline
-    Decay Rate & Oracle & Silverman & CV \\ 
+    Incident risk function \gls{spread} & Oracle & Silverman & CV \\ 
     \hline
     1.0 & -0.8180b & -0.7445 & 4.2668 \\
     1.4 & -0.7501 & -0.7224 & -0.5711 \\
     2.0 & -0.7548 & -0.7253 & -0.8425 \\
     \( \infty \) & -0.7317 & -0.7357 & -0.8103
 \end{tabular}
-\caption{Convergence power for different population decay rates}
-\label{tab:convergence_vs_decay}
+\caption{Convergence power for different incident risk function spreads}
+\label{tab:convergence_vs_spread}
 \end{table}
 
 %%
@@ -540,9 +540,9 @@ The corresponding equations for RMISE are:
 Parameter & Value \\
 \hline
 Population size & 10,000, 20,000, 40,000, 60,000, 80,000, 100,000 \\
-Population decay rate & uniform \\
+Population \gls{spread} & uniform \\
 \Gls{factor} & 100, 200, 400, 600, 800, 1000 \\
-Incident decay rate & 1.0 \\
+Incident \gls{spread} & 1.0 \\
 Incident center & (0,0) \\
 \hline
 \end{tabular}
@@ -553,7 +553,7 @@ Incident center & (0,0) \\
 
 We next examine the effect of increasing the sample size, while keeping the risk intensity function fixed.
 In order to do this, we increase the population size and the expected number of incidents proportionately.
-For this set of experiments, the population is uniformly distributed and the risk intensity has a single peak in the center with a fixed decay rate (standard deviation).
+For this set of experiments, the population is uniformly distributed and the risk intensity has a single peak in the center with a fixed \gls{spread} (standard deviation).
 
 \begin{figure}[htbp]
     \centering
@@ -576,7 +576,7 @@ For this set of experiments, the population is uniformly distributed and the ris
 
 %%
 %% Section
-\section{Varying the decay of the risk function}
+\section{Varying the spread of the risk function}
 \label{sec:results:unif_100_SD}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -589,41 +589,41 @@ For this set of experiments, the population is uniformly distributed and the ris
 Parameter & Value \\
 \hline
 Population size & 10,000 \\
-Population decay rate & uniform \\
+Population \gls{spread} & uniform \\
 \Gls{factor} & 100 \\
-Incident decay rate & 0.7, 1.0, 1.4, 2.0 \\
+Incident \gls{spread} & 0.7, 1.0, 1.4, 2.0 \\
 Incident center & (0,0) \\
 \hline
 \end{tabular}
-\caption{Parameters used for varying the decay rate of the risk function}
+\caption{Parameters used for varying the \gls{spread} of the risk function}
 \label{tab:params:unif_100_SD}
 \end{table}
 
-In this section, we compare the effect of the decay rate of the risk function on the estimate.
+In this section, we compare the effect of the \gls{spread} of the risk function on the estimate.
 The population distribution is uniform, and the \gls{factor} remains constant at 100, but
 the standard deviation of the Gaussian risk function is varied.
 
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/by_cases_decay/MISE-vs-risk-decay}
+    \includegraphics[width=\textwidth]{results/by_cases_spread/MISE-vs-risk-spread}
     \caption{MISE}
     \end{subfigure}
     \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/by_cases_decay/RMISE-vs-risk-decay}
+    \includegraphics[width=\textwidth]{results/by_cases_spread/RMISE-vs-risk-spread}
     \caption{Relative MISE}
     \end{subfigure}
     \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/by_cases_decay/RMISE-vs-risk-decay-log-log}
+    \includegraphics[width=\textwidth]{results/by_cases_spread/RMISE-vs-risk-spread-log-log}
     \caption{Relative MISE log-log}
     \end{subfigure}
-    \caption[MISE: by risk decay]{Mean Integrated Squared Error vs. risk decay rate}
+    \caption[MISE: by risk spread]{Mean Integrated Squared Error vs. risk spread}
     \label{fig:ise:unif_100_SD}
 \end{figure}
 
 %%
 %% Section
-\section{Varying the decay of the population density}
+\section{Varying the spread of the population density}
 \label{sec:results:pSD_100_1h}
 
 In this section, we compare the effect of different population distributions on the estimation of a single, fixed risk function.
@@ -633,7 +633,7 @@ The risk function has an \gls{factor} of 100.
 \begin{table}[htbp]
 \centering
 \input{results/p0.7_100_1.0_1h/output/mean_table.tex}
-\caption{Error rates for uniform population of 10,000, single peak intensity of \gls{factor} 100 and decay rate 0.7}
+\caption{Error rates for uniform population of 10,000, single peak intensity of \gls{factor} 100 and \gls{spread} 0.7}
 \label{tab:results:p0.7_100_1.0_1h}
 \end{table}
 
@@ -641,18 +641,18 @@ The risk function has an \gls{factor} of 100.
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/by_population_decay/MISE-vs-population-decay}
+    \includegraphics[width=\textwidth]{results/by_population_spread/MISE-vs-population-spread}
     \caption{MISE}
     \end{subfigure}
     \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/by_population_decay/RMISE-vs-population-decay}
+    \includegraphics[width=\textwidth]{results/by_population_spread/RMISE-vs-population-spread}
     \caption{Relative MISE}
     \end{subfigure}
     \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/by_population_decay/RMISE-vs-population-decay-log-log}
+    \includegraphics[width=\textwidth]{results/by_population_spread/RMISE-vs-population-spread-log-log}
     \caption{Relative MISE log-log}
     \end{subfigure}
-    \caption[MISE: by risk decay]{Mean Integrated Squared Error vs. population decay rate}
+    \caption[MISE: by risk spread]{Mean Integrated Squared Error vs. population spread}
     \label{fig:ise:pSD_100_1h}
 \end{figure}
 
@@ -676,7 +676,7 @@ The risk function has an \gls{factor} of 100.
     \includegraphics[width=\textwidth]{results/by_two_peaks/RMISE-vs-risk-peak-gap-log-log}
     \caption{Relative MISE log-log}
     \end{subfigure}
-    \caption[MISE: by risk decay]{Mean Integrated Squared Error vs. distance between two risk peaks}
+    \caption[MISE: by risk spread]{Mean Integrated Squared Error vs. distance between two risk peaks}
     \label{fig:ise:p1.4_100_G}
 \end{figure}
 
@@ -699,7 +699,7 @@ The risk function has an \gls{factor} of 100.
     \includegraphics[width=\textwidth]{results/by_pop_risk_distance/RMISE-vs-population-risk-gap-log-log}
     \caption{Relative MISE log-log}
     \end{subfigure}
-    \caption[MISE: by risk decay]{Mean Integrated Squared Error vs. distance between population and risk peaks}
+    \caption[MISE: by distance between population and risk peaks]{Mean Integrated Squared Error vs. distance between population and risk peaks}
     \label{fig:ise:p1.4_Gap_risk}
 \end{figure}
 

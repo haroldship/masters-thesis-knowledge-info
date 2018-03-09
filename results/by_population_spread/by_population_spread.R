@@ -1,12 +1,12 @@
 library(ggplot2)
 
-setwd("/Users/harold/Dropbox/MA_Knowledge_and_Info/Thesis/thesis/results/by_population_decay")
+setwd("/Users/harold/Dropbox/MA_Knowledge_and_Info/Thesis/thesis/results/by_population_spread")
 
-DecayRates <- c(0.7, 1.0, 1.4, 2.0)
-Dirs <- sapply(DecayRates, function(rate) paste('../p', format(rate, nsmall=1), '_100_1_1h/output/', sep=''))
+Spreads <- c(0.7, 1.0, 1.4, 2.0)
+Dirs <- sapply(Spreads, function(rate) paste('../p', format(rate, nsmall=1), '_100_1.0_1h/output/', sep=''))
 Files <- sapply(Dirs, function(dir) paste(dir, 'mean_table.tex', sep=''))
 
-N <- length(DecayRates)
+N <- length(Spreads)
 Errs <- character()
 
 matO <- NULL
@@ -15,7 +15,7 @@ matC <- NULL
 
 
 for (i in 1:N) {
-  DecayRate <- DecayRates[i]
+  Spread <- Spreads[i]
   File <- Files[i]
   lines <- readLines(File)
   lines <- lines[7:19]
@@ -47,45 +47,50 @@ for (i in 1:N) {
 }
 
 dfO <- as.data.frame(matO)
-dfO$DecayRate <- DecayRates
+dfO$Spread <- Spreads
 dfO$Bandwidth <- "Oracle"
-#dfO <- dfO[dfO$DecayRate!=0.7,]
+#dfO <- dfO[dfO$Spread!=0.7,]
 
 dfS <- as.data.frame(matS)
-dfS$DecayRate <- DecayRates
+dfS$Spread <- Spreads
 dfS$Bandwidth <- "Silverman"
-#dfS <- dfS[dfS$DecayRate!=0.7,]
+#dfS <- dfS[dfS$Spread!=0.7,]
 
 dfC <- as.data.frame(matC)
-dfC$DecayRate <- DecayRates
+dfC$Spread <- Spreads
 dfC$Bandwidth <- "CV"
-dfC <- dfC[dfC$DecayRate!=0.7,]
+dfC <- dfC[dfC$Spread!=0.7,]
 
 df <- rbind(dfO, dfS, dfC)
 df$Bandwidth <- as.factor(df$Bandwidth)
 
-coefO <- coef(lm(log(dfO$`Relative MISE`) ~ log(dfO$DecayRate)))
-coefS <- coef(lm(log(dfS$`Relative MISE`) ~ log(dfS$DecayRate)))
-coefC <- coef(lm(log(dfC$`Relative MISE`) ~ log(dfC$DecayRate)))
+coefO <- coef(lm(log(dfO$`Relative MISE`) ~ log(dfO$Spread)))
+coefS <- coef(lm(log(dfS$`Relative MISE`) ~ log(dfS$Spread)))
+coefC <- coef(lm(log(dfC$`Relative MISE`) ~ log(dfC$Spread)))
 
 
-pdf(file="MISE-vs-population-decay.pdf")
+pdf(file="MISE-vs-population-spread.pdf")
 ggplot(df) +
-  geom_point(aes(x=DecayRate, y=MISE, colour=Bandwidth, shape=Bandwidth))
+  geom_point(aes(x=Spread, y=MISE, colour=Bandwidth, shape=Bandwidth))
 dev.off()
-pdf(file="RMISE-vs-population-decay.pdf")
+pdf(file="RMISE-vs-population-spread.pdf")
 ggplot(df) +
 #  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(0.4, 2.2)) +
 #  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(0.4, 2.2)) +
 #  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(0.4, 2.2)) +
-  geom_point(aes(x=DecayRate, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth))
+  geom_point(aes(x=Spread, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth))
 dev.off()
-pdf(file="RMISE-vs-population-decay-log-log.pdf")
+pdf(file="RMISE-vs-population-spread-log-log.pdf")
 ggplot(df) +
-  geom_point(aes(x=DecayRate, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth)) +
+  geom_point(aes(x=Spread, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth)) +
 #  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(0.4, 2.2)) +
 #  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(0.4, 2.2)) +
 #  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(0.4, 2.2)) +
   coord_trans(x='log10', y='log10') +
   annotation_logticks(scaled=FALSE)
 dev.off()
+
+coefO
+coefS
+coefC
+

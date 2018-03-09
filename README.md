@@ -16,7 +16,7 @@
  - [ ] Conclusion: How good is Silverman?
  - [ ] Conclusion: when is Silverman better than CV?
  - [ ] Why is MISE going up?
- - [ ] replace "decay rate" with sigma_p, sigma_i, etc and "spread"
+ - [x] replace "decay rate" with sigma_p, sigma_i, etc and "spread"
  - [ ] Results: convergence rates
  - [ ] Method: explain the units of distance
  - [ ] Silverman's peak bias is positive in some cases: explain
