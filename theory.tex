@@ -49,27 +49,11 @@ Kernel intensity estimator (my simplification):
 
 where \gls{mu} is ... and \gls{k} is ...
 
-%
-% Convergence and inconsistency
-%
-\section{Inconsistency of the kernel intensity estimator}
-
-From \citet{guan2008consistent}:
-
-{
-\color{red}
-\textbf{The kernel intensity estimator is not consistent.}
-This is because, although the kernel only uses local information around the point of interest to compute the estimate.
-The resulting estimate has bias that tends to zero.
-However it's variance does not diminish because the number of events in any fixed region is of order 1.
-}
-
-The paper develops a \textit{new nonparametric intensity estimator} that is consistent under ``some suitable yet reasonable conditions.''
-
-%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bias and variance
-%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Bias and variance of kernel intensity estimator}
+\label{sec:theory:bias_variance}
 
 If we let \(\gls{lambda} = \gls{mu} f\) where \(f\) is a probability density, then at a point \((x_1, x_2) \in \RS\),
 \begin{align}
@@ -87,5 +71,30 @@ Also, as \(\mu \to \infty\), both the bias and variance also \(\to \infty\),
 but the \textit{relative} MISE, taken by dividing by \(\mu^2\) results in the relative bias being \(O(\mu^{-1/3})\)
 but the relative variance being \(O(\mu^{1/3})\).
 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bias and variance
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Asymptotic behavior of the bandwidth}
+\label{sec:theory:bandwidth}
+
+TBD
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Convergence and inconsistency
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Inconsistency of the kernel intensity estimator}
+\label{sec:theory:inconsistency}
+
+From \citet{guan2008consistent}:
+
+{
+\color{red}
+\textbf{The kernel intensity estimator is not consistent.}
+This is because, although the kernel only uses local information around the point of interest to compute the estimate.
+The resulting estimate has bias that tends to zero.
+However it's variance does not diminish because the number of events in any fixed region is of order 1.
+}
+
+The paper develops a \textit{new nonparametric intensity estimator} that is consistent under ``some suitable yet reasonable conditions.''
 
 

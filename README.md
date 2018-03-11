@@ -9,6 +9,8 @@
  - [x] Discussion: move 5.8 to 6
  - [x] Conclusion: when is Silverman better than CV?
  - [x] use (x_1, x_2) instead of vector x
+ - [x] Results: How does spread affect bandwidth?
+ - [x] Appendix: table 36 oracle is worse than Silverman?
    
 ### Fixed in version 0.5
  - [x] Explain error measures with formulas
@@ -34,10 +36,10 @@
  - [ ] Appendix: A.10 table: Silverman is better than CV
  - [ ] Appendix: for each section, plot accuracy measures vs. expected number of incidents
  - [ ] Conclusion: when is centroid better than peak?
- - [ ] Results: How does spread affect bandwidth?
+ - [x] Results: How does spread affect bandwidth?
  - [ ] Conclusion: Is Silverman bandwidth smaller in cases of positive bias?
  - [ ] Appendix: A.8 mention in subsection title that peaks are in same place
- - [ ] Appendix: table 36 oracle is worse than Silverman?
+ - [x] Appendix: table 36 oracle is worse than Silverman?
  - [x] No headers on pages
  - [ ] Compare bandwidths for 2 peaks: peak drift vs centroid drift, same for bias
  - [ ] Appendix: A.10 title should say peaks are NOT in same place

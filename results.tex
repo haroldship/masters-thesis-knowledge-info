@@ -6,21 +6,32 @@
 %%
 %%
 
-This chapter describes the results of several experiments, each run with a variation of the setup.
+This chapter describes the results of several experiments, each run with a variation of the same setup.
 In each case, we compare the results of 1,000 simulations using several accuracy measures.
 Each section describes a set of experiments, which, together, examine the effect of changes to a single variable on the performance of the \gls{dkd}.
-A table similar to \cref{tab:params:template}, describing the parameter ranges used in these experiments appears at the beginning of each section.
+
+\section{Experimental setup}
+\label{sec:results:setup}
+
+Each experiment was run on one of \textit{c4.2xlarge} or \textit{c4.4xlarge} instance in Amazon AWS \citep{aws:instancetypes}.
+These virtual machines have 8 and 16 virtual CPUs respectively.
+This allowed the monte carlo simulations to be sped up by running in 7 or 15 parallel threads using the \texttt{parallel} package in \texttt{R} \citep{r:parallel}.
+Randomization in parallel requires the random number stream to be split into separate sub-streams for each thread. 
+This was done using the L'Ecuyer-CMRG method \citep{lecuyer2002random}.
+
+Each experiment was run according to a set of parameters that comprised the particular setup.
+A table similar to \cref{tab:params:template}, describing the parameter ranges used in these experiments appears at the beginning of each section below.
 The first row in the table contains the \textit{population size} or \textit{sizes} used in the experiment.
 The second row contains the \textit{population \gls{spread}}, which controls how quickly the population density drops from the peak.
-We use the standard deviation \(\sigma\) of the bivariate normal distribution for this.
-The third row in the the table contains the \textit{population center}, which is the point \((X_1, X_2)\) of the peak of the population distribution.
+We use the standard deviation \ensuremath\sigma of the bivariate normal distribution for this.
+The third row in the the table contains the \textit{population center}, which is the point \((x_1, x_2)\) of the peak of the population distribution.
 For a uniform population distribution, the word ``uniform'' appears.
 The next row in the table is the \gls{factor}.
 This value is used to increase the expected number of cases for each simulation in the experiment.
 It is the same \gls{mu} found in \cref{ch:method}.
-The fifth row contains the \textit{incident\gls{spread}}, which controls how quickly the incidence risk drops from the peak.
-We use the standard deviation \(\sigma\) of the bivariate normal distribution for this.
-The sixth and last row in the the table contains the \textit{incident center}, which is the point \((X_1, X_2)\) of the peak of the incident risk function.
+The fifth row contains the \textit{incident \gls{spread}}, which controls how quickly the incidence risk drops from the peak.
+We use the standard deviation \ensuremath\sigma of the bivariate normal distribution for this.
+The sixth and last row in the the table contains the \textit{incident center}, which is the point \((x_1, x_2)\) of the peak of the incident risk function.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Parameter table - template
@@ -50,6 +61,81 @@ We then made ran several sets of experiments while changing one parameter at a t
 \autoref{sec:results:unif_NCases_1h} compares the results obtained by varying the number of cases.
 \autoref{sec:results:unifNpop_1h} compares the results obtained by varying the size of the population.
 
+\section[Effect of number of incidents with fixed population]
+    {Effect of number of incidents for a fixed, uniform population of 10,000 and single peak with spread 1.0}
+\label{sec:results:number_of_incidents}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Parameter table - expected number of incidents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[htbp]
+\centering
+\begin{tabular}{ll}
+\hline
+Parameter & Value \\
+\hline
+Population size & 10,000 \\
+Population \gls{spread} & uniform \\
+Population center & uniform \\
+\Gls{factor} & 50, 100, 200, 500, 1,000 \\
+Incident \gls{spread} & 1.0 \\
+Incident center & (0,0) \\
+\hline
+\end{tabular}
+\caption[Effect of number of incidents with fixed population]
+    {Experimental parameter values varying \gls{factor} for a fixed, uniform population of 10,000 and single peak with spread 1.0}
+\label{tab:params:results:number_of_incidents}
+\end{table}
+
+First, we examine the effect of sample size on the optimal bandwidth.
+According to the theory developed in \cref{sec:theory:bandwidth},
+the bandwidth should decrease as the sample size increases according to the formula
+
+\[
+    h_{\mymathit{opt}} = O(n^{-\frac{1}{6}})
+\]
+
+
+\input{results/by_h_per_mu/h_per_mu}
+
+
+\section[Effect of risk spread with fixed population]
+    {Effect of risk \gls{spread} for a fixed, uniform population of 10,000 and single peak with \gls{spread} 1.0}
+\label{sec:results:spread}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Parameter table - spread
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[htbp]
+\centering
+\begin{tabular}{ll}
+\hline
+Parameter & Value \\
+\hline
+Population size & 10,000 \\
+Population \gls{spread} & uniform \\
+Population center & uniform \\
+\Gls{factor} & 100 \\
+Incident \gls{spread} & 0.7, 1.0, 1.4, 2.0 \\
+Incident center & (0,0) \\
+\hline
+\end{tabular}
+\caption[Effect of spread with fixed population]
+    {Experimental parameter values varying \gls{spread} for a fixed, uniform population of 10,000 and single peak with \gls{spread} 1.0}
+\label{tab:params:results:spread}
+\end{table}
+
+We examine the effect of spread on the optimal bandwidth.
+The main effect of increasing spread is that the peak of the risk function becomes less pronounced.
+The \gls{oracle}, \gls{silverman}, and \gls{cv} bandwidths all increase as the spread increases.
+The \gls{oracle}, \gls{silverman}, and \gls{cv} NMISE decrease as the spread increases.
+However, the \gls{oracle} and \gls{cv} decrease faster than than \gls{silverman}.
+
+\input{results/by_h_per_mu/h_per_spread}
+
+\section{Consistency of the DKD}
+\label{sec:results:consistency}
+
 \textbf{
 \color{red}
 This table shows that the method is not consistent.
@@ -77,24 +163,6 @@ Normalized MISE is MISE divided by $\mu$.
     0.9197443
 }
 
-% latex table generated in R 3.3.3 by xtable 1.8-2 package
-% Tue Jan 16 19:25:44 2018
-\begin{table}[ht]
-\centering
-\small
-\color{red}
-\begin{tabular}{rrrrrrr}
-  \hline
-mu & oracle.nmise & silverman.nmise & cv.nmise & oracle.best\_h1 & oracle.best\_h2 & silverman.mean\_h \\ 
-  \hline
-0.500000 & 0.000018 & 0.000029 & 0.000028 & 1.500000 & 1.500000 & 1.033278 \\ 
-  1.000000 & 0.000022 & 0.000035 & 0.000033 & 1.300000 & 1.400000 & 0.918091 \\ 
-  2.000000 & 0.000026 & 0.000042 & 0.000036 & 1.200000 & 1.200000 & 0.817562 \\ 
-  5.000000 & 0.000034 & 0.000053 & 0.000058 & 1.100000 & 1.000000 & 0.703114 \\ 
-  10.000000 & 0.000038 & 0.000062 & 0.000114 & 0.900000 & 0.900000 & 0.626736 \\ 
-   \hline
-\end{tabular}
-\end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Results template

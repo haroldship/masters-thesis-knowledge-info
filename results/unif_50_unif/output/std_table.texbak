@@ -1,15 +1,17 @@
 % latex table generated in R 3.3.3 by xtable 1.8-2 package
-% Mon Mar  5 16:16:12 2018
+% Sun Mar 11 18:42:23 2018
 \begin{tabular}{lrrr}
   \hline
  & Oracle & Silverman & CV \\ 
   \hline
 MISE & 0.000001 & 0.000001 & 0.000001 \\ 
   Relative MISE & 0.044898 & 0.051853 & 0.055008 \\ 
-  Normalized MISE & 0.000002 & 0.000003 & 0.000003 \\ 
+  Normalized MISE & 0.448975 & 0.518531 & 0.550085 \\ 
   MIAE & 0.000295 & 0.000285 & 0.000305 \\ 
   Relative MIAE & 0.058994 & 0.056974 & 0.061084 \\ 
+  Normalized MIAE & 117.987718 & 113.948929 & 122.167387 \\ 
   Max Error & 0.000331 & 0.000725 & 0.000888 \\ 
+  Normalized Max Error & 132.463702 & 289.958853 & 355.219174 \\ 
   Peak bias & 0.001152 & 0.001701 & 0.001993 \\ 
   Relative Peak bias & 0.230399 & 0.340245 & 0.398699 \\ 
   Peak drift & 1.407526 & 1.591166 & 1.496585 \\ 
