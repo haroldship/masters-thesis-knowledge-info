@@ -1,7 +1,6 @@
 # Investigating the Statistical Properties of the Double Kernel Density Estimator
 ## Harold Ship, University of Haifa
 
-
 ### Fixed in version 0.6
  - [x] replace "decay rate" with sigma_p, sigma_i, etc and "spread"
  - [x] No headers on pages
@@ -9,7 +8,8 @@
  - [x] Method: use \widetilde instead of \hat on MISE, MIAE, etc.
  - [x] Discussion: move 5.8 to 6
  - [x] Conclusion: when is Silverman better than CV?
-  
+ - [x] use (x_1, x_2) instead of vector x
+   
 ### Fixed in version 0.5
  - [x] Explain error measures with formulas
  - [x] subcaption titles are too wide
@@ -51,7 +51,7 @@
  - [ ] Method: more rigorous math
  - [x] Method: use "approximate" instead of "estimate" for MISE, MIAE etc.
  - [x] Method: use \widetilde instead of \hat on MISE, MIAE, etc.
- - [ ] use (x_1, x_2) instead of vector x
+ - [x] use (x_1, x_2) instead of vector x
  - [x] Discussion: move 5.8 to 6
  - [ ] Method: mention parallelization and randomization algorithms and R packages, and AWS including which instance types and other details of execution
  - [ ] Introduction: define "statistical properties"

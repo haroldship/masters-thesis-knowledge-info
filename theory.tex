@@ -15,34 +15,36 @@ The theoretical results in this chapter are taken from \citet{diggle1988equivale
 
 Let \(N\) be a \gls{spp}, and let \(W \subset \mathbb{R}^2 \) be the study area.
 
-The intensity \gls{lambda} at \(\vec{s} \in \mathbb{R}^2\) is defined as:
+The intensity \gls{lambda} at \((s_1, x_s) \in \mathbb{R}^2\) is defined as:
 
 \begin{equation}
 \label{eq:lambda_differential}
-    \lambda (\vec{s}) = \lim_{|\ds| \to 0}
+    \lambda (x_1, x_2) = \lim_{|\ds| \to 0}
         \left\{
             \frac{\mathbb{E}[N(\ds)]}% /
             {|\ds|}
         \right\}
 \end{equation}
 
-And \(\lambda(\vec{s})|\ds\) is the approximate probability of \ds~ containing a single incident.
+And \(\lambda(s_1, s_2) \ds\) is the approximate probability of \ds~ containing a single incident.
 Qualitatively, an intensity function differs from a probability density function in that it does not necessarily integrate to \(1\).
 In particular, we can write \(\lambda\) as a scaled probability density function:
 
 \begin{equation}
 \label{eq:lambda_mu}
-    \lambda(\vec{s}) = \mu f(\vec{s})
+    \lambda(s_1, s_2) = \mu f\!(s_1, s_2)
 \end{equation}
 
 where \(f\) is a probability density function and \gls{mu} is a constant.
 
-Goal of intensity estimate: obtain an estimate of the function \(\lambda(\vec{s})\) on the study area by inference on a data sample.
+Goal of intensity estimate: obtain an estimate of the function \(\lambda((s_1, s_2))\) on the study area by inference on a data sample.
 
 Kernel intensity estimator (my simplification):
 \begin{equation}
 \label{eq:lambda_hat}
-    \hat{\lambda}(\vec{s}; h) = \frac{1}{h} \sum_{\vec{x} \in N \cap W}{k((\vec{x}-\vec{s})/h)}
+    \hat{\lambda}((s_1, s_2); h) 
+        = \frac{1}{h} \sum_{(x_1, x_2) \in N \cap W}
+            {k(((x_1, x_2)-(s_1, s_2))/h)}
 \end{equation}
 
 where \gls{mu} is ... and \gls{k} is ...
@@ -69,10 +71,14 @@ The paper develops a \textit{new nonparametric intensity estimator} that is cons
 %
 \section{Bias and variance of kernel intensity estimator}
 
-If we let \(\gls{lambda} = \gls{mu} f\) where \(f\) is a probability density, then at a point \(\vec{x} \in \mathbb{R}^2\),
+If we let \(\gls{lambda} = \gls{mu} f\) where \(f\) is a probability density, then at a point \((x_1, x_2) \in \RS\),
 \begin{align}
-\mbox{bias}(\gls{lambda_hat}(\vec{x};h)) & \approx \frac{1}{2} \mu h^2 \gls{grad}^2~\left[ f(\vec{x}) \right] \int {z^2 K(\vec{z}) \diff \vec{z}} \\
-\mbox{var}(\gls{lambda_hat}(\vec{x};h)) & \approx h^{-2} \mu \int {K(\vec{z})^2\diff \vec{z}} f(\vec{x})
+    \mbox{bias}(\gls{lambda_hat}((x_1, x_2);h)) & \approx
+        \frac{1}{2} \mu h^2 ~ \gls{grad}^2\!\left[ f(x_1, x_2) \right]
+            \int { z^2 K(z_1, z_2) \diff{z_1} \diff{z_2)} } \\
+    \mbox{var}(\gls{lambda_hat}((x_1, x_2);h)) & \approx
+        h^{-2} \mu
+            \int { K(z_1, z_2)^2\diff{z_1} \diff{z_2} } f(x_1, x_2)
 \end{align}
 
 Taking derivative by \(h\) and setting to \(0\), we get that \(h_{\mbox{opt}}\) is \(O(\mu^{-1/6})\).

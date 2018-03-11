@@ -119,7 +119,10 @@ the \gls{supremum error} looks at the worst case.
 We define the \gls{supremum error} as follows:
 
 \begin{equation}
-    \mbox{supremum error}(\hat{\lambda}) = \sup_{\vec{x} \in \RS} {\left| \hat{\lambda}(\vec{x}) - \lambda(\vec{x}) \right|}
+    \mbox{supremum error}(\hat{\lambda}) = \sup_{(x_1, x_2) \in \RS}
+        {\left|
+            \hat{\lambda}(x_1, x_2) - \lambda(x_1, x_2)
+        \right|}
 \end{equation}
 
 As in the previous accuracy measures, we run \(M\) monte carlo simulations, and approximate the Max Error, or mean supremum error by taking the empirical average of the supremum errors.
@@ -177,10 +180,10 @@ Next, we adjust the incident rate function, \textit{incident\textunderscore rate
 Assuming the expected number of incidents generate by \textit{incident\textunderscore rate} by itself is 1, we have
 
 \[
-    R(\vec{x}) = \mbox{EN.i}~\times~\mbox{incident\textunderscore rate}(\vec{x}) \text{,}
+    R((x_1, x_2)) = \mbox{EN.i}~\times~\mbox{incident\textunderscore rate}(x_1, x_2) \text{,}
 \]
 
-and we call \(R(\vec{x}\) is the \textit{true incident rate} for the experiment.
+and we call \(R((x_1, x_2)\) is the \textit{true incident rate} for the experiment.
 
 \section{Verifying bandwidth selection dependency on size}
 
