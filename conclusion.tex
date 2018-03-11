@@ -13,7 +13,15 @@
 We compared the performance of the \gls{dkd} under three different bandwidth schemes:
 the \gls{oracle}, \gls{silverman}, and \gls{cv}.
 In general, the \gls{oracle} performed best, followed by \gls{cv}, then \gls{silverman}.
+On average, the \gls{mise} of \gls{silverman} was between 0\% and 200\% of the \gls{mise} of \gls{cv}.
 However, there were a few cases where \gls{silverman} slightly outperformed \gls{cv}.
 When we looked at a uniform risk function on a uniformly distributed population (\cref{sec:app:results_unif_unif}), \gls{silverman} was at least as good as \gls{cv} for every \gls{factor}.
 The ratio of the \gls{mise} of \gls{silverman} to that of \gls{cv} for these experiments ranged from 0.94 to 1.0.
+For some values of \gls{mu} (200, 500 but not 50, 100, or 1000) the \gls{miae} and \gls{supremum error} were better than \gls{cv} as well.
 
+We saw this phenomenon in a few other cases as well.
+When there were two peaks, but they were close together, \gls{cv} was outperformed by \gls{silverman}.
+In particular, when the distance between the peaks was 1.0 and 2.0, but not for larger distances of 3.0 and 4.0.
+Also when there are peaks in both the population and the risk function, sometimes the \gls{cv} does not perform as well as \gls{silverman}.
+
+Some other cases where this occurs include \Cref{tab:mean_error_rates:unif_100_0.7_1h,tab:mean_error_rates:unif5k_50_1.0_1h,tab:mean_error_rates:p0.7_100_1.0_1h}.
