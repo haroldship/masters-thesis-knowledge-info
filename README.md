@@ -8,6 +8,7 @@
  - [x] Method: use "approximate" instead of "estimate" for MISE, MIAE etc.
  - [x] Method: use \widetilde instead of \hat on MISE, MIAE, etc.
  - [x] Discussion: move 5.8 to 6
+ - [x] Conclusion: when is Silverman better than CV?
   
 ### Fixed in version 0.5
  - [x] Explain error measures with formulas
@@ -24,7 +25,7 @@
  - [x] subcaption: "true risk function <del>distribution</del>"
  - [x] *factor* see if another term is common otherwise use *expected number of incidents*
  - [ ] Conclusion: How good is Silverman?
- - [ ] Conclusion: when is Silverman better than CV?
+ - [x] Conclusion: when is Silverman better than CV?
  - [ ] Why is MISE going up?
  - [x] replace "decay rate" with sigma_p, sigma_i, etc and "spread"
  - [ ] Results: convergence rates
