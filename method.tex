@@ -168,8 +168,9 @@ We call the corresponding accuracy measures \gls{centroid bias} and \gls{centroi
 In order to ensure repeatability of the experiements, we begin by setting the random number seed to the same fixed value (12).
 
 The first step in each experimental run is to define the study area. 
-The study area is always a 2-dimensional rectangle, with coordinates in the \(X_1\) and \(X_2\) directions set using the parameters \textit{x1.min}, \textit{x1.max}, \textit{x2.min}, and \textit{x2.max}.
-The study area is further restricted by the \textit{buffer} parameter.
+The study area is defined as a 2-dimensional rectangle, with coordinates in the \(x_1\) and \(x_2\) directions set using the parameters \textit{x1.min}, \textit{x1.max}, \textit{x2.min}, and \textit{x2.max}.
+These are abstract units of distance, that are analogous to kilometers or miles or any other actual unit of distance in which the \gls{dkd} might be used for spatial analysis.
+The study area is further restricted by the \textit{buffer} parameter, which forms a border around the perimeter of the study area.
 
 Next, a population is generated of size \textit{N.p}.
 When the \textit{c1} and \textit{c2} parameters are given, the population is distributed according to the parameters above.

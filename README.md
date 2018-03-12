@@ -1,6 +1,9 @@
 # Investigating the Statistical Properties of the Double Kernel Density Estimator
 ## Harold Ship, University of Haifa
 
+### Fixed in version 0.7
+ - [x] Method: explain the units of distance
+
 ### Fixed in version 0.6
  - [x] replace "decay rate" with sigma_p, sigma_i, etc and "spread"
  - [x] No headers on pages
@@ -31,7 +34,7 @@
  - [ ] Why is MISE going up?
  - [x] replace "decay rate" with sigma_p, sigma_i, etc and "spread"
  - [ ] Results: convergence rates
- - [ ] Method: explain the units of distance
+ - [x] Method: explain the units of distance
  - [ ] Silverman's peak bias is positive in some cases: explain
  - [ ] Appendix: A.10 table: Silverman is better than CV
  - [ ] Appendix: for each section, plot accuracy measures vs. expected number of incidents
