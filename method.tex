@@ -36,20 +36,44 @@ There is a fixed setup for each experiment, with the following set of parameters
 
 \Cref{sec:method:experiment_structure} describes the steps of each experiment, together with the measurements taken.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Section: computing the dkd
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Computing the DKD}
+\label{sec:method:computing}
+
+The \gls{dkd} is computed over the study area as the ratio of two positive-valued functions.
+At any given point \((x_1, x_2)\) in the plane, we can compute \(I(x_1, x_2)\), the \gls{factor} at that point.
+We call \(I(x_1, x_2)\) the \textit{incident intensity} at \((x_1, x_2)\).
+Next, at the same point, we can compute \(P(x_1, x_2)\), the population \textit{population intensity} at \((x_1, x_2)\).
+Ideally, we would know how to compute these functions exactly, and we would then compute the risk, or probability of an incident at \((x_1, x_2)\) with the ratio:
+\begin{equation}
+    \mymathit{DKD}\!(x_1, x_2) = \frac{I(x_1, x_2)}{P(x_1, x_2)}.
+\end{equation}
+
+Since we assume that we cannot compute \(I(x_1, x_2)\) and \(P(x_1, x_2)\) exactly, we approximate them as follows.
+
+TBD intensity kernel
+
+For simplicity of computation, we do not account for edge effects.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% Section: accuracy measures
 %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Measuring of accuracy of the DKD}
 \label{sec:method:accuracy}
 
 In order to describe the accuracy of the \gls{dkd} as a method of estimating the true risk function \(\lambda\),
 we use several accuracy measures.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Subsection: MISE
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{MISE}
 \label{subsec:method:mise}
 
@@ -77,9 +101,9 @@ In our experiments, we run \(M\) monte carlo simulations, and approximate the \g
     \widetilde{\mbox{MISE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{ISE}_i
 \end{equation}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Subsection: MIAE
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{MIAE}
 \label{subsec:method:miae}
 
@@ -108,9 +132,9 @@ As above, we run \(M\) monte carlo simulations, and approximate the \gls{miae} b
     \widetilde{\mbox{MIAE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{IAE}_i
 \end{equation}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Subsection: Max error
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Supremum error}
 \label{subsec:method:sup_error}
 
@@ -131,9 +155,9 @@ As in the previous accuracy measures, we run \(M\) monte carlo simulations, and 
     \widetilde{\mbox{Max Error}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{supremum error}_i
 \end{equation}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Subsection: Peak bias and drift
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Peak bias and peak drift}
 \label{subsec:method:peak_bias}
 
@@ -145,9 +169,9 @@ The \gls{peak bias} gives us a feel for how much the \gls{dkd} tends to over or 
 The second measure associated with the peak we call the \gls{peak drift}.
 It is defined as the mean distance between the peak of \gls{lambda_hat} and \gls{lambda}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Subsection: Centroid bias and drift
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Centroid bias and peak drift}
 \label{subsec:method:centroid_bias}
 
@@ -157,11 +181,11 @@ However, unlike the \gls{peak error} and \gls{peak bias}, they do not use the ex
 Instead, they use the centroid and average value of \gls{lambda_hat} over the 5\% of the study area where \gls{lambda_hat} is highest.
 We call the corresponding accuracy measures \gls{centroid bias} and \gls{centroid drift}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% Section: experiment structure
 %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experiment structure}
 \label{sec:method:experiment_structure}
 

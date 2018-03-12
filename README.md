@@ -3,7 +3,8 @@
 
 ### Fixed in version 0.7
  - [x] Method: explain the units of distance
-
+ - [x] Method: mention no edge effect compensation
+ 
 ### Fixed in version 0.6
  - [x] replace "decay rate" with sigma_p, sigma_i, etc and "spread"
  - [x] No headers on pages
@@ -46,7 +47,7 @@
  - [x] No headers on pages
  - [ ] Compare bandwidths for 2 peaks: peak drift vs centroid drift, same for bias
  - [ ] Appendix: A.10 title should say peaks are NOT in same place
- - [ ] Method: mention no edge effect compensation
+ - [x] Method: mention no edge effect compensation
  - [ ] Appendix: A.47 graph is weird
  - [ ] Appendix: A.10 biases are positive even for Oracle
  - [ ] Conclusion: Further work: more study on other distributions
