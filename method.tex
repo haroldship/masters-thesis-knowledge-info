@@ -87,6 +87,7 @@ For any given data sample, we can use the \gls{dkd} to compute the estimated ris
 We then integrate the squared error in the estimate over the plane to obtain the \gls{ise}.
 
 \begin{equation}
+\label{eq:ise}
     \mbox{ISE}(\hat{\lambda}) = 
         \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
             \left(
@@ -97,6 +98,7 @@ We then integrate the squared error in the estimate over the plane to obtain the
 We can then compute the expected value of the \gls{ise} to obtain the \gls{mise}.
 
 \begin{equation}
+\label{eq:mise}
     \mbox{MISE} = \E [\mbox{ISE}(\hat{\lambda})]
 \end{equation}
 
@@ -106,12 +108,38 @@ In our experiments, we run \(M\) monte carlo simulations, and approximate the \g
     \widetilde{\mbox{MISE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{ISE}(\hat{\lambda_i})
 \end{equation}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Subsection: Relative and normalized errors
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\subsection{Relative and normalized MISE}
-%\label{subsec:method:relative}
 
+In many of our analyses, we compare the accuracy of several experiments.
+\gls{mise} is computed from the \gls{ise},
+and \gls{ise} as computed using \cref{eq:ise}.
+For any \(\gls{lambda_hat} = \gls{mu} \hat f \),
+we have \( \gls{mise}(\gls{lambda_hat}) = \gls{mu}^2 \gls{mise}(\hat f) \).
+
+We observe that \gls{mise} will naturally increase with \gls{mu} when computed in an absolute sense.
+We provide two variations of the \gls{mise} that compensate for this.
+First, we compute \gls{rmise} by dividing \(\gls{lambda_hat}(x_1, x_2)\) by \(\gls{lambda}(x_1, x_2)\) at every point \(x_1, x_2\) in the evaluation grid, and computing
+\begin{equation}
+\label{eq:rmise}
+    \mbox{\gls{rmise}}(\gls{lambda_hat}) = 
+        \mbox{\gls{mise}}(\gls{relative_lambda_hat}) \\
+\end{equation}
+where
+\begin{equation}
+\label{eq:relative_lambda_hat}
+    \gls{relative_lambda_hat}(x_1, x_2) = 
+        \frac{\gls{lambda_hat}(x_1, x_2)}{\gls{lambda}(x_1, x_2)}
+        \text{.}
+\end{equation}
+
+Next, we \textit{normalize} the \gls{mise} by dividing by \(\gls{mu}^2\),
+which we call \gls{nmise}:
+\begin{equation}
+\label{eq:nmise}
+    \mbox{\gls{nmise}}(\gls{lambda_hat}) = 
+        \frac{1}{\gls{mu}^2} \mbox{\gls{mise}}(\gls{lambda_hat}) \text{.}
+\end{equation}
+
+In many cases it is more informative to compare the accuracy of two experiments using \gls{nmise} and \gls{rmise} than using \gls{mise}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Subsection: MIAE
@@ -142,11 +170,31 @@ We can then compute the expected value of the \gls{ise} to obtain the \gls{mise}
     \mbox{MIAE} = \E [\mbox{IAE}(\hat{\lambda})]
 \end{equation}
 
-As above, we run \(M\) monte carlo simulations, and approximate the \gls{miae} by taking the empirical average of the \glspl{iae}.
+As above, we run \(M\) monte carlo simulations,
+and approximate the \gls{miae} by taking the empirical average of the \glspl{iae}.
 
 \begin{equation}
     \widetilde{\mbox{MIAE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{IAE}(\hat{\lambda_i})
 \end{equation}
+
+As with \gls{mise}, we need to compare experiments with different values of \gls{mu}.
+The analogous definitions are \gls{rmiae} and \gls{nmiae}, as defined below.
+
+\begin{equation}
+\label{eq:rmiae}
+    \mbox{\gls{rmiae}}(\gls{lambda_hat}) = 
+        \mbox{\gls{miae}}(\gls{relative_lambda_hat}) \\
+\end{equation}
+
+where \gls{relative_lambda_hat} is defined above in \cref{eq:relative_lambda_hat},
+and
+
+\begin{equation}
+\label{eq:nmiae}
+    \mbox{\gls{nmiae}}(\gls{lambda_hat}) = 
+        \frac{1}{\gls{mu}^2} \mbox{\gls{miae}}(\gls{lambda_hat}) \text{.}
+\end{equation}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Subsection: Max error
