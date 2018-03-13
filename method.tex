@@ -48,9 +48,10 @@ The \gls{dkd} is computed over the study area as the ratio of two positive-value
 At any given point \((x_1, x_2)\) in the plane, we can compute \(I(x_1, x_2)\), the \gls{factor} at that point.
 We call \(I(x_1, x_2)\) the \textit{incident intensity} at \((x_1, x_2)\).
 Next, at the same point, we can compute \(P(x_1, x_2)\), the population \textit{population intensity} at \((x_1, x_2)\).
-Ideally, we would know how to compute these functions exactly, and we would then compute the risk, or probability of an incident at \((x_1, x_2)\) with the ratio:
+Ideally, we would know how to compute these functions exactly, and we would then compute \(\lambda(x_1, x_2)\) the risk,
+or probability of an incident at \((x_1, x_2)\) with the ratio:
 \begin{equation}
-    \mymathit{DKD}\!(x_1, x_2) = \frac{I(x_1, x_2)}{P(x_1, x_2)}.
+    \lambda(x_1, x_2) = \frac{I(x_1, x_2)}{P(x_1, x_2)}.
 \end{equation}
 
 Since we assume that we cannot compute \(I(x_1, x_2)\) and \(P(x_1, x_2)\) exactly, we approximate them as follows.
@@ -65,7 +66,7 @@ For simplicity of computation, we do not account for edge effects.
 %% Section: accuracy measures
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Measuring of accuracy of the DKD}
+\section{Measuring the accuracy of the DKD}
 \label{sec:method:accuracy}
 
 In order to describe the accuracy of the \gls{dkd} as a method of estimating the true risk function \(\lambda\),
@@ -86,20 +87,31 @@ For any given data sample, we can use the \gls{dkd} to compute the estimated ris
 We then integrate the squared error in the estimate over the plane to obtain the \gls{ise}.
 
 \begin{equation}
-    \mbox{ISE}(\hat{\lambda}) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \left( \hat{\lambda} - \lambda \right)^2 \diff{X_2} \diff{X_1}
+    \mbox{ISE}(\hat{\lambda}) = 
+        \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
+            \left(
+                \hat{\lambda}(x_1, x_2) - \lambda(x_1, x_2)
+            \right)^2 \diff{x_2} \diff{x_1}
 \end{equation}
 
 We can then compute the expected value of the \gls{ise} to obtain the \gls{mise}.
 
 \begin{equation}
-    \mbox{MISE} = \E [\mbox{ISE}]
+    \mbox{MISE} = \E [\mbox{ISE}(\hat{\lambda})]
 \end{equation}
 
 In our experiments, we run \(M\) monte carlo simulations, and approximate the \gls{mise} by taking the empirical average of the \glspl{ise}.
 
 \begin{equation}
-    \widetilde{\mbox{MISE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{ISE}_i
+    \widetilde{\mbox{MISE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{ISE}(\hat{\lambda_i})
 \end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Subsection: Relative and normalized errors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{Relative and normalized MISE}
+%\label{subsec:method:relative}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Subsection: MIAE
@@ -117,19 +129,23 @@ As we did in \autoref{subsec:method:mise}, for any given data sample we use the 
 We then integrate the absolute value of the error in the estimate over the plane to obtain the \gls{ise}.
 
 \begin{equation}
-    \mbox{IAE}(\hat{\lambda}) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \left| \hat{\lambda} - \lambda \right| \diff{X_2} \diff{X_1}
+    \mbox{IAE}(\hat{\lambda}) = 
+        \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
+            \left|
+                \hat{\lambda}(x_1, x_2) - \lambda(x_1, x_2)
+            \right| \diff{x_2} \diff{x_1}
 \end{equation}
 
 We can then compute the expected value of the \gls{ise} to obtain the \gls{mise}.
 
 \begin{equation}
-    \mbox{MIAE} = \E [\mbox{IAE}]
+    \mbox{MIAE} = \E [\mbox{IAE}(\hat{\lambda})]
 \end{equation}
 
 As above, we run \(M\) monte carlo simulations, and approximate the \gls{miae} by taking the empirical average of the \glspl{iae}.
 
 \begin{equation}
-    \widetilde{\mbox{MIAE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{IAE}_i
+    \widetilde{\mbox{MIAE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{IAE}(\hat{\lambda_i})
 \end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -149,10 +165,10 @@ We define the \gls{supremum error} as follows:
         \right|}
 \end{equation}
 
-As in the previous accuracy measures, we run \(M\) monte carlo simulations, and approximate the Max Error, or mean supremum error by taking the empirical average of the supremum errors.
+As in the previous accuracy measures, we run \(M\) monte carlo simulations, and approximate the \mbox{supremum error}, by taking the empirical average of the supremum error of the estimates.
 
 \begin{equation}
-    \widetilde{\mbox{Max Error}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{supremum error}_i
+    \widetilde{\mbox{\gls{supremum error}}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{supremum error}(\hat{\lambda_i})
 \end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -201,11 +217,11 @@ When the \textit{c1} and \textit{c2} parameters are given, the population is dis
 In particular, the distribution has bivariate normal shape with center (\textit{c1}, \textit{c2}),
 standard deviations \textit{sigma1}, \textit{sigma2}, and correlation \textit{rho}.
 
-Next, we adjust the incident rate function, \textit{incident\textunderscore rate} parameter, by scaling it so that the expected number of incidents is equal to the \textit{EN.i} parameter.
-Assuming the expected number of incidents generate by \textit{incident\textunderscore rate} by itself is 1, we have
+Next, we adjust the incident rate function, \(R(x_1, x_2)\) parameter, by scaling it so that the expected number of incidents \gls{mu} is equal to the \textit{EN.i} parameter.
+Assuming the expected number of incidents generate by \(f(x_1, x_2)\) by itself is 1, we have
 
 \[
-    R((x_1, x_2)) = \mbox{EN.i}~\times~\mbox{incident\textunderscore rate}(x_1, x_2) \text{,}
+    R((x_1, x_2)) = \gls{mu}~\times~\mbox{incident\textunderscore rate}(x_1, x_2) \text{,}
 \]
 
 and we call \(R((x_1, x_2)\) is the \textit{true incident rate} for the experiment.
