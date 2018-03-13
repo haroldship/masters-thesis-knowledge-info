@@ -207,16 +207,37 @@ the \gls{supremum error} looks at the worst case.
 We define the \gls{supremum error} as follows:
 
 \begin{equation}
-    \mbox{supremum error}(\hat{\lambda}) = \sup_{(x_1, x_2) \in \RS}
+    \mbox{supremum error}(\gls{lambda_hat}) = \sup_{(x_1, x_2) \in \gls{W}}
         {\left|
-            \hat{\lambda}(x_1, x_2) - \lambda(x_1, x_2)
+            \gls{lambda_hat}(x_1, x_2) - \lambda(x_1, x_2)
         \right|}
 \end{equation}
 
 As in the previous accuracy measures, we run \(M\) monte carlo simulations, and approximate the \mbox{supremum error}, by taking the empirical average of the supremum error of the estimates.
 
 \begin{equation}
-    \widetilde{\mbox{\gls{supremum error}}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{supremum error}(\hat{\lambda_i})
+    \widetilde{\mbox{\gls{supremum error}}}(\gls{lambda_hat}) = \frac{1}{M} \sum_{i=1}^{M} \mbox{supremum error}(\hat{\lambda_i})
+\end{equation}
+
+Furthermore, we need to compare experiments with different values of \gls{mu}.
+The analogous definitions are \gls{relative supremum error} and \gls{normalized supremum error}, as defined below.
+
+\begin{equation}
+\label{eq:relative_supremum_error}
+    \mbox{\gls{relative supremum error}}(\gls{lambda_hat}) = 
+        \frac{1}{\lambda_{max}} \mbox{\gls{supremum error}}(\gls{lambda_hat}) \\
+\end{equation}
+
+where
+\begin{equation}
+\label{eq:lambda_max}
+    \lambda_{max} = \sup_{(x_1, x_2) \in \gls{W}}{\gls{lambda}(x_1, x_2)} \text{.}
+\end{equation}
+
+\begin{equation}
+\label{eq:normalized_supremum_error}
+    \mbox{\gls{normalized supremum error}}(\gls{lambda_hat}) = 
+        \frac{1}{\gls{mu}^2} \mbox{\gls{supremum error}}(\gls{lambda_hat}) \text{.}
 \end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -233,6 +254,9 @@ The \gls{peak bias} gives us a feel for how much the \gls{dkd} tends to over or 
 The second measure associated with the peak we call the \gls{peak drift}.
 It is defined as the mean distance between the peak of \gls{lambda_hat} and \gls{lambda}.
 
+The \gls{relative peak bias} is the \gls{peak bias} divided by the value of the true peak.
+The \gls{relative peak drift} is the \gls{peak drift} divided by the range of \(x_1\) or \(x_2\), whichever is larger.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Subsection: Centroid bias and drift
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -244,6 +268,9 @@ In fact, they are nearly identical to the preceding two accuracy measures.
 However, unlike the \gls{peak error} and \gls{peak bias}, they do not use the exact peak of \gls{lambda_hat}.
 Instead, they use the centroid and average value of \gls{lambda_hat} over the 5\% of the study area where \gls{lambda_hat} is highest.
 We call the corresponding accuracy measures \gls{centroid bias} and \gls{centroid drift}.
+
+The \gls{relative centroid bias} is the \gls{centroid bias} divided by the value of the true peak.
+The \gls{relative centroid drift} is the \gls{centroid drift} divided by the range of \(x_1\) or \(x_2\), whichever is larger.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%

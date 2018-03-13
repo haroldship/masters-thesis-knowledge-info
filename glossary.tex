@@ -6,13 +6,15 @@
 %%
 %%
 
-\newglossaryentry{gls-cv} {
+\newglossaryentry{gls-cv}
+{% use \gls{cv} which is found in acronyms.tex
    type=main,
    name={cross-validation},
    description={a method for selecting bandwidths by minimising leave-one-out cross-validation mean squared error}
 }
 
-\newglossaryentry{spread} {
+\newglossaryentry{spread}
+{
    type=main,
    name={spread},
    description={an experimental parameter that controls how wide the population distribution or the risk function is spread out over the study area; equivalent to standard deviation}
@@ -25,13 +27,15 @@
    description={the expected number of incidents from the stochastic process}
 }
 
-\newglossaryentry{oracle} {
+\newglossaryentry{oracle} 
+{
    type=main,
    name={oracle},
    description={an imaginary entity that has access to the the unknown truth}
 }
 
-\newglossaryentry{silverman} {
+\newglossaryentry{silverman} 
+{
    type=main,
    name={Silverman},
    description={Silverman's rule of thumb for optimal bandwidth estimation}
@@ -42,6 +46,20 @@
    type=main,
    name={supremum error},
    description={the maximum absolute value of the error of the dkd estimate}
+}
+
+\newglossaryentry{normalized supremum error}
+{% This entry goes in the `main' glossary:
+   type=main,
+   name={normalized supremum error},
+   description={the supremum error, normalized by the expected number of incidents}
+}
+
+\newglossaryentry{relative supremum error}
+{% This entry goes in the `main' glossary:
+   type=main,
+   name={relative supremum error},
+   description={the supremum error, relative to the maximum value of the true risk function}
 }
 
 \newglossaryentry{peak error}
@@ -65,6 +83,20 @@
    description={the distance between of the peak of the dkd estimate and the peak of the true risk function}
 }
 
+\newglossaryentry{relative peak bias}
+{% This entry goes in the `main' glossary:
+   type=main,
+   name={relative peak bias},
+   description={the \gls{peak bias} divided by the value of the true peak}
+}
+
+\newglossaryentry{relative peak drift}
+{% This entry goes in the `main' glossary:
+   type=main,
+   name={relative peak drift},
+   description={the \gls{peak drift} divided by the range of \ensuremath{x_1} or \ensuremath{x_2}, whichever is larger}
+}
+
 \newglossaryentry{centroid error}
 {% This entry goes in the `main' glossary:
    type=main,
@@ -82,8 +114,22 @@
 \newglossaryentry{centroid drift}
 {% This entry goes in the `main' glossary:
    type=main,
-   name={peak drift},
-   description={the distance between of the centroid of the top 5\% of the dkd estimate and the peak of the true risk function}
+   name={centroid drift},
+   description={the distance between of the centroid of the top 5\% of the dkd estimate and the centroid of the true risk function}
+}
+
+\newglossaryentry{relative centroid bias}
+{% This entry goes in the `main' glossary:
+   type=main,
+   name={relative centroid bias},
+   description={the \gls{centroid bias} divided by the value of the true peak}
+}
+
+\newglossaryentry{relative centroid drift}
+{% This entry goes in the `main' glossary:
+   type=main,
+   name={relative centroid drift},
+   description={the \gls{centroid drift} divided by the range of \ensuremath{x_1} or \ensuremath{x_2}, whichever is larger}
 }
 
 
