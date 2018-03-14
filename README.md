@@ -65,3 +65,33 @@
  - [x] Method: mention parallelization and randomization algorithms and R packages, and AWS including which instance types and other details of execution
  - [ ] Introduction: define "statistical properties"
  
+### To  Do 14-3-2018
+ - [ ] Appendix: some tables are squished. Paragraph indentation?
+ - [ ] Results: 5.1 mention that population and incident bivariate normal is independent with equal variances (and move to Method)
+ - [ ] Results: 5.1 mention the actual size of the study area (and move to Method)
+ - [ ] Results: 5.1 drift needs to be seen in relation to square
+ - [ ] Results: 5.1 mentions 5.6-7 but not 5.2-4
+ - [ ] Results: 5.2 sample size: **n = actual** number of incidents; explain in Method; state that we fix the expected but observe actual
+ - [ ] Method & Theoretical background: describe the data generation process
+ - [ ] Method & Theoretical background: mention we have a simulation study and we generate incidents using...
+ - [ ] Results: Figure 5.10 "empirical distribution of <del>MISE</del> and <del>RMISE</del>"
+ - [ ] Define h_opt
+ - [ ] For NMIAE and NSUP - use mu not mu^2
+ - [ ] 5.2/5.3 describe what's in the tables and make a plot (log-log?)
+ - [ ] 5.2/5.3 add CV bandwidths to tables
+ - [ ] 5.2/5.3 split titles to 2 rows
+ - [ ] 5.2/5.3 add "mean" to h_o, etc.
+ - [ ] "error fell with increasing <del>the multiplication expected number of incidents</del>" + "mu"
+ - [ ] "negative polynomial order" <-- check
+ - [ ] Discussion: overall plot of everything e.g. NMISE of CV, Silv, Oracle vs. experiment number
+ - [ ] Discussion: 6.2 needs MORE
+ - [ ] Discussion: 6.1 needs plot to illustrate
+ - [ ] Conclusion: needs BOTTOM LINE
+ - [ ] Conclusion: "performance" - break down to different measures
+ - [ ] Conclusion: for MISE, CV ~~ Oracle which is the best we can hope for; MIAE, Sup are similar but peak bias & drift maybe not
+ - [ ] Conclusion: peak vs. centroid for drift & bias
+ - [ ] Discussion: bias is negative but not always - when? why?
+ - [ ] Conclusion: can we look at data and predict which technique would perform better?
+ - [ ] Conclusion: Limitation: in real life, distributions can be more complicated
+ - [ ] Conclusion: Silverman is nearly as good as CV but **much** easier to compute
+
