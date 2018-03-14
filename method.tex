@@ -8,7 +8,9 @@
 
 In this chapter, we describe the methods used to examine the statistical performance of the \gls{dkd}.
 The basic unit is the \textit{experiment}, a set of simulations run with the same initial setup with the same measurements taken.
-There is a fixed setup for each experiment, with the following set of parameters.
+Each experiment is run with a fixed set of parameters, described below in \Cref{tab:experimental_parameters}.
+We then run a set of experiments, varying one parameter at a time, or in some cases two parameters in tandem, in order to observe the effect of this parameter on the accuracy of the \gls{dkd}.
+
 \begin{table}[htbp]
     \centering
     \begin{tabular}{ll}
@@ -280,26 +282,38 @@ The \gls{relative centroid drift} is the \gls{centroid drift} divided by the ran
 \section{Experiment structure}
 \label{sec:method:experiment_structure}
 
-In order to ensure repeatability of the experiements, we begin by setting the random number seed to the same fixed value (12).
+In order to ensure repeatability of the experiements, we begin by setting the random number seed to the same fixed value.
+We arbitrarily chose the number 12.
 
-The first step in each experimental run is to define the study area. 
+The first step in each experimental run is to define the study area \gls{W}. 
 The study area is defined as a 2-dimensional rectangle, with coordinates in the \(x_1\) and \(x_2\) directions set using the parameters \textit{x1.min}, \textit{x1.max}, \textit{x2.min}, and \textit{x2.max}.
 These are abstract units of distance, that are analogous to kilometers or miles or any other actual unit of distance in which the \gls{dkd} might be used for spatial analysis.
-The study area is further restricted by the \textit{buffer} parameter, which forms a border around the perimeter of the study area.
+\Gls{W} is further restricted by the \textit{buffer} parameter, which forms a border around the perimeter of the study area.
 
 Next, a population is generated of size \textit{N.p}.
-When the \textit{c1} and \textit{c2} parameters are given, the population is distributed according to the parameters above.
-In particular, the distribution has bivariate normal shape with center (\textit{c1}, \textit{c2}),
+The population is generated \textbf{once} for the entire experiment, and consists of points \((x_1, x_2) \in \gls{W}\).
+When the \textit{c1} and \textit{c2} parameters are given, the population is distributed according in a bivariate normal pattern.
+In particular, the population distribution has its center at (\textit{c1}, \textit{c2}),
 standard deviations \textit{sigma1}, \textit{sigma2}, and correlation \textit{rho}.
+In practice, we always use the same value for \textit{sigma1} and \textit{sigma2}.
 
-Next, we adjust the incident rate function, \(R(x_1, x_2)\) parameter, by scaling it so that the expected number of incidents \gls{mu} is equal to the \textit{EN.i} parameter.
-Assuming the expected number of incidents generate by \(f(x_1, x_2)\) by itself is 1, we have
+Next, we generate the incident risk function, \(\gls{lambda}(x_1, x_2)\) parameter, by scaling it so that the expected number of incidents \gls{mu} is equal to the \textit{EN.i} parameter.
+We begin with a function \(f(x_1, x_2)\) defined on \gls{W}, which is positive-valued and has 
 
-\[
-    R((x_1, x_2)) = \gls{mu}~\times~\mbox{incident\textunderscore rate}(x_1, x_2) \text{,}
-\]
+\begin{equation*}
+    \int_{\gls{W}} {f(x_1, x_2) \diff{x_2} \diff{x_1}} = 1
+    \text{.}
+\end{equation*}
 
-and we call \(R((x_1, x_2)\) is the \textit{true incident rate} for the experiment.
+We define the \textit{true incident risk} function for the experiment
+
+\begin{equation}
+    \gls{lambda}(x_1, x_2) = \gls{mu} f(x_1, x_2) \text{.}
+\end{equation}
+
+The next step is to compute the \gls{oracle} bandwidths \gls{h_o1} and \gls{h_o2}.
+These bandwidths will be used in later steps to compare the accuracy of the \gls{dkd} estimator using multiple bandwidth selection schemes.
+The bandwidths \gls{h_o1} and \gls{h_o2} are chosen by running a small number of 49 simulations and taking the bandwidth pair \gls{h_1} and \gls{h_2} that minimize the approximate \gls{mise} which is computed for each pair using \cref{eq:mise}.
 
 \section{Verifying bandwidth selection dependency on size}
 

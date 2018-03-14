@@ -41,7 +41,7 @@ for (sigma in sigmas) {
 
 }
 
-setwd("/Users/harold/Dropbox/MA_Knowledge_and_Info/Thesis/thesis/results/by_h_per_mu/")
+setwd("/Users/harold/Dropbox/MA_Knowledge_and_Info/Thesis/thesis/results/by_h_per_spread/")
 
 df <- data.frame(spread, oracle.best_h1, oracle.best_h2, silverman.mean_h,
                  oracle.nmise, silverman.nmise, cv.nmise)
@@ -49,7 +49,7 @@ df <- data.frame(spread, oracle.best_h1, oracle.best_h2, silverman.mean_h,
 tb <- xtable(df,
              caption=c("Bandwidth and accuracy by spread for uniform population of 10,000 with single-peak risk function with expected number of incidents 100. The NMISE values are scaled by $10^9$.",
                        "Bandwidth and accuracy by spread of incidents"),
-             label="tab:results:bandwidth_vs_mu")
+             label="tab:results:bandwidth_vs_spread")
 colnames(tb) <- c("$\\sigma_i$", '$h_{o}(x_1)$', '$h_{o}(x_2)$', '$h_{s}$', 'Oracle NMISE', 'Silverman NMISE', 'CV NMISE')
 
 print(tb, include.rownames=FALSE, sanitize.colnames.function=identity)
