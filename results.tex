@@ -20,7 +20,12 @@ Randomization in parallel requires the random number stream to be split into sep
 This was done using the L'Ecuyer-CMRG method \citep{lecuyer2002random}.
 
 Each experiment was run according to a set of parameters that comprised the particular setup.
-A table similar to \cref{tab:params:template}, describing the parameter ranges used in these experiments appears at the beginning of each section below.
+The parameters (\cref{tab:experimental_parameters}) that define the study area remained fixed throughout the study.
+In particular, we set \texttt{x1.min} to -4, \texttt{x1.max} to 4, \texttt{x2.min} to -4, \texttt{x2.max} to 4, and \texttt{buffer} to 0.5.
+This gave us a study area with dimensions \(8 \times 8\), with incidents concentrated in an area of \(7 \times 7\).
+For evaluating the \gls{dkd} we used a grid size of 0.5.
+
+A table similar to \cref{tab:params:template}, describing the parameter ranges used in the related experiments appears at the beginning of each section below.
 The first row in the table contains the \textit{population size} or \textit{sizes} used in the experiment.
 The second row contains the \textit{population \gls{spread}}, which controls how quickly the population density drops from the peak.
 We use the standard deviation \ensuremath\sigma of an independent, bivariate normal distribution with equal variances for this.

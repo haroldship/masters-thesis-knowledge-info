@@ -6,16 +6,22 @@
 %%
 %%
 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Spatial point processes
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Spatial point processes}
+\label{sec:theory:spatial_point_processes}
 
 The theoretical results in this chapter are taken from \citet{diggle1988equivalence}, \citet{guan2008consistent}, and \citet{wand1994kernel}.
+In order to understand the patterns in a set of events in a region.
 
 \begin{defn}
 ``A \gls{spp} is any stochastic mechanism which generates a countable set of events in the plane.''
 \end{defn}
 
-Let \(N\) be a \gls{spp}, and let \(W \subset \mathbb{R}^2 \) be the study area.
+Let \gls{Lambda} be a \gls{spp}, and let \(\gls{W} \subset \RS \) be the study area.
 
-The intensity \gls{lambda} at \((s_1, x_s) \in \mathbb{R}^2\) is defined as:
+The intensity \gls{lambda} at \((s_1, x_s) \in \RS\) is defined as:
 
 \begin{equation}
 \label{eq:lambda_differential}
@@ -98,3 +104,27 @@ However it's variance does not diminish because the number of events in any fixe
 The paper develops a \textit{new nonparametric intensity estimator} that is consistent under ``some suitable yet reasonable conditions.''
 
 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Data generation process
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Data generation process}
+\label{sec:theory:data generation}
+
+We generate data for each experiment as follows.
+Before we begin, we set the random number seed to a fixed value for all experiments.
+The first step is to generate a population.
+We choose a distribution function \(f_p\) over \gls{W}, and scale it to obtain an the population intensity function \gls{lambda_p} of a \gls{spp} \gls{Lambda} with an expected number of points the same as our chosen population size.
+This means that the actual population size may not be exactly what we have chosen.
+We then generate points \((x_1, x_2)\) uniformly in \gls{W} and use keep them with probability \gls{lambda_p}\((x_1, x_2)\).
+This gives us our population \gls{P} which use throughout the experiment.
+In this way,
+if \gls{lambda_p}\((x_1, x_2)\) has twice the value of \gls{lambda_p}\((y_1, y_2)\) for two points \((x_1, x_2)\) and \((y_1, y_2)\) in \gls{W},
+then we expect to see about twice as many points around \((x_1, x_2)\) than around \((y_1, y_2)\) in \gls{P}.
+
+Once we have a fixed population, we have need to decide which members of the population constitute the incidents.
+The process to generate the incidents is similar to that of the population.
+We create an incident intensity function \gls{lambda_i} of a \gls{spp} for incidents.
+We then take the points \((x_1, x_2) \in \gls{P}\) and keep each one with probability \gls{lambda_i}\((x_1, x_2)\).
+This gives us our set of incidents \gls{I}.
+Once again, when \gls{I}\((x_1, x_2)\) is higher than \gls{I}\((y_1, y_2)\),
+then the probability of \((x_1, x_2) \in \gls{I}\) is correspondingly higher than that of \((y_1, y_2)\).

@@ -289,6 +289,10 @@ The first step in each experimental run is to define the study area \gls{W}.
 The study area is defined as a 2-dimensional rectangle, with coordinates in the \(x_1\) and \(x_2\) directions set using the parameters \textit{x1.min}, \textit{x1.max}, \textit{x2.min}, and \textit{x2.max}.
 These are abstract units of distance, that are analogous to kilometers or miles or any other actual unit of distance in which the \gls{dkd} might be used for spatial analysis.
 \Gls{W} is further restricted by the \textit{buffer} parameter, which forms a border around the perimeter of the study area.
+These parameters that define the study area \gls{W} remained fixed throughout the study.
+In particular, we set \texttt{x1.min} to -4, \texttt{x1.max} to 4, \texttt{x2.min} to -4, \texttt{x2.max} to 4, and \texttt{buffer} to 0.5.
+This gave us a study area with dimensions \(8 \times 8\), with incidents concentrated in an area of \(7 \times 7\).
+For evaluating the \gls{dkd} we used a grid size of 0.5.
 
 Next, a population is generated of size \textit{N.p}.
 The population is generated \textbf{once} for the entire experiment, and consists of points \((x_1, x_2) \in \gls{W}\).
@@ -297,7 +301,7 @@ In particular, the population distribution has its center at (\textit{c1}, \text
 standard deviations \textit{sigma1}, \textit{sigma2}, \textit{rho}.
 In this study, we always use the same value for both directions \textit{sigma1} and \textit{sigma2} and set \textit{rho} to 0 making \(x_1\) and \(x_2\) independent.
 
-Next, we generate the incident risk function, \(\gls{lambda}(x_1, x_2)\) parameter, by scaling it so that the expected number of incidents \gls{mu} is equal to the \textit{EN.i} parameter.
+Next, we generate the incident risk function, \(\gls{lambda}(x_1, x_2)\), by scaling our base function \(f(x_1, x_2\) it so that the expected number of incidents \gls{mu} is equal to the \textit{EN.i} parameter.
 We begin with a function \(f(x_1, x_2)\) defined on \gls{W}, which is positive-valued and has 
 
 \begin{equation*}
@@ -310,6 +314,9 @@ We define the \textit{true incident risk} function for the experiment
 \begin{equation}
     \gls{lambda}(x_1, x_2) = \gls{mu} f(x_1, x_2) \text{.}
 \end{equation}
+
+By applying \gls{lambda}, re-scaled according to the population size, on the population points, we generate incidents.
+This technique randomly determines whether or not each member of the population is regarded as an incident, with probability according to the value of \gls{lambda}\((x_1, x_2\) at the associated coordinates.
 
 The next step is to compute the \gls{oracle} bandwidths \gls{h_o1} and \gls{h_o2}.
 These bandwidths will be used in later steps to compare the accuracy of the \gls{dkd} estimator using multiple bandwidth selection schemes.

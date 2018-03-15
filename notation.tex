@@ -6,12 +6,99 @@
 %%
 %%
 
+\newglossaryentry{f}
+{% This entry goes in the `notation' glossary:
+   type=notation,
+   name={\ensuremath{f}},
+   description={a distribution function over \ensuremant{W}},
+   sort={f}
+}
+
+\newglossaryentry{f_i}
+{% This entry goes in the `notation' glossary:
+   type=notation,
+   name={\ensuremath{f_i}},
+   description={the distribution function for the incidents over \ensuremant{W}},
+   sort={f_i}
+}
+
+\newglossaryentry{f_p}
+{% This entry goes in the `notation' glossary:
+   type=notation,
+   name={\ensuremath{f_p}},
+   description={the distribution function for the population over \ensuremant{W}},
+   sort={f_p}
+}
+
+\newglossaryentry{grad}
+{% This entry goes in the `notation' glossary:
+   type=notation,
+   name={\ensuremath{\nabla}},
+   description={the gradient vector of partial derivative operators},
+   sort={grad}
+}
+
+\newglossaryentry{h}
+{% This entry goes in the `notation' glossary:
+   type=notation,
+   name={\ensuremath{h}},
+   description={kernel bandwidth parameter},
+   sort={h}
+}
+
+\newglossaryentry{h_1}
+{% This entry goes in the `notation' glossary:
+   type=notation,
+   name={\ensuremath{h_1}},
+   description={kernel bandwidth parameter in the \ensuremath{x_1} direction},
+   sort={h_1}
+}
+
+\newglossaryentry{h_2}
+{% This entry goes in the `notation' glossary:
+   type=notation,
+   name={\ensuremath{h_2}},
+   description={kernel bandwidth parameter in the \ensuremath{x_2} direction},
+   sort={h_2}
+}
+
+\newglossaryentry{h_o1}
+{% This entry goes in the `notation' glossary:
+   type=notation,
+   name={\ensuremath{h_{o1}}},
+   description={optimal kernel bandwidth parameter in the \ensuremath{x_1} direction, approximated using an Oracle},
+   sort={h_o1}
+}
+
+\newglossaryentry{h_o2}
+{% This entry goes in the `notation' glossary:
+   type=notation,
+   name={\ensuremath{h_{o2}}},
+   description={optimal kernel bandwidth parameter in the \ensuremath{x_2} direction, approximated using an Oracle},
+   sort={h_o2}
+}
+
+\newglossaryentry{I}
+{% This entry goes in the `notation' glossary:
+   type=notation,
+   name={\ensuremath{I}},
+   description={the set of points in \ensuremath{W} making up the incidents},
+   sort={I}
+}
 
 \newglossaryentry{k}
 {% This entry goes in the `notation' glossary:
    type=notation,
    name={k},
    description={a kernel function}
+}
+
+\newglossaryentry{Lambda}
+{% This entry goes in the `notation' glossary:
+   type=notation,
+   name={\ensuremath{\Lambda}},
+   description={the spatial point process that whose realization is the intensity \ensuremath{\lambda}},
+   sort={lambda}
 }
 
 \newglossaryentry{lambda}
@@ -30,6 +117,22 @@
    sort={lambda_hat}
 }
 
+\newglossaryentry{lambda_i}
+{% This entry goes in the `notation' glossary:
+   type=notation,
+   name={\ensuremath{\lambda_i}},
+   description={the intensity function of the incidents},
+   sort={lambda_i}
+}
+
+\newglossaryentry{lambda_p}
+{% This entry goes in the `notation' glossary:
+   type=notation,
+   name={\ensuremath{\lambda_p}},
+   description={the intensity function of the population},
+   sort={lambda_p}
+}
+
 \newglossaryentry{relative_lambda_hat}
 {% This entry goes in the `notation' glossary:
    type=notation,
@@ -46,12 +149,12 @@
    sort={mu}
 }
 
-\newglossaryentry{grad}
+\newglossaryentry{P}
 {% This entry goes in the `notation' glossary:
    type=notation,
-   name={\ensuremath{\nabla}},
-   description={the gradient vector of partial derivative operators},
-   sort={grad}
+   name={\ensuremath{P}},
+   description={the set of points in \ensuremath{W} that make up the population of the experiment},
+   sort={P}
 }
 
 \newglossaryentry{sigma}
@@ -67,7 +170,7 @@
    type=notation,
    name={\ensuremath{\sigma_1}},
    description={standard deviation in the \ensuremath{x_1} direction},
-   sort={sigma}
+   sort={sigma_1}
 }
 
 \newglossaryentry{sigma_2}
@@ -75,7 +178,7 @@
    type=notation,
    name={\ensuremath{\sigma_2}},
    description={standard deviation in the \ensuremath{x_2} direction},
-   sort={sigma}
+   sort={sigma_2}
 }
 
 \newglossaryentry{sigma_i}
@@ -100,45 +203,5 @@
    name={\ensuremath{W}},
    description={the study area, a subset of \ensuremath{\RS}},
    sort={W}
-}
-
-\newglossaryentry{h}
-{% This entry goes in the `notation' glossary:
-   type=notation,
-   name={\ensuremath{h}},
-   description={kernel bandwidth parameter},
-   sort={h}
-}
-
-\newglossaryentry{h_1}
-{% This entry goes in the `notation' glossary:
-   type=notation,
-   name={\ensuremath{h_1}},
-   description={kernel bandwidth parameter in the \ensuremath{x_1} direction},
-   sort={h}
-}
-
-\newglossaryentry{h_2}
-{% This entry goes in the `notation' glossary:
-   type=notation,
-   name={\ensuremath{h_2}},
-   description={kernel bandwidth parameter in the \ensuremath{x_2} direction},
-   sort={h}
-}
-
-\newglossaryentry{h_o1}
-{% This entry goes in the `notation' glossary:
-   type=notation,
-   name={\ensuremath{h_{o1}}},
-   description={optimal kernel bandwidth parameter in the \ensuremath{x_1} direction, approximated using an Oracle},
-   sort={h}
-}
-
-\newglossaryentry{h_o2}
-{% This entry goes in the `notation' glossary:
-   type=notation,
-   name={\ensuremath{h_{o2}}},
-   description={optimal kernel bandwidth parameter in the \ensuremath{x_2} direction, approximated using an Oracle},
-   sort={h}
 }
 
