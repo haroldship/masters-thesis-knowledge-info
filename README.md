@@ -7,7 +7,8 @@
  - [x] Method: mention parallelization and randomization algorithms and R packages, and AWS including which instance types and other details of execution
  - [x] Method: more rigorous math
  - [x] Method: add "relative" and "normalized" error measures
-
+ - [x] Results: 5.1 mention that population and incident bivariate normal is independent with equal variances (and move to Method)
+ 
 ### Fixed in version 0.6
  - [x] replace "decay rate" with sigma_p, sigma_i, etc and "spread"
  - [x] No headers on pages
@@ -67,7 +68,7 @@
  
 ### To  Do 14-3-2018
  - [ ] Appendix: some tables are squished. Paragraph indentation?
- - [ ] Results: 5.1 mention that population and incident bivariate normal is independent with equal variances (and move to Method)
+ - [x] Results: 5.1 mention that population and incident bivariate normal is independent with equal variances (and move to Method)
  - [ ] Results: 5.1 mention the actual size of the study area (and move to Method)
  - [ ] Results: 5.1 drift needs to be seen in relation to square
  - [ ] Results: 5.1 mentions 5.6-7 but not 5.2-4

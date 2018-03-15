@@ -294,8 +294,8 @@ Next, a population is generated of size \textit{N.p}.
 The population is generated \textbf{once} for the entire experiment, and consists of points \((x_1, x_2) \in \gls{W}\).
 When the \textit{c1} and \textit{c2} parameters are given, the population is distributed according in a bivariate normal pattern.
 In particular, the population distribution has its center at (\textit{c1}, \textit{c2}),
-standard deviations \textit{sigma1}, \textit{sigma2}, and correlation \textit{rho}.
-In practice, we always use the same value for \textit{sigma1} and \textit{sigma2}.
+standard deviations \textit{sigma1}, \textit{sigma2}, \textit{rho}.
+In this study, we always use the same value for both directions \textit{sigma1} and \textit{sigma2} and set \textit{rho} to 0 making \(x_1\) and \(x_2\) independent.
 
 Next, we generate the incident risk function, \(\gls{lambda}(x_1, x_2)\) parameter, by scaling it so that the expected number of incidents \gls{mu} is equal to the \textit{EN.i} parameter.
 We begin with a function \(f(x_1, x_2)\) defined on \gls{W}, which is positive-valued and has 
