@@ -9,7 +9,7 @@
  - [x] Method: add "relative" and "normalized" error measures
  - [x] Results: 5.1 mention that population and incident bivariate normal is independent with equal variances (and move to Method)
  - [x] Results: 5.1 mention the actual size of the study area (and move to Method)
- - [x] Method & Theoretical background: describe the data generation process
+ - [x] Method: describe the data generation process
  
 
 ### Fixed in version 0.6
@@ -76,7 +76,8 @@
  - [ ] Results: 5.1 drift needs to be seen in relation to square
  - [ ] Results: 5.1 mentions 5.6-7 but not 5.2-4
  - [ ] Results: 5.2 sample size: **n = actual** number of incidents; state that we fix the expected but observe actual
- - [x] Method & Theoretical background: describe the data generation process
+ - [x] Method: describe the data generation process
+ - [ ] Theoretical background: describe rejection sampling
  - [ ] Results: Figure 5.10 "empirical distribution of <del>MISE</del> and <del>RMISE</del>"
  - [ ] Define h_opt
  - [ ] For NMIAE and NSUP - use mu not mu^2

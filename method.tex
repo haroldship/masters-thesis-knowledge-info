@@ -274,6 +274,31 @@ We call the corresponding accuracy measures \gls{centroid bias} and \gls{centroi
 The \gls{relative centroid bias} is the \gls{centroid bias} divided by the value of the true peak.
 The \gls{relative centroid drift} is the \gls{centroid drift} divided by the range of \(x_1\) or \(x_2\), whichever is larger.
 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Data generation process
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Data generation process}
+\label{sec:method:data generation}
+
+We generate data for each experiment as follows.
+Before we begin, we set the random number seed to a fixed value for all experiments.
+The first step is to generate a population.
+We choose a distribution function \(f_p\) over \gls{W}, and scale it to obtain an the population intensity function \gls{lambda_p} of a \gls{spp} \gls{Lambda} with an expected number of points the same as our chosen population size.
+This means that the actual population size may not be exactly what we have chosen.
+We then generate points \((x_1, x_2)\) uniformly in \gls{W} and use keep them with probability \gls{lambda_p}\((x_1, x_2)\).
+This gives us our population \gls{P} which use throughout the experiment.
+In this way,
+if \gls{lambda_p}\((x_1, x_2)\) has twice the value of \gls{lambda_p}\((y_1, y_2)\) for two points \((x_1, x_2)\) and \((y_1, y_2)\) in \gls{W},
+then we expect to see about twice as many points around \((x_1, x_2)\) than around \((y_1, y_2)\) in \gls{P}.
+
+Once we have a fixed population, we have need to decide which members of the population constitute the incidents.
+The process to generate the incidents is similar to that of the population.
+We create an incident intensity function \gls{lambda_i} of a \gls{spp} for incidents.
+We then take the points \((x_1, x_2) \in \gls{P}\) and keep each one with probability \gls{lambda_i}\((x_1, x_2)\).
+This gives us our set of incidents \gls{I}.
+Once again, when \gls{I}\((x_1, x_2)\) is higher than \gls{I}\((y_1, y_2)\),
+then the probability of \((x_1, x_2) \in \gls{I}\) is correspondingly higher than that of \((y_1, y_2)\).
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% Section: experiment structure
@@ -296,7 +321,7 @@ For evaluating the \gls{dkd} we used a grid size of 0.5.
 
 Next, a population is generated of size \textit{N.p}.
 The population is generated \textbf{once} for the entire experiment, and consists of points \((x_1, x_2) \in \gls{W}\).
-When the \textit{c1} and \textit{c2} parameters are given, the population is distributed according in a bivariate normal pattern.
+When the \textit{c1} and \textit{c2} parameters are given, the population is distributed according to a bivariate normal pattern.
 In particular, the population distribution has its center at (\textit{c1}, \textit{c2}),
 standard deviations \textit{sigma1}, \textit{sigma2}, \textit{rho}.
 In this study, we always use the same value for both directions \textit{sigma1} and \textit{sigma2} and set \textit{rho} to 0 making \(x_1\) and \(x_2\) independent.
