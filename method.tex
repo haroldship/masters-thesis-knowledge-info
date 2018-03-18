@@ -301,6 +301,25 @@ then the probability of \((x_1, x_2) \in \gls{I}\) is correspondingly higher tha
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
+%% Section: cross-validation bandwidth
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Bandwidth selection using cross-validation}
+\label{sec:method:cross-validation}
+
+We use cross-validation to select a pair of bandwidths \gls{h_1} and \gls{h_2} that minimize a \gls{cv} error function that approximates the \gls{mise}.
+We note that in a real-world situation, the true risk function is unknown, and so it is not possible to compute the \gls{mise}.
+In order to compute the \gls{cv} bandwidths, the following steps are taken.
+\begin{enumerate}
+    \item Generate a set of bandwidths to check.
+    \item For each pair of bandwidths \gls{h_1} and \gls{h_2} and each incident \((x_{1,i}, x_{2,i})\) in \gls{I}, generate the estimate of \gls{lambda_hat} by leaving out \((x_{1,i}, x_{2,i})\).
+    \item Compute the \gls{cv} error for the bandwidth pair.
+    \item Choose the bandwidth pair that minimizes the \gls{cv} error.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
 %% Section: experiment structure
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -347,17 +366,34 @@ The next step is to compute the \gls{oracle} bandwidths \gls{h_o1} and \gls{h_o2
 These bandwidths will be used in later steps to compare the accuracy of the \gls{dkd} estimator using multiple bandwidth selection schemes.
 The bandwidths \gls{h_o1} and \gls{h_o2} are chosen by running a small number of 49 simulations and taking the bandwidth pair \gls{h_1} and \gls{h_2} that minimize the approximate \gls{mise} which is computed for each pair using \cref{eq:mise}.
 
-\section{Verifying bandwidth selection dependency on size}
+We now can begin the main simulations.
+For each experiment, we run 1,000 simulations.
+In each simulation, we peform the following:
+\begin{enumerate}
+    \item\label{itm:method:simulation:generate} Generate a sample of incidents \gls{I} from the population \gls{P}, based on the risk function \gls{lambda}.
+    \item\label{itm:method:simulation:oracle_lambda_i} Using the \gls{oracle} bandwidths \gls{h_o1} and \gls{h_o2}, compute the \gls{oracle} estimate of \gls{lambda_i}.
+    \item\label{itm:method:simulation:oracle_lambda_hat} At each grid point \((x_{1,i}, x_{2,i})\), divide the oracle estimate of \gls{lambda_i}\((x_{1,i}, x_{2,i})\) by \gls{lambda_p}\((x_{i,i}, x_{2,i})\) to obtain \gls{lambda_hat_o}\((x_{1,i}, x_{2,i})\).
+    \item\label{itm:method:simulation:accuracy} Compute the accuracy measures \gls{ise}, \gls{iae}, \gls{supremum error}, \gls{peak error}, \gls{peak drift} for the \gls{oracle}.
+    Also compute the relative values for these measures.
+    \item\label{itm:method:simulation:silverman_lambda_i} Repeat steps \ref{itm:method:simulation:oracle_lambda_i} to \ref{itm:method:simulation:accuracy} using the bandwith computed with \gls{silverman}.
+    \item\label{itm:method:simulation:cv_lambda_i} Repeat steps \ref{itm:method:simulation:oracle_lambda_i} to \ref{itm:method:simulation:accuracy} using the bandwidths computed by \gls{cv}.
+    This computation is described in \cref{sec:method:cross-validation}.
+\end{enumerate}
 
-\section{Effect of expected number of incidents on DKD accuracy}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Section: 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section[Combining experiments]{Combining experiments to examine the effects of different variables}
+\label{sec:method:combining_experiments}
 
-\section{Effect of sample size on DKD accuracy}
-
-\section{Effect of risk function spread on DKD accuracy}
-
-\section{Effect of population spread on DKD accuracy}
-
-\section{Examining two peaks in the risk function}
-
-\section{Examining non-uniform population distrbution}
+We now take our ability to run experiments under different setups,
+and create combinations of experiments that examine the impact of different variables on the various accuracy measures described in \cref{sec:method:accuracy},
+and in some cases also on the selected bandwidths.
+The first combination will look at how the expected number of incidents for a fixed population size and distribution affects the accuracy and selected bandwidths.
+Next, we will examine how the sample size affects the accuracy and bandwidth selection.
+We do this by keeping the true risk function fixed, and allowing both the size of the population and the expectd number of incidents vary in tandem.
+Third, we examine the effect of the risk function spread on the accuracy, followed by the effect of the population spread.
+Finally, we examine the effect of the distance between two peaks in a bimodal risk function affects the accuracy of the estimate.
 
