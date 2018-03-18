@@ -47,16 +47,17 @@ We then run a set of experiments, varying one parameter at a time, or in some ca
 \label{sec:method:computing}
 
 The \gls{dkd} is computed over the study area as the ratio of two positive-valued functions.
-At any given point \((x_1, x_2)\) in the plane, we can compute \(I(x_1, x_2)\), the \gls{factor} at that point.
-We call \(I(x_1, x_2)\) the \textit{incident intensity} at \((x_1, x_2)\).
-Next, at the same point, we can compute \(P(x_1, x_2)\), the population \textit{population intensity} at \((x_1, x_2)\).
+At any given point \((x_1, x_2)\) in the plane, we can compute \gls{lambda_i}\((x_1, x_2)\), the \gls{factor} at that point.
+We call \gls{lambda_i}\((x_1, x_2)\) the \textit{incident intensity} at \((x_1, x_2)\).
+Next, at the same point, we can compute \gls{lambda_p}\((x_1, x_2)\), the population \textit{population intensity} at \((x_1, x_2)\).
 Ideally, we would know how to compute these functions exactly, and we would then compute \(\lambda(x_1, x_2)\) the risk,
 or probability of an incident at \((x_1, x_2)\) with the ratio:
 \begin{equation}
-    \lambda(x_1, x_2) = \frac{I(x_1, x_2)}{P(x_1, x_2)}.
+    \lambda(x_1, x_2) = \frac{\gls{lambda_i}(x_1, x_2)}{\gls{lambda_p}(x_1, x_2)}.
 \end{equation}
 
-Since we assume that we cannot compute \(I(x_1, x_2)\) and \(P(x_1, x_2)\) exactly, we approximate them as follows.
+Since we assume that we cannot compute \gls{lambda_i}\((x_1, x_2)\) and \gls{lambda_p}\((x_1, x_2)\) exactly,
+we approximate them as follows.
 
 TBD intensity kernel
 
