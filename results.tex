@@ -10,6 +10,11 @@ This chapter describes the results of several experiments, each run with a varia
 In each case, we compare the results of 1,000 simulations using several accuracy measures.
 Each section describes a set of experiments, which, together, examine the effect of changes to a single variable on the performance of the \gls{dkd}.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Section: Experimental setup
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experimental setup}
 \label{sec:results:setup}
 
@@ -59,12 +64,23 @@ Incident center & (0,0) \\
 \label{tab:params:template}
 \end{table}
 
+The rest of this chapter examines the effect of different variables on the \gls{dkd} accuracy, on the selected bandwidths, and on other statistical properties of the \gls{dkd}.
+\Cref{sec:results:number_of_incidents} describes the relationship between the above and the magnitude of the risk function and corresponding number of incidents for a fixed population.
+In \cref{sec:results:spread} we look at how the spread of the risk function affects accuracy.
+In \cref{sec:results:consistency} we look at the consistency of the \gls{dkd}.
+
+
 The results of the first experiment, uniform population and a uniform intensity,
 are described in \autoref{sec:results:unif_100_unif}.
 We then made ran several sets of experiments while changing one parameter at a time.
 \autoref{sec:results:unif_NCases_1h} compares the results obtained by varying the number of cases.
 \autoref{sec:results:unifNpop_1h} compares the results obtained by varying the size of the population.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Section: Effect of number of incidents with fixed population
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section[Effect of number of incidents with fixed population]
     {Effect of number of incidents for a fixed, uniform population of 10,000 and single peak with spread 1.0}
 \label{sec:results:number_of_incidents}
@@ -103,6 +119,11 @@ the bandwidth should decrease as the sample size increases according to the form
 \input{results/by_h_per_mu/h_per_mu}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Section: Effect of risk spread with fixed population
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section[Effect of risk spread with fixed population]
     {Effect of risk \gls{spread} for a fixed, uniform population of 10,000 and single peak with \gls{spread} 1.0}
 \label{sec:results:spread}
@@ -137,6 +158,11 @@ However, the \gls{oracle} and \gls{cv} decrease faster than than \gls{silverman}
 
 \input{results/by_h_per_spread/h_per_spread}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Section: Consistency of the DKD
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Consistency of the DKD}
 \label{sec:results:consistency}
 
@@ -344,11 +370,11 @@ Normalized MISE is MISE divided by $\mu$.
 \end{figure}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% Uniform risk on uniform population section
 %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Uniform risk on a uniform population}
 \label{sec:results:unif_100_unif}
 
@@ -475,8 +501,11 @@ reflects the relative ease with which the DKD can estimate a flat intensity func
 \end{figure}
 
 
-%%
-%% Section
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Section: Varying the number of incidents
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Varying the number of incidents}
 \label{sec:results:unif_NCases_1h}
 

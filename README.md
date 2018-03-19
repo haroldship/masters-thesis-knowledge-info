@@ -1,6 +1,9 @@
 # Investigating the Statistical Properties of the Double Kernel Density Estimator
 ## Harold Ship, University of Haifa
 
+### Fixed in version 0.8
+ - [x] Results: 5.1 mentions 5.6-7 but not 5.2-4
+
 ### Fixed in version 0.7
  - [x] Method: explain the units of distance
  - [x] Method: mention no edge effect compensation
@@ -10,7 +13,6 @@
  - [x] Results: 5.1 mention that population and incident bivariate normal is independent with equal variances (and move to Method)
  - [x] Results: 5.1 mention the actual size of the study area (and move to Method)
  - [x] Method: describe the data generation process
- 
 
 ### Fixed in version 0.6
  - [x] replace "decay rate" with sigma_p, sigma_i, etc and "spread"
@@ -74,7 +76,7 @@
  - [x] Results: 5.1 mention that population and incident bivariate normal is independent with equal variances (and move to Method)
  - [x] Results: 5.1 mention the actual size of the study area (and move to Method)
  - [ ] Results: 5.1 drift needs to be seen in relation to square
- - [ ] Results: 5.1 mentions 5.6-7 but not 5.2-4
+ - [x] Results: 5.1 mentions 5.6-7 but not 5.2-4
  - [ ] Results: 5.2 sample size: **n = actual** number of incidents; state that we fix the expected but observe actual
  - [x] Method: describe the data generation process
  - [ ] Theoretical background: describe rejection sampling
