@@ -3,6 +3,7 @@
 
 ### Fixed in version 0.8
  - [x] Results: 5.1 mentions 5.6-7 but not 5.2-4
+ - [x] Appendix: some tables are squished. Paragraph indentation?
 
 ### Fixed in version 0.7
  - [x] Method: explain the units of distance
@@ -72,7 +73,7 @@
  - [ ] Introduction: define "statistical properties"
  
 ### To  Do 14-3-2018
- - [ ] Appendix: some tables are squished. Paragraph indentation?
+ - [x] Appendix: some tables are squished. Paragraph indentation?
  - [x] Results: 5.1 mention that population and incident bivariate normal is independent with equal variances (and move to Method)
  - [x] Results: 5.1 mention the actual size of the study area (and move to Method)
  - [ ] Results: 5.1 drift needs to be seen in relation to square

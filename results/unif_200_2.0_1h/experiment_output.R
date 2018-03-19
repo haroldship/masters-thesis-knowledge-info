@@ -29,13 +29,13 @@ compare_peaks.result$oracle.nise <- 10**9 * compare_peaks.result$oracle.ise / fa
 compare_peaks.result$silverman.nise <- 10**9 * compare_peaks.result$silverman.ise / factor**2
 compare_peaks.result$cv.nise <- 10**9 * compare_peaks.result$cv.ise / factor**2
 
-compare_peaks.result$oracle.niae <- 10**9 * compare_peaks.result$oracle.iae / factor**2
-compare_peaks.result$silverman.niae <- 10**9 * compare_peaks.result$silverman.iae / factor**2
-compare_peaks.result$cv.niae <- 10**9 * compare_peaks.result$cv.iae / factor**2
+compare_peaks.result$oracle.niae <- compare_peaks.result$oracle.iae / factor
+compare_peaks.result$silverman.niae <- compare_peaks.result$silverman.iae / factor
+compare_peaks.result$cv.niae <- compare_peaks.result$cv.iae / factor
 
-compare_peaks.result$oracle.nsup <- 10**9 * compare_peaks.result$oracle.sup / factor**2
-compare_peaks.result$silverman.nsup <- 10**9 * compare_peaks.result$silverman.sup / factor**2
-compare_peaks.result$cv.nsup <- 10**9 * compare_peaks.result$cv.sup / factor**2
+compare_peaks.result$oracle.nsup <- compare_peaks.result$oracle.sup / factor
+compare_peaks.result$silverman.nsup <- compare_peaks.result$silverman.sup / factor
+compare_peaks.result$cv.nsup <- compare_peaks.result$cv.sup / factor
 
 # 5. Output the results
 
@@ -299,9 +299,9 @@ meansdf <- data.frame(
   Oracle=c(mean_values$oracle.mise[1], mean_values$oracle.rmise[1],
            10**9 * mean_values$oracle.mise[1]/factor**2,
            mean_values$oracle.miae[1], mean_values$oracle.rmiae[1],
-           10**9 * mean_values$oracle.miae[1]/factor**2,
+           mean_values$oracle.miae[1]/factor,
            mean_values$oracle.msup[1],
-           10**9 * mean_values$oracle.msup[1]/factor**2,
+           mean_values$oracle.msup[1]/factor,
            mean_values$oracle.merr[1], mean_values$oracle.merr[1]/max.val,
            mean_values$oracle.mdist[1], mean_values$oracle.mdist[1]/base,
            mean_values$oracle.mcerr[1], mean_values$oracle.mcerr[1]/max.val,
@@ -309,9 +309,9 @@ meansdf <- data.frame(
   Silverman=c(mean_values$silverman.mise[1], mean_values$silverman.rmise[1],
               10**9 * mean_values$silverman.mise[1]/factor**2,
               mean_values$silverman.miae[1], mean_values$silverman.rmiae[1],
-              10**9 * mean_values$silverman.miae[1]/factor**2,
+              mean_values$silverman.miae[1]/factor,
               mean_values$silverman.msup[1],
-              10**9 * mean_values$silverman.msup[1]/factor**2,
+              mean_values$silverman.msup[1]/factor,
               mean_values$silverman.merr[1], mean_values$silverman.merr[1]/max.val,
               mean_values$silverman.mdist[1], mean_values$silverman.mdist[1]/base,
               mean_values$silverman.mcerr[1], mean_values$silverman.mcerr[1]/max.val,
@@ -319,9 +319,9 @@ meansdf <- data.frame(
   CV=c(mean_values$cv.mise[1], mean_values$cv.rmise[1],
        10**9 * mean_values$cv.mise[1]/factor**2,
        mean_values$cv.miae[1], mean_values$cv.rmiae[1],
-       10**9 * mean_values$cv.miae[1]/factor**2,
+       mean_values$cv.miae[1]/factor,
        mean_values$cv.msup[1],
-       10**9 * mean_values$cv.msup[1]/factor**2,
+       mean_values$cv.msup[1]/factor,
        mean_values$cv.merr[1], mean_values$cv.merr[1]/max.val,
        mean_values$cv.mdist[1], mean_values$cv.mdist[1]/base,
        mean_values$cv.mcerr[1], mean_values$cv.mcerr[1]/max.val,
@@ -338,9 +338,9 @@ stddevdf <- data.frame(
   Oracle=c(sd_values$oracle.mise[1], sd_values$oracle.rmise[1],
            10**9 * sd_values$oracle.mise[1]/factor**2,
            sd_values$oracle.miae[1], sd_values$oracle.rmiae[1],
-           10**9 * sd_values$oracle.miae[1]/factor**2,
+           sd_values$oracle.miae[1]/factor,
            sd_values$oracle.msup[1],
-           10**9 * sd_values$oracle.msup[1]/factor**2,
+           sd_values$oracle.msup[1]/factor,
            sd_values$oracle.merr[1], sd_values$oracle.merr[1]/max.val,
            sd_values$oracle.mdist[1], sd_values$oracle.mdist[1]/base,
            sd_values$oracle.mcerr[1], sd_values$oracle.mcerr[1]/max.val,
@@ -348,9 +348,9 @@ stddevdf <- data.frame(
   Silverman=c(sd_values$silverman.mise[1], sd_values$silverman.rmise[1],
               10**9 * sd_values$silverman.mise[1]/factor**2,
               sd_values$silverman.miae[1], sd_values$silverman.rmiae[1],
-              10**9 * sd_values$silverman.miae[1]/factor**2,
+              sd_values$silverman.miae[1]/factor,
               sd_values$silverman.msup[1],
-              10**9 * sd_values$silverman.msup[1]/factor**2,
+              sd_values$silverman.msup[1]/factor,
               sd_values$silverman.merr[1], sd_values$silverman.merr[1]/max.val,
               sd_values$silverman.mdist[1], sd_values$silverman.mdist[1]/base,
               sd_values$silverman.mcerr[1], sd_values$silverman.mcerr[1]/max.val,
@@ -358,9 +358,9 @@ stddevdf <- data.frame(
   CV=c(sd_values$cv.mise[1], sd_values$cv.rmise[1],
        10**9 * sd_values$cv.mise[1]/factor**2,
        sd_values$cv.miae[1], sd_values$cv.rmiae[1],
-       10**9 * sd_values$cv.miae[1]/factor**2,
+       sd_values$cv.miae[1]/factor,
        sd_values$cv.msup[1],
-       10**9 * sd_values$cv.msup[1]/factor**2,
+       sd_values$cv.msup[1]/factor,
        sd_values$cv.merr[1], sd_values$cv.merr[1]/max.val,
        sd_values$cv.mdist[1], sd_values$cv.mdist[1]/base,
        sd_values$cv.mcerr[1], sd_values$cv.mcerr[1]/max.val,
