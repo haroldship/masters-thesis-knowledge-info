@@ -465,18 +465,20 @@ However, instead of comparing the true peak to the peak of the estimate, they co
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_unif/output/ise-relative-histogram}
-    \caption{Relative ISE}
+    \includegraphics[width=\textwidth]{results/unif_100_unif/output/ise-histogram}
+    \subcaption{Absolute ISE}
+    \label{fig:ise:unif_100_unif:absolute}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_unif/output/ise-histogram}
-    \caption{Absolute ISE}
+    \includegraphics[width=\textwidth]{results/unif_100_unif/output/ise-relative-histogram}
+    \subcaption{Relative ISE}
+    \label{fig:ise:unif_100_unif:relative}
     \end{subfigure}
     \caption[ISE: uniform on uniform]{Integrated squared error histogram for uniform intensity on a uniform population, 100 cases}
     \label{fig:ise:unif_100_unif}
 \end{figure}
 
-\autoref{fig:ise:unif_100_unif} shows the empirical distribution of the MISE and RMISE for the uniform intensity on uniform population.
+\Cref{fig:ise:unif_100_unif} shows the empirical distribution of the absolute \subref{fig:ise:unif_100_unif:absolute} and relative \subref{fig:ise:unif_100_unif:relative} \gls{ise} for the uniform intensity on uniform population.
 The similarity of the distributions for the Oracle, Silverman, and Cross-validation bandwidths
 reflects the relative ease with which the DKD can estimate a flat intensity function.
 

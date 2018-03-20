@@ -5,6 +5,7 @@
  - [x] Results: 5.1 mentions 5.6-7 but not 5.2-4
  - [x] Appendix: some tables are squished. Paragraph indentation?
  - [x] For NMIAE and NSUP - use mu not mu^2
+ - [x] Results: Figure 5.10 "empirical distribution of <del>MISE</del> and <del>RMISE</del>"
 
 ### Fixed in version 0.7
  - [x] Method: explain the units of distance
@@ -40,7 +41,6 @@
  - [ ] Theoretical background: describe rejection sampling
  - [ ] Results: 5.1 drift needs to be seen in relation to square
  - [ ] Results: 5.2 sample size: **n = actual** number of incidents; state that we fix the expected but observe actual
- - [ ] Results: Figure 5.10 "empirical distribution of <del>MISE</del> and <del>RMISE</del>"
  - [ ] Results: convergence rates
  - [ ] Define h_opt
  - [ ] 5.2/5.3 describe what's in the tables and make a plot (log-log?)
