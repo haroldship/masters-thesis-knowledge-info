@@ -109,12 +109,14 @@ Incident center & (0,0) \\
 
 First, we examine the effect of sample size on the optimal bandwidth.
 According to the theory developed in \cref{sec:theory:bandwidth},
-the bandwidth should decrease as the sample size increases according to the formula
+the bandwidth should decrease as the \textit{observed} sample size increases according to the formula
 
 \[
-    \gls{h_opt} = O(n^{-\frac{1}{6}})
+    \gls{h_opt} = O(n^{-\frac{1}{6}}) \text{.}
 \]
 
+\Cref{tab:results:bandwidth_vs_mu} compares the selected bandwidths obtained for different the \textit{expected} sample sizes,
+since this is the variable which we control.
 
 \input{results/by_h_per_mu/h_per_mu}
 
