@@ -8,6 +8,7 @@
  - [x] Results: Figure 5.10 "empirical distribution of <del>MISE</del> and <del>RMISE</del>"
  - [x] Define h_opt
  - [x] Results: 5.2 sample size: **n = actual** number of incidents; state that we fix the expected but observe actual
+ - [x] "error fell with increasing <del>the multiplication expected number of incidents</del>" + "mu"
 
 ### Fixed in version 0.7
  - [x] Method: explain the units of distance
@@ -47,7 +48,6 @@
  - [ ] 5.2/5.3 add CV bandwidths to tables
  - [ ] 5.2/5.3 split titles to 2 rows
  - [ ] 5.2/5.3 add "mean" to h_o, etc.
- - [ ] "error fell with increasing <del>the multiplication expected number of incidents</del>" + "mu"
  - [ ] "negative polynomial order" <-- check
  - [ ] Appendix: A.10 title should say peaks are NOT in same place
  - [ ] Appendix: A.47 graph is weird
