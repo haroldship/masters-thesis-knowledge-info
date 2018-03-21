@@ -9,6 +9,9 @@
  - [x] Define h_opt
  - [x] Results: 5.2 sample size: **n = actual** number of incidents; state that we fix the expected but observe actual
  - [x] "error fell with increasing <del>the multiplication expected number of incidents</del>" + "mu"
+ - [x] 5.2/5.3 add CV bandwidths to tables
+ - [x] 5.2/5.3 split titles to 2 rows
+ - [x] 5.2/5.3 add "mean" to h_o, etc.
 
 ### Fixed in version 0.7
  - [x] Method: explain the units of distance
@@ -45,9 +48,6 @@
  - [ ] Results: 5.1 drift needs to be seen in relation to square
  - [ ] Results: convergence rates
  - [ ] 5.2/5.3 describe what's in the tables and make a plot (log-log?)
- - [ ] 5.2/5.3 add CV bandwidths to tables
- - [ ] 5.2/5.3 split titles to 2 rows
- - [ ] 5.2/5.3 add "mean" to h_o, etc.
  - [ ] "negative polynomial order" <-- check
  - [ ] Appendix: A.10 title should say peaks are NOT in same place
  - [ ] Appendix: A.47 graph is weird
