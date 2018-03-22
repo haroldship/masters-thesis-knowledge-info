@@ -12,7 +12,8 @@
  - [x] 5.2/5.3 add CV bandwidths to tables
  - [x] 5.2/5.3 split titles to 2 rows
  - [x] 5.2/5.3 add "mean" to h_o, etc.
-
+ - [x] Method: Describe subsections 4.1-4.4 and 4.6.
+ 
 ### Fixed in version 0.7
  - [x] Method: explain the units of distance
  - [x] Method: mention no edge effect compensation
