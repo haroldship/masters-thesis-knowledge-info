@@ -52,18 +52,18 @@ Finally, in \cref{sec:method:combining_experiments}, we describe how the effect 
 \section{Computing the DKD}
 \label{sec:method:computing}
 
-The \gls{dkd} is computed over the study area as the ratio of two positive-valued functions.
+The \gls{dkd} is computed over the study area \gls{W} as the ratio of two positive-valued functions.
 At any given point \((x_1, x_2)\) in the plane, we can compute \gls{lambda_i}\((x_1, x_2)\), the \gls{factor} at that point.
 We call \gls{lambda_i}\((x_1, x_2)\) the \textit{incident intensity} at \((x_1, x_2)\).
-Next, at the same point, we can compute \gls{lambda_p}\((x_1, x_2)\), the population \textit{population intensity} at \((x_1, x_2)\).
+Next, at the same point, we can compute \gls{lambda_p}\((x_1, x_2)\), the \textit{population intensity} at \((x_1, x_2)\).
 Ideally, we would know how to compute these functions exactly, and we would then compute \(\lambda(x_1, x_2)\) the risk,
 or probability of an incident at \((x_1, x_2)\) with the ratio:
 \begin{equation}
     \lambda(x_1, x_2) = \frac{\gls{lambda_i}(x_1, x_2)}{\gls{lambda_p}(x_1, x_2)}.
 \end{equation}
 
-Since we assume that we cannot compute \gls{lambda_i}\((x_1, x_2)\) and \gls{lambda_p}\((x_1, x_2)\) exactly,
-we approximate them as follows.
+In practice, these functions are not known and we cannot compute \gls{lambda_i}\((x_1, x_2)\) and \gls{lambda_p}\((x_1, x_2)\) exactly, 
+so we estimate them from observational data as follows.
 
 TBD intensity kernel
 
@@ -89,7 +89,7 @@ we use several accuracy measures.
 
 \Gls{mise} is a measure of the expected squared difference between an estimated risk function \gls{lambda_hat},
 computed using the \gls{dkd}, and the true risk function \gls{lambda}.
-\Gls{mise} allows for additional analysis by being broken down into the mean integraged bias and mean integrated variance.
+\Gls{mise} allows for additional analysis by being broken down into the mean integraged squared bias and mean integrated variance.
 It can also be easily approximated by cross-validation error.
 
 For any given data sample, we can use the \gls{dkd} to compute the estimated risk function \gls{lambda_hat}.
@@ -114,6 +114,7 @@ We can then compute the expected value of the \gls{ise} to obtain the \gls{mise}
 In our experiments, we run \(M\) monte carlo simulations, and approximate the \gls{mise} by taking the empirical average of the \glspl{ise}.
 
 \begin{equation}
+\label{eq:mise_tilde}
     \widetilde{\mbox{MISE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{ISE}(\hat{\lambda_i})
 \end{equation}
 
@@ -140,7 +141,7 @@ where
         \text{.}
 \end{equation}
 
-Next, we \textit{normalize} the \gls{mise} by dividing by \(\gls{mu}^2\),
+We also \textit{normalize} the \gls{mise} by dividing by \(\gls{mu}^2\),
 which we call \gls{nmise}:
 \begin{equation}
 \label{eq:nmise}
@@ -201,7 +202,7 @@ and
 \begin{equation}
 \label{eq:nmiae}
     \mbox{\gls{nmiae}}(\gls{lambda_hat}) = 
-        \frac{1}{\gls{mu}^2} \mbox{\gls{miae}}(\gls{lambda_hat}) \text{.}
+        \frac{1}{\gls{mu}} \mbox{\gls{miae}}(\gls{lambda_hat}) \text{.}
 \end{equation}
 
 
@@ -246,7 +247,7 @@ where
 \begin{equation}
 \label{eq:normalized_supremum_error}
     \mbox{\gls{normalized supremum error}}(\gls{lambda_hat}) = 
-        \frac{1}{\gls{mu}^2} \mbox{\gls{supremum error}}(\gls{lambda_hat}) \text{.}
+        \frac{1}{\gls{mu}} \mbox{\gls{supremum error}}(\gls{lambda_hat}) \text{.}
 \end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -256,12 +257,29 @@ where
 \label{subsec:method:peak_bias}
 
 The next two accuracy measures compare the estimated risk function's accuracy in computing the peak.
-The \gls{peak error} is difference between the maximum value of the \gls{dkd} estimate \gls{lambda_hat} and the maximum of the true risk function \gls{lambda}.
-We denote by \gls{peak bias} the mean over the monte carlo simulations of the \gls{peak error}.
+The \gls{peak error} is defined to be difference between the maximum value of the \gls{dkd} estimate \gls{lambda_hat} and the maximum of the true risk function \gls{lambda}.
+The \gls{peak bias} is defined to be the expected value of the \gls{peak error}, which we estimate with the sample mean over the monte carlo simulations of the \gls{peak error}.
 The \gls{peak bias} gives us a feel for how much the \gls{dkd} tends to over or underestimate the worst case of the true risk \gls{lambda}.
 
+\begin{align}
+    \mbox{\gls{peak bias}}  & = \E \left[
+                                \max_{(x_1,x_2) \in W} \left[
+                                    {\gls{lambda_hat}(x_1, x_2)} - \gls{lambda}(x_1, x_2)
+                                \right]
+                            \right]
+                            \\
+    \widetilde{\mbox{\gls{peak bias}}}(\gls{lambda_hat}) & = \frac{1}{M} \sum_{i=1}^{M} \mbox{peak bias}(\hat{\lambda_i})
+\end{align}
+
 The second measure associated with the peak we call the \gls{peak drift}.
-It is defined as the mean distance between the peak of \gls{lambda_hat} and \gls{lambda}.
+It is defined as the expected value of the distance in \(\RS\) between the location of the peaks of \gls{lambda_hat} and \gls{lambda}, which we approximate with the mean of the monte carlo simulations.
+
+\begin{align}
+    \mbox{\gls{peak drift}} & = \E \left[
+                            |\widehat{(p_1, p_2)} - (p_1, p_2)|
+                        \right]
+    \widetilde{\mbox{\gls{peak drift}}}(\gls{lambda_hat}) & = \frac{1}{M} \sum_{i=1}^{M} \mbox{peak drift}(\hat{\lambda_i})
+\end{align}
 
 The \gls{relative peak bias} is the \gls{peak bias} divided by the value of the true peak.
 The \gls{relative peak drift} is the \gls{peak drift} divided by the range of \(x_1\) or \(x_2\), whichever is larger.
@@ -290,15 +308,16 @@ The \gls{relative centroid drift} is the \gls{centroid drift} divided by the ran
 We generate data for each experiment as follows.
 Before we begin, we set the random number seed to a fixed value for all experiments.
 The first step is to generate a population.
-We choose a distribution function \(f_p\) over \gls{W}, and scale it to obtain an the population intensity function \gls{lambda_p} of a \gls{spp} \gls{Lambda} with an expected number of points the same as our chosen population size.
-This means that the actual population size may not be exactly what we have chosen.
-We then generate points \((x_1, x_2)\) uniformly in \gls{W} and use keep them with probability \gls{lambda_p}\((x_1, x_2)\).
-This gives us our population \gls{P} which use throughout the experiment.
+We choose a distribution function \(f_p\) over \gls{W}, and scale it to obtain the population intensity function \gls{lambda_p} of a \gls{spp} \gls{Lambda} with an expected number of points the same as our chosen population size.
+This means that in a given realization, the actual population size may not be exactly what we have chosen.
+We then generate points \((x_1, x_2)\) in \gls{W} from the uniform random vector \((X_1,X_2)\),
+and keep them with probability \gls{lambda_p}\((x_1, x_2)\).
+This gives us our population \gls{P} which we use throughout the experiment.
 In this way,
 if \gls{lambda_p}\((x_1, x_2)\) has twice the value of \gls{lambda_p}\((y_1, y_2)\) for two points \((x_1, x_2)\) and \((y_1, y_2)\) in \gls{W},
 then we expect to see about twice as many points around \((x_1, x_2)\) than around \((y_1, y_2)\) in \gls{P}.
 
-Once we have a fixed population, we have need to decide which members of the population constitute the incidents.
+Once we have a fixed population, we have to decide which members of the population constitute the incidents.
 The process to generate the incidents is similar to that of the population.
 We create an incident intensity function \gls{lambda_i} of a \gls{spp} for incidents.
 We then take the points \((x_1, x_2) \in \gls{P}\) and keep each one with probability \gls{lambda_i}\((x_1, x_2)\).
@@ -350,13 +369,13 @@ The population is generated \textbf{once} for the entire experiment, and consist
 When the \textit{c1} and \textit{c2} parameters are given, the population is distributed according to a bivariate normal pattern.
 In particular, the population distribution has its center at (\textit{c1}, \textit{c2}),
 standard deviations \textit{sigma1}, \textit{sigma2}, \textit{rho}.
-In this study, we always use the same value for both directions \textit{sigma1} and \textit{sigma2} and set \textit{rho} to 0 making \(x_1\) and \(x_2\) independent.
+In this study, we always use the same value for both directions \textit{sigma1} and \textit{sigma2} and set \textit{rho} to 0 (zero) making \(x_1\) and \(x_2\) independent.
 
 Next, we generate the incident risk function, \(\gls{lambda}(x_1, x_2)\), by scaling our base function \(f(x_1, x_2\) it so that the expected number of incidents \gls{mu} is equal to the \textit{EN.i} parameter.
 We begin with a function \(f(x_1, x_2)\) defined on \gls{W}, which is positive-valued and has 
 
 \begin{equation*}
-    \int_{\gls{W}} {f(x_1, x_2) \diff{x_2} \diff{x_1}} = 1
+    \iint\limits_{(x_1,x_2)\in\gls{W}} {f(x_1, x_2) \diff{x_2} \diff{x_1}} = 1
     \text{.}
 \end{equation*}
 
@@ -371,7 +390,7 @@ This technique randomly determines whether or not each member of the population 
 
 The next step is to compute the \gls{oracle} bandwidths \gls{h_o1} and \gls{h_o2}.
 These bandwidths will be used in later steps to compare the accuracy of the \gls{dkd} estimator using multiple bandwidth selection schemes.
-The bandwidths \gls{h_o1} and \gls{h_o2} are chosen by running a small number of 49 simulations and taking the bandwidth pair \gls{h_1} and \gls{h_2} that minimize the approximate \gls{mise} which is computed for each pair using \cref{eq:mise}.
+The bandwidths \gls{h_o1} and \gls{h_o2} are chosen by running a small number of 49 simulations and taking the bandwidth pair \gls{h_1} and \gls{h_2} that minimize the approximate \gls{mise} which is computed for each pair using \cref{eq:mise_tilde}.
 
 We now can begin the main simulations.
 For each experiment, we run 1,000 simulations.
@@ -399,7 +418,7 @@ We now take our ability to run experiments under different setups,
 and create combinations of experiments that examine the impact of different variables on the various accuracy measures described in \cref{sec:method:accuracy},
 and in some cases also on the selected bandwidths.
 The first combination will look at how the expected number of incidents for a fixed population size and distribution affects the accuracy and selected bandwidths.
-Next, we will examine how the sample size affects the accuracy and bandwidth selection.
+Next, we will examine how the \gls{factor} affects the accuracy and bandwidth selection.
 We do this by keeping the true risk function fixed, and allowing both the size of the population and the expectd number of incidents vary in tandem.
 Third, we examine the effect of the risk function spread on the accuracy, followed by the effect of the population spread.
 Finally, we examine the effect of the distance between two peaks in a bimodal risk function affects the accuracy of the estimate.

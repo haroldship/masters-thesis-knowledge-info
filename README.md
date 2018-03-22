@@ -44,8 +44,29 @@
 
 ### TODO
 
+ - [ ] lambda_i used for intensity AND for index: change intensity to lambda_I/lambda_P
  - [ ] Introduction: define "statistical properties"
  - [ ] Theoretical background: describe rejection sampling
+ - [ ] Method: 4.1 desribe the study area
+ - [ ] Method: 4.1 put in a picture of pop and incident points
+ - [ ] Method: 4.1 Discuss the real-life underlying story of the data with examples
+ - [ ] Method: 4.1 Discuss how the real-life underlying story is modeled with SPP or Poisson
+ - [ ] Method: 4.1 Describe the kernel method of intensit estimation, assumes some data, "if someone has incident location data, they can use this method"
+ - [ ] Method: 4.1 mention 2 kernel methods, incidents vs population
+ - [ ] Method: 4.2 define lambda := lambda(., .) to show lambda is a function
+ - [ ] Method: double integral with (x1, x2) in W as limits
+ - [ ] Method: 4.2.1: "in many cases": when & how?
+ - [ ] Method: 4.2.5: motivation for centroid
+ - [ ] Method: 4.2.5: formulas
+ - [ ] Method: 4.3: "and scale it" - example
+ - [ ] Method: 4.4: "A common method for bandwidth selection..." to start
+ - [ ] Method: 4.4: Add formulas and a reference for CV
+ - [ ] Method: 4.5: Explain buffer with respect to edge effects
+ - [ ] Method: 4.5: use \texttt for variable names
+ - [ ] Method: 4.5: explain that the oracle knows the true lambda and so creates a baseline that approximates mise-optimal b/w
+ - [ ] Method: 4.5: add a step to compute lambda_p
+ - [ ] Method: 4.6: reword last sentence
+ - [ ] Method: Add computing and technical issues and solutions: time, AWS, etc. move from wherever.
  - [ ] Results: 5.1 drift needs to be seen in relation to square
  - [ ] Results: convergence rates
  - [ ] 5.2/5.3 describe what's in the tables and make a plot (log-log?)
