@@ -453,12 +453,13 @@ which is followed by Relative MIAE which is computed analogously to Relative MIS
 This is followed by the Maximum error, which is the greatest absolute error over the study area.
 Complete results can be found in \autoref{tab:mean_error_rates:unif_100_unif} in \autoref{ch:results_tables}.
 
-The error measures mentioned above each compare the closeness of the estimated intensity function to the true funcition.
+The error measures mentioned above each compare the closeness of the estimated intensity function to the true function.
 The following error measures, on the other hand, relate the closeness of the \textit{peak} of the estimate to the true peak.
-The \textit{peak bias} is the average difference between the computed and true maxima,
-that is the empirical expectation of \(\max{\{\hat{f}(x)\}} - \max{\{f(x)\}}\).
+The \textit{peak bias} is the expected value of the  difference between the computed and true maxima.
+We estimate it using the empirical average of \(\max{\{\hat{f}(x)\}} - \max{\{f(x)\}}\).
+We note that our study area \gls{W} is 8 units long by 8 units wide.
 The Relative peak bias is peak bias expressed relative to the true maximum.
-The \textit{peak drift} is the Euclidean distance between the estimated peak and the true peak.
+The \textit{peak drift} is the expected value of Euclidean distance between the estimated peak and the true peak.
 The Relative peak drift is the peak drift, expressed relative to the width of the study area.
 
 The next four measures, \textit{centroid bias} and \textit{drift}, and the relative versions of them, are analogous to the peak error measures.

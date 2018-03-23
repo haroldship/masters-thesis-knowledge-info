@@ -13,6 +13,7 @@
  - [x] 5.2/5.3 split titles to 2 rows
  - [x] 5.2/5.3 add "mean" to h_o, etc.
  - [x] Method: Describe subsections 4.1-4.4 and 4.6.
+ - [x] Results: 5.1 drift needs to be seen in relation to square
  
 ### Fixed in version 0.7
  - [x] Method: explain the units of distance
@@ -67,7 +68,6 @@
  - [ ] Method: 4.5: add a step to compute lambda_p
  - [ ] Method: 4.6: reword last sentence
  - [ ] Method: Add computing and technical issues and solutions: time, AWS, etc. move from wherever.
- - [ ] Results: 5.1 drift needs to be seen in relation to square
  - [ ] Results: convergence rates
  - [ ] 5.2/5.3 describe what's in the tables and make a plot (log-log?)
  - [ ] "negative polynomial order" <-- check
