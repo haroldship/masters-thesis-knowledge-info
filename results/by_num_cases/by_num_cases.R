@@ -1,10 +1,11 @@
 library(ggplot2)
+library(Hmisc)
 
 setwd("/Users/harold/Dropbox/MA_Knowledge_and_Info/Thesis/thesis/results/by_num_cases")
 
 #Cases <- c(50, 100, 200, 500, 1000)
-Cases <- c(50, 100, 200, 1000)
-Dirs <- sapply(Cases, function(case) paste('../p1.0_', case, '_1_1h/output/', sep=''))
+Cases <- c(50, 100, 200, 500, 1000)
+Dirs <- sapply(Cases, function(case) paste('../unif_', case, '_1.0_1h/output/', sep=''))
 Files <- sapply(Dirs, function(dir) paste(dir, 'mean_table.tex', sep=''))
 
 N <- length(Cases)
@@ -86,3 +87,40 @@ ggplot(df) +
   coord_trans(x='log10', y='log10') +
   annotation_logticks(scaled=FALSE)
 dev.off()
+
+# redo for NMISE
+coefO <- coef(lm(log(dfO$`Normalized MISE`) ~ log(dfO$Case)))
+coefS <- coef(lm(log(dfS$`Normalized MISE`) ~ log(dfS$Case)))
+coefC <- coef(lm(log(dfC$`Normalized MISE`) ~ log(dfC$Case)))
+
+pdf(file="NMISE-vs-cases.pdf")
+ggplot(df) +
+  geom_point(aes(x=Case, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
+  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(45,1100)) +
+  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(45,1100)) +
+  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(45,1100))
+dev.off()
+pdf(file="NMISE-vs-cases-log-log.pdf")
+ggplot(df) +
+  geom_point(aes(x=Case, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
+  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(45,1100)) +
+  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(45,1100)) +
+  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(45,1100)) +
+  coord_trans(x='log10', y='log10') +
+  annotation_logticks(scaled=FALSE)
+dev.off()
+
+Selector <- c("Oracle", "Silverman", "CV")
+Slope <- c(coefO[2], coefS[2], coefC[2])
+
+df.alpha <- data.frame(Selector, Slope)
+df.alpha.latex <- latex(df.alpha,
+                        file="alpha_by_selector.tex",
+                        title="alpha_by_selector",
+                        where="htbp",
+                        label="tab:results:nmise_alpha_by_selector",
+                        rowname=NULL,
+                        cdec=c(0,3),
+                        caption.loc="bottom",
+                        caption="NMISE onvergence rate $\\alpha$ for different bandwidth selectors for a single-peak risk function with spread of 1.0 on a uniform population of 10,000.",
+                        caption.lot="NMISE Convergence rate of bandwidth selectors")

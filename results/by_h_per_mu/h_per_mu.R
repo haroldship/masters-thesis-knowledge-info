@@ -140,10 +140,10 @@ df.alpha.latex <- latex(df.alpha,
                         file="alpha_by_selector.tex",
                         title="alpha_by_selector",
                         where="htbp",
-                        label="tab:results:alpha_by_selector",
+                        label="tab:results:bandwidth_alpha_by_selector",
                         rowname=NULL,
                         cdec=c(0,3),
                         caption.loc="bottom",
-                        caption="Convergence rate $\\alpha$ for different bandwidth selectors for a single-peak risk function with spread of 1.0 on a uniform population of 10,000.",
-                        caption.lot="Convergence rate of different bandwidth selectors")
+                        caption="Bandwidth onvergence rate $\\alpha$ of for different bandwidth selectors for a single-peak risk function with spread of 1.0 on a uniform population of 10,000.",
+                        caption.lot="Bandwidth convergence rate of bandwidth selectors")
 

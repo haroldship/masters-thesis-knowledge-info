@@ -71,7 +71,6 @@ In \cref{sec:results:consistency} we look at the consistency of the \gls{dkd}.
 The results of the first experiment, uniform population and a uniform intensity,
 are described in \cref{sec:results:unif_100_unif}.
 We then made ran several sets of experiments while changing one parameter at a time.
-\Cref{sec:results:unif_NCases_1h} compares the results obtained by varying the number of cases.
 \Cref{sec:results:unifNpop_1h} compares the results obtained by varying the size of the population.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -113,6 +112,21 @@ centered at the origin,
 with a \gls{spread} of 1.0.
 The \glspl{factor} used in the experiments in this section were 50, 100, 200, 500, and 1,000.
 The full set of accuracy measures for these cases can be found in \autoref{tab:mean_error_rates:unif_50_1.0_1h}, \autoref{tab:mean_error_rates:unif_100_1.0_1h}, \autoref{tab:mean_error_rates:unif_200_1.0_1h}, \autoref{tab:mean_error_rates:unif_500_1.0_1h}, and \autoref{tab:mean_error_rates:unif_1000_1.0_1h} in \autoref{ch:results_tables}.
+\autoref{fig:one_sample:unif_NCases_1h} shows how one realization of incidents, distributed over the population, for sample sizes of 100 and 500.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{results/unif_100_1.0_1h/output/population_and_incidents_scatter}
+    \caption{100 incidents}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{results/unif_500_1.0_1h/output/population_and_incidents_scatter}
+    \caption{500 incidents}
+    \end{subfigure}
+    \caption{A single realization of different sizes from a single-peak risk on a uniform population}
+    \label{fig:one_sample:unif_NCases_1h}
+\end{figure}
 
 According to the theory developed in \cref{sec:theory:bandwidth},
 the bandwidth should decrease as the \textit{observed} sample size increases according to the formula
@@ -122,8 +136,6 @@ the bandwidth should decrease as the \textit{observed} sample size increases acc
     \gls{h_opt} = O(n^{-\frac{1}{6}}) \text{.}
 \end{equation}
 
-\input{results/by_h_per_mu/h_per_mu}
-
 \Cref{tab:results:bandwidth_vs_mu} compares the selected bandwidths and \gls{nmise} obtained for different \glspl{factor},
 since this is the variable which we control.
 We observe that all of the bandwidths decrease as \gls{mu} increases.
@@ -131,38 +143,39 @@ When there is a power relationship as in \cref{eq:h_opt} above, we can take the 
 The slope of the line in the log-log equation is equal to the power of the original equation.
 \Cref{fig:results:bandwidth_by_incidents} shows log-log plots of the observed bandwidths that were obtained by the various selection mechanisms.
 We have fit a line to each plot to show the linear relationship in the log-log equations, and hence the power relationship between the bandwidths selected by the different mechanisms and the sample size, represented by \gls{factor}.
-The observed values for the power of $n$ as represented by $N_I$ are shown in \cref{tab:results:alpha_by_selector}.
+The observed values for the power of $n$ as represented by $N_I$ are shown in \cref{tab:results:bandwidth_alpha_by_selector}.
+
+\input{results/by_h_per_mu/h_per_mu}
 
 \input{results/by_h_per_mu/alpha_by_selector}
 
 \begin{figure}[htbp]
     \centering
-    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{subfigure}[t]{0.195\textwidth}
         \centering
         \captionsetup{width=.8\linewidth}%
         \includegraphics[width=\textwidth]{results/by_h_per_mu/oracle_bandwidth_x1_vs_mu.pdf}
         \subcaption{Oracle bandwidth in $x_1$ direction by \glsentryname{factor}}
     \end{subfigure}
-    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{subfigure}[t]{0.195\textwidth}
         \centering
         \captionsetup{width=.8\linewidth}%
         \includegraphics[width=\textwidth]{results/by_h_per_mu/oracle_bandwidth_x2_vs_mu.pdf}
         \subcaption{Oracle bandwidth in $x_2$ direction by \glsentryname{factor}}
     \end{subfigure}
-    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{subfigure}[t]{0.195\textwidth}
         \centering
         \captionsetup{width=.8\linewidth}%
         \includegraphics[width=\textwidth]{results/by_h_per_mu/silverman_bandwidth_vs_mu.pdf}
         \subcaption{Mean Silverman bandwidth by \glsentryname{factor}}
     \end{subfigure}
-
-    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{subfigure}[t]{0.195\textwidth}
         \centering
         \captionsetup{width=.8\linewidth}%
         \includegraphics[width=\textwidth]{results/by_h_per_mu/cv_bandwidth_x1_vs_mu.pdf}
         \subcaption{Mean CV bandwidth in $x_1$ direction by \glsentryname{factor}}
     \end{subfigure}
-    \begin{subfigure}[t]{0.32\textwidth}
+    \begin{subfigure}[t]{0.195\textwidth}
         \centering
         \captionsetup{width=.8\linewidth}%
         \includegraphics[width=\textwidth]{results/by_h_per_mu/cv_bandwidth_x2_vs_mu.pdf}
@@ -173,6 +186,72 @@ The observed values for the power of $n$ as represented by $N_I$ are shown in \c
         The slope of the log-log plot indicates the power of $n$ in the convergence rate.}
     \label{fig:results:bandwidth_by_incidents}    
 \end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.24\textwidth}
+    \includegraphics[width=\textwidth]{results/by_num_cases/MISE-vs-cases}
+    \subcaption{\glsentryname{mise}}
+    \label{fig:ise:unif_NCases_1h:mise}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.24\textwidth}
+    \includegraphics[width=\textwidth]{results/by_num_cases/RMISE-vs-cases}
+    \subcaption{\glsentryname{rmise}}
+    \label{fig:ise:unif_NCases_1h:rmise}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.24\textwidth}
+    \includegraphics[width=\textwidth]{results/by_num_cases/NMISE-vs-cases}
+    \subcaption{\glsentryname{nmise}}
+    \label{fig:ise:unif_NCases_1h:nmise}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.24\textwidth}
+    \includegraphics[width=\textwidth]{results/by_num_cases/NMISE-vs-cases-log-log}
+    \subcaption{\glsentryname{nmise} log-log}
+    \label{fig:ise:unif_NCases_1h:nmise_log_log}
+    \end{subfigure}
+    \caption[\glsentryname{mise}: by number of cases]{\glsentryname{mise} vs. number of cases}
+    \label{fig:ise:unif_NCases_1h}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/unif_100_1.0_1h/output/bandwidths-silverman}
+    \caption{Silverman}
+    \label{fig:bandwidths_x1:unif_100_1.0_1h:s}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/unif_100_1.0_1h/output/bandwidths-x1}
+    \caption{Cross-validation, \(X_1\)}
+    \label{fig:bandwidths_x1:unif_100_1.0_1h:x1}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{results/unif_100_1.0_1h/output/bandwidths-x2}
+    \caption{Cross-validation, \(X_2\)}
+    \label{fig:bandwidths_x1:unif_100_1.0_1h:x2}
+    \end{subfigure}
+    \caption{Bandwidth histograms for 100 incidents in a single peak from population of 10,000}
+\end{figure}
+
+\autoref{fig:ise:unif_NCases_1h} shows the effect of \gls{factor} on the \gls{mise}, \gls{rmise} and on \gls{nmise}:
+\autoref{fig:ise:unif_NCases_1h:mise} shows how \gls{mise} increases with \gls{factor}.
+One might expect the error to associated with estimating a function to \textit{decrease} as the \gls{factor} increases.
+However, the \gls{factor} increases linearly with the intensity function value.
+For example, double the number of incidents corresponds to an intensity of twice the value.
+This makes comparing the \gls{mise} of estimates of intensity functions difficult,
+as the errors will also rise in the same direction.
+In order to facilitate the comparison of intensity functions that have different expected number of incidents,
+we use the \gls{rmise}and \gls{nmise}.
+\Cref{fig:ise:unif_NCases_1h:rmise,fig:ise:unif_NCases_1h:nmise} shows how \gls{rmise} and \gls{nmise} decreases with \gls{factor}.
+To test if there is a power relationship between \gls{nmise} and \gls{factor},
+we take the logarithms of each variable and fit a line.
+\autoref{fig:ise:unif_NCases_1h:nmise_log_log} is a log-log graph,
+showing the linear relationship between the logarithm of \gls{nmise} and the logarithm of the \gls{factor}.
+This indicates a power relationship between \gls{nmise} and \gls{factor} for each bandwidth selection method is shown in \cref{tab:results:nmise_alpha_by_selector}.
+They are all near to $-0.75$.
+
+\input{results/by_num_cases/alpha_by_selector}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -560,132 +639,10 @@ reflects the relative ease with which the DKD can estimate a flat intensity func
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Section: Varying the number of incidents
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Varying the number of incidents}
-\label{sec:results:unif_NCases_1h}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Parameter table
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[htbp]
-\centering
-\begin{tabular}{ll}
-\hline
-Parameter & Value \\
-\hline
-Population size & 10,000 \\
-Population \gls{spread} & uniform \\
-\Gls{factor} & 50, 100, 200, 500, 1000 \\
-Incident \gls{spread} & 1.0 \\
-Incident center & (0,0) \\
-\hline
-\end{tabular}
-\caption{Parameters used for varying the number of incidents}
-\label{tab:params:unif_NCases_1h}
-\end{table}
-
-In this section we examine and compare the results of experiments where the number of incidents is varied, while keeping the population size constant at 10,000, distributed uniformly throughout the study area.
-The expected incident sizes used in the experiments in this section were 50, 100, 200, 500, and 1,000.
-The full set of error measures for these cases can be found in \autoref{tab:mean_error_rates:unif_50_1.0_1h}, \autoref{tab:mean_error_rates:unif_100_1.0_1h}, \autoref{tab:mean_error_rates:unif_200_1.0_1h}, \autoref{tab:mean_error_rates:unif_500_1.0_1h}, and \autoref{tab:mean_error_rates:unif_100_1.0_1h} in \autoref{ch:results_tables}.
-
-
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_1.0_1h/output/population_and_incidents_scatter}
-    \caption{100 incidents}
-    \end{subfigure}
-    \begin{subfigure}{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_500_1.0_1h/output/population_and_incidents_scatter}
-    \caption{500 incidents}
-    \end{subfigure}
-    \caption{A single realization of different sizes from a single-peak risk on a uniform population}
-    \label{fig:one_sample:unif_NCases_1h}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/by_num_cases/MISE-vs-cases}
-    \caption{MISE}
-    \label{fig:ise:unif_NCases_1h:a}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/by_num_cases/RMISE-vs-cases}
-    \caption{Relative MISE}
-    \label{fig:ise:unif_NCases_1h:b}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/by_num_cases/RMISE-vs-cases-log-log}
-    \caption{Relative MISE log-log}
-    \label{fig:ise:unif_NCases_1h:c}
-    \end{subfigure}
-    \caption[MISE: by number of cases]{Mean Integrated Squared Error vs. number of cases}
-    \label{fig:ise:unif_NCases_1h}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_1.0_1h/output/bandwidths-silverman}
-    \caption{Silverman}
-    \label{fig:bandwidths_x1:unif_100_1.0_1h:s}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_1.0_1h/output/bandwidths-x1}
-    \caption{Cross-validation, \(X_1\)}
-    \label{fig:bandwidths_x1:unif_100_1.0_1h:x1}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_1.0_1h/output/bandwidths-x2}
-    \caption{Cross-validation, \(X_2\)}
-    \label{fig:bandwidths_x1:unif_100_1.0_1h:x2}
-    \end{subfigure}
-    \caption{Bandwidth histograms for 100 incidents in a single peak from population of 10,000}
-\end{figure}
-
-\autoref{fig:one_sample:unif_NCases_1h} shows how one realization of incidents, distributed over the population, for sample sizes of 100 and 500.
-This is done by multiplying the single-peak risk function by a constant in order to control the expected number of incidents per simulation.
-\autoref{fig:ise:unif_NCases_1h} shows the effect on the MISE and RMISE:
-\autoref{fig:ise:unif_NCases_1h:a} shows how MISE increases with expected incidents per patient.
-One might expect the error to associated with estimating a function to \textit{decrease} as the number of incidents increases.
-However, the expected number of incidents increases linearly with the intensity function value.
-For example, double the number of incidents corresponds to an intensity of twice the value.
-This makes comparing the MISE of estimates of intensity functions difficult, as the errors will also rise in the same direction.
-In order to facilitate the comparison of intensity functions that have different expected number of incidents, we use the RMISE.
-\autoref{fig:ise:unif_NCases_1h:b} shows how RMISE decreases with expected incidents per patient.
-\autoref{fig:ise:unif_NCases_1h:c} is a log-log graph, showing a linear relationship between the logarithm of RMISE and the logarithm of the number of cases.
-The values of the intercept and slope are -2.3525396 and -0.7316768 for the Oracle bandwidth; -1.8623772 and -0.7356884 for the Silverman bandwidth; and -1.5308541 and -0.8103349 for the cross-validation bandwidth.
-The corresponding equations for RMISE are:
-
-\begin{align}
-    \mbox{RMISE}_{oracle} &= 0.09512727 N^{-0.7316768} \\
-    \mbox{RMISE}_{silverman} &= 0.155303 N^{-0.7356884} \\
-    \mbox{RMISE}_{cv} &= 0.2163508 N^{-0.8103349}
-\end{align}
-
-\textcolor{red}{TBD: chart of bandwidth vs. no. cases}
-
-\begin{table}
-\centering
-\begin{tabular}{rrrr}
-    \hline
-    Incident risk function \gls{spread} & Oracle & Silverman & CV \\ 
-    \hline
-    1.0 & -0.8180b & -0.7445 & 4.2668 \\
-    1.4 & -0.7501 & -0.7224 & -0.5711 \\
-    2.0 & -0.7548 & -0.7253 & -0.8425 \\
-    \( \infty \) & -0.7317 & -0.7357 & -0.8103
-\end{tabular}
-\caption{Convergence power for different incident risk function spreads}
-\label{tab:convergence_vs_spread}
-\end{table}
-
 %%
-%% Section
+%% Varying the sample size for fixed intensity
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Varying the sample size for fixed intensity}
 \label{sec:results:unifNpop_1h}
 

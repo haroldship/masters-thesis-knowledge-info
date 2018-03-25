@@ -1,0 +1,14 @@
+%latex.default(df.alpha, file = "alpha_by_selector.tex", title = "alpha_by_selector",     where = "htbp", label = "tab:results:nmise_alpha_by_selector",     rowname = NULL, cdec = c(0, 3), caption.loc = "bottom", caption = "NMISE onvergence rate $\\alpha$ for different bandwidth selectors for a single-peak risk function with spread of 1.0 on a uniform population of 10,000.",     caption.lot = "NMISE Convergence rate of bandwidth selectors")%
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{lr}
+\hline\hline
+\multicolumn{1}{c}{Selector}&\multicolumn{1}{c}{Slope}\tabularnewline
+\hline
+Oracle&$-0.742$\tabularnewline
+Silverman&$-0.741$\tabularnewline
+CV&$-0.775$\tabularnewline
+\hline
+\end{tabular}
+\caption[NMISE Convergence rate of bandwidth selectors]{NMISE onvergence rate $\alpha$ for different bandwidth selectors for a single-peak risk function with spread of 1.0 on a uniform population of 10,000.\label{tab:results:nmise_alpha_by_selector}}\end{center}
+\end{table}
