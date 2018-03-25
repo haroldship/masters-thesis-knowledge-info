@@ -64,6 +64,7 @@ Incident center & (0,0) \\
 \label{tab:params:template}
 \end{table}
 
+In \cref{sec:results:unif_100_unif} we take a deep look at a single experiment.
 The rest of this chapter examines the effect of different variables on the \gls{dkd} accuracy, on the selected bandwidths, and on other statistical properties of the \gls{dkd}.
 \Cref{sec:results:number_of_incidents} describes the relationship between the accuracy of the \gls{dkd} and the magnitude of the risk function for a fixed population.
 In \cref{sec:results:spread} we look at how the spread of the risk function affects accuracy.
@@ -75,11 +76,20 @@ We then made ran several sets of experiments while changing one parameter at a t
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
+%% Section: Results of single-peak risk on uniform population
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section[Results of single-peak risk on uniform population]
+    {Results of a single experiment with risk function having single peak with with \glsentryname{spread} 1.0 and \glsentryname{factor} of 100 on a fixed, uniform population of 10,000}
+\label{sec:results:unif_100_1.0_1h}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
 %% Section: Effect of number of incidents with fixed population
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section[Effect of number of incidents with fixed population]
-    {Effect of number of incidents for a fixed, uniform population of 10,000 and single peak with spread 1.0}
+    {Effect of \glsentryname{factor} for a fixed, uniform population of 10,000 and single peak with \glsentryname{spread} 1.0}
 \label{sec:results:number_of_incidents}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -100,7 +110,7 @@ Incident center & (0,0) \\
 \hline
 \end{tabular}
 \caption[Effect of \glsentryname{factor} with fixed population]
-    {Experimental parameter values varying \entryname{factor} for a fixed, uniform population of 10,000 and single peak with spread 1.0}
+    {Experimental parameter values varying \glsentryname{factor} for a fixed, uniform population of 10,000 and single peak with spread 1.0}
 \label{tab:params:results:number_of_incidents}
 \end{table}
 
@@ -506,7 +516,7 @@ Normalized MISE is MISE divided by $\mu$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% Uniform risk on uniform population section
+%% Section: Uniform risk on uniform population section
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Uniform risk on a uniform population}
@@ -640,7 +650,7 @@ reflects the relative ease with which the DKD can estimate a flat intensity func
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% Varying the sample size for fixed intensity
+%% Section: Varying the sample size for fixed intensity
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Varying the sample size for fixed intensity}
@@ -690,8 +700,11 @@ For this set of experiments, the population is uniformly distributed and the ris
 \end{figure}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% Section
+%% Section: Varying the spread of the risk function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Varying the spread of the risk function}
 \label{sec:results:unif_100_SD}
 
@@ -737,8 +750,11 @@ the standard deviation of the Gaussian risk function is varied.
     \label{fig:ise:unif_100_SD}
 \end{figure}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% Section
+%% Section: Varying the spread of the population density
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Varying the spread of the population density}
 \label{sec:results:pSD_100_1h}
 
@@ -773,8 +789,11 @@ The risk function has an \gls{factor} of 100.
 \end{figure}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% Section
+%% Section: Distance between two peaks
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Distance between two peaks}
 \label{sec:results:p1.4_100_G}
 
@@ -796,8 +815,11 @@ The risk function has an \gls{factor} of 100.
     \label{fig:ise:p1.4_100_G}
 \end{figure}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% Section
+%% Section: Distance between the population and risk function peaks
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Distance between the population and risk function peaks}
 \label{sec:ise:p1.4_Gap_risk}
 
