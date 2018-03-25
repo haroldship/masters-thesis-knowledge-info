@@ -14,6 +14,9 @@
  - [x] 5.2/5.3 add "mean" to h_o, etc.
  - [x] Method: Describe subsections 4.1-4.4 and 4.6.
  - [x] Results: 5.1 drift needs to be seen in relation to square
+ - [x] Results: convergence rates
+ - [x] 5.2/5.3 describe what's in the tables and make a plot (log-log?)
+ - [x] "negative polynomial order" <-- check
  
 ### Fixed in version 0.7
  - [x] Method: explain the units of distance
@@ -68,9 +71,6 @@
  - [ ] Method: 4.5: add a step to compute lambda_p
  - [ ] Method: 4.6: reword last sentence
  - [ ] Method: Add computing and technical issues and solutions: time, AWS, etc. move from wherever.
- - [ ] Results: convergence rates
- - [ ] 5.2/5.3 describe what's in the tables and make a plot (log-log?)
- - [ ] "negative polynomial order" <-- check
  - [ ] Appendix: A.10 title should say peaks are NOT in same place
  - [ ] Appendix: A.47 graph is weird
  - [ ] Appendix: A.10 biases are positive even for Oracle

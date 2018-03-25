@@ -53,10 +53,10 @@ The sixth and last row in the the table contains the \textit{incident center}, w
 Parameter & Value \\
 \hline
 Population size & 10,000 \\
-Population \gls{spread} & 1.0 \\
+Population \glsentryname{spread} & 1.0 \\
 Population center & (0,0) \\
-\Gls{factor} & 100, 200 \\
-Incident \gls{spread} & 1.0 \\
+\Glsentryname{factor} & 100, 200 \\
+Incident \glsentryname{spread} & 1.0 \\
 Incident center & (0,0) \\
 \hline
 \end{tabular}
@@ -65,11 +65,9 @@ Incident center & (0,0) \\
 \end{table}
 
 The rest of this chapter examines the effect of different variables on the \gls{dkd} accuracy, on the selected bandwidths, and on other statistical properties of the \gls{dkd}.
-\Cref{sec:results:number_of_incidents} describes the relationship between the above and the magnitude of the risk function and corresponding number of incidents for a fixed population.
+\Cref{sec:results:number_of_incidents} describes the relationship between the accuracy of the \gls{dkd} and the magnitude of the risk function for a fixed population.
 In \cref{sec:results:spread} we look at how the spread of the risk function affects accuracy.
 In \cref{sec:results:consistency} we look at the consistency of the \gls{dkd}.
-
-
 The results of the first experiment, uniform population and a uniform intensity,
 are described in \cref{sec:results:unif_100_unif}.
 We then made ran several sets of experiments while changing one parameter at a time.
@@ -95,31 +93,86 @@ We then made ran several sets of experiments while changing one parameter at a t
 Parameter & Value \\
 \hline
 Population size & 10,000 \\
-Population \gls{spread} & uniform \\
+Population \glsentryname{spread} & uniform \\
 Population center & uniform \\
-\Gls{factor} & 50, 100, 200, 500, 1,000 \\
-Incident \gls{spread} & 1.0 \\
+\Glsentryname{factor} & 50, 100, 200, 500, 1,000 \\
+Incident \glsentryname{spread} & 1.0 \\
 Incident center & (0,0) \\
 \hline
 \end{tabular}
-\caption[Effect of number of incidents with fixed population]
-    {Experimental parameter values varying \gls{factor} for a fixed, uniform population of 10,000 and single peak with spread 1.0}
+\caption[Effect of \glsentryname{factor} with fixed population]
+    {Experimental parameter values varying \entryname{factor} for a fixed, uniform population of 10,000 and single peak with spread 1.0}
 \label{tab:params:results:number_of_incidents}
 \end{table}
 
-First, we examine the effect of sample size on the optimal bandwidth.
+In this section we examine and compare the results of five experiments where the \glspl{factor} of a single-peak risk function is varied.
+For our setup, we keep the population size constant at 10,000,
+distributed uniformly throughout the study area.
+The risk function for each of the five experiments has a single peak,
+centered at the origin,
+with a \gls{spread} of 1.0.
+The \glspl{factor} used in the experiments in this section were 50, 100, 200, 500, and 1,000.
+The full set of accuracy measures for these cases can be found in \autoref{tab:mean_error_rates:unif_50_1.0_1h}, \autoref{tab:mean_error_rates:unif_100_1.0_1h}, \autoref{tab:mean_error_rates:unif_200_1.0_1h}, \autoref{tab:mean_error_rates:unif_500_1.0_1h}, and \autoref{tab:mean_error_rates:unif_1000_1.0_1h} in \autoref{ch:results_tables}.
+
 According to the theory developed in \cref{sec:theory:bandwidth},
 the bandwidth should decrease as the \textit{observed} sample size increases according to the formula
 
-\[
+\begin{equation}
+    \label{eq:h_opt}
     \gls{h_opt} = O(n^{-\frac{1}{6}}) \text{.}
-\]
-
-\Cref{tab:results:bandwidth_vs_mu} compares the selected bandwidths obtained for different the \textit{expected} sample sizes,
-since this is the variable which we control.
+\end{equation}
 
 \input{results/by_h_per_mu/h_per_mu}
 
+\Cref{tab:results:bandwidth_vs_mu} compares the selected bandwidths and \gls{nmise} obtained for different \glspl{factor},
+since this is the variable which we control.
+We observe that all of the bandwidths decrease as \gls{mu} increases.
+When there is a power relationship as in \cref{eq:h_opt} above, we can take the logarithm of both variables to produce a linear relationship.
+The slope of the line in the log-log equation is equal to the power of the original equation.
+\Cref{fig:results:bandwidth_by_incidents} shows log-log plots of the observed bandwidths that were obtained by the various selection mechanisms.
+We have fit a line to each plot to show the linear relationship in the log-log equations, and hence the power relationship between the bandwidths selected by the different mechanisms and the sample size, represented by \gls{factor}.
+The observed values for the power of $n$ as represented by $N_I$ are shown in \cref{tab:results:alpha_by_selector}.
+
+\input{results/by_h_per_mu/alpha_by_selector}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering
+        \captionsetup{width=.8\linewidth}%
+        \includegraphics[width=\textwidth]{results/by_h_per_mu/oracle_bandwidth_x1_vs_mu.pdf}
+        \subcaption{Oracle bandwidth in $x_1$ direction by \glsentryname{factor}}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering
+        \captionsetup{width=.8\linewidth}%
+        \includegraphics[width=\textwidth]{results/by_h_per_mu/oracle_bandwidth_x2_vs_mu.pdf}
+        \subcaption{Oracle bandwidth in $x_2$ direction by \glsentryname{factor}}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering
+        \captionsetup{width=.8\linewidth}%
+        \includegraphics[width=\textwidth]{results/by_h_per_mu/silverman_bandwidth_vs_mu.pdf}
+        \subcaption{Mean Silverman bandwidth by \glsentryname{factor}}
+    \end{subfigure}
+
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering
+        \captionsetup{width=.8\linewidth}%
+        \includegraphics[width=\textwidth]{results/by_h_per_mu/cv_bandwidth_x1_vs_mu.pdf}
+        \subcaption{Mean CV bandwidth in $x_1$ direction by \glsentryname{factor}}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering
+        \captionsetup{width=.8\linewidth}%
+        \includegraphics[width=\textwidth]{results/by_h_per_mu/cv_bandwidth_x2_vs_mu.pdf}
+        \subcaption{Mean CV bandwidth in $x_2$ direction by \glsentryname{factor}}
+    \end{subfigure}
+    \caption[Selected bandwidth by \glsentryname{factor}]
+        {Log-log plot of selected bandwidth by \glsentryname{factor} for different bandwidth selectors.
+        The slope of the log-log plot indicates the power of $n$ in the convergence rate.}
+    \label{fig:results:bandwidth_by_incidents}    
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -127,7 +180,7 @@ since this is the variable which we control.
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section[Effect of risk spread with fixed population]
-    {Effect of risk \gls{spread} for a fixed, uniform population of 10,000 and single peak with \gls{spread} 1.0}
+    {Effect of risk \glsentryname{spread} for a fixed, uniform population of 10,000 and single peak with \glsentryname{spread} 1.0}
 \label{sec:results:spread}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -140,15 +193,15 @@ since this is the variable which we control.
 Parameter & Value \\
 \hline
 Population size & 10,000 \\
-Population \gls{spread} & uniform \\
+Population \glsentryname{spread} & uniform \\
 Population center & uniform \\
-\Gls{factor} & 100 \\
-Incident \gls{spread} & 0.7, 1.0, 1.4, 2.0 \\
+\Glsentryname{factor} & 100 \\
+Incident \glsentryname{spread} & 0.7, 1.0, 1.4, 2.0 \\
 Incident center & (0,0) \\
 \hline
 \end{tabular}
 \caption[Effect of spread with fixed population]
-    {Experimental parameter values varying \gls{spread} for a fixed, uniform population of 10,000 and single peak with \gls{spread} 1.0}
+    {Experimental parameter values varying \glsentryname{spread} for a fixed, uniform population of 10,000 and single peak with \glsentryname{spread} 1.0}
 \label{tab:params:results:spread}
 \end{table}
 
