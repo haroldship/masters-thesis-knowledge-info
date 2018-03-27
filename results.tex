@@ -85,9 +85,12 @@ We then made ran several sets of experiments while changing one parameter at a t
 \def\input@path{{./results/unif_100_1.0_1h/}}
 \makeatother
 
-This section describes the results of a single experiment with risk function having a single peak with with \glsentryname{spread} 1.0 and \glsentryname{factor} of 100 on a fixed, uniform population of 10,000.
+In this section, we look at how well the \gls{dkd} performs when there is a single, central cause of disease incidents.
+The strength of this source to generate incidents degrades with the distance from it.
+We simulate this phenomenon with a risk function having a single peak with with \glsentryname{spread} 1.0 and \glsentryname{factor} of 100 on a fixed, uniform population of 10,000.
 These parameters are summarized in \cref{tab:params:unif_100_1.0_1h}.
-\Cref{fig:cases_scatter:unif_100_1.0_1h} shows the distribution of the population in \subref{fig:cases_scatter:unif_100_1.0_1h:popdist},
+\Cref{fig:cases_scatter:unif_100_1.0_1h} shows a realization, generated from the model.
+The distribution of the population in \subref{fig:cases_scatter:unif_100_1.0_1h:popdist},
 the population points that were generated in \subref{fig:cases_scatter:unif_100_1.0_1h:poppts},
 and the incidents on top of the population in \subref{fig:cases_scatter:unif_100_1.0_1h:incidentspts}.
 
@@ -183,15 +186,21 @@ and the black cross is the location of the centroid estimated peak.
 
 In \cref{fig:ise:unif_100_1.0_1h}, we look at the distribution of the \gls{ise}.
 In particular, we see that the relative and normalized \gls{ise} have similarly shaped distributions, although the scale is different.
-We also observe that the distributions are heavily skewed to the left,
+We also observe that the distributions are skewed to the right,
 indicating that for this simple setup,
-the accuracy of the \gls{dkd} is much more likely to be below its mean.
-Finally, we note that the estimates calculated with \gls{silverman} and \gls{cv} selected bandwidths and their corresponding mean values had similar performance in \gls{ise}.
+the accuracy of the \gls{dkd} for a specific sample is more likely to be below the \gls{mise}.
+Finally, we note that the estimates calculated with \gls{silverman} and \gls{cv}
+selected bandwidths and their corresponding mean values had similar performance in \gls{ise}.
+
+\Cref{fig:ise:unif_100_1.0_1h} shows the relative and normalized distributions of the \gls{iae}.
+Once again, the normalized and relative error measures have similar distributions.
+The \gls{oracle} bandwidth selection technique is still notably more accurate when comparing with \gls{iae} than with \gls{ise}.
+However, for \gls{iae} we see that \gls{cv} bandwidth selection results in a wider distribution than with \gls{silverman}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ISE distribution - unif_100_1.0_1h
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[htbp]
+\begin{figure}[tbp]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/ise-relative-histogram}
@@ -201,14 +210,14 @@ Finally, we note that the estimates calculated with \gls{silverman} and \gls{cv}
         \includegraphics[width=\textwidth]{output/ise-normalized-histogram}
         \subcaption{Normalized \glsentryname{ise}}
     \end{subfigure}
-    \caption[\glsentryname{ise}: Single-peak of 100 on uniform population]{\glsentryname{ise} histogram for a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population. Vertical lines indicate the estimated \glsentryname{mise} of the simulations.}
+    \caption[\glsentryname{ise}: Single-peak of 100 on uniform population]{\glsentryname{ise} histogram for a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population. Vertical lines indicate the estimated \glsentryname{mise} of the simulations. \glsentryname{nmise} values are multiplied by $10^9$.}
     \label{fig:ise:unif_100_1.0_1h}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % IAE distribution - unif_100_1.0_1h
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[htbp]
+\begin{figure}[tbp]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/iae-relative-histogram}
@@ -218,14 +227,14 @@ Finally, we note that the estimates calculated with \gls{silverman} and \gls{cv}
         \includegraphics[width=\textwidth]{output/iae-normalized-histogram}
         \subcaption{Normalized \glsentryname{iae}}
     \end{subfigure}
-    \caption[\glsentryname{iae}: Single-peak of 100 on uniform population]{\glsentryname{iae} histogram for a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population. Vertical lines indicate the estimated \glsentryname{mise} of the simulations.}
+    \caption[\glsentryname{iae}: Single-peak of 100 on uniform population]{\glsentryname{iae} histogram for a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population. Vertical lines indicate the estimated \glsentryname{miae} of the simulations.}
     \label{fig:iae:unif_100_1.0_1h}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Max error distribution - unif_100_1.0_1h
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[htbp]
+\begin{figure}[tbp]
     \centering
     \includegraphics[width=0.45\textwidth]{output/maxerr-histogram}
     \caption[Maximum error: uniform on uniform]{Maximum error histogram for uniform intensity on a uniform population, 100 cases}
@@ -235,17 +244,17 @@ Finally, we note that the estimates calculated with \gls{silverman} and \gls{cv}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Mean errors - unif_100_1.0_1h
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[htbp]
-\centering
-\input{output/mean_table.tex}
-\caption{Mean error rates for uniform population, single-peak risk with \glsentryname{spread} 1.0 of \glsentryname{factor} 100}
-\label{tab:errors:unif_100_1.0_1h}
+\begin{table}[tbp]
+    \centering
+    \input{output/mean_table.tex}
+    \caption{Mean error rates for uniform population, single-peak risk with \glsentryname{spread} 1.0 of \glsentryname{factor} 100}
+    \label{tab:errors:unif_100_1.0_1h}
 \end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Peaks - unif_100_1.0_1h
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[htbp]
+\begin{figure}[tbp]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/peak-dist-histogram}
@@ -262,7 +271,7 @@ Finally, we note that the estimates calculated with \gls{silverman} and \gls{cv}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Centroids - unif_100_1.0_1h
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[htbp]
+\begin{figure}[tbp]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/centroid-dist-histogram}
@@ -279,7 +288,7 @@ Finally, we note that the estimates calculated with \gls{silverman} and \gls{cv}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bandwidths - unif_100_1.0_1h
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[htbp]
+\begin{figure}[tbp]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/bandwidths-x1}
