@@ -64,13 +64,11 @@ Incident center & (0,0) \\
 \label{tab:params:template}
 \end{table}
 
-In \cref{sec:results:unif_100_unif} we take a deep look at a single experiment.
+In \cref{sec:results:unif_100_1.0_1h} we take a deep look at a single experiment.
 The rest of this chapter examines the effect of different variables on the \gls{dkd} accuracy, on the selected bandwidths, and on other statistical properties of the \gls{dkd}.
 \Cref{sec:results:number_of_incidents} describes the relationship between the accuracy of the \gls{dkd} and the magnitude of the risk function for a fixed population.
 In \cref{sec:results:spread} we look at how the spread of the risk function affects accuracy.
 In \cref{sec:results:consistency} we look at the consistency of the \gls{dkd}.
-The results of the first experiment, uniform population and a uniform intensity,
-are described in \cref{sec:results:unif_100_unif}.
 We then made ran several sets of experiments while changing one parameter at a time.
 \Cref{sec:results:unifNpop_1h} compares the results obtained by varying the size of the population.
 
@@ -82,6 +80,234 @@ We then made ran several sets of experiments while changing one parameter at a t
 \section[Results of single-peak risk on uniform population]
     {Results of a single experiment with risk function having single peak with with \glsentryname{spread} 1.0 and \glsentryname{factor} of 100 on a fixed, uniform population of 10,000}
 \label{sec:results:unif_100_1.0_1h}
+\graphicspath{{./results/unif_100_1.0_1h/}}
+\makeatletter
+\def\input@path{{./results/unif_100_1.0_1h/}}
+\makeatother
+
+This section describes the results of a single experiment with risk function having a single peak with with \glsentryname{spread} 1.0 and \glsentryname{factor} of 100 on a fixed, uniform population of 10,000.
+These parameters are summarized in \cref{tab:params:unif_100_1.0_1h}.
+\Cref{fig:cases_scatter:unif_100_1.0_1h} shows the distribution of the population in \subref{fig:cases_scatter:unif_100_1.0_1h:popdist},
+the population points that were generated in \subref{fig:cases_scatter:unif_100_1.0_1h:poppts},
+and the incidents on top of the population in \subref{fig:cases_scatter:unif_100_1.0_1h:incidentspts}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Parameter table - unif_100_1.0_1h
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{ll}
+        \hline
+        Parameter & Value \\
+        \hline
+        Population size & 10,000 \\
+        Population \glsentryname{spread} & uniform \\
+        Population center & uniform \\
+        \Glsentryname{factor} & 100 \\
+        Incident \glsentryname{spread} & 1.0 \\
+        Incident center & (0,0) \\
+        \hline
+    \end{tabular}
+    \caption[Parameters of single-peak risk of 100 on uniform population]
+        {Parameters used in single-peak risk of \glsentryname{factor} 100 with \glsentryname{spread} of 1.0 on uniform population}
+    \label{tab:params:unif_100_1.0_1h}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Example cases scatter - unif_100_1.0_1h
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[t]{0.32\textwidth}
+        \includegraphics[width=\textwidth]{output/population-heatmap}
+        \subcaption{Population distribution}
+        \label{fig:cases_scatter:unif_100_1.0_1h:popdist}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.32\textwidth}
+        \includegraphics[width=\textwidth]{output/population-points}
+        \subcaption{Population realization}
+        \label{fig:cases_scatter:unif_100_1.0_1h:poppts}
+    \end{subfigure}%
+    \begin{subfigure}[t]{0.32\textwidth}
+        \includegraphics[width=\textwidth]{output/population_and_incidents_scatter}
+        \subcaption{With incidents}
+        \label{fig:cases_scatter:unif_100_1.0_1h:incidentspts}
+    \end{subfigure}%
+    \caption[Uniform population distribution]
+        {Population distribution (a), realization (b), and sample incidents (c)}
+    \label{fig:cases_scatter:unif_100_1.0_1h}    
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Example cases heat map - unif_100_1.0_1h
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{output/true_intensity_heatmap}
+        \subcaption{True incident risk function}
+        \label{fig:cases_heatmap:unif_100_1.0_1h:true}
+    \end{subfigure}%
+    \begin{subfigure}[t]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{output/oracle_intensity_heatmap}
+        \subcaption{Incident risk estimate using Oracle bandwidth}
+        \label{fig:cases_heatmap:unif_100_1.0_1h:oracle}
+    \end{subfigure}
+
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{output/silverman_intensity_heatmap}
+        \subcaption{Incident risk estimate using Silverman bandwidth}
+        \label{fig:cases_heatmap:unif_100_1.0_1h:silverman}
+    \end{subfigure}%
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{output/CV_intensity_heatmap}
+        \subcaption{Incident risk estimate using Cross-validation bandwidth}
+        \label{fig:cases_heatmap:unif_100_1.0_1h:cv}
+    \end{subfigure}
+    \caption[Example incidents: uniform incident risk on uniform population, 100 cases]
+        {Example incidents: uniform incident risk on uniform population, 100 cases}
+    \label{fig:cases_heatmap:unif_100_1.0_1h}
+\end{figure}
+
+In order to better understand the incident risk and the estimates,
+we use a two-dimensional geographic heatmap of the study area \gls{W} to show a single simulation realization in
+\cref{fig:cases_heatmap:unif_100_1.0_1h}.
+The color of a point $(x_1, x_2)$ represents the risk or estimated risk of an incident at that point.
+\Cref{fig:cases_heatmap:unif_100_1.0_1h:true} shows a heatmap of the true distribution function.
+We see the \gls{dkd} estimates obtained using the \gls{oracle} in \subref{fig:cases_heatmap:unif_100_1.0_1h:oracle},
+\gls{silverman} in \subref{fig:cases_heatmap:unif_100_1.0_1h:silverman} and \gls{cv} in \subref{fig:cases_heatmap:unif_100_1.0_1h:cv}.
+The red dot is the location of the true peak.
+The blue diamond is the location of the estimated peak,
+and the black cross is the location of the centroid estimated peak.
+
+In \cref{fig:ise:unif_100_1.0_1h}, we look at the distribution of the \gls{ise}.
+In particular, we see that the relative and normalized \gls{ise} have similarly shaped distributions, although the scale is different.
+We also observe that the distributions are heavily skewed to the left,
+indicating that for this simple setup,
+the accuracy of the \gls{dkd} is much more likely to be below its mean.
+Finally, we note that the estimates calculated with \gls{silverman} and \gls{cv} selected bandwidths and their corresponding mean values had similar performance in \gls{ise}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ISE distribution - unif_100_1.0_1h
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{output/ise-relative-histogram}
+        \subcaption{Relative \glsentryname{ise}}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{output/ise-normalized-histogram}
+        \subcaption{Normalized \glsentryname{ise}}
+    \end{subfigure}
+    \caption[\glsentryname{ise}: Single-peak of 100 on uniform population]{\glsentryname{ise} histogram for a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population. Vertical lines indicate the estimated \glsentryname{mise} of the simulations.}
+    \label{fig:ise:unif_100_1.0_1h}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% IAE distribution - unif_100_1.0_1h
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{output/iae-relative-histogram}
+        \subcaption{Relative \glsentryname{iae}}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{output/iae-normalized-histogram}
+        \subcaption{Normalized \glsentryname{iae}}
+    \end{subfigure}
+    \caption[\glsentryname{iae}: Single-peak of 100 on uniform population]{\glsentryname{iae} histogram for a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population. Vertical lines indicate the estimated \glsentryname{mise} of the simulations.}
+    \label{fig:iae:unif_100_1.0_1h}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Max error distribution - unif_100_1.0_1h
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.45\textwidth]{output/maxerr-histogram}
+    \caption[Maximum error: uniform on uniform]{Maximum error histogram for uniform intensity on a uniform population, 100 cases}
+    \label{fig:maxerr:unif_100_1.0_1h}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Mean errors - unif_100_1.0_1h
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[htbp]
+\centering
+\input{output/mean_table.tex}
+\caption{Mean error rates for uniform population, single-peak risk with \glsentryname{spread} 1.0 of \glsentryname{factor} 100}
+\label{tab:errors:unif_100_1.0_1h}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Peaks - unif_100_1.0_1h
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{output/peak-dist-histogram}
+        \subcaption{Peak distance from truth}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{output/peak-height-histogram}
+        \subcaption{Peak heights}
+    \end{subfigure}
+    \caption[Peaks: uniform on uniform]{Peak distance from truth and height histograms for uniform intensity on a uniform population, 100 cases}
+    \label{fig:peaks:unif_100_1.0_1h}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Centroids - unif_100_1.0_1h
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{output/centroid-dist-histogram}
+        \subcaption{Centroid peak distance from truth}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{output/centroid-height-histogram}
+        \subcaption{Centroid peak heights}
+    \end{subfigure}
+    \caption[Centroids: uniform on uniform]{Centroid peak distance from truth and height histograms for uniform intensity on a uniform population, 100 cases}
+    \label{fig:centroids:unif_100_1.0_1h}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bandwidths - unif_100_1.0_1h
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{output/bandwidths-x1}
+        \subcaption{CV Bandwidths - \(X_1\)}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{output/bandwidths-x2}
+        \subcaption{CV Bandwidths - \(X_2\)}
+    \end{subfigure}
+
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{output/bandwidths-difference}
+        \subcaption{Difference between \(X_1\) and \(X_2\) bandwidths}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{output/bandwidths-silverman}
+        \subcaption{Silverman Bandwidths}
+    \end{subfigure}
+    \caption[Bandwidths: uniform on uniform]{CV bandwidths: \(X_1\), \(X_2\) and difference and Silverman bandwidth
+        histograms for uniform intensity on a uniform population, 100 cases}
+    \label{fig:bandwidths:unif_100_1.0_1h}
+\end{figure}
+
+% Restore graphics and input path
+\graphicspath{{./}}
+\makeatletter
+\def\input@path{{./}}
+\makeatother
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -114,9 +340,10 @@ Incident center & (0,0) \\
 \label{tab:params:results:number_of_incidents}
 \end{table}
 
-In this section we examine and compare the results of five experiments where the \glspl{factor} of a single-peak risk function is varied.
-For our setup, we keep the population size constant at 10,000,
-distributed uniformly throughout the study area.
+In this section we examine and compare the results of five experiments in which we vary the \glspl{factor}
+of a single-peak risk function.
+This is analogous a real-world researcher combining the several years worth of incident data from the same population.
+We keep the population size constant at 10,000, distributed uniformly throughout the study area.
 The risk function for each of the five experiments has a single peak,
 centered at the origin,
 with a \gls{spread} of 1.0.
@@ -310,237 +537,6 @@ However, the \gls{oracle} and \gls{cv} decrease faster than than \gls{silverman}
 \section{Consistency of the DKD}
 \label{sec:results:consistency}
 
-\textbf{
-\color{red}
-This table shows that the method is not consistent.
-There is an issue with the CV using gradient descent.
-However, even the Oracle and Silverman bandwidths have INCREASING normalized error.
-Also note the bandwidths are getting smaller.
-}
-
-$$
-\lambda(x_1, x_2) = \mu f\!(x_1, x_2)
-$$
-
-where $\mu$ is a constant multiplier.
-Normalized MISE is MISE divided by $\mu$.
-
-\textbf{
-    \color{red}
-    Also note that taking the average of the 2 Oracle bandwidths for $\mu=1$ is 1.35,
-    and $1.35 \mu^{-1/6}$ gives:
-    \\
-    1.5153238 \\
-    1.3500000 \\
-    1.2027133 \\
-    1.0323781 \\
-    0.9197443
-}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Results template
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Results template}
-\label{sec:results:template}
-\graphicspath{{./results/unif_100_1.0_1h/}}
-\makeatletter
-\def\input@path{{./results/unif_100_1.0_1h/}}
-\makeatother
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Example cases scatter - template
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[t]{0.32\textwidth}
-    \includegraphics[width=\textwidth]{output/population-heatmap}
-    \caption{Population distribution}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.32\textwidth}
-    \includegraphics[width=\textwidth]{output/population-points}
-    \caption{Population realization}
-    \end{subfigure}%
-    \begin{subfigure}[t]{0.32\textwidth}
-    \includegraphics[width=\textwidth]{output/population_and_incidents_scatter}
-    \caption{With incidents}
-    \end{subfigure}%
-    \caption[Uniform population distribution]
-        {Population distribution (a), realization (b), and sample incidents (c)}
-    \label{fig:cases_scatter:template}    
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Example cases heat map - template
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[t]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{output/true_intensity_heatmap}
-    \caption{True incident risk function}
-    \end{subfigure}%
-    \begin{subfigure}[t]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{output/oracle_intensity_heatmap}
-    \caption{Incident risk estimate using Oracle bandwidth}
-    \end{subfigure}
-
-
-    \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{output/silverman_intensity_heatmap}
-    \caption{Incident risk estimate using Silverman bandwidth}
-    \end{subfigure}%
-    \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{output/CV_intensity_heatmap}
-    \caption{Incident risk estimate using Cross-validation bandwidth}
-    \end{subfigure}
-    \caption[Example incidents: uniform incident risk on uniform population, 100 cases]
-        {Example incidents: uniform incident risk on uniform population, 100 cases}
-    \label{fig:cases_heatmap:template}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ISE distribution - template
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{output/ise-relative-histogram}
-    \caption{Relative ISE}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{output/ise-normalized-histogram}
-    \caption{Normalized absolute ISE}
-    \end{subfigure}
-    \caption[ISE: uniform on uniform]{Integrated squared error histogram for uniform intensity on a uniform population, 100 cases}
-    \label{fig:ise:template}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% IAE distribution - template
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{output/iae-relative-histogram}
-    \caption{Relative IAE}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{output/iae-histogram}
-    \caption{Absolute IAE}
-    \end{subfigure}
-    \caption[IAE: uniform on uniform]{Integrated absolute error histogram for uniform intensity on a uniform population, 100 cases}
-    \label{fig:iae:template}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Max error distribution - template
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.45\textwidth]{output/maxerr-histogram}
-    \caption[Maximum error: uniform on uniform]{Maximum error histogram for uniform intensity on a uniform population, 100 cases}
-    \label{fig:maxerr:template}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Mean errors - template
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[htbp]
-\centering
-\input{output/mean_table.tex}
-\caption{Mean error rates for uniform population, uniform intensity of\gls{factor} 100}
-\label{tab:errors:template}
-\end{table}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Peaks - template
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{output/peak-dist-histogram}
-    \caption{Peak distance from truth}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{output/peak-height-histogram}
-    \caption{Peak heights}
-    \end{subfigure}
-    \caption[Peaks: uniform on uniform]{Peak distance from truth and height histograms for uniform intensity on a uniform population, 100 cases}
-    \label{fig:peaks:template}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Centroids - template
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{output/centroid-dist-histogram}
-    \caption{Centroid peak distance from truth}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{output/centroid-height-histogram}
-    \caption{Centroid peak heights}
-    \end{subfigure}
-    \caption[Centroids: uniform on uniform]{Centroid peak distance from truth and height histograms for uniform intensity on a uniform population, 100 cases}
-    \label{fig:centroids:template}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Bandwidths - template
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{output/bandwidths-x1}
-    \caption{CV Bandwidths - \(X_1\)}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{output/bandwidths-x2}
-    \caption{CV Bandwidths - \(X_2\)}
-    \end{subfigure}
-
-    \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{output/bandwidths-difference}
-    \caption{Difference between \(X_1\) and \(X_2\) bandwidths}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{output/bandwidths-silverman}
-    \caption{Silverman Bandwidths}
-    \end{subfigure}
-    \caption[Bandwidths: uniform on uniform]{CV bandwidths: \(X_1\), \(X_2\) and difference and Silverman bandwidth
-        histograms for uniform intensity on a uniform population, 100 cases}
-    \label{fig:bandwidths:template}
-\end{figure}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-%% Section: Uniform risk on uniform population section
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Uniform risk on a uniform population}
-\label{sec:results:unif_100_unif}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Parameter table - template
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[htbp]
-\centering
-\begin{tabular}{ll}
-\hline
-Parameter & Value \\
-\hline
-Population size & 10,000 \\
-Population \gls{spread} & uniform \\
-\Gls{factor} & 100 \\
-Incident \gls{spread} & uniform \\
-Incident center & -- \\
-\hline
-\end{tabular}
-\caption{Parameters used in uniform risk on a uniform population}
-\label{tab:params:unif_100_unif}
-\end{table}
 
 In this section, we describe the results of 1,000 simulations conducted for a population of 10,000 points,
 distributed uniformly throughout the study area.

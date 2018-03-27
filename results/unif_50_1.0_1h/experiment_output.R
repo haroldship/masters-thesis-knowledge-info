@@ -99,11 +99,11 @@ ggplot(compare_peaks.result) +
   geom_density(aes(x=oracle.nise, colour="Oracle", linetype="Oracle"), size=0.8) +
   geom_density(aes(x=silverman.nise, colour="Silverman", linetype="Silverman"), size=0.8) +
   geom_density(aes(x=cv.nise, colour="CV", linetype="CV"), size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=oracle.mise/factor, colour="Oracle", linetype="Oracle"),
+  geom_vline(data=mean_values, aes(xintercept=10**9*oracle.mise/factor**2, colour="Oracle", linetype="Oracle"),
              size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=silverman.mise/factor, colour="Silverman", linetype="Silverman"),
+  geom_vline(data=mean_values, aes(xintercept=10**9*silverman.mise/factor**2, colour="Silverman", linetype="Silverman"),
              size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=cv.mise/factor, colour="CV", linetype="CV"),
+  geom_vline(data=mean_values, aes(xintercept=10**9*cv.mise/factor**2, colour="CV", linetype="CV"),
              size=0.8) +
   scale_linetype_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
                         values=c("dashed", "solid", "dotted")) +
@@ -150,6 +150,28 @@ ggplot(compare_peaks.result) +
   geom_vline(data=mean_values, aes(xintercept=silverman.rmiae, colour="Silverman", linetype="Silverman"),
              size=0.8) +
   geom_vline(data=mean_values, aes(xintercept=cv.rmiae, colour="CV", linetype="CV"),
+             size=0.8) +
+  scale_linetype_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
+                        values=c("dashed", "solid", "dotted")) +
+  scale_colour_brewer(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
+                      palette="Dark2")
+dev.off()
+
+pdf(file=paste(outdir, "iae-normalized-histogram.pdf", sep="/"))
+ggplot(compare_peaks.result) +
+  ggtitle("Normalized IAE") +
+  theme_linedraw() +
+  theme(axis.ticks=element_blank(), axis.text.y=element_blank()) +
+  xlab("Normalized IAE") +
+  ylab(NULL) +
+  geom_density(aes(x=oracle.niae, colour="Oracle", linetype="Oracle"), size=0.8) +
+  geom_density(aes(x=silverman.niae, colour="Silverman", linetype="Silverman"), size=0.8) +
+  geom_density(aes(x=cv.niae, colour="CV", linetype="CV"), size=0.8) +
+  geom_vline(data=mean_values, aes(xintercept=oracle.miae/factor, colour="Oracle", linetype="Oracle"),
+             size=0.8) +
+  geom_vline(data=mean_values, aes(xintercept=silverman.miae/factor, colour="Silverman", linetype="Silverman"),
+             size=0.8) +
+  geom_vline(data=mean_values, aes(xintercept=cv.miae/factor, colour="CV", linetype="CV"),
              size=0.8) +
   scale_linetype_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
                         values=c("dashed", "solid", "dotted")) +

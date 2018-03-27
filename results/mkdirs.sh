@@ -1,6 +1,8 @@
 #!/bin/bash
 
 INCIDENTS="50 100 200 500 1000"
+BAK="bak"
+#BAK=""
 
 # make uniform pop, uniform risk
 for I in $INCIDENTS; do
@@ -13,7 +15,7 @@ for I in $INCIDENTS; do
     mkdir $dstr
   fi
   cp -a template/* $dstr
-  sed -e "s/genhill(sigma=1.0)/genunif()/" -e "s/EN.i=50/EN.i=${I}/" -i "bak" $dstr/experiment_setup.R
+  sed -e "s/genhill(sigma=1.0)/genunif()/" -e "s/EN.i=50/EN.i=${I}/" -i $BAK $dstr/experiment_setup.R
 done
 
 # make uniform pop, 1 peak risk
@@ -27,7 +29,7 @@ for I in $INCIDENTS; do
     mkdir $dstr
   fi
   cp -a template/* $dstr
-  sed -e "s/EN.i=50/EN.i=${I}/" -i "bak" $dstr/experiment_setup.R
+  sed -e "s/EN.i=50/EN.i=${I}/" -i $BAK $dstr/experiment_setup.R
 done
 
 # make uniform but increasing pop, 1 peak risk
@@ -43,7 +45,7 @@ for I in $INCIDENTS; do
     mkdir $dstr
   fi
   cp -a template/* $dstr
-  sed -e "s/N.p=10000/N.p=${P}/" -e "s/EN.i=50/EN.i=${I}/" -i "bak" $dstr/experiment_setup.R
+  sed -e "s/N.p=10000/N.p=${P}/" -e "s/EN.i=50/EN.i=${I}/" -i $BAK $dstr/experiment_setup.R
 done
 
 # make uniform pop, 1 peak risk with changing sigma
@@ -59,7 +61,7 @@ for I in $INCIDENTS; do
       mkdir $dstr
     fi
     cp -a template/* $dstr
-    sed -e "s/genhill(sigma=1.0)/genhill(sigma=${S})/" -e "s/EN.i=50/EN.i=${I}/" -i "bak" $dstr/experiment_setup.R
+    sed -e "s/genhill(sigma=1.0)/genhill(sigma=${S})/" -e "s/EN.i=50/EN.i=${I}/" -i $BAK $dstr/experiment_setup.R
 done
 done
 # make uniform pop, 1 peak risk with changing sigma
@@ -74,7 +76,7 @@ for S in $SIGMAS; do
     mkdir $dstr
   fi
   cp -a template/* $dstr
-  sed -e "s/#c/c/" -e "s/sigma2=1.0/sigma2=${S}/" -e "s/sigma1=1.0/sigma1=${S}/" -e "s/EN.i=50/EN.i=100/" -i "bak" $dstr/experiment_setup.R
+  sed -e "s/#c/c/" -e "s/sigma2=1.0/sigma2=${S}/" -e "s/sigma1=1.0/sigma1=${S}/" -e "s/EN.i=50/EN.i=100/" -i $BAK $dstr/experiment_setup.R
 done
 
 #   incident_rate=gentwohills(center1=c(2.0,0), factor1=0.4, center2=c(-2.0,0), factor2=0.6)
@@ -91,7 +93,7 @@ for D in $DISTS; do
     mkdir $dstr
   fi
   cp -a template/* $dstr
-  sed -e "s/genhill(sigma=1.0)/gentwohills(center1=c(${X},0), factor1=0.4, center2=c(-${X},0), factor2=0.6)/" -e "s/EN.i=50/EN.i=100/" -i "bak" $dstr/experiment_setup.R
+  sed -e "s/genhill(sigma=1.0)/gentwohills(center1=c(${X},0), factor1=0.4, center2=c(-${X},0), factor2=0.6)/" -e "s/EN.i=50/EN.i=100/" -i $BAK $dstr/experiment_setup.R
 done
 
 # distance between incident peak and 
@@ -107,5 +109,5 @@ for D in $DISTS; do
     mkdir $dstr
   fi
   cp -a template/* $dstr
-  sed -e "s/#c1=0.0/c1=${X}/" -e "s/#c2/c2/" -e "s/sigma1=1.0/sigma1=1.4/" -e "s/sigma2=1.0/sigma2=1.4/" -e "s/incident_rate=genhill(sigma=1.0)/incident_rate=genhill(center=c(-${X},0),sigma=1.0)/" -e "s/EN.i=50/EN.i=100/" -i "bak" $dstr/experiment_setup.R
+  sed -e "s/#c1=0.0/c1=${X}/" -e "s/#c2/c2/" -e "s/sigma1=1.0/sigma1=1.4/" -e "s/sigma2=1.0/sigma2=1.4/" -e "s/incident_rate=genhill(sigma=1.0)/incident_rate=genhill(center=c(-${X},0),sigma=1.0)/" -e "s/EN.i=50/EN.i=100/" -i $BAK $dstr/experiment_setup.R
 done
