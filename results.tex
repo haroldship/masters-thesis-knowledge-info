@@ -184,7 +184,34 @@ The red dot is the location of the true peak.
 The blue diamond is the location of the estimated peak,
 and the black cross is the location of the centroid estimated peak.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Mean errors - unif_100_1.0_1h
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[htbp]
+    \centering
+    \input{output/mean_table.tex}
+    \caption{Mean error rates for uniform population, single-peak risk with \glsentryname{spread} 1.0 of \glsentryname{factor} 100}
+    \label{tab:errors:unif_100_1.0_1h}
+\end{table}
+
+\Cref{tab:errors:unif_100_1.0_1h} contains a summary of all of the measures of accuracy for this experiment.
+We can see that for most measures, the \gls{oracle} selected bandwidth provides the best results.
+Since the \gls{oracle} bandwidth is designed to be approximate the \gls{mise}-optimal bandwidth \gls{h_opt},
+this is not surprising.
+However, in real world scenarios, the true function is unknown, and hence it is impossible to compute the \gls{oracle} bandwidth.
+Therefore, we are interested in knowing how close the \gls{silverman} and \gls{cv} bandwidth selection methods can get to the \gls{oracle} for the different measures.
+One exception is the \gls{peak bias}, which measures the difference between the maximum of the estimated risk and the maximum of the true risk (see \cref{subsec:method:peak_bias}).
+In this experiment, the \gls{silverman} bandwidth produced a better \gls{peak bias} value than the other bandwidth selectors. 
+The \gls{oracle} and \gls{cv} bandwidths resulted in negative biases,
+which is the logical result since the general result of smoothing is to lower the high values and raise the low values.
+The \gls{silverman} bandwidth, on the other hand, produced a positive value,
+which indicates undersmoothing.
+This requires further study.
+
 In \cref{fig:ise:unif_100_1.0_1h}, we look at the distribution of the \gls{ise}.
+As described in \cref{subsec:method:mise},
+the \gls{iae} gives a summary of the error of the estimate over all of \gls{W},
+that penalizes higher error values.
 In particular, we see that the relative and normalized \gls{ise} have similarly shaped distributions, although the scale is different.
 We also observe that the distributions are skewed to the right,
 indicating that for this simple setup,
@@ -192,15 +219,10 @@ the accuracy of the \gls{dkd} for a specific sample is more likely to be below t
 Finally, we note that the estimates calculated with \gls{silverman} and \gls{cv}
 selected bandwidths and their corresponding mean values had similar performance in \gls{ise}.
 
-\Cref{fig:ise:unif_100_1.0_1h} shows the relative and normalized distributions of the \gls{iae}.
-Once again, the normalized and relative error measures have similar distributions.
-The \gls{oracle} bandwidth selection technique is still notably more accurate when comparing with \gls{iae} than with \gls{ise}.
-However, for \gls{iae} we see that \gls{cv} bandwidth selection results in a wider distribution than with \gls{silverman}.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ISE distribution - unif_100_1.0_1h
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[tbp]
+\begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/ise-relative-histogram}
@@ -210,14 +232,14 @@ However, for \gls{iae} we see that \gls{cv} bandwidth selection results in a wid
         \includegraphics[width=\textwidth]{output/ise-normalized-histogram}
         \subcaption{Normalized \glsentryname{ise}}
     \end{subfigure}
-    \caption[\glsentryname{ise}: Single-peak of 100 on uniform population]{\glsentryname{ise} histogram for a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population. Vertical lines indicate the estimated \glsentryname{mise} of the simulations. \glsentryname{nmise} values are multiplied by $10^9$.}
+    \caption[\glsentryname{ise}: Single-peak of 100 on uniform population]{\glsentryname{ise} density for a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population. Vertical lines indicate the estimated \glsentryname{mise} of the simulations. \glsentryname{nmise} values are multiplied by $10^9$.}
     \label{fig:ise:unif_100_1.0_1h}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % IAE distribution - unif_100_1.0_1h
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[tbp]
+\begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/iae-relative-histogram}
@@ -227,34 +249,42 @@ However, for \gls{iae} we see that \gls{cv} bandwidth selection results in a wid
         \includegraphics[width=\textwidth]{output/iae-normalized-histogram}
         \subcaption{Normalized \glsentryname{iae}}
     \end{subfigure}
-    \caption[\glsentryname{iae}: Single-peak of 100 on uniform population]{\glsentryname{iae} histogram for a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population. Vertical lines indicate the estimated \glsentryname{miae} of the simulations.}
+    \caption[\glsentryname{iae}: Single-peak of 100 on uniform population]{\glsentryname{iae} density for a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population. Vertical lines indicate the estimated \glsentryname{miae} of the simulations.}
     \label{fig:iae:unif_100_1.0_1h}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Max error distribution - unif_100_1.0_1h
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[tbp]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.45\textwidth]{output/maxerr-histogram}
-    \caption[Maximum error: uniform on uniform]{Maximum error histogram for uniform intensity on a uniform population, 100 cases}
+    \caption[\glsentryname{supremum error}: Single-peak of 100 on uniform population]{\glsentryname{supremum error} density for a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population. Vertical lines indicate the estimated mean \glsentryname{supremum error} of the simulations.}
     \label{fig:maxerr:unif_100_1.0_1h}
 \end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Mean errors - unif_100_1.0_1h
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[tbp]
-    \centering
-    \input{output/mean_table.tex}
-    \caption{Mean error rates for uniform population, single-peak risk with \glsentryname{spread} 1.0 of \glsentryname{factor} 100}
-    \label{tab:errors:unif_100_1.0_1h}
-\end{table}
+\Cref{fig:ise:unif_100_1.0_1h} shows the relative and normalized distributions of the \gls{iae}.
+As described in \cref{subsec:method:miae},
+the \gls{iae} gives a summary of the error of the estimate over all of \gls{W},
+giving equal weight to all error values.
+Once again, the normalized and relative error measures have similar distributions.
+The \gls{oracle} bandwidth selection technique is still notably more accurate when comparing with \gls{iae} than with \gls{ise}.
+However, for \gls{iae} we see that \gls{cv} bandwidth selection results in a wider distribution than with \gls{silverman}.
+
+In \cref{fig:maxerr:unif_100_1.0_1h}, we look at the distribution of the \gls{supremum error}.
+As described in \cref{subsec:method:sup_error},
+the \gls{supremum error} is the worst-case error of the estimate on \gls{W}.
+We observe that the distributions are once again skewed to the right,
+indicating that for this simple setup,
+the worst-case accuracy of the \gls{dkd} for a specific sample is more likely to be below the average \gls{supremum error}.
+Finally, we note that the estimates calculated with \gls{silverman} and \gls{cv}
+selected bandwidths and their corresponding mean values had similar performance in \gls{supremum error}.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Peaks - unif_100_1.0_1h
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[tbp]
+\begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/peak-dist-histogram}
@@ -271,7 +301,7 @@ However, for \gls{iae} we see that \gls{cv} bandwidth selection results in a wid
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Centroids - unif_100_1.0_1h
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[tbp]
+\begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/centroid-dist-histogram}
@@ -288,7 +318,7 @@ However, for \gls{iae} we see that \gls{cv} bandwidth selection results in a wid
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bandwidths - unif_100_1.0_1h
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[tbp]
+\begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/bandwidths-x1}

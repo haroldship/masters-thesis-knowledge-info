@@ -23,7 +23,7 @@ if (! dir.exists(outdir)) {
 source("experiment_setup.R")
 factor <- experiment$EN.i
 
-# 2-4: load previous experiment
+# 2-4: load previous experiment, compute normalized
 load("output/experiment.RData")
 compare_peaks.result$oracle.nise <- 10**9 * compare_peaks.result$oracle.ise / factor**2
 compare_peaks.result$silverman.nise <- 10**9 * compare_peaks.result$silverman.ise / factor**2
@@ -36,6 +36,18 @@ compare_peaks.result$cv.niae <- compare_peaks.result$cv.iae / factor
 compare_peaks.result$oracle.nsup <- compare_peaks.result$oracle.sup / factor
 compare_peaks.result$silverman.nsup <- compare_peaks.result$silverman.sup / factor
 compare_peaks.result$cv.nsup <- compare_peaks.result$cv.sup / factor
+
+mean_values$oracle.nmise <- 10**9 * mean_values$oracle.mise / factor**2
+mean_values$silverman.nmise <- 10**9 * mean_values$silverman.mise / factor**2
+mean_values$cv.nmise <- 10**9 * mean_values$cv.mise / factor**2
+
+mean_values$oracle.nmiae <- mean_values$oracle.miae / factor
+mean_values$silverman.nmiae <- mean_values$silverman.miae / factor
+mean_values$cv.nmiae <- mean_values$cv.miae / factor
+
+mean_values$oracle.nmsup <- mean_values$oracle.msup / factor
+mean_values$silverman.nmsup <- mean_values$silverman.msup / factor
+mean_values$cv.nmsup <- mean_values$cv.msup / factor
 
 # 5. Output the results
 
@@ -67,217 +79,56 @@ dev.off()
 
 # b) error histograms
 
-pdf(file=paste(outdir, "ise-relative-histogram.pdf", sep="/"))
-ggplot(compare_peaks.result) +
-  ggtitle("Relative ISE") +
-  theme_linedraw() +
-  theme(axis.ticks=element_blank(), axis.text.y=element_blank()) +
-  xlab("Relative ISE") +
-  ylab(NULL) +
-  geom_density(aes(x=oracle.rise, colour="Oracle", linetype="Oracle"), size=0.8) +
-  geom_density(aes(x=silverman.rise, colour="Silverman", linetype="Silverman"), size=0.8) +
-  geom_density(aes(x=cv.rise, colour="CV", linetype="CV"), size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=oracle.rmise, colour="Oracle", linetype="Oracle"),
-             size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=silverman.rmise, colour="Silverman", linetype="Silverman"),
-             size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=cv.rmise, colour="CV", linetype="CV"),
-             size=0.8) +
-  scale_linetype_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
-                        values=c("dashed", "solid", "dotted")) +
-  scale_colour_brewer(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
-                      palette="Dark2")
-dev.off()
+error_hist <- function(df, title, e, m, filename) {
+  oe <- paste('oracle', e, sep='.')
+  se <- paste('cv', e, sep='.')
+  ce <- paste('silverman', e, sep='.')
+  om <- paste('oracle', m, sep='.')
+  sm <- paste('cv', m, sep='.')
+  cm <- paste('silverman', m, sep='.')
+  pdf(file=paste(outdir, filename, sep="/"))
+  g <- ggplot(df) +
+#    ggtitle(title) +
+    theme_classic() +
+    theme(axis.ticks=element_blank(), axis.text.y=element_blank()) +
+    theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+          legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+          legend.key.size=unit(1.5, 'cm')) +
+    ylab(NULL) +
+    xlab(NULL) +
+    scale_linetype_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
+                          values=c("twodash", "solid", "dashed")) +
+    scale_colour_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
+                        values=brewer.pal(3, "Dark2")) +
+    geom_density(aes_string(x=oe, colour='"Oracle"', linetype='"Oracle"'), size=0.8) +
+    geom_density(aes_string(x=se, colour='"Silverman"', linetype='"Silverman"'), size=0.8) +
+    geom_density(aes_string(x=ce, colour='"CV"', linetype='"CV"'), size=0.8) +
+    geom_vline(data=mean_values, aes_string(xintercept=om, colour='"Oracle"', linetype='"Oracle"'),
+               size=0.8) +
+    geom_vline(data=mean_values, aes_string(xintercept=sm, colour='"Silverman"', linetype='"Silverman"'),
+               size=0.8) +
+    geom_vline(data=mean_values, aes_string(xintercept=cm, colour='"CV"', linetype='"CV"'),
+               size=0.8)
+  print(g)
+  dev.off()
+}
 
-pdf(file=paste(outdir, "ise-normalized-histogram.pdf", sep="/"))
-ggplot(compare_peaks.result) +
-  ggtitle("Normalized ISE") +
-  theme_linedraw() +
-  theme(axis.ticks=element_blank(), axis.text.y=element_blank()) +
-  xlab("Normalized ISE") +
-  ylab(NULL) +
-  geom_density(aes(x=oracle.nise, colour="Oracle", linetype="Oracle"), size=0.8) +
-  geom_density(aes(x=silverman.nise, colour="Silverman", linetype="Silverman"), size=0.8) +
-  geom_density(aes(x=cv.nise, colour="CV", linetype="CV"), size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=10**9*oracle.mise/factor**2, colour="Oracle", linetype="Oracle"),
-             size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=10**9*silverman.mise/factor**2, colour="Silverman", linetype="Silverman"),
-             size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=10**9*cv.mise/factor**2, colour="CV", linetype="CV"),
-             size=0.8) +
-  scale_linetype_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
-                        values=c("dashed", "solid", "dotted")) +
-  scale_colour_brewer(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
-                      palette="Dark2")
-dev.off()
+error_hist(compare_peaks.result, "Relative ISE", 'rise', 'rmise', 'ise-relative-histogram.pdf')
+error_hist(compare_peaks.result, "Normalized ISE", 'nise', 'nmise', 'ise-normalized-histogram.pdf')
+error_hist(compare_peaks.result, "ISE", 'ise', 'mise', 'ise-histogram.pdf')
 
+error_hist(compare_peaks.result, "Relative IAE", 'riae', 'rmiae', 'iae-relative-histogram.pdf')
+error_hist(compare_peaks.result, "Normalized IAE", 'niae', 'nmiae', 'iae-normalized-histogram.pdf')
+error_hist(compare_peaks.result, "IAE", 'iae', 'miae', 'iae-histogram.pdf')
 
-pdf(file=paste(outdir, "ise-histogram.pdf", sep="/"))
-ggplot(compare_peaks.result) +
-  ggtitle("ISE") +
-  theme_linedraw() +
-  theme(axis.ticks=element_blank(), axis.text.y=element_blank()) +
-  xlab("ISE") +
-  ylab(NULL) +
-  geom_density(aes(x=oracle.ise, colour="Oracle", linetype="Oracle"), size=0.8) +
-  geom_density(aes(x=silverman.ise, colour="Silverman", linetype="Silverman"), size=0.8) +
-  geom_density(aes(x=cv.ise, colour="CV", linetype="CV"), size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=oracle.mise, colour="Oracle", linetype="Oracle"),
-             size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=silverman.mise, colour="Silverman", linetype="Silverman"),
-             size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=cv.mise, colour="CV", linetype="CV"),
-             size=0.8) +
-  scale_linetype_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
-                        values=c("dashed", "solid", "dotted")) +
-  scale_colour_brewer(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
-                      palette="Dark2")
+error_hist(compare_peaks.result, "Supremum", 'sup', 'msup', 'maxerr-histogram.pdf')
 
-dev.off()
+error_hist(compare_peaks.result, "Relative Peak distances - centroid", 'cent_dist', 'mcdist', 'centroid-dist-histogram.pdf')
+error_hist(compare_peaks.result, "Peak distances", 'peak_dist', 'mdist', 'peak-dist-histogram.pdf')
 
-pdf(file=paste(outdir, "iae-relative-histogram.pdf", sep="/"))
-ggplot(compare_peaks.result) +
-  ggtitle("Relative IAE") +
-  theme_linedraw() +
-  theme(axis.ticks=element_blank(), axis.text.y=element_blank()) +
-  xlab("Relative IAE") +
-  ylab(NULL) +
-  geom_density(aes(x=oracle.riae, colour="Oracle", linetype="Oracle"), size=0.8) +
-  geom_density(aes(x=silverman.riae, colour="Silverman", linetype="Silverman"), size=0.8) +
-  geom_density(aes(x=cv.riae, colour="CV", linetype="CV"), size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=oracle.rmiae, colour="Oracle", linetype="Oracle"),
-             size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=silverman.rmiae, colour="Silverman", linetype="Silverman"),
-             size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=cv.rmiae, colour="CV", linetype="CV"),
-             size=0.8) +
-  scale_linetype_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
-                        values=c("dashed", "solid", "dotted")) +
-  scale_colour_brewer(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
-                      palette="Dark2")
-dev.off()
+error_hist(compare_peaks.result, "Peak error - centroid", 'cent_err', 'mcerr', 'centroid-height-histogram.pdf')
+error_hist(compare_peaks.result, "Peak error", 'peak_err', 'merr', 'peak-height-histogram.pdf')
 
-pdf(file=paste(outdir, "iae-normalized-histogram.pdf", sep="/"))
-ggplot(compare_peaks.result) +
-  ggtitle("Normalized IAE") +
-  theme_linedraw() +
-  theme(axis.ticks=element_blank(), axis.text.y=element_blank()) +
-  xlab("Normalized IAE") +
-  ylab(NULL) +
-  geom_density(aes(x=oracle.niae, colour="Oracle", linetype="Oracle"), size=0.8) +
-  geom_density(aes(x=silverman.niae, colour="Silverman", linetype="Silverman"), size=0.8) +
-  geom_density(aes(x=cv.niae, colour="CV", linetype="CV"), size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=oracle.miae/factor, colour="Oracle", linetype="Oracle"),
-             size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=silverman.miae/factor, colour="Silverman", linetype="Silverman"),
-             size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=cv.miae/factor, colour="CV", linetype="CV"),
-             size=0.8) +
-  scale_linetype_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
-                        values=c("dashed", "solid", "dotted")) +
-  scale_colour_brewer(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
-                      palette="Dark2")
-dev.off()
-
-pdf(file=paste(outdir, "iae-histogram.pdf", sep="/"))
-ggplot(compare_peaks.result) +
-  ggtitle("IAE") +
-  theme_linedraw() +
-  theme(axis.ticks=element_blank(), axis.text.y=element_blank()) +
-  xlab("IAE") +
-  ylab(NULL) +
-  geom_density(aes(x=oracle.iae, colour="Oracle", linetype="Oracle"), size=0.8) +
-  geom_density(aes(x=silverman.iae, colour="Silverman", linetype="Silverman"), size=0.8) +
-  geom_density(aes(x=cv.iae, colour="CV", linetype="CV"), size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=oracle.miae, colour="Oracle", linetype="Oracle"),
-             size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=silverman.miae, colour="Silverman", linetype="Silverman"),
-             size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=cv.miae, colour="CV", linetype="CV"),
-             size=0.8) +
-  scale_linetype_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
-                        values=c("dashed", "solid", "dotted")) +
-  scale_colour_brewer(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
-                      palette="Dark2")
-dev.off()
-
-pdf(file=paste(outdir, "maxerr-histogram.pdf", sep="/"))
-ggplot(compare_peaks.result) +
-  ggtitle("Sup (Maximum)") +
-  theme_linedraw() +
-  theme(axis.ticks=element_blank(), axis.text.y=element_blank()) +
-  xlab("Sup (Maximum) Error") +
-  ylab(NULL) +
-  geom_density(aes(x=oracle.sup, colour="Oracle", linetype="Oracle"), size=0.8) +
-  geom_density(aes(x=silverman.sup, colour="Silverman", linetype="Silverman"), size=0.8) +
-  geom_density(aes(x=cv.sup, colour="CV", linetype="CV"), size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=oracle.msup, colour="Oracle", linetype="Oracle"),
-             size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=silverman.msup, colour="Silverman", linetype="Silverman"),
-             size=0.8) +
-  geom_vline(data=mean_values, aes(xintercept=cv.msup, colour="CV", linetype="CV"),
-             size=0.8) +
-  scale_linetype_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
-                        values=c("dashed", "solid", "dotted")) +
-  scale_colour_brewer(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
-                      palette="Dark2")
-dev.off()
-
-pdf(file=paste(outdir, "centroid-dist-histogram.pdf", sep="/"))
-ggplot(compare_peaks.result) +
-  ggtitle("Relative Peak distances - centroid") +
-  geom_histogram(aes(x=cv.cent_dist, fill="CV"), alpha=.5) +
-  geom_histogram(aes(x=oracle.cent_dist, fill="Oracle"), alpha=.5) +
-  geom_histogram(aes(x=silverman.cent_dist, fill="Silverman"), alpha=.5) +
-  geom_vline(data=mean_values, aes(xintercept=oracle.mcdist, colour="Oracle"),
-             linetype="dashed", size=1, show.legend=FALSE) +
-  geom_vline(data=mean_values, aes(xintercept=cv.mcdist, colour="CV"),
-             linetype="dashed", size=1, show.legend=FALSE) +
-  geom_vline(data=mean_values, aes(xintercept=silverman.mcdist, colour="Silverman"),
-             linetype="dashed", size=1, show.legend=FALSE)
-dev.off()
-
-pdf(file=paste(outdir, "peak-dist-histogram.pdf", sep="/"))
-ggplot(compare_peaks.result) +
-  ggtitle("Peak distances") +
-  geom_histogram(aes(x=cv.peak_dist, fill="CV"), alpha=.5) +
-  geom_histogram(aes(x=oracle.peak_dist, fill="Oracle"), alpha=.5) +
-  geom_histogram(aes(x=silverman.peak_dist, fill="Silverman"), alpha=.5) +
-  geom_vline(data=mean_values, aes(xintercept=oracle.mdist, colour="Oracle"),
-             linetype="dashed", size=1, show.legend=FALSE) +
-  geom_vline(data=mean_values, aes(xintercept=cv.mdist, colour="CV"),
-             linetype="dashed", size=1, show.legend=FALSE) +
-  geom_vline(data=mean_values, aes(xintercept=silverman.mdist, colour="Silverman"),
-             linetype="dashed", size=1, show.legend=FALSE)
-dev.off()
-
-pdf(file=paste(outdir, "centroid-height-histogram.pdf", sep="/"))
-ggplot(compare_peaks.result) +
-  ggtitle("Peak height error - centroid") +
-  geom_histogram(aes(x=cv.cent_err, fill="CV"), alpha=.5) +
-  geom_histogram(aes(x=oracle.cent_err, fill="Oracle"), alpha=.5) +
-  geom_histogram(aes(x=silverman.cent_err, fill="Silverman"), alpha=.5) +
-  geom_vline(data=mean_values, aes(xintercept=oracle.mcerr, colour="Oracle"),
-             linetype="dashed", size=1, show.legend=FALSE) +
-  geom_vline(data=mean_values, aes(xintercept=cv.mcerr, colour="CV"),
-             linetype="dashed", size=1, show.legend=FALSE) +
-  geom_vline(data=mean_values, aes(xintercept=silverman.mcerr, colour="Silverman"),
-             linetype="dashed", size=1, show.legend=FALSE)
-dev.off()
-
-pdf(file=paste(outdir, "peak-height-histogram.pdf", sep="/"))
-ggplot(compare_peaks.result) +
-  ggtitle("Peak height error") +
-  geom_histogram(aes(x=cv.peak_err, fill="CV"), alpha=.5) +
-  geom_histogram(aes(x=oracle.peak_err, fill="Oracle"), alpha=.5) +
-  geom_histogram(aes(x=silverman.peak_err, fill="Silverman"), alpha=.5) +
-  geom_vline(data=mean_values, aes(xintercept=oracle.merr, colour="Oracle"),
-             linetype="dashed", size=1, show.legend=FALSE) +
-  geom_vline(data=mean_values, aes(xintercept=cv.merr, colour="CV"),
-             linetype="dashed", size=1, show.legend=FALSE) +
-  geom_vline(data=mean_values, aes(xintercept=silverman.merr, colour="Silverman"),
-             linetype="dashed", size=1, show.legend=FALSE)
-dev.off()
 
 # c) bandwidth plots
 pdf(file=paste(outdir, "bandwidths-x1.pdf", sep="/"))

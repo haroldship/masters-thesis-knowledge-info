@@ -1,8 +1,8 @@
 #!/bin/bash
 
 INCIDENTS="50 100 200 500 1000"
-BAK="bak"
-#BAK=""
+#BAK="bak"
+BAK=""
 
 # make uniform pop, uniform risk
 for I in $INCIDENTS; do
