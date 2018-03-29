@@ -31,6 +31,7 @@ This gave us a study area with dimensions \(8 \times 8\), with incidents concent
 For evaluating the \gls{dkd} we used a grid size of 0.5.
 
 A table similar to \cref{tab:params:template}, describing the parameter ranges used in the related experiments appears at the beginning of each section below.
+This table summarizes the values from \cref{tab:experimental_parameters} that are used to run the experiments in that section.
 The first row in the table contains the \textit{population size} or \textit{sizes} used in the experiment.
 The second row contains the \textit{population \gls{spread}}, which controls how quickly the population density drops from the peak.
 We use the standard deviation \ensuremath\sigma of an independent, bivariate normal distribution with equal variances for this.
@@ -47,21 +48,21 @@ The sixth and last row in the the table contains the \textit{incident center}, w
 % Parameter table - template
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[htbp]
-\centering
-\begin{tabular}{ll}
-\hline
-Parameter & Value \\
-\hline
-Population size & 10,000 \\
-Population \glsentryname{spread} & 1.0 \\
-Population center & (0,0) \\
-\Glsentryname{factor} & 100, 200 \\
-Incident \glsentryname{spread} & 1.0 \\
-Incident center & (0,0) \\
-\hline
-\end{tabular}
-\caption{Experimental parameters and example values}
-\label{tab:params:template}
+    \centering
+    \begin{tabular}{ll}
+        \hline
+        Parameter & Value \\
+        \hline
+        Population size & 10,000 \\
+        Population \glsentryname{spread} & 1.0 \\
+        Population center & (0,0) \\
+        \Glsentryname{factor} & 100, 200 \\
+        Incident \glsentryname{spread} & 1.0 \\
+        Incident center & (0,0) \\
+        \hline
+    \end{tabular}
+    \caption{Experimental parameters template and example values}
+    \label{tab:params:template}
 \end{table}
 
 In \cref{sec:results:unif_100_1.0_1h} we take a deep look at a single experiment.
@@ -112,7 +113,7 @@ and the incidents on top of the population in \subref{fig:cases_scatter:unif_100
         \hline
     \end{tabular}
     \caption[Parameters of single-peak risk of 100 on uniform population]
-        {Parameters used in single-peak risk of \glsentryname{factor} 100 with \glsentryname{spread} of 1.0 on uniform population}
+        {Parameters used in a single experiment with a single-peak risk of \glsentryname{factor} 100 with \glsentryname{spread} of 1.0 on uniform population of 10,000.}
     \label{tab:params:unif_100_1.0_1h}
 \end{table}
 
@@ -137,8 +138,8 @@ and the incidents on top of the population in \subref{fig:cases_scatter:unif_100
         \subcaption{With incidents}
         \label{fig:cases_scatter:unif_100_1.0_1h:incidentspts}
     \end{subfigure}%
-    \caption[Uniform population distribution]
-        {Population distribution (a), realization (b), and sample incidents (c)}
+    \caption[Example population and incidents: single-peak risk on uniform population]
+        {Example population and incidents of one realization of single-peak risk of \glsentryname{factor} 100 with \glsentryname{spread} of 1.0 on a uniform population of 10,000. The red dots are the true peak. The blue diamonds are the peaks of the estimates. The black crosses are the centroid peaks of the estimates.}
     \label{fig:cases_scatter:unif_100_1.0_1h}    
 \end{figure}
 
@@ -289,12 +290,14 @@ selected bandwidths and their corresponding mean values had similar performance 
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/peak-dist-histogram}
         \subcaption{Peak distance from truth}
+        \label{fig:peaks:unif_100_1.0_1h:dist}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/peak-height-histogram}
-        \subcaption{Peak heights}
+        \subcaption{Peak height error}
+        \label{fig:peaks:unif_100_1.0_1h:height}
     \end{subfigure}
-    \caption[Peaks: uniform on uniform]{Peak distance from truth and height histograms for uniform intensity on a uniform population, 100 cases}
+    \caption[Peak errors: single peak on uniform]{Peak distance from truth and height histograms for uniform intensity on a uniform population, 100 cases}
     \label{fig:peaks:unif_100_1.0_1h}
 \end{figure}
 
@@ -309,11 +312,13 @@ selected bandwidths and their corresponding mean values had similar performance 
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/centroid-height-histogram}
-        \subcaption{Centroid peak heights}
+        \subcaption{Centroid peak height error}
     \end{subfigure}
-    \caption[Centroids: uniform on uniform]{Centroid peak distance from truth and height histograms for uniform intensity on a uniform population, 100 cases}
+    \caption[Centroid errors: single peak on uniform]{Centroid peak distance from truth and height histograms for uniform intensity on a uniform population, 100 cases}
     \label{fig:centroids:unif_100_1.0_1h}
 \end{figure}
+
+The peak distances (\cref{fig:peaks:unif_100_1.0_1h:dist}) and peak height errors (\cref{fig:peaks:unif_100_1.0_1h:height}).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bandwidths - unif_100_1.0_1h
@@ -322,16 +327,16 @@ selected bandwidths and their corresponding mean values had similar performance 
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/bandwidths-x1}
-        \subcaption{CV Bandwidths - \(X_1\)}
+        \subcaption{CV Bandwidths - \(x_1\)}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/bandwidths-x2}
-        \subcaption{CV Bandwidths - \(X_2\)}
+        \subcaption{CV Bandwidths - \(x_2\)}
     \end{subfigure}
 
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/bandwidths-difference}
-        \subcaption{Difference between \(X_1\) and \(X_2\) bandwidths}
+        \subcaption{Difference between \(x_1\) and \(x_2\) bandwidths}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/bandwidths-silverman}

@@ -56,9 +56,8 @@ pdf(file=paste(outdir, "population-heatmap.pdf", sep="/"))
 p <- levelplot(experiment$pop.true,
                row.values=experiment$region$x1,
                column.values=experiment$region$x2,
-               xlab=expression(X[1]),
-               ylab=expression(X[2]),
-               main="True population distribution")
+               xlab=expression(x[1]),
+               ylab=expression(x[2]))
 print(p)
 dev.off()
 
@@ -71,9 +70,8 @@ p <- xyplot(X2 ~ X1, data=pop,
             aspect=1,
             xlim=c(experiment$region$x1.min, experiment$region$x1.max),
             ylim=c(experiment$region$x2.min, experiment$region$x2.max),
-            xlab=expression(X[1]),
-            ylab=expression(X[2]),
-            main="Population locations")
+            xlab=expression(x[1]),
+            ylab=expression(x[2]))
 print(p)
 dev.off()
 
@@ -81,16 +79,18 @@ dev.off()
 
 error_hist <- function(df, title, e, m, filename) {
   oe <- paste('oracle', e, sep='.')
-  se <- paste('cv', e, sep='.')
-  ce <- paste('silverman', e, sep='.')
+  se <- paste('silverman', e, sep='.')
+  ce <- paste('cv', e, sep='.')
   om <- paste('oracle', m, sep='.')
-  sm <- paste('cv', m, sep='.')
-  cm <- paste('silverman', m, sep='.')
-  pdf(file=paste(outdir, filename, sep="/"))
+  sm <- paste('silverman', m, sep='.')
+  cm <- paste('cv', m, sep='.')
+  if (hasArg(filename)) {
+    pdf(file=paste(outdir, filename, sep="/"))
+  }
   g <- ggplot(df) +
 #    ggtitle(title) +
     theme_classic() +
-    theme(axis.ticks=element_blank(), axis.text.y=element_blank()) +
+    theme(axis.ticks.y=element_blank(), axis.text.y=element_blank()) +
     theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
           legend.title=element_text(size=16, family='NewCenturySchoolbook'),
           legend.key.size=unit(1.5, 'cm')) +
@@ -100,17 +100,19 @@ error_hist <- function(df, title, e, m, filename) {
                           values=c("twodash", "solid", "dashed")) +
     scale_colour_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
                         values=brewer.pal(3, "Dark2")) +
-    geom_density(aes_string(x=oe, colour='"Oracle"', linetype='"Oracle"'), size=0.8) +
-    geom_density(aes_string(x=se, colour='"Silverman"', linetype='"Silverman"'), size=0.8) +
-    geom_density(aes_string(x=ce, colour='"CV"', linetype='"CV"'), size=0.8) +
+    stat_density(aes_string(x=oe, colour='"Oracle"', linetype='"Oracle"'), geom='line', size=0.8) +
+    stat_density(aes_string(x=se, colour='"Silverman"', linetype='"Silverman"'), geom='line', size=0.8) +
+    stat_density(aes_string(x=ce, colour='"CV"', linetype='"CV"'), geom='line', size=0.8) +
     geom_vline(data=mean_values, aes_string(xintercept=om, colour='"Oracle"', linetype='"Oracle"'),
-               size=0.8) +
+               size=0.8, show.legend=FALSE) +
     geom_vline(data=mean_values, aes_string(xintercept=sm, colour='"Silverman"', linetype='"Silverman"'),
-               size=0.8) +
+               size=0.8, show.legend=FALSE) +
     geom_vline(data=mean_values, aes_string(xintercept=cm, colour='"CV"', linetype='"CV"'),
-               size=0.8)
+               size=0.8, show.legend=FALSE)
   print(g)
-  dev.off()
+  if (hasArg(filename)) {
+    dev.off()
+  }
 }
 
 error_hist(compare_peaks.result, "Relative ISE", 'rise', 'rmise', 'ise-relative-histogram.pdf')
@@ -151,7 +153,7 @@ dev.off()
 
 pdf(file=paste(outdir, "bandwidths-difference.pdf", sep="/"))
 ggplot(compare_peaks.result) +
-  ggtitle(expression(X[1] - X[2])) +
+  ggtitle(expression(x[1] - x[2])) +
   geom_histogram(aes(x=cv.bandwidth.x1 - cv.bandwidth.x2), fill="blue", alpha=0.5)
 dev.off()
 
