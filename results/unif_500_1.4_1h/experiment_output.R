@@ -135,26 +135,30 @@ error_hist(compare_peaks.result, "Peak error", 'peak_err', 'merr', 'peak-height-
 # c) bandwidth plots
 pdf(file=paste(outdir, "bandwidths-x1.pdf", sep="/"))
 ggplot(compare_peaks.result) +
-  ggtitle("CV Bandwidths X1") +
-  geom_histogram(aes(x=cv.bandwidth.x1, fill="X1"), alpha=.5)
+  xlab(NULL) +
+  ylab(NULL) +
+  geom_histogram(aes(x=cv.bandwidth.x1), alpha=.5, bins=16)
 dev.off()
 
 pdf(file=paste(outdir, "bandwidths-x2.pdf", sep="/"))
 ggplot(compare_peaks.result) +
-  ggtitle("CV Bandwidths X2") +
-  geom_histogram(aes(x=cv.bandwidth.x2, fill="X2"), alpha=.5)
+  xlab(NULL) +
+  ylab(NULL) +
+  geom_histogram(aes(x=cv.bandwidth.x2), alpha=.5, bins=16)
 dev.off()
 
 pdf(file=paste(outdir, "bandwidths-silverman.pdf", sep="/"))
 ggplot(compare_peaks.result) +
-  ggtitle("Silverman Bandwidths") +
-  geom_histogram(aes(x=silverman.bandwidth, fill="Silverman"), alpha=.5)
+  xlab(NULL) +
+  ylab(NULL) +
+  geom_histogram(aes(x=silverman.bandwidth), alpha=.5, bins=16)
 dev.off()
 
 pdf(file=paste(outdir, "bandwidths-difference.pdf", sep="/"))
 ggplot(compare_peaks.result) +
-  ggtitle(expression(x[1] - x[2])) +
-  geom_histogram(aes(x=cv.bandwidth.x1 - cv.bandwidth.x2), fill="blue", alpha=0.5)
+  xlab(NULL) +
+  ylab(NULL) +
+  geom_histogram(aes(x=cv.bandwidth.x1 - cv.bandwidth.x2), fill="blue", alpha=0.5, bins=16)
 dev.off()
 
 # 5 output results table

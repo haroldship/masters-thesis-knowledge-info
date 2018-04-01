@@ -202,11 +202,12 @@ this is not surprising.
 However, in real world scenarios, the true function is unknown, and hence it is impossible to compute the \gls{oracle} bandwidth.
 Therefore, we are interested in knowing how close the \gls{silverman} and \gls{cv} bandwidth selection methods can get to the \gls{oracle} for the different measures.
 One exception is the \gls{peak bias}, which measures the difference between the maximum of the estimated risk and the maximum of the true risk (see \cref{subsec:method:peak_bias}).
-In this experiment, the \gls{silverman} bandwidth produced a better \gls{peak bias} value than the other bandwidth selectors. 
-The \gls{oracle} and \gls{cv} bandwidths resulted in negative biases,
-which is the logical result since the general result of smoothing is to lower the high values and raise the low values.
+In this experiment, the \gls{silverman} and \gls{cv} bandwidths produced lower absolute \gls{peak bias} values than the \gls{oracle}. 
+However, the \gls{oracle} and \gls{cv} bandwidths resulted in negative biases,
+which is what we expected,
+since the process of smoothing generally lowers high values (peaks) and raises low values.
 The \gls{silverman} bandwidth, on the other hand, produced a positive value,
-which indicates undersmoothing.
+which may indicate undersmoothing.
 This requires further study.
 
 In \cref{fig:ise:unif_100_1.0_1h}, we look at the distribution of the \gls{ise}.
@@ -297,7 +298,7 @@ selected bandwidths and their corresponding mean values had similar performance 
         \subcaption{Peak height error}
         \label{fig:peaks:unif_100_1.0_1h:height}
     \end{subfigure}
-    \caption[Peak errors: single peak on uniform]{Peak distance from truth and height histograms for uniform intensity on a uniform population, 100 cases}
+    \caption[Peak accuracy: Single-peak of 100 on uniform population]{Peak accuracy measure densities for a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population. Vertical lines indicate the mean values of the simulations.}
     \label{fig:peaks:unif_100_1.0_1h}
 \end{figure}
 
@@ -314,38 +315,58 @@ selected bandwidths and their corresponding mean values had similar performance 
         \includegraphics[width=\textwidth]{output/centroid-height-histogram}
         \subcaption{Centroid peak height error}
     \end{subfigure}
-    \caption[Centroid errors: single peak on uniform]{Centroid peak distance from truth and height histograms for uniform intensity on a uniform population, 100 cases}
+    \caption[Centroid accuracy: Single-peak of 100 on uniform population]{Peak accuracy measures densitiesu sing centroid technique for a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population. Vertical lines indicate the mean values of the simulations.}
     \label{fig:centroids:unif_100_1.0_1h}
 \end{figure}
 
-The peak distances (\cref{fig:peaks:unif_100_1.0_1h:dist}) and peak height errors (\cref{fig:peaks:unif_100_1.0_1h:height}).
+For both of the peak distance errors (\cref{fig:peaks:unif_100_1.0_1h:dist}) and peak height errors (\cref{fig:peaks:unif_100_1.0_1h:height}) of this experiment,
+we see the \gls{cv} bandwidth selection outperforms the \gls{silverman} rule of thumb, and that the \gls{oracle} seems to outperform them both.
+In fact, the \gls{peak bias}, which we estimate using the mean \gls{peak error},
+is positive for \gls{silverman}.
+This indicates a tendency towards undersmoothing.
+We note that all three of bandwidth selection techniques are designed to minimize \gls{mise}.
+We also note the multi-modal peak distance distributions.
+We believe this is an artifact of the experimental design,
+since our estimate of the peak will always be at one of a fixed, discrete number of points on a grid in the study area.
+
+In \cref{fig:centroids:unif_100_1.0_1h} we see the distributions of \gls{peak error} and \gls{peak drift} using the centroid estimation technique.
+We note that the scales of both types of error are markedly improved.
+That is, the centroid technique improves both the estimated location and estimated height of the peak.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bandwidths - unif_100_1.0_1h
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[t]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/bandwidths-x1}
         \subcaption{CV Bandwidths - \(x_1\)}
+        \label{fig:bandwidths:unif_100_1.0_1h:x1}
     \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[t]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/bandwidths-x2}
         \subcaption{CV Bandwidths - \(x_2\)}
+        \label{fig:bandwidths:unif_100_1.0_1h:x2}
     \end{subfigure}
 
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[t]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/bandwidths-difference}
         \subcaption{Difference between \(x_1\) and \(x_2\) bandwidths}
+        \label{fig:bandwidths:unif_100_1.0_1h:diff}
     \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[t]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/bandwidths-silverman}
         \subcaption{Silverman Bandwidths}
+        \label{fig:bandwidths:unif_100_1.0_1h:silverman}
     \end{subfigure}
-    \caption[Bandwidths: uniform on uniform]{CV bandwidths: \(X_1\), \(X_2\) and difference and Silverman bandwidth
-        histograms for uniform intensity on a uniform population, 100 cases}
+    \caption[Bandwidths: Single-peak of 100 on uniform population]{\glsentryname{cv} bandwidths: \(x_1\), \(x_2\) and difference and \glsentryname{silverman} bandwidth histograms for  a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population}
     \label{fig:bandwidths:unif_100_1.0_1h}
 \end{figure}
+
+The bandwidths selected by \gls{cv} were allowed to vary in the $x_1$ and $x_2$ directions.
+In \cref{fig:bandwidths:unif_100_1.0_1h:x1,fig:bandwidths:unif_100_1.0_1h:x2} we see that the distributions of these bandwidths observed in this experiment are quite similar,
+while \cref{fig:bandwidths:unif_100_1.0_1h:diff} shows that they often differ significantly in the indidual realizations.
+The distribution of the \gls{silverman} selected bandwidths is quite much more symmetric, and has a lower mean value (\cref{fig:bandwidths:unif_100_1.0_1h:silverman}).
 
 % Restore graphics and input path
 \graphicspath{{./}}
@@ -366,22 +387,22 @@ The peak distances (\cref{fig:peaks:unif_100_1.0_1h:dist}) and peak height error
 % Parameter table - expected number of incidents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[htbp]
-\centering
-\begin{tabular}{ll}
-\hline
-Parameter & Value \\
-\hline
-Population size & 10,000 \\
-Population \glsentryname{spread} & uniform \\
-Population center & uniform \\
-\Glsentryname{factor} & 50, 100, 200, 500, 1,000 \\
-Incident \glsentryname{spread} & 1.0 \\
-Incident center & (0,0) \\
-\hline
-\end{tabular}
-\caption[Effect of \glsentryname{factor} with fixed population]
-    {Experimental parameter values varying \glsentryname{factor} for a fixed, uniform population of 10,000 and single peak with spread 1.0}
-\label{tab:params:results:number_of_incidents}
+    \centering
+    \begin{tabular}{ll}
+        \hline
+        Parameter & Value \\
+        \hline
+        Population size & 10,000 \\
+        Population \glsentryname{spread} & uniform \\
+        Population center & uniform \\
+        \Glsentryname{factor} & 50, 100, 200, 500, 1,000 \\
+        Incident \glsentryname{spread} & 1.0 \\
+        Incident center & (0,0) \\
+        \hline
+    \end{tabular}
+    \caption[Effect of \glsentryname{factor} with fixed population]
+        {Experimental parameter values varying \glsentryname{factor} for a fixed, uniform population of 10,000 and single peak with spread 1.0}
+    \label{tab:params:results:number_of_incidents}
 \end{table}
 
 In this section we examine and compare the results of five experiments in which we vary the \glspl{factor}
@@ -393,6 +414,7 @@ centered at the origin,
 with a \gls{spread} of 1.0.
 The \glspl{factor} used in the experiments in this section were 50, 100, 200, 500, and 1,000.
 The full set of accuracy measures for these cases can be found in \autoref{tab:mean_error_rates:unif_50_1.0_1h}, \autoref{tab:mean_error_rates:unif_100_1.0_1h}, \autoref{tab:mean_error_rates:unif_200_1.0_1h}, \autoref{tab:mean_error_rates:unif_500_1.0_1h}, and \autoref{tab:mean_error_rates:unif_1000_1.0_1h} in \autoref{ch:results_tables}.
+We note that as in \cref{sec:results:unif_100_1.0_1h}, the \gls{peak bias} values were positive for the \gls{silverman} bandwidth based estimates.
 \autoref{fig:one_sample:unif_NCases_1h} shows how one realization of incidents, distributed over the population, for sample sizes of 100 and 500.
 
 \begin{figure}[htbp]
