@@ -407,7 +407,9 @@ The distribution of the \gls{silverman} selected bandwidths is quite much more s
 
 In this section we examine and compare the results of five experiments in which we vary the \glspl{factor}
 of a single-peak risk function.
+The unknown information that one is trying to discover, is the risk of a person catching a specific disease over a defined time period.
 This is analogous to a real-world researcher combining the several years worth of incident data from the same population.
+Our question is, will this lead to more accurate results for the \gls{dkd}?
 We keep the population size constant at 10,000, distributed uniformly throughout the study area.
 The risk function for each of the five experiments has a single peak,
 centered at the origin,
@@ -589,7 +591,9 @@ They are all near to $-0.75$.
 
 In this section we examine and compare the results of five experiments in which we vary the \gls{spread} \gls{sigma_i}
 of a single-peak risk function.
-Differing spreads are analogous to different levels of concentration of the risk of disease is in a specific location.
+The unknown information that one is trying to discover is, how far away from a source of disease risk is safe?
+Our question is, under different \glspl{spread}, how accurate is the \gls{dkd}?
+Differing \glspl{spread} are analogous to different levels of concentration of the risk of disease is in a specific location.
 Another way to look at it is, is how quickly the risk dissipates in space as one moves further away from a single source of disease risk.
 We keep the population size constant at 10,000, distributed uniformly throughout the study area.
 The risk function for each of the five experiments has a single peak,
@@ -620,40 +624,41 @@ as can be seen in \cref{fig:one_sample:unif_Spreads_1h}.
 We observe the effect of varying \gls{sigma_i} on the selected bandwidths.
 The \gls{oracle}, \gls{silverman}, and \gls{cv} bandwidths all increase as the spread increases, as can be seen in \cref{tab:results:bandwidth_vs_spread}.
 This is to be expected, since smaller bandwidths result in decreased smoothing,
-which lead to more accurate estimations to functions with smaller \gls{sigma_i} values.
+which is necessary when the true risk function varies more quickly as is the case with smaller \gls{sigma_i} values.
+We note that the \gls{cv} selected bandwidths are closer to \gls{h_opt} as approximated by the \gls{oracle}, than are the \gls{silverman} bandwidths.
 
 \input{results/by_h_per_spread/h_per_spread}
 
+We also observe that the \gls{nmise} decreases significantly with increasing \gls{sigma_i}.
+This provides evidence that the \gls{dkd} may be better suited to situations where the true underlying risk is smoother.
 
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[t]{0.24\textwidth}
         \includegraphics[width=\textwidth]{results/by_cases_spread/MISE-vs-risk-spread}
         \caption{\glsentryname{mise}}
-        \label{fig:ise:unif_100_SD:mise}
+        \label{fig:ise:unif_Spreads_1h:mise}
     \end{subfigure}
     \begin{subfigure}[t]{0.24\textwidth}
         \includegraphics[width=\textwidth]{results/by_cases_spread/RMISE-vs-risk-spread}
         \caption{Relative \glsentryname{mise}}
-        \label{fig:ise:unif_100_SD:rmise}
+        \label{fig:ise:unif_Spreads_1h:rmise}
     \end{subfigure}
     \begin{subfigure}[t]{0.24\textwidth}
         \includegraphics[width=\textwidth]{results/by_cases_spread/NMISE-vs-risk-spread}
         \caption{\glsentryname{nmise}}
-        \label{fig:ise:unif_100_SD:nmise}
+        \label{fig:ise:unif_Spreads_1h:nmise}
     \end{subfigure}
     \begin{subfigure}[t]{0.24\textwidth}
         \includegraphics[width=\textwidth]{results/by_cases_spread/NMISE-vs-risk-spread-log-log}
         \caption{\glsentryname{nmise} log-log}
-        \label{fig:ise:unif_100_SD:nmise_log_log}
+        \label{fig:ise:unif_Spreads_1h:nmise_log_log}
     \end{subfigure}
     \caption[\glsentryname{mise}: by risk \glsentryname{spread}]
         {The effect of \glsentryname{spread} on \glsentryname{mise}}
-    \label{fig:ise:unif_100_SD}
+    \label{fig:ise:unif_Spreads_1h}
 \end{figure}
 
-The \gls{oracle}, \gls{silverman}, and \gls{cv} NMISE decrease as the spread increases.
-However, the \gls{oracle} and \gls{cv} decrease faster than than \gls{silverman}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

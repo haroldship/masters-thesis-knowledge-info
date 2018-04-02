@@ -73,17 +73,17 @@ ggplot(df) +
 dev.off()
 pdf(file="RMISE-vs-risk-spread.pdf")
 ggplot(df) +
-  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(0.4, 2.2)) +
-  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(0.4, 2.2)) +
-  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(0.4, 2.2)) +
+#  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(0.4, 3.0)) +
+#  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(0.4, 3.0)) +
+#  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(0.4, 3.0)) +
   geom_point(aes(x=Spread, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth))
 dev.off()
 pdf(file="RMISE-vs-risk-spread-log-log.pdf")
 ggplot(df) +
   geom_point(aes(x=Spread, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth)) +
-  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(0.4, 2.2)) +
-  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(0.4, 2.2)) +
-  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(0.4, 2.2)) +
+  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(0.4, 3.0)) +
+  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(0.4, 3.0)) +
+  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(0.4, 3.0)) +
   coord_trans(x='log10', y='log10') +
   annotation_logticks(scaled=FALSE)
 dev.off()
@@ -96,16 +96,16 @@ coefC <- coef(lm(log(dfC$`Normalized MISE`) ~ log(dfC$Spread)))
 pdf(file="NMISE-vs-risk-spread.pdf")
 ggplot(df) +
   geom_point(aes(x=Spread, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
-  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(0.4, 2.2)) +
-  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(0.4, 2.2)) +
-  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(0.4, 2.2))
+  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(0.4, 3.0)) +
+  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(0.4, 3.0)) +
+  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(0.4, 3.0))
 dev.off()
 pdf(file="NMISE-vs-risk-spread-log-log.pdf")
 ggplot(df) +
   geom_point(aes(x=Spread, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
-  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(0.4, 2.2)) +
-  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(0.4, 2.2)) +
-  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(0.4, 2.2)) +
+  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(0.4, 3.0)) +
+  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(0.4, 3.0)) +
+  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(0.4, 3.0)) +
   coord_trans(x='log10', y='log10') +
   annotation_logticks(scaled=FALSE)
 dev.off()
