@@ -6,38 +6,39 @@
 
 \ProvidesPackage{mymacros}
 
-% Set up research question label, override equation label to use brackets (autoref)
-\newtheorem{researchquestion}{Research question}
-\providecommand*{\researchquestionautorefname}{Research~question}
-
 % math styles
-\newcommand{\mymathit}[1]{\ensuremath{\mbox{\itshape #1}}} % in math mode make words tight
+\newcommand{\mymathit}[1]{\ensuremath{\mbox{\itshape #1}}}% in math mode make words tight
 
 %\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}} % vector as bold
 %\renewcommand{\vec}[1]{\ensuremath{({#1}_1, {#1}_2})} % vector as (x_1, x_2)
-\newcommand{\norm}[1]{\ensuremath{\lVert#1\rVert}} % vector norm
+\newcommand{\norm}[1]{\ensuremath{\lVert#1\rVert}}% vector norm
+\newcommand{\xvec}{\ensuremath{(x_1, x_2)}}%
 
-\newcommand{\transpose}[1]{\ensuremath{#1}^{\mathrm{T}}} % matrix transpose
+\newcommand{\transpose}[1]{\ensuremath{#1}^{\mathrm{T}}}% matrix transpose
 
 % operators
-\newcommand{\conv}[2]{(\ensuremath{#1 \ast #2})} % convolution
-\newcommand*\diff{\mathop{}\!\mathrm{d}} % \diff for differentiator symbol 'd'
-\newcommand*{\ds}{\ensuremath{\diff{\vec{s}}}} % ds (vector)
+\newcommand{\conv}[2]{(\ensuremath{#1 \ast #2})}% convolution
+\newcommand*\diff{\mathop{}\!\mathrm{d}}% \diff for differentiator symbol 'd'
+\newcommand*{\ds}{\ensuremath{\diff{\vec{s}}}}% ds (vector)
 
 % math symbols
-\newcommand{\E}{\ensuremath{\mathbb{E}}} % expected value
-\newcommand{\R}{\ensuremath{\mathbb{R}}} % R - the reals
-\newcommand{\RS}{\ensuremath{\mathbb{R}^2}} % R^2 the plane
+\newcommand{\E}{\ensuremath{\mathbb{E}}}% expected value
+\newcommand{\R}{\ensuremath{\mathbb{R}}}% R - the reals
+\newcommand{\RS}{\ensuremath{\mathbb{R}^2}}% R^2 the plane
 
-\DeclareMathOperator*{\argmin}{\arg\!\min} % argmin
-\DeclareMathOperator*{\argmax}{\arg\!\max} % argmax
+\DeclareMathOperator*{\argmin}{\arg\!\min}% argmin
+\DeclareMathOperator*{\argmax}{\arg\!\max}% argmax
+
+% Set up research question label, override equation label to use brackets (autoref)
+\newtheorem{researchquestion}{Research question}%
+\providecommand*{\researchquestionautorefname}{Research~question}%
 
 \theoremstyle{plain}
-\newtheorem{thm}{Theorem}[chapter] % reset theorem numbering for each chapter
+\newtheorem{thm}{Theorem}[chapter]% reset theorem numbering for each chapter
 
 \theoremstyle{definition}
-\newtheorem{defn}[thm]{Definition} % definition numbers are dependent on theorem numbers
-\newtheorem{exmp}[thm]{Example} % same for example numbers
+\newtheorem{defn}[thm]{Definition}% definition numbers are dependent on theorem numbers
+\newtheorem{exmp}[thm]{Example}% same for example numbers
 
 
 

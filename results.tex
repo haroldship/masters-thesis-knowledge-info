@@ -27,7 +27,7 @@ This was done using the L'Ecuyer-CMRG method \citep{lecuyer2002random}.
 Each experiment was run according to a set of parameters that comprised the particular setup.
 The parameters (\cref{tab:experimental_parameters}) that define the study area remained fixed throughout the study.
 In particular, we set \texttt{x1.min} to -4, \texttt{x1.max} to 4, \texttt{x2.min} to -4, \texttt{x2.max} to 4, and \texttt{buffer} to 0.5.
-This gave us a study area with dimensions \(8 \times 8\), with incidents concentrated in an area of \(7 \times 7\).
+This gave us a study area with dimensions $8 \times 8$, with incidents concentrated in an area of $7 \times 7$.
 For evaluating the \gls{dkd} we used a grid size of 0.5.
 
 A table similar to \cref{tab:params:template}, describing the parameter ranges used in the related experiments appears at the beginning of each section below.
@@ -35,14 +35,14 @@ This table summarizes the values from \cref{tab:experimental_parameters} that ar
 The first row in the table contains the \textit{population size} or \textit{sizes} used in the experiment.
 The second row contains the \textit{population \gls{spread}}, which controls how quickly the population density drops from the peak.
 We use the standard deviation \ensuremath\sigma of an independent, bivariate normal distribution with equal variances for this.
-The third row in the the table contains the \textit{population center}, which is the point \((x_1, x_2)\) of the peak of the population distribution.
+The third row in the the table contains the \textit{population center}, which is the point $\xvec$ of the peak of the population distribution.
 For a uniform population distribution, the word ``uniform'' appears.
 The next row in the table is the \gls{factor}.
 This value is used to increase the expected number of cases for each simulation in the experiment.
 It is the same \gls{mu} found in \cref{ch:method}.
 The fifth row contains the \textit{incident \gls{spread}}, which controls how quickly the incidence risk drops from the peak.
 We use the standard deviation \ensuremath\sigma of an independent, bivariate normal distribution with equal variances for this.
-The sixth and last row in the the table contains the \textit{incident center}, which is the point \((x_1, x_2)\) of the peak of the incident risk function.
+The sixth and last row in the the table contains the \textit{incident center}, which is the point $\xvec$ of the peak of the incident risk function.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Parameter table - template
@@ -177,7 +177,7 @@ and the incidents on top of the population in \subref{fig:cases_scatter:unif_100
 In order to better understand the incident risk and the estimates,
 we use a two-dimensional geographic heatmap of the study area \gls{W} to show a single simulation realization in
 \cref{fig:cases_heatmap:unif_100_1.0_1h}.
-The color of a point $(x_1, x_2)$ represents the risk or estimated risk of an incident at that point.
+The color of a point $\xvec$ represents the risk or estimated risk of an incident at that point.
 \Cref{fig:cases_heatmap:unif_100_1.0_1h:true} shows a heatmap of the true distribution function.
 We see the \gls{dkd} estimates obtained using the \gls{oracle} in \subref{fig:cases_heatmap:unif_100_1.0_1h:oracle},
 \gls{silverman} in \subref{fig:cases_heatmap:unif_100_1.0_1h:silverman} and \gls{cv} in \subref{fig:cases_heatmap:unif_100_1.0_1h:cv}.
@@ -340,18 +340,18 @@ That is, the centroid technique improves both the estimated location and estimat
     \centering
     \begin{subfigure}[t]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/bandwidths-x1}
-        \subcaption{CV Bandwidths - \(x_1\)}
+        \subcaption{CV Bandwidths - $x_1$}
         \label{fig:bandwidths:unif_100_1.0_1h:x1}
     \end{subfigure}
     \begin{subfigure}[t]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/bandwidths-x2}
-        \subcaption{CV Bandwidths - \(x_2\)}
+        \subcaption{CV Bandwidths - $x_2$}
         \label{fig:bandwidths:unif_100_1.0_1h:x2}
     \end{subfigure}
 
     \begin{subfigure}[t]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/bandwidths-difference}
-        \subcaption{Difference between \(x_1\) and \(x_2\) bandwidths}
+        \subcaption{Difference between $x_1$ and $x_2$ bandwidths}
         \label{fig:bandwidths:unif_100_1.0_1h:diff}
     \end{subfigure}
     \begin{subfigure}[t]{0.45\textwidth}
@@ -359,7 +359,7 @@ That is, the centroid technique improves both the estimated location and estimat
         \subcaption{Silverman Bandwidths}
         \label{fig:bandwidths:unif_100_1.0_1h:silverman}
     \end{subfigure}
-    \caption[Bandwidths: Single-peak of 100 on uniform population]{\glsentryname{cv} bandwidths: \(x_1\), \(x_2\) and difference and \glsentryname{silverman} bandwidth histograms for  a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population}
+    \caption[Bandwidths: Single-peak of 100 on uniform population]{\glsentryname{cv} bandwidths: $x_1$, $x_2$ and difference and \glsentryname{silverman} bandwidth histograms for  a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population}
     \label{fig:bandwidths:unif_100_1.0_1h}
 \end{figure}
 
@@ -525,12 +525,12 @@ The observed values for the power of $n$ as represented by $N_I$ are shown in \c
     \end{subfigure}
     \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\textwidth]{results/unif_100_1.0_1h/output/bandwidths-x1}
-    \caption{Cross-validation, \(X_1\)}
+    \caption{Cross-validation, $X_1$}
     \label{fig:bandwidths_x1:unif_100_1.0_1h:x1}
     \end{subfigure}
     \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\textwidth]{results/unif_100_1.0_1h/output/bandwidths-x2}
-    \caption{Cross-validation, \(X_2\)}
+    \caption{Cross-validation, $X_2$}
     \label{fig:bandwidths_x1:unif_100_1.0_1h:x2}
     \end{subfigure}
     \caption{Bandwidth histograms for 100 incidents in a single peak from population of 10,000}
@@ -587,62 +587,74 @@ They are all near to $-0.75$.
     \label{tab:params:results:spread}
 \end{table}
 
-In this section we examine and compare the results of five experiments in which we vary the \glspl{spread}
+In this section we examine and compare the results of five experiments in which we vary the \gls{spread} \gls{sigma_i}
 of a single-peak risk function.
-This is analogous to looking at how concentrated the risk of disease is in a specific location, or alternatively, how quickly the risk tapers off in space.
+Differing spreads are analogous to different levels of concentration of the risk of disease is in a specific location.
+Another way to look at it is, is how quickly the risk dissipates in space as one moves further away from a single source of disease risk.
 We keep the population size constant at 10,000, distributed uniformly throughout the study area.
 The risk function for each of the five experiments has a single peak,
 centered at the origin,
 with a \gls{factor} of 100.
-The \glspl{spread} used in the experiments in this section were 0.7, 1.0, 1.4, 2.0, and 2.8.
+The values of \gls{sigma_i} used in the experiments in this section are 0.7, 1.0, 1.4, 2.0, and 2.8.
 The full set of accuracy measures for these cases can be found in \autoref{tab:mean_error_rates:unif_100_0.7_1h}, \autoref{tab:mean_error_rates:unif_100_1.0_1h}, \autoref{tab:mean_error_rates:unif_100_1.4_1h}, \autoref{tab:mean_error_rates:unif_100_2.0_1h}, and \autoref{tab:mean_error_rates:unif_100_2.8_1h} in \autoref{ch:results_tables}.
 We note that as in \cref{sec:results:unif_100_1.0_1h}, the \gls{peak bias} values were positive for the \gls{silverman} bandwidth based estimates.
-\autoref{fig:one_sample:unif_Spreads_1h} shows how one realization of incidents, distributed over the population, for sample sizes of 100 and 500.
+\autoref{fig:one_sample:unif_Spreads_1h} shows how one realization of incidents, distributed over the population, for \glspl{spread} of 1.0 and 2.8.
 
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_1.0_1h/output/population_and_incidents_scatter}
-    \caption{\glsentryname{spread} of 1.0}
+        \includegraphics[width=\textwidth]{results/unif_100_1.0_1h/output/population_and_incidents_scatter}
+        \caption{\Glsentryname{spread} of 1.0}
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_2.8_1h/output/population_and_incidents_scatter}
-    \caption{\glsentryname{spread} of 2.8}
+        \includegraphics[width=\textwidth]{results/unif_100_2.8_1h/output/population_and_incidents_scatter}
+        \caption{\Glsentryname{spread} of 2.8}
     \end{subfigure}
     \caption{A single realization of different \glspl{spread} from a single-peak risk on a uniform population}
     \label{fig:one_sample:unif_Spreads_1h}
 \end{figure}
 
+The effect of increasing \gls{spread} is that the peak of the risk function becomes less pronounced.
+The incidents that are generated by the corresponding \gls{spp} are distributed more evenly and widely throughout the study area \gls{W},
+as can be seen in \cref{fig:one_sample:unif_Spreads_1h}.
+We observe the effect of varying \gls{sigma_i} on the selected bandwidths.
+The \gls{oracle}, \gls{silverman}, and \gls{cv} bandwidths all increase as the spread increases, as can be seen in \cref{tab:results:bandwidth_vs_spread}.
+This is to be expected, since smaller bandwidths result in decreased smoothing,
+which lead to more accurate estimations to functions with smaller \gls{sigma_i} values.
+
+\input{results/by_h_per_spread/h_per_spread}
+
+
 \begin{figure}[htbp]
     \centering
-    \begin{subfigure}[b]{0.3\textwidth}
+    \begin{subfigure}[t]{0.24\textwidth}
         \includegraphics[width=\textwidth]{results/by_cases_spread/MISE-vs-risk-spread}
         \caption{\glsentryname{mise}}
         \label{fig:ise:unif_100_SD:mise}
     \end{subfigure}
-    \begin{subfigure}[b]{0.3\textwidth}
+    \begin{subfigure}[t]{0.24\textwidth}
         \includegraphics[width=\textwidth]{results/by_cases_spread/RMISE-vs-risk-spread}
         \caption{Relative \glsentryname{mise}}
         \label{fig:ise:unif_100_SD:rmise}
     \end{subfigure}
-    \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{results/by_cases_spread/RMISE-vs-risk-spread-log-log}
-        \caption{Relative \glsentryname{mise} log-log}
-        \label{fig:ise:unif_100_SD:rmise_log_log}
+    \begin{subfigure}[t]{0.24\textwidth}
+        \includegraphics[width=\textwidth]{results/by_cases_spread/NMISE-vs-risk-spread}
+        \caption{\glsentryname{nmise}}
+        \label{fig:ise:unif_100_SD:nmise}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.24\textwidth}
+        \includegraphics[width=\textwidth]{results/by_cases_spread/NMISE-vs-risk-spread-log-log}
+        \caption{\glsentryname{nmise} log-log}
+        \label{fig:ise:unif_100_SD:nmise_log_log}
     \end{subfigure}
     \caption[\glsentryname{mise}: by risk \glsentryname{spread}]
         {The effect of \glsentryname{spread} on \glsentryname{mise}}
     \label{fig:ise:unif_100_SD}
 \end{figure}
 
-
-
-The main effect of increasing spread is that the peak of the risk function becomes less pronounced.
-The \gls{oracle}, \gls{silverman}, and \gls{cv} bandwidths all increase as the spread increases.
 The \gls{oracle}, \gls{silverman}, and \gls{cv} NMISE decrease as the spread increases.
 However, the \gls{oracle} and \gls{cv} decrease faster than than \gls{silverman}.
 
-\input{results/by_h_per_spread/h_per_spread}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -699,7 +711,7 @@ Each row represents a different measure of error.
 Relative MISE is the mean integrated relative squared error,
 where the relative squared error is computed in the following manner:
 \[ \mbox{RSE}(x) = \left(\frac{\hat{f}(x)-f(x)}{f(x)}\right)^2 .\]
-More generally, the relative error at a point \(x\) is computed as
+More generally, the relative error at a point $x$ is computed as
 \[ \mbox{RE}(x) =  \frac{\hat{f}(x)-f(x)}{f(x)} .\]
 The next row is the mean integrated absolute error (MIAE),
 which is followed by Relative MIAE which is computed analogously to Relative MISE.
@@ -709,7 +721,7 @@ Complete results can be found in \autoref{tab:mean_error_rates:unif_100_unif} in
 The error measures mentioned above each compare the closeness of the estimated intensity function to the true function.
 The following error measures, on the other hand, relate the closeness of the \textit{peak} of the estimate to the true peak.
 The \textit{peak bias} is the expected value of the  difference between the computed and true maxima.
-We estimate it using the empirical average of \(\max{\{\hat{f}(x)\}} - \max{\{f(x)\}}\).
+We estimate it using the empirical average of $\max{\{\hat{f}(x)\}} - \max{\{f(x)\}}$.
 We note that our study area \gls{W} is 8 units long by 8 units wide.
 The Relative peak bias is peak bias expressed relative to the true maximum.
 The \textit{peak drift} is the expected value of Euclidean distance between the estimated peak and the true peak.
@@ -747,12 +759,12 @@ reflects the relative ease with which the DKD can estimate a flat intensity func
     \end{subfigure}
     \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\textwidth]{results/unif_100_unif/output/bandwidths-x1}
-    \caption{Cross-validation, \(X_1\)}
+    \caption{Cross-validation, $X_1$}
     \label{fig:bandwidths_x1:unif_100_unif:x1}
     \end{subfigure}
     \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\textwidth]{results/unif_100_unif/output/bandwidths-x2}
-    \caption{Cross-validation, \(X_2\)}
+    \caption{Cross-validation, $X_2$}
     \label{fig:bandwidths_x1:unif_100_unif:x2}
     \end{subfigure}
     \caption{Bandwidth histograms for 100 incidents (uniform) from population of 10,000}
