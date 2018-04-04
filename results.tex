@@ -69,7 +69,6 @@ In \cref{sec:results:unif_100_1.0_1h} we take a deep look at a single experiment
 The rest of this chapter examines the effect of different variables on the \gls{dkd} accuracy, on the selected bandwidths, and on other statistical properties of the \gls{dkd}.
 \Cref{sec:results:number_of_incidents} describes the relationship between the accuracy of the \gls{dkd} and the magnitude of the risk function for a fixed population.
 In \cref{sec:results:spread} we look at how the spread of the risk function affects accuracy.
-In \cref{sec:results:consistency} we look at the consistency of the \gls{dkd}.
 We then made ran several sets of experiments while changing one parameter at a time.
 \Cref{sec:results:unifNpop_1h} compares the results obtained by varying the size of the population.
 
@@ -518,26 +517,6 @@ The observed values for the power of $n$ as represented by $N_I$ are shown in \c
     \label{fig:ise:unif_NCases_1h}
 \end{figure}
 
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{results/unif_100_1.0_1h/output/bandwidths-silverman}
-        \caption{Silverman}
-        \label{fig:bandwidths_x1:unif_100_1.0_1h:s}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{results/unif_100_1.0_1h/output/bandwidths-x1}
-        \caption{Cross-validation, $X_1$}
-        \label{fig:bandwidths_x1:unif_100_1.0_1h:x1}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{results/unif_100_1.0_1h/output/bandwidths-x2}
-        \caption{Cross-validation, $X_2$}
-        \label{fig:bandwidths_x1:unif_100_1.0_1h:x2}
-    \end{subfigure}
-    \caption{Bandwidth histograms for 100 incidents in a single peak from population of 10,000}
-\end{figure}
-
 \autoref{fig:ise:unif_NCases_1h} shows the effect of \gls{factor} on the \gls{mise}, \gls{rmise} and on \gls{nmise}:
 \autoref{fig:ise:unif_NCases_1h:mise} shows how \gls{mise} increases with \gls{factor}.
 One might expect the error to associated with estimating a function to \textit{decrease} as the \gls{factor} increases.
@@ -552,10 +531,10 @@ To test if there is a power relationship between \gls{nmise} and \gls{factor},
 we take the logarithms of each variable and fit a line.
 \autoref{fig:ise:unif_NCases_1h:nmise_log_log} is a log-log graph,
 showing the linear relationship between the logarithm of \gls{nmise} and the logarithm of the \gls{factor}.
-This indicates a power relationship between \gls{nmise} and \gls{factor} for each bandwidth selection method is shown in \cref{tab:results:nmise_alpha_by_selector}.
+This indicates a power relationship between \gls{nmise} and \gls{factor} for each bandwidth selection method is shown in \cref{tab:results:nmise_convergence_by_num_cases}.
 They are all near to $-0.75$.
 
-\input{results/by_num_cases/alpha_by_selector}
+\input{results/by_num_cases/nmise_convergence_table}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -631,6 +610,12 @@ We note that the \gls{cv} selected bandwidths are closer to \gls{h_opt} as appro
 
 We also observe that the \gls{nmise} decreases significantly with increasing \gls{sigma_i}.
 This provides evidence that the \gls{dkd} may be better suited to situations where the true underlying risk is smoother.
+In \cref{fig:ise:unif_Spreads_1h} take a closer look at the distributions of \gls{mise}, \gls{rmise}, and \gls{nmise}.
+\textbf{What we see is that as \gls{sigma_i} increases, both absolute and normalized \gls{mise} decrease but relative \gls{mise} increases.}
+This is the same for all bandwidth selection methods.
+Since we keep \gls{mu} constant throughout the experiment, it would make sense absolute and normalized \gls{mise} behave similarly.
+The \gls{rmise} takes a local view of relative error, and here we see that as the \gls{spread} increase, the \gls{mise} decreases but at a slower rate than the true function.
+
 
 \begin{figure}[htbp]
     \centering
@@ -641,7 +626,7 @@ This provides evidence that the \gls{dkd} may be better suited to situations whe
     \end{subfigure}
     \begin{subfigure}[t]{0.24\textwidth}
         \includegraphics[width=\textwidth]{results/by_cases_spread/RMISE-vs-risk-spread}
-        \caption{Relative \glsentryname{mise}}
+        \caption{\glsentryname{rmise}}
         \label{fig:ise:unif_Spreads_1h:rmise}
     \end{subfigure}
     \begin{subfigure}[t]{0.24\textwidth}
@@ -655,126 +640,19 @@ This provides evidence that the \gls{dkd} may be better suited to situations whe
         \label{fig:ise:unif_Spreads_1h:nmise_log_log}
     \end{subfigure}
     \caption[\glsentryname{mise}: by risk \glsentryname{spread}]
-        {The effect of \glsentryname{spread} on \glsentryname{mise}}
+        {The effect of \glsentryname{spread} on \glsentryname{mise} for different bandwidth selectors for a single-peak risk function with \gls{factor} 100 on a uniform population of 10,000}
     \label{fig:ise:unif_Spreads_1h}
 \end{figure}
 
+We look now at the asymptotic behavior of \gls{nmise} as $\gls{sigma_i} \to \infty$.
+From \cref{fig:ise:unif_Spreads_1h:nmise_log_log} we see a polynomial relationship between \gls{nmise} and \gls{sigma_i} (\cref{eq:nmise:spread}).
+\Cref{tab:results:nmise_convergence_by_cases_spread} shows the slope $\alpha_S$ that we observed for each bandwidth selection method.
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-%% Section: Consistency of the DKD
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Consistency of the DKD}
-\label{sec:results:consistency}
-
-
-In this section, we describe the results of 1,000 simulations conducted for a population of 10,000 points,
-distributed uniformly throughout the study area.
-\autoref{fig:cases:unif_100_unif} shows the true uniform intensity function,
-together with three estimated intensity functions of a single simulation,
-computed using three bandwidths: the oracle bandwidth, the Silverman rule of thumb bandwidth,
-and the cross-validation bandwidth.
-
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[t]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_unif/output/true_intensity_heatmap}
-    \caption{True intensity}
-    \end{subfigure}%
-    \begin{subfigure}[t]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_unif/output/oracle_intensity_heatmap}
-    \caption{Oracle bandwidth estimate}
-    \end{subfigure}
-
-
-    \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_unif/output/silverman_intensity_heatmap}
-    \caption{Silverman bandwidth estimate}
-    \end{subfigure}%
-    \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_unif/output/CV_intensity_heatmap}
-    \caption{Cross-validation bandwidth estimate}
-    \end{subfigure}
-    \caption{Example cases: uniform intensity on uniform population, 100 cases}
-    \label{fig:cases:unif_100_unif}
-\end{figure}
-
-\begin{table}[htbp]
-\centering
-\input{results/unif_100_unif/output/mean_table.tex}
-\caption{Mean error rates for uniform population, uniform intensity of \gls{factor} 100}
-\label{tab:errors:unif_100_unif}
-\end{table}
-
-\autoref{tab:errors:unif_100_unif} lists the mean error rates obtained for a uniform intensity with \gls{factor} of 100,
-over a uniform population of 10,000.
-The columns represent the errors observed by using the three different methods for computing the smoothing bandwidth:
-the Oracle, the Silverman rule of thumb, and least-squares cross validation.
-Each row represents a different measure of error.
-Relative MISE is the mean integrated relative squared error,
-where the relative squared error is computed in the following manner:
-\[ \mbox{RSE}(x) = \left(\frac{\hat{f}(x)-f(x)}{f(x)}\right)^2 .\]
-More generally, the relative error at a point $x$ is computed as
-\[ \mbox{RE}(x) =  \frac{\hat{f}(x)-f(x)}{f(x)} .\]
-The next row is the mean integrated absolute error (MIAE),
-which is followed by Relative MIAE which is computed analogously to Relative MISE.
-This is followed by the Maximum error, which is the greatest absolute error over the study area.
-Complete results can be found in \autoref{tab:mean_error_rates:unif_100_unif} in \autoref{ch:results_tables}.
-
-The error measures mentioned above each compare the closeness of the estimated intensity function to the true function.
-The following error measures, on the other hand, relate the closeness of the \textit{peak} of the estimate to the true peak.
-The \textit{peak bias} is the expected value of the  difference between the computed and true maxima.
-We estimate it using the empirical average of $\max{\{\hat{f}(x)\}} - \max{\{f(x)\}}$.
-We note that our study area \gls{W} is 8 units long by 8 units wide.
-The Relative peak bias is peak bias expressed relative to the true maximum.
-The \textit{peak drift} is the expected value of Euclidean distance between the estimated peak and the true peak.
-The Relative peak drift is the peak drift, expressed relative to the width of the study area.
-
-The next four measures, \textit{centroid bias} and \textit{drift}, and the relative versions of them, are analogous to the peak error measures.
-However, instead of comparing the true peak to the peak of the estimate, they compare it to the location and value of the estimate, calculated at the centroid of the top five percent of the estimated function.
-
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_unif/output/ise-histogram}
-    \subcaption{Absolute ISE}
-    \label{fig:ise:unif_100_unif:absolute}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_unif/output/ise-relative-histogram}
-    \subcaption{Relative ISE}
-    \label{fig:ise:unif_100_unif:relative}
-    \end{subfigure}
-    \caption[ISE: uniform on uniform]{Integrated squared error histogram for uniform intensity on a uniform population, 100 cases}
-    \label{fig:ise:unif_100_unif}
-\end{figure}
-
-\Cref{fig:ise:unif_100_unif} shows the empirical distribution of the absolute \subref{fig:ise:unif_100_unif:absolute} and relative \subref{fig:ise:unif_100_unif:relative} \gls{ise} for the uniform intensity on uniform population.
-The similarity of the distributions for the Oracle, Silverman, and Cross-validation bandwidths
-reflects the relative ease with which the DKD can estimate a flat intensity function.
-
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_unif/output/bandwidths-silverman}
-    \caption{Silverman}
-    \label{fig:bandwidths_x1:unif_100_unif:s}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_unif/output/bandwidths-x1}
-    \caption{Cross-validation, $X_1$}
-    \label{fig:bandwidths_x1:unif_100_unif:x1}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_unif/output/bandwidths-x2}
-    \caption{Cross-validation, $X_2$}
-    \label{fig:bandwidths_x1:unif_100_unif:x2}
-    \end{subfigure}
-    \caption{Bandwidth histograms for 100 incidents (uniform) from population of 10,000}
-\end{figure}
-
+\begin{equation}
+    \label{eq:nmise:spread}
+    \gls{nmise} = O(n^{\alpha_S})
+\end{equation}
+\input{results/by_cases_spread/nmise_convergence_table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -788,22 +666,22 @@ reflects the relative ease with which the DKD can estimate a flat intensity func
 % Parameter table
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[htbp]
-\centering
-\begin{tabular}{ll}
-\hline
-Parameter & Value \\
-\hline
-Population size & 10,000, 20,000, 40,000, 60,000, 80,000, 100,000 \\
-Population \gls{spread} & uniform \\
-\Gls{factor} & 100, 200, 400, 600, 800, 1000 \\
-Incident \gls{spread} & 1.0 \\
-Incident center & (0,0) \\
-\hline
-\end{tabular}
-\caption{Parameters used for varying the sample size for fixed intensity}
-\label{tab:params:unifNpop_1h}
+    \centering
+    \begin{tabular}{ll}
+        \hline
+        Parameter & Value \\
+        \hline
+        Population size & 10,000, 20,000, 40,000, 60,000, 80,000, 100,000 \\
+        Population \gls{spread} & uniform \\
+        Population center & uniform \\
+        \Gls{factor} & 100, 200, 400, 600, 800, 1000 \\
+        Incident \gls{spread} & 1.0 \\
+        Incident center & (0,0) \\
+        \hline
+    \end{tabular}
+    \caption{Parameters used for varying the sample size for fixed intensity}
+    \label{tab:params:unifNpop_1h}
 \end{table}
-
 
 We next examine the effect of increasing the sample size, while keeping the risk intensity function fixed.
 In order to do this, we increase the population size and the expected number of incidents proportionately.

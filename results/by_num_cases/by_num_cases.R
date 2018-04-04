@@ -69,17 +69,20 @@ coefC <- coef(lm(log(dfC$`Relative MISE`) ~ log(dfC$Case)))
 
 pdf(file="MISE-vs-cases.pdf")
 ggplot(df) +
+  xlab(expression(mu)) +
+  theme(axis.title=element_text(size=20)) +
   geom_point(aes(x=Case, y=MISE, colour=Bandwidth, shape=Bandwidth), size=3)
 dev.off()
 pdf(file="RMISE-vs-cases.pdf")
 ggplot(df) +
-  #  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(45,1100)) +
-  #  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(45,1100)) +
-  #  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(45,1100)) +
+  xlab(expression(mu)) +
+  theme(axis.title=element_text(size=20)) +
   geom_point(aes(x=Case, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth), size=3)
 dev.off()
 pdf(file="RMISE-vs-cases-log-log.pdf")
 ggplot(df) +
+  xlab(expression(mu)) +
+  theme(axis.title=element_text(size=20)) +
   geom_point(aes(x=Case, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
   stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(45,1100)) +
   stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(45,1100)) +
@@ -95,6 +98,8 @@ coefC <- coef(lm(log(dfC$`Normalized MISE`) ~ log(dfC$Case)))
 
 pdf(file="NMISE-vs-cases.pdf")
 ggplot(df) +
+  xlab(expression(mu)) +
+  theme(axis.title=element_text(size=20)) +
   geom_point(aes(x=Case, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
   stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(45,1100)) +
   stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(45,1100)) +
@@ -102,6 +107,8 @@ ggplot(df) +
 dev.off()
 pdf(file="NMISE-vs-cases-log-log.pdf")
 ggplot(df) +
+  xlab(expression(mu)) +
+  theme(axis.title=element_text(size=20)) +
   geom_point(aes(x=Case, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
   stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(45,1100)) +
   stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(45,1100)) +
@@ -115,12 +122,11 @@ Slope <- c(coefO[2], coefS[2], coefC[2])
 
 df.alpha <- data.frame(Selector, Slope)
 df.alpha.latex <- latex(df.alpha,
-                        file="alpha_by_selector.tex",
-                        title="alpha_by_selector",
+                        title="nmise_convergence_table",
                         where="htbp",
-                        label="tab:results:nmise_alpha_by_selector",
+                        label="tab:results:nmise_convergence_by_num_cases",
                         rowname=NULL,
                         cdec=c(0,3),
                         caption.loc="bottom",
-                        caption="NMISE onvergence rate $\\alpha$ for different bandwidth selectors for a single-peak risk function with spread of 1.0 on a uniform population of 10,000.",
-                        caption.lot="NMISE Convergence rate of bandwidth selectors")
+                        caption="NMISE onvergence rate by number of cases for different bandwidth selectors for a single-peak risk function with spread of 1.0 on a uniform population of 10,000.",
+                        caption.lot="NMISE Convergence rate by number of cases for spread 1.0")

@@ -69,18 +69,21 @@ coefC <- coef(lm(log(dfC$`Relative MISE`) ~ log(dfC$Spread)))
 
 pdf(file="MISE-vs-risk-spread.pdf")
 ggplot(df) +
+  xlab(expression(sigma[i])) +
+  theme(axis.title=element_text(size=20)) +
   geom_point(aes(x=Spread, y=MISE, colour=Bandwidth, shape=Bandwidth))
 dev.off()
 pdf(file="RMISE-vs-risk-spread.pdf")
 ggplot(df) +
-#  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(0.4, 3.0)) +
-#  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(0.4, 3.0)) +
-#  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(0.4, 3.0)) +
+  xlab(expression(sigma[i])) +
+  theme(axis.title=element_text(size=20)) +
   geom_point(aes(x=Spread, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth))
 dev.off()
 pdf(file="RMISE-vs-risk-spread-log-log.pdf")
 ggplot(df) +
   geom_point(aes(x=Spread, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth)) +
+  xlab(expression(sigma[i])) +
+  theme(axis.title=element_text(size=20)) +
   stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(0.4, 3.0)) +
   stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(0.4, 3.0)) +
   stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(0.4, 3.0)) +
@@ -96,6 +99,8 @@ coefC <- coef(lm(log(dfC$`Normalized MISE`) ~ log(dfC$Spread)))
 pdf(file="NMISE-vs-risk-spread.pdf")
 ggplot(df) +
   geom_point(aes(x=Spread, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
+  xlab(expression(sigma[i])) +
+  theme(axis.title=element_text(size=20)) +
   stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(0.4, 3.0)) +
   stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(0.4, 3.0)) +
   stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(0.4, 3.0))
@@ -103,6 +108,8 @@ dev.off()
 pdf(file="NMISE-vs-risk-spread-log-log.pdf")
 ggplot(df) +
   geom_point(aes(x=Spread, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
+  xlab(expression(sigma[i])) +
+  theme(axis.title=element_text(size=20)) +
   stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(0.4, 3.0)) +
   stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(0.4, 3.0)) +
   stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(0.4, 3.0)) +
@@ -115,12 +122,11 @@ Slope <- c(coefO[2], coefS[2], coefC[2])
 
 df.alpha <- data.frame(Selector, Slope)
 df.alpha.latex <- latex(df.alpha,
-                        file="alpha_by_selector.tex",
-                        title="alpha_by_selector",
+                        title="nmise_convergence_table",
                         where="htbp",
-                        label="tab:results:nmise_alpha_by_selector",
+                        label="tab:results:nmise_convergence_by_cases_spread",
                         rowname=NULL,
                         cdec=c(0,3),
                         caption.loc="bottom",
-                        caption="NMISE onvergence rate $\\alpha$ for different bandwidth selectors for a single-peak risk function with expected number of incidents 100 on a uniform population of 10,000.",
-                        caption.lot="NMISE Convergence rate of bandwidth selectors")
+                        caption="NMISE convergence rate by spread for different bandwidth selectors for a single-peak risk function with expected number of incidents 100 on a uniform population of 10,000.",
+                        caption.lot="NMISE Convergence rate by spread for 100 cases")
