@@ -1,5 +1,4 @@
 library(Hmisc)
-#library(xtable)
 library(doublekernel)
 
 sigmas <- c("0.7", "1.0", "1.4", "2.0", "2.8")

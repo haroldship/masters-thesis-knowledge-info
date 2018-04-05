@@ -71,12 +71,18 @@ pdf(file="MISE-vs-risk-spread.pdf")
 ggplot(df) +
   xlab(expression(sigma[i])) +
   theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
   geom_point(aes(x=Spread, y=MISE, colour=Bandwidth, shape=Bandwidth))
 dev.off()
 pdf(file="RMISE-vs-risk-spread.pdf")
 ggplot(df) +
   xlab(expression(sigma[i])) +
   theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
   geom_point(aes(x=Spread, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth))
 dev.off()
 pdf(file="RMISE-vs-risk-spread-log-log.pdf")
@@ -84,6 +90,9 @@ ggplot(df) +
   geom_point(aes(x=Spread, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth)) +
   xlab(expression(sigma[i])) +
   theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
   stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(0.4, 3.0)) +
   stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(0.4, 3.0)) +
   stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(0.4, 3.0)) +
@@ -101,6 +110,9 @@ ggplot(df) +
   geom_point(aes(x=Spread, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
   xlab(expression(sigma[i])) +
   theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
   stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(0.4, 3.0)) +
   stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(0.4, 3.0)) +
   stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(0.4, 3.0))
@@ -110,6 +122,9 @@ ggplot(df) +
   geom_point(aes(x=Spread, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
   xlab(expression(sigma[i])) +
   theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
   stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(0.4, 3.0)) +
   stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(0.4, 3.0)) +
   stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(0.4, 3.0)) +

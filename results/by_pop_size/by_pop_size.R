@@ -1,10 +1,11 @@
 library(ggplot2)
+library(Hmisc)
 
 setwd("/Users/harold/Dropbox/MA_Knowledge_and_Info/Thesis/thesis/results/by_pop_size")
 
-Pops <- c(10000, 20000, 40000, 60000, 80000, 100000)
-PopStrs <- c("_100", "20k_200", "40k_400", "60k_600", "80k_800", "100k_1000")
-Dirs <- sapply(PopStrs, function(pop) paste('../unif', pop, '_1_1h/output/', sep=''))
+Pops <- c(5000, 10000, 20000, 50000, 100000)
+PopStrs <- c("5k_50", "10k_100", "20k_200", "50k_500", "100k_1000")
+Dirs <- sapply(PopStrs, function(pop) paste('../unif', pop, '_1.0_1h/output/', sep=''))
 Files <- sapply(Dirs, function(dir) paste(dir, 'mean_table.tex', sep=''))
 
 N <- length(Pops)
@@ -69,21 +70,62 @@ coefC <- coef(lm(log(dfC$`Relative MISE`) ~ log(dfC$Pop)))
 
 pdf(file="MISE-vs-population.pdf")
 ggplot(df) +
+  xlab(expression(N[p])) +
+  theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
   geom_point(aes(x=Pop, y=MISE, colour=Bandwidth, shape=Bandwidth))
 dev.off()
 pdf(file="RMISE-vs-population.pdf")
 ggplot(df) +
-  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(9000,110000)) +
-  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(9000,110000)) +
-  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(9000,110000)) +
+  xlab(expression(N[p])) +
+  theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
   geom_point(aes(x=Pop, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth))
 dev.off()
 pdf(file="RMISE-vs-population-log-log.pdf")
 ggplot(df) +
+  xlab(expression(N[p])) +
+  theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
   geom_point(aes(x=Pop, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth)) +
-  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(9000,110000)) +
-  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(9000,110000)) +
-  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(9000,110000)) +
   coord_trans(x='log10', y='log10') +
   annotation_logticks(scaled=FALSE)
 dev.off()
+
+coefO <- coef(lm(log(dfO$`Normalized MISE`) ~ log(dfO$Pop)))
+coefS <- coef(lm(log(dfS$`Normalized MISE`) ~ log(dfS$Pop)))
+coefC <- coef(lm(log(dfC$`Normalized MISE`) ~ log(dfC$Pop)))
+
+pdf(file="NMISE-vs-population.pdf")
+ggplot(df) +
+  xlab(expression(N[p])) +
+  theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
+  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(4000,110000)) +
+  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(4000,110000)) +
+  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(4000,110000)) +
+  geom_point(aes(x=Pop, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth))
+dev.off()
+pdf(file="NMISE-vs-population-log-log.pdf")
+ggplot(df) +
+  xlab(expression(N[p])) +
+  theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
+  geom_point(aes(x=Pop, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth)) +
+  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(4000,110000)) +
+  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(4000,110000)) +
+  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(4000,110000)) +
+  coord_trans(x='log10', y='log10') +
+  annotation_logticks(scaled=FALSE)
+dev.off()
+

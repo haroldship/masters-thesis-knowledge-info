@@ -71,18 +71,27 @@ pdf(file="MISE-vs-cases.pdf")
 ggplot(df) +
   xlab(expression(mu)) +
   theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
   geom_point(aes(x=Case, y=MISE, colour=Bandwidth, shape=Bandwidth), size=3)
 dev.off()
 pdf(file="RMISE-vs-cases.pdf")
 ggplot(df) +
   xlab(expression(mu)) +
   theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
   geom_point(aes(x=Case, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth), size=3)
 dev.off()
 pdf(file="RMISE-vs-cases-log-log.pdf")
 ggplot(df) +
   xlab(expression(mu)) +
   theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
   geom_point(aes(x=Case, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
   stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(45,1100)) +
   stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(45,1100)) +
@@ -100,6 +109,9 @@ pdf(file="NMISE-vs-cases.pdf")
 ggplot(df) +
   xlab(expression(mu)) +
   theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
   geom_point(aes(x=Case, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
   stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(45,1100)) +
   stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(45,1100)) +
@@ -109,6 +121,9 @@ pdf(file="NMISE-vs-cases-log-log.pdf")
 ggplot(df) +
   xlab(expression(mu)) +
   theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
   geom_point(aes(x=Case, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
   stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(45,1100)) +
   stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(45,1100)) +
