@@ -3,12 +3,12 @@ library(Hmisc)
 
 setwd("/Users/harold/Dropbox/MA_Knowledge_and_Info/Thesis/thesis/results/by_pop_size")
 
-Pops <- c(5000, 10000, 20000, 50000, 100000)
+Incidents <- c(50, 100, 200, 500, 1000)
 PopStrs <- c("5k_50", "10k_100", "20k_200", "50k_500", "100k_1000")
 Dirs <- sapply(PopStrs, function(pop) paste('../unif', pop, '_1.0_1h/output/', sep=''))
 Files <- sapply(Dirs, function(dir) paste(dir, 'mean_table.tex', sep=''))
 
-N <- length(Pops)
+N <- length(Incidents)
 Errs <- character()
 
 matO <- NULL
@@ -17,7 +17,7 @@ matC <- NULL
 
 
 for (i in 1:N) {
-  Pop <- Pops[i]
+  Inc <- Incidents[i]
   File <- Files[i]
   lines <- readLines(File)
   lines <- lines[7:19]
@@ -49,83 +49,97 @@ for (i in 1:N) {
 }
 
 dfO <- as.data.frame(matO)
-dfO$Pop <- Pops
+dfO$Incidents <- Incidents
 dfO$Bandwidth <- "Oracle"
 
 dfS <- as.data.frame(matS)
-dfS$Pop <- Pops
+dfS$Incidents <- Incidents
 dfS$Bandwidth <- "Silverman"
 
 dfC <- as.data.frame(matC)
-dfC$Pop <- Pops
+dfC$Incidents <- Incidents
 dfC$Bandwidth <- "CV"
 
 df <- rbind(dfO, dfS, dfC)
 df$Bandwidth <- as.factor(df$Bandwidth)
 
-coefO <- coef(lm(log(dfO$`Relative MISE`) ~ log(dfO$Pop)))
-coefS <- coef(lm(log(dfS$`Relative MISE`) ~ log(dfS$Pop)))
-coefC <- coef(lm(log(dfC$`Relative MISE`) ~ log(dfC$Pop)))
+coefO <- coef(lm(log(dfO$`Relative MISE`) ~ log(dfO$Incidents)))
+coefS <- coef(lm(log(dfS$`Relative MISE`) ~ log(dfS$Incidents)))
+coefC <- coef(lm(log(dfC$`Relative MISE`) ~ log(dfC$Incidents)))
 
 
 pdf(file="MISE-vs-population.pdf")
 ggplot(df) +
-  xlab(expression(N[p])) +
+  xlab(expression(N[i])) +
   theme(axis.title=element_text(size=20)) +
   theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
         legend.title=element_text(size=16, family='NewCenturySchoolbook'),
         legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Pop, y=MISE, colour=Bandwidth, shape=Bandwidth))
+  geom_point(aes(x=Incidents, y=MISE, colour=Bandwidth, shape=Bandwidth))
 dev.off()
 pdf(file="RMISE-vs-population.pdf")
 ggplot(df) +
-  xlab(expression(N[p])) +
+  xlab(expression(N[i])) +
   theme(axis.title=element_text(size=20)) +
   theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
         legend.title=element_text(size=16, family='NewCenturySchoolbook'),
         legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Pop, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth))
+  geom_point(aes(x=Incidents, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth))
 dev.off()
 pdf(file="RMISE-vs-population-log-log.pdf")
 ggplot(df) +
-  xlab(expression(N[p])) +
+  xlab(expression(N[i])) +
   theme(axis.title=element_text(size=20)) +
   theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
         legend.title=element_text(size=16, family='NewCenturySchoolbook'),
         legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Pop, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth)) +
+  geom_point(aes(x=Incidents, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth)) +
   coord_trans(x='log10', y='log10') +
   annotation_logticks(scaled=FALSE)
 dev.off()
 
-coefO <- coef(lm(log(dfO$`Normalized MISE`) ~ log(dfO$Pop)))
-coefS <- coef(lm(log(dfS$`Normalized MISE`) ~ log(dfS$Pop)))
-coefC <- coef(lm(log(dfC$`Normalized MISE`) ~ log(dfC$Pop)))
+coefO <- coef(lm(log(dfO$`Normalized MISE`) ~ log(dfO$Incidents)))
+coefS <- coef(lm(log(dfS$`Normalized MISE`) ~ log(dfS$Incidents)))
+coefC <- coef(lm(log(dfC$`Normalized MISE`) ~ log(dfC$Incidents)))
 
 pdf(file="NMISE-vs-population.pdf")
 ggplot(df) +
-  xlab(expression(N[p])) +
+  xlab(expression(N[i])) +
   theme(axis.title=element_text(size=20)) +
   theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
         legend.title=element_text(size=16, family='NewCenturySchoolbook'),
         legend.key.size=unit(1.5, 'cm')) +
-  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(4000,110000)) +
-  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(4000,110000)) +
-  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(4000,110000)) +
-  geom_point(aes(x=Pop, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth))
+  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(40,1100)) +
+  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(40,1100)) +
+  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(40,1100)) +
+  geom_point(aes(x=Incidents, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth))
 dev.off()
 pdf(file="NMISE-vs-population-log-log.pdf")
 ggplot(df) +
-  xlab(expression(N[p])) +
+  xlab(expression(N[i])) +
   theme(axis.title=element_text(size=20)) +
   theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
         legend.title=element_text(size=16, family='NewCenturySchoolbook'),
         legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Pop, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth)) +
-  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(4000,110000)) +
-  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(4000,110000)) +
-  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(4000,110000)) +
+  geom_point(aes(x=Incidents, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth)) +
+  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(40,1100)) +
+  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(40,1100)) +
+  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(40,1100)) +
   coord_trans(x='log10', y='log10') +
   annotation_logticks(scaled=FALSE)
 dev.off()
+
+Selector <- c("Oracle", "Silverman", "CV")
+Slope <- c(coefO[2], coefS[2], coefC[2])
+
+df.alpha <- data.frame(Selector, Slope)
+df.alpha.latex <- latex(df.alpha,
+                        title="nmise_convergence_table",
+                        where="htbp",
+                        label="tab:results:nmise_convergence_by_sample_size",
+                        rowname=NULL,
+                        cdec=c(0,3),
+                        caption.loc="bottom",
+                        caption="NMISE convergence rate by sample size for different bandwidth selectors for a fixed, single-peak risk function with expected number of incidents 100 on a uniform population.",
+                        caption.lot="NMISE Convergence rate by sample size")
 

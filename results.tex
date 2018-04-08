@@ -418,18 +418,21 @@ The full set of accuracy measures for these cases can be found in \cref{tab:mean
 We note that as in \cref{sec:results:unif_100_1.0_1h}, the \gls{peak bias} values were positive for the \gls{silverman} bandwidth based estimates.
 \autoref{fig:one_sample:unif_NCases_1h} shows how one realization of incidents, distributed over the population, for sample sizes of 100 and 500.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples showing factorS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_100_1.0_1h/output/population_and_incidents_scatter}
-    \caption{100 incidents}
+        \includegraphics[width=\textwidth]{results/unif_100_1.0_1h/output/population_and_incidents_scatter}
+        \caption{100 incidents}
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
-    \includegraphics[width=\textwidth]{results/unif_500_1.0_1h/output/population_and_incidents_scatter}
-    \caption{500 incidents}
+        \includegraphics[width=\textwidth]{results/unif_500_1.0_1h/output/population_and_incidents_scatter}
+        \caption{500 incidents}
     \end{subfigure}
-    \caption{A single realization of different sizes from a single-peak risk on a uniform population}
-    \label{fig:one_sample:unif_NCases_1h}
+        \caption{A single realization of different \glspl{factor} from a single-peak risk on a uniform population}
+        \label{fig:one_sample:unif_NCases_1h}
 \end{figure}
 
 According to the theory developed in \cref{sec:theory:bandwidth},
@@ -453,35 +456,33 @@ The observed values for the power of $n$ as represented by $N_I$ are shown in \c
 
 \input{results/by_h_per_mu/alpha_by_selector}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Selected bandwidty by factor
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[t]{0.195\textwidth}
         \centering
-        \captionsetup{width=.8\linewidth}%
         \includegraphics[width=\textwidth]{results/by_h_per_mu/oracle_bandwidth_x1_vs_mu.pdf}
         \subcaption{Oracle bandwidth in $x_1$ direction by \glsentryname{factor}}
     \end{subfigure}
     \begin{subfigure}[t]{0.195\textwidth}
         \centering
-        \captionsetup{width=.8\linewidth}%
         \includegraphics[width=\textwidth]{results/by_h_per_mu/oracle_bandwidth_x2_vs_mu.pdf}
         \subcaption{Oracle bandwidth in $x_2$ direction by \glsentryname{factor}}
     \end{subfigure}
     \begin{subfigure}[t]{0.195\textwidth}
         \centering
-        \captionsetup{width=.8\linewidth}%
         \includegraphics[width=\textwidth]{results/by_h_per_mu/silverman_bandwidth_vs_mu.pdf}
         \subcaption{Mean Silverman bandwidth by \glsentryname{factor}}
     \end{subfigure}
     \begin{subfigure}[t]{0.195\textwidth}
         \centering
-        \captionsetup{width=.8\linewidth}%
         \includegraphics[width=\textwidth]{results/by_h_per_mu/cv_bandwidth_x1_vs_mu.pdf}
         \subcaption{Mean CV bandwidth in $x_1$ direction by \glsentryname{factor}}
     \end{subfigure}
     \begin{subfigure}[t]{0.195\textwidth}
         \centering
-        \captionsetup{width=.8\linewidth}%
         \includegraphics[width=\textwidth]{results/by_h_per_mu/cv_bandwidth_x2_vs_mu.pdf}
         \subcaption{Mean CV bandwidth in $x_2$ direction by \glsentryname{factor}}
     \end{subfigure}
@@ -491,6 +492,9 @@ The observed values for the power of $n$ as represented by $N_I$ are shown in \c
     \label{fig:results:bandwidth_by_incidents}    
 \end{figure}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MISE by number of cases
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.24\textwidth}
@@ -583,6 +587,9 @@ The full set of accuracy measures for these cases can be found in \autoref{tab:m
 We note that as in \cref{sec:results:unif_100_1.0_1h}, the \gls{peak bias} values were positive for the \gls{silverman} bandwidth based estimates.
 \autoref{fig:one_sample:unif_Spreads_1h} shows how one realization of incidents, distributed over the population, for \glspl{spread} of 1.0 and 2.8.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples showing spreads
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}{0.45\textwidth}
@@ -617,6 +624,9 @@ Since we keep \gls{mu} constant throughout the experiment, it would make sense a
 The \gls{rmise} takes a local view of relative error, and here we see that as the \gls{spread} increase, the \gls{mise} decreases but at a slower rate than the true function.
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MISE by spread
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[t]{0.24\textwidth}
@@ -693,28 +703,65 @@ and in the next experiment the \gls{factor} is 100 and the population is 10,000.
 For this set of experiments, the population is uniformly distributed and the risk intensity has a single peak in the center with a fixed \gls{sigma_i} of 1.0.
 Mean and standard deviations of accuracy measures for the experiments of this section are found in \cref{tab:mean_error_rates:unif5k_50_1.0_1h,tab:mean_error_rates:unif10k_100_1.0_1h,tab:mean_error_rates:unif20k_200_1.0_1h,tab:mean_error_rates:unif50k_500_1.0_1h,tab:mean_error_rates:unif100k_1000_1.0_1h}.
 
+\Cref{fig:one_sample:unifNpop_1h} shows the denser population, as represented by the blue dots, and the larger sample size, represented by the red dots.
+In both cases, the population is distributed uniformly throughout the study area,
+while the incident samples are concentrated around the peak in the center.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples showing sample size
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{results/unif10k_100_1.0_1h/output/population_and_incidents_scatter}
+        \caption{100 incidents from population of 10,000}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{results/unif50k_500_1.0_1h/output/population_and_incidents_scatter}
+        \caption{500 incidents from population of 50,000}
+    \end{subfigure}
+    \caption{A single realization of different sample sizes from a single-peak risk on a uniform population, obtained by varying the \gls{factor} and population size in tandem while keeping the risk function $\lambda \xvec$ fixed}
+    \label{fig:one_sample:unifNpop_1h}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MISE by sample + population
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.24\textwidth}
         \includegraphics[width=\textwidth]{results/by_pop_size/MISE-vs-population}
         \caption{\glsentryname{mise}}
+        \label{fig:ise:unifNpop_1h:mise}
     \end{subfigure}
     \begin{subfigure}[b]{0.24\textwidth}
         \includegraphics[width=\textwidth]{results/by_pop_size/RMISE-vs-population}
         \caption{\glsentryname{rmise}}
+        \label{fig:ise:unifNpop_1h:rmise}
     \end{subfigure}
     \begin{subfigure}[b]{0.24\textwidth}
         \includegraphics[width=\textwidth]{results/by_pop_size/NMISE-vs-population}
         \caption{\glsentryname{nmise}}
+        \label{fig:ise:unifNpop_1h:nmise}
     \end{subfigure}
     \begin{subfigure}[b]{0.24\textwidth}
         \includegraphics[width=\textwidth]{results/by_pop_size/NMISE-vs-population-log-log}
         \caption{\glsentryname{nmise} log-log}
+        \label{fig:ise:unifNpop_1h:nmise_log_log}
     \end{subfigure}
     \caption[\glsentryname{mise}: by sample and population size]{\glsentryname{mise} vs. sample and population size}
     \label{fig:ise:unifNpop_1h}
 \end{figure}
 
+In \cref{fig:ise:unifNpop_1h:mise} we see that in this experiment,
+\gls{mise} decreases when the sample and population sizes increase.
+\Gls{rmise} also decreases in a similar manner, as shown in \cref{fig:ise:unifNpop_1h:rmise}.
+When we look at \cref{fig:ise:unifNpop_1h:nmise} we see that the rate of decrease of \gls{nmise} appears to be much higher than \gls{mise}.
+In \cref{tab:results:nmise_convergence_by_sample_size} we see that when we fix the risk function $\lambda \xvec$,
+the \gls{nmise} converges at a much higher rate than we observed in \cref{sec:results:number_of_incidents}.
+We also note that selected the bandwidth using \gls{cv} appears to result in a slightly faster rate of convergence than \gls{silverman}.
+
+\input{results/by_pop_size/nmise_convergence_table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
