@@ -1,10 +1,11 @@
 library(ggplot2)
+library(Hmisc)
 
 setwd("/Users/harold/Dropbox/MA_Knowledge_and_Info/Thesis/thesis/results/by_pop_risk_distance")
 
 Gaps <- c(0, 1, 2, 3, 4)
-GapStrs <- c("", "_1s", "_2s", "_3s", "_4s")
-Dirs <- sapply(GapStrs, function(gap) paste('../p1.4_100_1_1h', gap, '/output/', sep=''))
+GapStrs <- c("_1.0_1h", "_1_1h_1s", "_1_1h_2s", "_1_1h_3s", "_1_1h_4s")
+Dirs <- sapply(GapStrs, function(gap) paste('../p1.4_100', gap, '/output/', sep=''))
 Files <- sapply(Dirs, function(dir) paste(dir, 'mean_table.tex', sep=''))
 
 N <- length(Gaps)
@@ -19,7 +20,7 @@ for (i in 1:N) {
   Gap <- Gaps[i]
   File <- Files[i]
   lines <- readLines(File)
-  lines <- lines[7:19]
+  lines <- lines[7:22]
   Os <- numeric()
   Ss <- numeric()
   Cs <- numeric()
@@ -69,21 +70,93 @@ coefC <- coef(lm(log(dfC$`Relative MISE`) ~ dfC$Gap))
 
 pdf(file="MISE-vs-population-risk-gap.pdf")
 ggplot(df) +
-  geom_point(aes(x=Gap, y=MISE, colour=Bandwidth, shape=Bandwidth))
+  theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
+  geom_point(aes(x=Gap, y=MISE, colour=Bandwidth, shape=Bandwidth), size=3)
 dev.off()
 pdf(file="RMISE-vs-population-risk-gap.pdf")
 ggplot(df) +
+  theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
+  geom_point(aes(x=Gap, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
   stat_function(fun=function(x) {exp(coefO[2] * x + coefO[1])}, aes(colour="Oracle"), xlim=c(0, 4)) +
   stat_function(fun=function(x) {exp(coefS[2] * x + coefS[1])}, aes(colour="Silverman"), xlim=c(0, 4)) +
-  stat_function(fun=function(x) {exp(coefC[2] * x + coefC[1])}, aes(colour="CV"), xlim=c(0, 4)) +
-  geom_point(aes(x=Gap, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth))
+  stat_function(fun=function(x) {exp(coefC[2] * x + coefC[1])}, aes(colour="CV"), xlim=c(0, 4))
 dev.off()
 pdf(file="RMISE-vs-population-risk-gap-log-log.pdf")
 ggplot(df) +
-  geom_point(aes(x=Gap, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth)) +
+  theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
+  geom_point(aes(x=Gap, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
   stat_function(fun=function(x) {exp(coefO[2] * x + coefO[1])}, aes(colour="Oracle"), xlim=c(0, 4)) +
   stat_function(fun=function(x) {exp(coefS[2] * x + coefS[1])}, aes(colour="Silverman"), xlim=c(0, 4)) +
   stat_function(fun=function(x) {exp(coefC[2] * x + coefC[1])}, aes(colour="CV"), xlim=c(0, 4)) +
   coord_trans(y='log10') +
   annotation_logticks(sides="l", scaled=FALSE)
 dev.off()
+
+Selector <- c("Oracle", "Silverman", "CV")
+Gap <- c(coefO[2], coefS[2], coefC[2])
+
+df.alpha <- data.frame(Selector, Gap)
+df.alpha.latex <- latex(df.alpha,
+                        title="rmise_convergence_table",
+                        where="htbp",
+                        label="tab:results:rmise_convergence_by_pop_incident_gap",
+                        rowname=NULL,
+                        booktabs=TRUE,
+                        cdec=c(0,3),
+                        caption.loc="bottom",
+                        caption="RMISE convergence rate by incident-population peak distance for different bandwidth selectors for a single-peak risk function with spread of 1.0 on a single-peak population of 10,000.",
+                        caption.lot="RMISE Convergence rate by incident-population peak distance")
+
+coefO <- coef(lm(log(dfO$`Normalized MISE`) ~ dfO$Gap))
+coefS <- coef(lm(log(dfS$`Normalized MISE`) ~ dfS$Gap))
+coefC <- coef(lm(log(dfC$`Normalized MISE`) ~ dfC$Gap))
+
+pdf(file="NMISE-vs-population-risk-gap.pdf")
+ggplot(df) +
+  theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
+  geom_point(aes(x=Gap, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
+  stat_function(fun=function(x) {exp(coefO[2] * x + coefO[1])}, aes(colour="Oracle"), xlim=c(0, 4)) +
+  stat_function(fun=function(x) {exp(coefS[2] * x + coefS[1])}, aes(colour="Silverman"), xlim=c(0, 4)) +
+  stat_function(fun=function(x) {exp(coefC[2] * x + coefC[1])}, aes(colour="CV"), xlim=c(0, 4))
+dev.off()
+pdf(file="NMISE-vs-population-risk-gap-log-log.pdf")
+ggplot(df) +
+  theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
+  geom_point(aes(x=Gap, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
+  stat_function(fun=function(x) {exp(coefO[2] * x + coefO[1])}, aes(colour="Oracle"), xlim=c(0, 4)) +
+  stat_function(fun=function(x) {exp(coefS[2] * x + coefS[1])}, aes(colour="Silverman"), xlim=c(0, 4)) +
+  stat_function(fun=function(x) {exp(coefC[2] * x + coefC[1])}, aes(colour="CV"), xlim=c(0, 4)) +
+  coord_trans(y='log10') +
+  annotation_logticks(sides="l", scaled=FALSE)
+dev.off()
+
+Selector <- c("Oracle", "Silverman", "CV")
+Gap <- c(coefO[2], coefS[2], coefC[2])
+
+df.alpha <- data.frame(Selector, Gap)
+df.alpha.latex <- latex(df.alpha,
+                        title="nmise_convergence_table",
+                        where="htbp",
+                        label="tab:results:nmise_convergence_by_pop_incident_gap",
+                        rowname=NULL,
+                        booktabs=TRUE,
+                        cdec=c(0,3),
+                        caption.loc="bottom",
+                        caption="NMISE convergence rate by incident-population peak distance for different bandwidth selectors for a single-peak risk function with spread of 1.0 on a single-peak population of 10,000.",
+                        caption.lot="NMISE Convergence rate by incident-population peak distance")
+

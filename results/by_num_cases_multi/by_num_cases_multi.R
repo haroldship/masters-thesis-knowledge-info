@@ -19,20 +19,20 @@ for (j in 1:M) {
   Decay <- Decays[j]
   Dirs <- sapply(Cases, function(case) paste('../unif_', case, '_', Decay, '_1h/output/', sep=''))
   Files <- sapply(Dirs, function(dir) paste(dir, 'mean_table.tex', sep=''))
-  
+
   N <- length(Cases)
   Errs <- character()
-  
+
   matO <- NULL
   matS <- NULL
   matC <- NULL
-  
-  
+
+
   for (i in 1:N) {
     Case <- Cases[i]
     File <- Files[i]
     lines <- readLines(File)
-    lines <- lines[7:19]
+    lines <- lines[7:22]
     Os <- numeric()
     Ss <- numeric()
     Cs <- numeric()
@@ -59,26 +59,26 @@ for (j in 1:M) {
     matS[i,] <- Ss
     matC[i,] <- Cs
   }
-  
+
   dfO <- as.data.frame(matO)
   dfO$Case <- Cases
   dfO$Bandwidth <- "Oracle"
-  
+
   dfS <- as.data.frame(matS)
   dfS$Case <- Cases
   dfS$Bandwidth <- "Silverman"
-  
+
   dfC <- as.data.frame(matC)
   dfC$Case <- Cases
   dfC$Bandwidth <- "CV"
-  
+
   df <- rbind(dfO, dfS, dfC)
   df$Bandwidth <- as.factor(df$Bandwidth)
-  
+
   coefO <- coef(lm(log(dfO$`Relative MISE`) ~ log(dfO$Case)))
   coefS <- coef(lm(log(dfS$`Relative MISE`) ~ log(dfS$Case)))
   coefC <- coef(lm(log(dfC$`Relative MISE`) ~ log(dfC$Case)))
-  
+
   if (Decay == "unif") decayN <- Inf else decayN <- as.numeric(Decay)
   decay <- c(decay, decayN)
   kO <- c(kO, coefO[1])
@@ -87,8 +87,8 @@ for (j in 1:M) {
   alphaS <- c(alphaS, coefS[2])
   kC <- c(kC, coefC[1])
   alphaC <- c(alphaC, coefC[2])
-  
-  
+
+
   # pdf(file="MISE-vs-cases.pdf")
   # ggplot(df) +
   #   geom_point(aes(x=Case, y=MISE, colour=Bandwidth, shape=Bandwidth), size=3)

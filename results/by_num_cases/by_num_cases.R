@@ -19,7 +19,7 @@ for (i in 1:N) {
   Case <- Cases[i]
   File <- Files[i]
   lines <- readLines(File)
-  lines <- lines[7:19]
+  lines <- lines[7:22]
   Os <- numeric()
   Ss <- numeric()
   Cs <- numeric()

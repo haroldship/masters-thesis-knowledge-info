@@ -929,21 +929,21 @@ We do this to see how the minor peak affects the accuracy of the measuring the \
 The results of the experiments described in this section are summarized in \cref{tab:mean_error_rates:unif_100_1_2h_1,tab:mean_error_rates:unif_100_1_2h_2,tab:mean_error_rates:unif_100_1_2h_3,tab:mean_error_rates:unif_100_1_2h_4}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Examples showing population spread
+% Examples showing distance between two peaks
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=\textwidth]{results/unif_100_1_2h_2/output/population_and_incidents_scatter}
         \subcaption{Centers at $\{(1,0), (-1,0)\}$ (distance 2)}
-        \label{fig:one_sample:p1.4_100_G:1.0}
+        \label{fig:one_sample:p1.4_100_G:2}
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=\textwidth]{results/unif_100_1_2h_4/output/population_and_incidents_scatter}
         \subcaption{Centers at $\{(2,0), (-2,0)\}$ (distance 4)}
-        \label{fig:one_sample:p1.4_100_G:2.8}
+        \label{fig:one_sample:p1.4_100_G:4}
     \end{subfigure}
-    \caption[Examples showing population spread]
+    \caption[Examples showing distance between two peaks]
         {A single realization of different sample sizes from a double-peak risk on a uniform population, obtained by varying the distance between two peaks in the incident risk function.}
     \label{fig:one_sample:p1.4_100_G}
 \end{figure}
@@ -1012,22 +1012,95 @@ However, we also observe that \gls{peak bias} and \gls{centroid bias} decrease a
 \section{Distance between the population and risk function peaks}
 \label{sec:ise:p1.4_Gap_risk}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Parameter table
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{ll}
+        \toprule
+        Parameter & Value \\
+        \midrule
+        Population size & 10,000 \\
+        Population \gls{spread} & 1.4 \\
+        Population center & (-0.5,0), (-1,0), (-1.5,0), (-2,0) \\
+        \Gls{factor} & 40, 60 \\
+        Incident \gls{spread} & 1.0 \\
+        Incident center & (0.5,0), (1,0), (1.5,0), (2,0) \\
+        \bottomrule
+    \end{tabular}
+    \caption{Parameters used for varying the peak of the single-peak risk function with \glspl{factor} 100 and the peak of the single-peak population of 10,000}
+    \label{tab:params:p1.4_100_Gap_risk}
+\end{table}
+
+In this section, we look at incident risk function that have their peak at a different location from the peak in the population distribution.
+We expect that as this distance grows, the relatively small population at the peak of the incident risk will make it difficult to obtain any information through observing incidents and estimating with the \gls{dkd}.
+The results of the experiments described in this section are summarized in \cref{tab:mean_error_rates:p1.4_100_1_1h_1s,tab:mean_error_rates:p1.4_100_1_1h_2s,tab:mean_error_rates:p1.4_100_1_1h_3s,tab:mean_error_rates:p1.4_100_1_1h_4s}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples showing distance between population
+% and incident peaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
-    \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/by_pop_risk_distance/MISE-vs-population-risk-gap}
-    \caption{MISE}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{results/p1.4_100_1_1h_2s/output/population_and_incidents_scatter}
+        \subcaption{Centers at $\{(-1,0), (1,0)\}$ (distance 2)}
+        \label{fig:one_sample:p1.4_100_Gap_risk:2}
     \end{subfigure}
-    \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/by_pop_risk_distance/RMISE-vs-population-risk-gap}
-    \caption{Relative MISE}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{results/p1.4_100_1_1h_4s/output/population_and_incidents_scatter}
+        \subcaption{Centers at $\{(-2,0), (2,0)\}$ (distance 4)}
+        \label{fig:one_sample:p1.4_100_Gap_risk:4}
     \end{subfigure}
-    \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/by_pop_risk_distance/RMISE-vs-population-risk-gap-log-log}
-    \caption{Relative MISE log-log}
-    \end{subfigure}
-    \caption[MISE: by distance between population and risk peaks]{Mean Integrated Squared Error vs. distance between population and risk peaks}
-    \label{fig:ise:p1.4_Gap_risk}
+    \caption[Examples showing distance between population and incident peaks]
+        {A single realization of different sample sizes from a single-peak risk on a single-peak population, obtained by varying the distance between two peaks.}
+    \label{fig:one_sample:p1.4_100_Gap_risk}
 \end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MISE by distance between population
+% and incident peaks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.24\textwidth}
+        \includegraphics[width=\textwidth]{results/by_pop_risk_distance/MISE-vs-population-risk-gap}
+        \caption{\glsentryname{mise}}
+        \label{fig:ise:p1.4_100_Gap_risk:mise}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.24\textwidth}
+        \includegraphics[width=\textwidth]{results/by_pop_risk_distance/RMISE-vs-population-risk-gap}
+        \caption{\glsentryname{rmise}}
+        \label{fig:ise:p1.4_100_Gap_risk:rmise}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.24\textwidth}
+        \includegraphics[width=\textwidth]{results/by_pop_risk_distance/NMISE-vs-population-risk-gap}
+        \caption{\glsentryname{nmise}}
+        \label{fig:ise:p1.4_100_Gap_risk:nmise}
+    \end{subfigure}
+
+    \begin{subfigure}[b]{0.24\textwidth}
+        \includegraphics[width=\textwidth]{results/by_pop_risk_distance/RMISE-vs-population-risk-gap-log-log}
+        \caption{Log-log of \glsentryname{rmise}}
+        \label{fig:ise:p1.4_100_Gap_risk:rmise_log_log}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.24\textwidth}
+        \includegraphics[width=\textwidth]{results/by_pop_risk_distance/NMISE-vs-population-risk-gap-log-log}
+        \caption{Log-log of \glsentryname{nmise}}
+        \label{fig:ise:p1.4_100_Gap_risk:nmise_log_log}
+    \end{subfigure}    
+    \caption{\gls{mise} by distance between two risk peaks}
+    \label{fig:ise:p1.4_100_Gap_risk}
+\end{figure}
+
+\input{results/by_pop_risk_distance/nmise_convergence_table}
+
+\Cref{fig:ise:p1.4_100_Gap_risk} shows the different measures of \gls{mise} accuracy.
+We can see from \cref{fig:ise:p1.4_100_Gap_risk:rmise_log_log,fig:ise:p1.4_100_Gap_risk:nmise_log_log} that there is a linear relationship in the log-log graph,
+indicating polynomial increase with positive coefficient of \gls{mise} when the distance between the incident and population peaks increases.
+We see in \cref{tab:results:nmise_convergence_by_pop_incident_gap} that the exponent is just over 1,
+indicating just worse than linear.
+
 
 \graphicspath{{./}}
