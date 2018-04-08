@@ -833,6 +833,9 @@ because the population is greater in the same place that the risk of incidence i
 \end{figure}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MISE by population spread
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[t]{0.24\textwidth}
@@ -855,7 +858,7 @@ because the population is greater in the same place that the risk of incidence i
         \caption{\glsentryname{nmise} log-log}
         \label{fig:ise:pSD_100_1h:nmise_log_log}
     \end{subfigure}
-    \caption[\glsentryname{mise}: by sample and population \glsentryname{spread}]{\glsentryname{mise} vs. population \glsentryname{spread}}
+    \caption[\glsentryname{mise}: by population \glsentryname{spread}]{\glsentryname{mise} vs. population \glsentryname{spread}}
     \label{fig:ise:pSD_100_1h}
 \end{figure}
 
@@ -872,6 +875,9 @@ Because the risk function $\gls{lambda} \xvec$ is identical across experiments,
 the relative, normal and absolute measures all have similar patterns
 as seen in \cref{fig:other_measures:pSD_100_1h}.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Other accuracy measures by population spread
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[t]{0.24\textwidth}
@@ -896,23 +902,107 @@ as seen in \cref{fig:other_measures:pSD_100_1h}.
 \section{Distance between two peaks}
 \label{sec:results:p1.4_100_G}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Parameter table
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{ll}
+        \toprule
+        Parameter & Value \\
+        \midrule
+        Population size & 10,000 \\
+        Population \gls{spread} & uniform \\
+        Population center & uniform \\
+        \Gls{factor} & 40, 60 \\
+        Incident \gls{spread} & 1.0 \\
+        Incident center & \{(0.5,0), (-0.5,0)\},  \{(1,0), (-1,0)\}, \{(1.5,0), (-1.5,0)\}, \{(2,0), (-2,0)\}\\
+        \bottomrule
+    \end{tabular}
+    \caption{Parameters used for varying the two peaks of the risk function with \glspl{factor} 40 and 60 on a uniform population of 10,000}
+    \label{tab:params:p1.4_100_G}
+\end{table}
+
+In this section, we look at incident risk functions that have two peaks.
+The major peak has a \gls{factor} of 60, while the second, minor peak has a \gls{factor} of 40.
+We do this to see how the minor peak affects the accuracy of the measuring the \gls{dkd} in general and the \gls{peak bias} and \gls{peak drift} in particular.
+The results of the experiments described in this section are summarized in \cref{tab:mean_error_rates:unif_100_1_2h_1,tab:mean_error_rates:unif_100_1_2h_2,tab:mean_error_rates:unif_100_1_2h_3,tab:mean_error_rates:unif_100_1_2h_4}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples showing population spread
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
-    \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/by_two_peaks/MISE-vs-risk-peak-gap}
-    \caption{MISE}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{results/unif_100_1_2h_2/output/population_and_incidents_scatter}
+        \subcaption{Centers at $\{(1,0), (-1,0)\}$ (distance 2)}
+        \label{fig:one_sample:p1.4_100_G:1.0}
     \end{subfigure}
-    \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/by_two_peaks/RMISE-vs-risk-peak-gap}
-    \caption{Relative MISE}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{results/unif_100_1_2h_4/output/population_and_incidents_scatter}
+        \subcaption{Centers at $\{(2,0), (-2,0)\}$ (distance 4)}
+        \label{fig:one_sample:p1.4_100_G:2.8}
     \end{subfigure}
-    \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{results/by_two_peaks/RMISE-vs-risk-peak-gap-log-log}
-    \caption{Relative MISE log-log}
+    \caption[Examples showing population spread]
+        {A single realization of different sample sizes from a double-peak risk on a uniform population, obtained by varying the distance between two peaks in the incident risk function.}
+    \label{fig:one_sample:p1.4_100_G}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MISE by peak distance
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.24\textwidth}
+        \includegraphics[width=\textwidth]{results/by_two_peaks/MISE-vs-risk-peak-gap}
+        \caption{\glsentryname{mise}}
     \end{subfigure}
-    \caption[MISE: by risk spread]{Mean Integrated Squared Error vs. distance between two risk peaks}
+    \begin{subfigure}[b]{0.24\textwidth}
+        \includegraphics[width=\textwidth]{results/by_two_peaks/RMISE-vs-risk-peak-gap}
+        \caption{\glsentryname{rmise}}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.24\textwidth}
+        \includegraphics[width=\textwidth]{results/by_two_peaks/NMISE-vs-risk-peak-gap}
+        \caption{\glsentryname{nmise}}
+    \end{subfigure}
+    \caption{\gls{mise} by distance between two risk peaks}
     \label{fig:ise:p1.4_100_G}
 \end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Other measures by peak distance
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.24\textwidth}
+        \includegraphics[width=\textwidth]{results/by_two_peaks/peak-bias-vs-risk-peak-gap}
+        \caption{\glsentryname{peak bias}}
+        \label{fig:other_measures:p1.4_100_G:peak_bias}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.24\textwidth}
+        \includegraphics[width=\textwidth]{results/by_two_peaks/peak-drift-vs-risk-peak-gap}
+        \caption{\glsentryname{peak drift}}
+        \label{fig:other_measures:p1.4_100_G:peak_drift}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.24\textwidth}
+        \includegraphics[width=\textwidth]{results/by_two_peaks/centroid-bias-vs-risk-peak-gap}
+        \caption{\glsentryname{centroid bias}}
+        \label{fig:other_measures:p1.4_100_G:centroid_bias}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.24\textwidth}
+        \includegraphics[width=\textwidth]{results/by_two_peaks/centroid-drift-vs-risk-peak-gap}
+        \caption{\glsentryname{centroid drift}}
+        \label{fig:other_measures:p1.4_100_G:centroid_drift}
+    \end{subfigure}
+    \caption{Other accuracy measures by distance between two risk peaks}
+    \label{fig:other_measures:p1.4_100_G}
+\end{figure}
+
+We observe that \gls{mise}, \gls{rmise} and \gls{nmise} all increase when the distance between two peaks increases (\cref{fig:ise:p1.4_100_G}).
+The \gls{peak drift} and \gls{centroid drift} also increase when the distance between the two peaks increases (\cref{fig:other_measures:p1.4_100_G:peak_drift,fig:other_measures:p1.4_100_G:centroid_drift}).
+However, we also observe that \gls{peak bias} and \gls{centroid bias} decrease as the distance between the two peaks increases (\cref{fig:other_measures:p1.4_100_G:peak_bias,fig:other_measures:p1.4_100_G:centroid_bias}).
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%

@@ -1,9 +1,10 @@
 library(ggplot2)
+library(Hmisc)
 
 setwd("/Users/harold/Dropbox/MA_Knowledge_and_Info/Thesis/thesis/results/by_two_peaks")
 
-Gaps <- c(0, 1, 2, 3, 4)
-GapStrs <- c("1h", "2h_1", "2h_2", "2h_3", "2h_4")
+Gaps <- c(1, 2, 3, 4)
+GapStrs <- c("2h_1", "2h_2", "2h_3", "2h_4")
 Dirs <- sapply(GapStrs, function(gap) paste('../unif_100_1_', gap, '/output/', sep=''))
 Files <- sapply(Dirs, function(dir) paste(dir, 'mean_table.tex', sep=''))
 
@@ -19,7 +20,7 @@ for (i in 1:N) {
   Gap <- Gaps[i]
   File <- Files[i]
   lines <- readLines(File)
-  lines <- lines[7:19]
+  lines <- lines[7:22]
   Os <- numeric()
   Ss <- numeric()
   Cs <- numeric()
@@ -69,21 +70,64 @@ coefC <- coef(lm(log(dfC$`Relative MISE`) ~ dfC$Gap))
 
 pdf(file="MISE-vs-risk-peak-gap.pdf")
 ggplot(df) +
-  geom_point(aes(x=Gap, y=MISE, colour=Bandwidth, shape=Bandwidth))
+  theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
+  geom_point(aes(x=Gap, y=MISE, colour=Bandwidth, shape=Bandwidth), size=3)
 dev.off()
 pdf(file="RMISE-vs-risk-peak-gap.pdf")
 ggplot(df) +
-  stat_function(fun=function(x) {exp(coefO[2] * x + coefO[1])}, aes(colour="Oracle"), xlim=c(0, 4)) +
-  stat_function(fun=function(x) {exp(coefS[2] * x + coefS[1])}, aes(colour="Silverman"), xlim=c(0, 4)) +
-  stat_function(fun=function(x) {exp(coefC[2] * x + coefC[1])}, aes(colour="CV"), xlim=c(0, 4)) +
-  geom_point(aes(x=Gap, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth))
+  theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
+  geom_point(aes(x=Gap, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth), size=3)
 dev.off()
-pdf(file="RMISE-vs-risk-peak-gap-log-log.pdf")
+
+coefO <- coef(lm(log(dfO$`Normalized MISE`) ~ dfO$Gap))
+coefS <- coef(lm(log(dfS$`Normalized MISE`) ~ dfS$Gap))
+coefC <- coef(lm(log(dfC$`Normalized MISE`) ~ dfC$Gap))
+
+pdf(file="NMISE-vs-risk-peak-gap.pdf")
 ggplot(df) +
-  geom_point(aes(x=Gap, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth)) +
-  stat_function(fun=function(x) {exp(coefO[2] * x + coefO[1])}, aes(colour="Oracle"), xlim=c(0, 4)) +
-  stat_function(fun=function(x) {exp(coefS[2] * x + coefS[1])}, aes(colour="Silverman"), xlim=c(0, 4)) +
-  stat_function(fun=function(x) {exp(coefC[2] * x + coefC[1])}, aes(colour="CV"), xlim=c(0, 4)) +
-  coord_trans(y='log10') +
-  annotation_logticks(sides="l", scaled=FALSE)
+  theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
+  geom_point(aes(x=Gap, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth), size=3)
 dev.off()
+
+pdf(file="peak-bias-vs-risk-peak-gap.pdf")
+ggplot(df) +
+  theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
+  geom_point(aes(x=Gap, y=`Peak bias`, colour=Bandwidth, shape=Bandwidth), size=3)
+dev.off()
+pdf(file="peak-drift-vs-risk-peak-gap.pdf")
+ggplot(df) +
+  theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
+  geom_point(aes(x=Gap, y=`Peak drift`, colour=Bandwidth, shape=Bandwidth), size=3)
+dev.off()
+pdf(file="centroid-bias-vs-risk-peak-gap.pdf")
+ggplot(df) +
+  theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
+  geom_point(aes(x=Gap, y=`Centroid bias`, colour=Bandwidth, shape=Bandwidth), size=3)
+dev.off()
+pdf(file="centroid-drift-vs-risk-peak-gap.pdf")
+ggplot(df) +
+  theme(axis.title=element_text(size=20)) +
+  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
+        legend.key.size=unit(1.5, 'cm')) +
+  geom_point(aes(x=Gap, y=`Centroid drift`, colour=Bandwidth, shape=Bandwidth), size=3)
+dev.off()
+
