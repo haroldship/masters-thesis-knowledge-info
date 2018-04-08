@@ -1,9 +1,10 @@
 library(ggplot2)
-library(xtable)
+library(Hmisc)
 
 setwd("/Users/harold/Dropbox/MA_Knowledge_and_Info/Thesis/thesis/results/by_num_cases_multi")
 
-Decays <- c("0.7", "1", "1.4", "2.0", "unif")
+Decays <- c("0.7", "1.0", "1.4", "2.0", "unif")
+DecayStrs <- c("0.7_1h", "1.0_1h", "1.4_1h", "2.0_1h", "unif")
 M <- length(Decays)
 
 decay <- numeric()
@@ -17,7 +18,8 @@ kC <- numeric()
 for (j in 1:M) {
   Cases <- c(50, 100, 200, 500, 1000)
   Decay <- Decays[j]
-  Dirs <- sapply(Cases, function(case) paste('../unif_', case, '_', Decay, '_1h/output/', sep=''))
+  DecayStr <- DecayStrs[j]
+  Dirs <- sapply(Cases, function(case) paste('../unif_', case, '_', DecayStr, '/output/', sep=''))
   Files <- sapply(Dirs, function(dir) paste(dir, 'mean_table.tex', sep=''))
 
   N <- length(Cases)
@@ -88,7 +90,6 @@ for (j in 1:M) {
   kC <- c(kC, coefC[1])
   alphaC <- c(alphaC, coefC[2])
 
-
   # pdf(file="MISE-vs-cases.pdf")
   # ggplot(df) +
   #   geom_point(aes(x=Case, y=MISE, colour=Bandwidth, shape=Bandwidth), size=3)
@@ -111,6 +112,16 @@ for (j in 1:M) {
   # dev.off()
 }
 
-df <- data.frame(decay, kO, alphaO, kS, alphaS, kC, alphaC)
-xt <- xtable(df, digits=4, align="llrrrrrr")
-print(xt, include.rownames=FALSE, floating=FALSE)
+df <- data.frame(decay, alphaO, alphaS, alphaC)
+
+df.latex <- latex(df,
+                  title="rmise_convergence_table",
+                  where="htbp",
+                  label="tab:results:rmise_convergence_by_cases_and_spread",
+                  rowname=NULL,
+                  booktabs=TRUE,
+                  cdec=c(1,rep(3, 3)),
+                  caption.loc="bottom",
+                  caption="RMISE convergence rates by case for different bandwidth selectors and different spreads when the population of 10,000 is uniformly distributed.",
+                  caption.lot="RMISE Convergence rate by case for different spreads")
+
