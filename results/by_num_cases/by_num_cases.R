@@ -3,7 +3,6 @@ library(Hmisc)
 
 setwd("/Users/harold/Dropbox/MA_Knowledge_and_Info/Thesis/thesis/results/by_num_cases")
 
-#Cases <- c(50, 100, 200, 500, 1000)
 Cases <- c(50, 100, 200, 500, 1000)
 Dirs <- sapply(Cases, function(case) paste('../unif_', case, '_1.0_1h/output/', sep=''))
 Files <- sapply(Dirs, function(dir) paste(dir, 'mean_table.tex', sep=''))
@@ -141,6 +140,7 @@ df.alpha.latex <- latex(df.alpha,
                         where="htbp",
                         label="tab:results:nmise_convergence_by_num_cases",
                         rowname=NULL,
+                        booktabs=TRUE,
                         cdec=c(0,3),
                         caption.loc="bottom",
                         caption="NMISE onvergence rate by number of cases for different bandwidth selectors for a single-peak risk function with spread of 1.0 on a uniform population of 10,000.",

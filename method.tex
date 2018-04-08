@@ -14,23 +14,25 @@ We then run a set of experiments, varying one parameter at a time, or in some ca
 \begin{table}[htbp]
     \centering
     \begin{tabular}{ll}
-    Parameter name & Description \\
-    \hline
-    x1.min & Minimum value of the study area in the horizontal ($X_1$) direction \\
-    x1.max & Maximum value of the study area in the horizontal ($X_1$) direction  \\
-    x2.min & Minimum value of the study area in the vertical ($X_2$) direction \\
-    x2.max & Maximum value of the study area in the vertical ($X_2$) direction \\
-    grid.by & Space between grid points in the study area \\
-    buffer & Buffer around outside of study area \\
-    N.p & Size of population \\
-    EN.i & Expected number of incidents per simulation \\
-    c1 & (optional) $x_1$ coordinate of the population peak \\
-    c2 & (optional) $x_2$ coordinate of the population peak \\
-    sigma1 & (optional) $x_1$ standard deviation of the population peak \\
-    sigma2 & (optional) $x_2$ standard deviation of the population peak \\
-    rho & (optional) Correlation coefficient of $x_1$ and $x_2$ \\
-    bandwidths & List of bandwidths for evaluating the Oracle \\
-    incident\textunderscore rate & Risk function for generating incidents from population \\
+        \toprule
+        Parameter name & Description \\
+        \midrule
+        x1.min & Minimum value of the study area in the horizontal ($X_1$) direction \\
+        x1.max & Maximum value of the study area in the horizontal ($X_1$) direction  \\
+        x2.min & Minimum value of the study area in the vertical ($X_2$) direction \\
+        x2.max & Maximum value of the study area in the vertical ($X_2$) direction \\
+        grid.by & Space between grid points in the study area \\
+        buffer & Buffer around outside of study area \\
+        N.p & Size of population \\
+        EN.i & Expected number of incidents per simulation \\
+        c1 & (optional) $x_1$ coordinate of the population peak \\
+        c2 & (optional) $x_2$ coordinate of the population peak \\
+        sigma1 & (optional) $x_1$ standard deviation of the population peak \\
+        sigma2 & (optional) $x_2$ standard deviation of the population peak \\
+        rho & (optional) Correlation coefficient of $x_1$ and $x_2$ \\
+        bandwidths & List of bandwidths for evaluating the Oracle \\
+        incident\textunderscore rate & Risk function for generating incidents from population \\
+        \bottomrule
     \end{tabular}
     \caption{Experimental parameters}
     \label{tab:experimental_parameters}

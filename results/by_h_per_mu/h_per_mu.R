@@ -53,6 +53,7 @@ df.latex <- latex(df,
                   where="htbp",
                   label="tab:results:bandwidth_vs_mu",
                   rowname=NULL,
+                  booktabs=TRUE,
                   cgroup=c("", "Mean Bandwidths", "NMISE"),
                   n.cgroup=c(1, 5, 3),
                   colheads=c("$N_I$", '$h_{o1}$', '$h_{o2}$', '$h_{s}$', '$h_{cv1}$', '$h_{cv2}$', 'Oracle', 'Silverman', 'CV'),
@@ -137,13 +138,13 @@ Slope <- c(coef_ho1[2],
 
 df.alpha <- data.frame(Selector, Slope)
 df.alpha.latex <- latex(df.alpha,
-                        file="alpha_by_selector.tex",
                         title="alpha_by_selector",
                         where="htbp",
                         label="tab:results:bandwidth_alpha_by_selector",
                         rowname=NULL,
+                        booktabs=TRUE,
                         cdec=c(0,3),
                         caption.loc="bottom",
-                        caption="Bandwidth onvergence rate $\\alpha$ of for different bandwidth selectors for a single-peak risk function with spread of 1.0 on a uniform population of 10,000.",
+                        caption="Bandwidth convergence rate $\\alpha$ of for different bandwidth selectors for a single-peak risk function with spread of 1.0 on a uniform population of 10,000.",
                         caption.lot="Bandwidth convergence rate of bandwidth selectors")
 

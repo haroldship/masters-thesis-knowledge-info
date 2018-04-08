@@ -2,6 +2,7 @@
 ## Harold Ship, University of Haifa
 
 ### Fixed in version 0.8
+ - [x] Results: major rewrite
  - [x] Results: 5.1 mentions 5.6-7 but not 5.2-4
  - [x] Appendix: some tables are squished. Paragraph indentation?
  - [x] For NMIAE and NSUP - use mu not mu^2

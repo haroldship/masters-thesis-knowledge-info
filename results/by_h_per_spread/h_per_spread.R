@@ -46,19 +46,12 @@ setwd("/Users/harold/Dropbox/MA_Knowledge_and_Info/Thesis/thesis/results/by_h_pe
 df <- data.frame(spread, oracle.best_h1, oracle.best_h2, silverman.mean_h, cv.mean_h1, cv.mean_h2,
                  oracle.nmise, silverman.nmise, cv.nmise)
 
-# tb <- xtable(df,
-#              digits=c(1, 1, rep(1, 5), rep(6, 3)),
-#              caption=c("Bandwidth and accuracy by spread for uniform population of 10,000 with single-peak risk function with expected number of incidents 100. The NMISE values are scaled by $10^9$.",
-#                        "Bandwidth and accuracy by spread of incidents"),
-#              label="tab:results:bandwidth_vs_spread")
-# colnames(tb) <- c("$\\sigma_i$", 'Mean $h_{o1}$', 'Mean $h_{o2}$', 'Mean $h_{s}$', 'Mean $h_{cv1}$', 'Mean $h_{cv2}$', 'Oracle NMISE', 'Silverman NMISE', 'CV NMISE')
-#
-# print(tb, include.rownames=FALSE, sanitize.colnames.function=identity)
-# print(tb, include.rownames=FALSE, sanitize.colnames.function=identity, file="h_per_spread.tex")
-
-df.latex <- latex(df, file="h_per_spread.tex", title="h_per_spread", where="htbp",
+df.latex <- latex(df, file="h_per_spread.tex",
+                  title="h_per_spread",
+                  where="htbp",
                   label="tab:results:bandwidth_vs_spread",
                   rowname=NULL,
+                  booktabs=TRUE,
                   cgroup=c("", "Mean Bandwidths", "NMISE"),
                   n.cgroup=c(1, 5, 3),
                   colheads=c("$\\sigma_i$", '$h_{o1}$', '$h_{o2}$', '$h_{s}$', '$h_{cv1}$', '$h_{cv2}$', 'Oracle', 'Silverman', 'CV'),

@@ -168,7 +168,7 @@ base <- experiment$region$x1.max - experiment$region$x1.min - 2*experiment$regio
 
 measures <- c("MISE", "Relative MISE", "Normalized MISE",
               "MIAE", "Relative MIAE", "Normalized MIAE",
-              "Max Error", "Normalized Max Error",
+              "Supremum error", "Normalized Sup error",
               "Peak bias", "Relative Peak bias",
               "Peak drift", "Relative Peak drift",
               "Centroid bias", "Relative Centroid bias",
@@ -210,7 +210,7 @@ rownames(meansdf) <- measures
 
 mean_table <- xtable(meansdf, digits=6, align="lrrr")
 sink(paste(outdir, "mean_table.tex", sep="/"))
-print(mean_table, include.rownames=TRUE, floating=FALSE)
+print(mean_table, include.rownames=TRUE, floating=FALSE, booktabs = TRUE)
 sink()
 
 stddevdf <- data.frame(
@@ -249,7 +249,7 @@ rownames(stddevdf) <- measures
 
 std_table <- xtable(stddevdf, digits=6, align="lrrr")
 sink(paste(outdir, "std_table.tex", sep="/"))
-print(std_table, include.rownames=TRUE, floating=FALSE)
+print(std_table, include.rownames=TRUE, floating=FALSE, booktabs = TRUE)
 sink()
 
 # print/plot one simulation
