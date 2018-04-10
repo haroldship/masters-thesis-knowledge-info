@@ -21,6 +21,11 @@
 \newcommand*\diff{\mathop{}\!\mathrm{d}}% \diff for differentiator symbol 'd'
 \newcommand*{\ds}{\ensuremath{\diff{\mathbf{s}}}}% ds (vector)
 
+% integrals
+\newcommand{\iintW}[1]{
+    \iint\limits_{\xvec \in W} {#1 \diff{x_2} \diff{x_1}}
+}
+
 % math symbols
 \newcommand{\E}{\ensuremath{\mathbb{E}}}% expected value
 \newcommand{\R}{\ensuremath{\mathbb{R}}}% R - the reals

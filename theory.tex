@@ -7,50 +7,94 @@
 %%
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 % Spatial point processes
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Disease incidence}
+\label{sec:theory:incidence}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Spatial point processes
+%
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Spatial point processes}
 \label{sec:theory:spatial_point_processes}
 
-The theoretical results in this chapter are taken from \citet{diggle1988equivalence}, \citet{guan2008consistent}, and \citet{wand1994kernel}.
-In order to understand the patterns in a set of events in a region.
+The theoretical results in this chapter are taken from \citet{diggle1983spatial},
+\citet{diggle1988equivalence},
+\citet{guan2008consistent},
+\citet{silverman1986density},
+and \citet{wand1994kernel}.
+
+In order to understand the geospatial patterns of disease incidence,
+we consider points in two-dimensional space $\RS$.
+We begin by defining
 
 \begin{defn}
-``A \gls{spp} is any stochastic mechanism which generates a countable set of events in the plane.''
+    A \textbf{study} area $\gls{W} \subset \RS$ is a region in the plane where we make observations.
 \end{defn}
 
-Let \gls{Lambda} be a \gls{spp}, and let \(\gls{W} \subset \RS \) be the study area.
+The observations we are interested in are points distributed in \gls{W} which we call
 
-The intensity \gls{lambda} at \((s_1, x_s) \in \RS\) is defined as:
+\begin{defn}
+    \textbf{Events} are points in a study area \gls{W} that we are interested in observing together.
+\end{defn}
+
+For example, in the study area of the boundaries of a city, we consider the events of the addresses of the residents.
+We call this set of events
+
+\begin{defn}
+    The \textbf{population} \gls{P} is the set of home addresses of the residents of the study area \gls{W}.
+\end{defn}
+
+The type of study we are interested in involves incidents of a chronic disease.
+Therefore, we separately consider those people who contracted the disease under study.
+
+\begin{defn}
+    The subset \gls{I} of the population \gls{P} consisting of the home addresses of people who contracted the disease under study we call the \textbf{incidents}.
+\end{defn}
+
+In general, we are interested in the understanding they mechanism by which the events occurred.
+We are interested both in the number of events, and even more so in the pattern by which their locations are distributed in \gls{W}.
+
+\begin{defn}
+    A \textbf{\gls{spp}} is a stochastic mechanism which generates a set of events.
+\end{defn}
+
+Let \gls{Lambda} be a \gls{spp}, and let $\gls{W} \subset \RS $ be the study area.
+
+The intensity \gls{lambda} at $(s_1, x_s) \in \RS$ is defined as:
 
 \begin{equation}
 \label{eq:lambda_differential}
-    \lambda (x_1, x_2) = \lim_{|\ds| \to 0}
+    \lambda \xvec = \lim_{|\ds| \to 0}
         \left\{
             \frac{\mathbb{E}[N(\ds)]}% /
             {|\ds|}
         \right\}
 \end{equation}
 
-And \(\lambda(s_1, s_2) \ds\) is the approximate probability of \ds~ containing a single incident.
-Qualitatively, an intensity function differs from a probability density function in that it does not necessarily integrate to \(1\).
-In particular, we can write \(\lambda\) as a scaled probability density function:
+And $\lambda(s_1, s_2) \ds$ is the approximate probability of \ds~ containing a single incident.
+Qualitatively, an intensity function differs from a probability density function in that it does not necessarily integrate to $1$.
+In particular, we can write $\lambda$ as a scaled probability density function:
 
 \begin{equation}
 \label{eq:lambda_mu}
     \lambda(s_1, s_2) = \mu f\!(s_1, s_2)
 \end{equation}
 
-where \(f\) is a probability density function and \gls{mu} is a constant.
+where $f$ is a probability density function and \gls{mu} is a constant.
 
-Goal of intensity estimate: obtain an estimate of the function \(\lambda((s_1, s_2))\) on the study area by inference on a data sample.
+Goal of intensity estimate: obtain an estimate of the function $\lambda((s_1, s_2))$ on the study area by inference on a data sample.
 
 Kernel intensity estimator (my simplification):
 \begin{equation}
 \label{eq:lambda_hat}
     \hat{\lambda}((s_1, s_2); h) 
-        = \frac{1}{h} \sum_{(x_1, x_2) \in N \cap W}
-            {k(((x_1, x_2)-(s_1, s_2))/h)}
+        = \frac{1}{h} \sum_{\xvec \in N \cap W}
+            {k((\xvec-(s_1, s_2))/h)}
 \end{equation}
 
 where \gls{mu} is ... and \gls{k} is ...
@@ -61,21 +105,21 @@ where \gls{mu} is ... and \gls{k} is ...
 \section{Bias and variance of kernel intensity estimator}
 \label{sec:theory:bias_variance}
 
-If we let \(\gls{lambda} = \gls{mu} f\) where \(f\) is a probability density, then at a point \((x_1, x_2) \in \RS\),
+If we let $\gls{lambda} = \gls{mu} f$ where $f$ is a probability density, then at a point $\xvec \in \RS$,
 \begin{align}
-    \mbox{bias}(\gls{lambda_hat}((x_1, x_2);h)) & \approx
-        \frac{1}{2} \mu h^2 ~ \gls{grad}^2\!\left[ f(x_1, x_2) \right]
+    \mbox{bias}(\gls{lambda_hat}(\xvec;h)) & \approx
+        \frac{1}{2} \mu h^2 ~ \gls{grad}^2\!\left[ f\xvec \right]
             \int { z^2 K(z_1, z_2) \diff{z_1} \diff{z_2)} } \\
-    \mbox{var}(\gls{lambda_hat}((x_1, x_2);h)) & \approx
+    \mbox{var}(\gls{lambda_hat}(\xvec;h)) & \approx
         h^{-2} \mu
-            \int { K(z_1, z_2)^2\diff{z_1} \diff{z_2} } f(x_1, x_2)
+            \int { K(z_1, z_2)^2\diff{z_1} \diff{z_2} } f\xvec
 \end{align}
 
-Taking derivative by \(h\) and setting to \(0\), we get that \(h_{\mbox{opt}}\) is \(O(\mu^{-1/6})\).
+Taking derivative by $h$ and setting to $0$, we get that $h_{\mbox{opt}}$ is $O(\mu^{-1/6})$.
 
-Also, as \(\mu \to \infty\), both the bias and variance also \(\to \infty\),
-but the \textit{relative} MISE, taken by dividing by \(\mu^2\) results in the relative bias being \(O(\mu^{-1/3})\)
-but the relative variance being \(O(\mu^{1/3})\).
+Also, as $\mu \to \infty$, both the bias and variance also $\to \infty$,
+but the \textit{relative} MISE, taken by dividing by $\mu^2$ results in the relative bias being $O(\mu^{-1/3})$
+but the relative variance being $O(\mu^{1/3})$.
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bias and variance
@@ -113,18 +157,18 @@ The paper develops a \textit{new nonparametric intensity estimator} that is cons
 We generate data for each experiment as follows.
 Before we begin, we set the random number seed to a fixed value for all experiments.
 The first step is to generate a population.
-We choose a distribution function \(f_p\) over \gls{W}, and scale it to obtain an the population intensity function \gls{lambda_p} of a \gls{spp} \gls{Lambda} with an expected number of points the same as our chosen population size.
+We choose a distribution function $f_p$ over \gls{W}, and scale it to obtain an the population intensity function \gls{lambda_p} of a \gls{spp} \gls{Lambda} with an expected number of points the same as our chosen population size.
 This means that the actual population size may not be exactly what we have chosen.
-We then generate points \((x_1, x_2)\) uniformly in \gls{W} and use keep them with probability \gls{lambda_p}\((x_1, x_2)\).
+We then generate points $\xvec$ uniformly in \gls{W} and keep them with probability \gls{lambda_p}$\xvec$.
 This gives us our population \gls{P} which use throughout the experiment.
 In this way,
-if \gls{lambda_p}\((x_1, x_2)\) has twice the value of \gls{lambda_p}\((y_1, y_2)\) for two points \((x_1, x_2)\) and \((y_1, y_2)\) in \gls{W},
-then we expect to see about twice as many points around \((x_1, x_2)\) than around \((y_1, y_2)\) in \gls{P}.
+if \gls{lambda_p}$\xvec$ has twice the value of \gls{lambda_p}$(y_1, y_2)$ for two points $\xvec$ and $(y_1, y_2)$ in \gls{W},
+then we expect to see about twice as many points around $\xvec$ than around $(y_1, y_2)$ in \gls{P}.
 
 Once we have a fixed population, we have need to decide which members of the population constitute the incidents.
 The process to generate the incidents is similar to that of the population.
 We create an incident intensity function \gls{lambda_i} of a \gls{spp} for incidents.
-We then take the points \((x_1, x_2) \in \gls{P}\) and keep each one with probability \gls{lambda_i}\((x_1, x_2)\).
+We then take the points $\xvec \in \gls{P}$ and keep each one with probability \gls{lambda_i}$\xvec$.
 This gives us our set of incidents \gls{I}.
-Once again, when \gls{I}\((x_1, x_2)\) is higher than \gls{I}\((y_1, y_2)\),
-then the probability of \((x_1, x_2) \in \gls{I}\) is correspondingly higher than that of \((y_1, y_2)\).
+Once again, when \gls{I}$\xvec$ is higher than \gls{I}$(y_1, y_2)$,
+then the probability of $\xvec \in \gls{I}$ is correspondingly higher than that of $(y_1, y_2)$.

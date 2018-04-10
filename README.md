@@ -1,6 +1,12 @@
 # Investigating the Statistical Properties of the Double Kernel Density Estimator
 ## Harold Ship, University of Haifa
 
+### Fixed in version 0.9
+ - [x] Theory: major rewrite
+ - [x] Method: double integral with (x1, x2) in W as limits
+ - [x] Method: 4.2.1: "in many cases": when & how?
+ - [x] Method: 4.4: "A common method for bandwidth selection..." to start
+
 ### Fixed in version 0.8
  - [x] Results: major rewrite
  - [x] Results: 5.1 mentions 5.6-7 but not 5.2-4
@@ -59,8 +65,6 @@
  - [ ] Method: 4.1 Describe the kernel method of intensit estimation, assumes some data, "if someone has incident location data, they can use this method"
  - [ ] Method: 4.1 mention 2 kernel methods, incidents vs population
  - [ ] Method: 4.2 define lambda := lambda(., .) to show lambda is a function
- - [ ] Method: double integral with (x1, x2) in W as limits
- - [ ] Method: 4.2.1: "in many cases": when & how?
  - [ ] Method: 4.2.5: motivation for centroid
  - [ ] Method: 4.2.5: formulas
  - [ ] Method: 4.3: "and scale it" - example

@@ -99,11 +99,9 @@ We then integrate the squared error in the estimate over the plane to obtain the
 
 \begin{equation}
 \label{eq:ise}
-    \mbox{ISE}(\hat{\lambda}) = 
-        \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
-            \left(
-                \hat{\lambda}\xvec - \lambda\xvec
-            \right)^2 \diff{x_2} \diff{x_1}
+    \mbox{ISE}(\hat{\lambda}) = \iintW{
+            \left( \hat{\lambda}\xvec - \lambda\xvec \right)^2
+        }
 \end{equation}
 
 We can then compute the expected value of the \gls{ise} to obtain the \gls{mise}.
@@ -151,7 +149,10 @@ which we call \gls{nmise}:
         \frac{1}{\gls{mu}^2} \mbox{\gls{mise}}(\gls{lambda_hat}) \text{.}
 \end{equation}
 
-In many cases it is more informative to compare the accuracy of two experiments using \gls{nmise} and \gls{rmise} than using \gls{mise}.
+Often we are comparing the results of several experiments.
+Sometimes, the \gls{factor} \gls{mu} has different values in each of those experiments.
+In such a case, it is more informative to compare the accuracy of two experiments using \gls{nmise} and \gls{rmise} than using \gls{mise},
+since the \gls{mise} describes the absolute accuracy of the estimate and its value is highly dependent on the scale of the true intensity \gls{lambda}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Subsection: MIAE
@@ -170,10 +171,9 @@ We then integrate the absolute value of the error in the estimate over the plane
 
 \begin{equation}
     \mbox{IAE}(\hat{\lambda}) = 
-        \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
-            \left|
-                \hat{\lambda}\xvec - \lambda\xvec
-            \right| \diff{x_2} \diff{x_1}
+        \iintW{
+            \left| \hat{\lambda}\xvec - \lambda\xvec \right|
+        }
 \end{equation}
 
 We can then compute the expected value of the \gls{ise} to obtain the \gls{mise}.
@@ -332,11 +332,13 @@ then the probability of $\xvec \in \gls{I}$ is correspondingly higher than that 
 %% Section: cross-validation bandwidth
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Bandwidth selection using cross-validation}
+\section{Bandwidth selection using \glsentryname{gls-cv}}
 \label{sec:method:cross-validation}
 
-We use cross-validation to select a pair of bandwidths \gls{h_1} and \gls{h_2} that minimize a \gls{cv} error function that approximates the \gls{mise}.
-We note that in a real-world situation, the true risk function is unknown, and so it is not possible to compute the \gls{mise}.
+A common method for bandwidth selection is least-squares \gls{gls-cv},
+which selects a pair of bandwidths \gls{h_1} and \gls{h_2} that minimizes the \gls{cv} error.
+This \gls{cv} error can be shown to asymptotically approximate the \gls{mise},
+which cannot be computed in a real-world situation since the true risk function \gls{lambda} would not be known.
 In order to compute the \gls{cv} bandwidths, the following steps are taken.
 \begin{enumerate}
     \item Generate a set of bandwidths to check.
@@ -377,8 +379,7 @@ Next, we generate the incident risk function, $\gls{lambda}\xvec$, by scaling ou
 We begin with a function $f\xvec$ defined on \gls{W}, which is positive-valued and has 
 
 \begin{equation*}
-    \iint\limits_{(x_1,x_2)\in\gls{W}} {f\xvec \diff{x_2} \diff{x_1}} = 1
-    \text{.}
+    \iintW{f\xvec} = 1 \text{.}
 \end{equation*}
 
 We define the \textit{true incident risk} function for the experiment
