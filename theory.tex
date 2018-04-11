@@ -14,6 +14,39 @@
 \section{Disease incidence}
 \label{sec:theory:incidence}
 
+The theory described in this section is based on \citet{rothman2008modern}.
+We study of chronic diseases in order to better understand the degree to which different groups of people are ``at risk'' of contracting a disease.
+We also are interested in discovering and describing the association between environmental factors and this ``risk''.
+For example, one could ask if air pollution emitted by a factory is associated with an increased ``risk'' of lung cancer among people that live close by.
+
+In order to be more precise, we begin by defining
+
+\begin{defn}
+    The \textbf{risk} is the probability of contracting a disease in a specific time period.
+\end{defn}
+
+One way to estimate the risk, is to look at the historical frequency of contracting of the disease.
+The common measure of frequency used in the literature compares the number of new cases of a disease to the total exposure time of the population:
+
+\begin{equation}
+    \mbox{\Gls{incidence rate}} = \frac{\mbox{number of new cases}}
+                                {\displaystyle\smashoperator{\sum\limits_{\mbox{persons}}}\mbox{time spent by person in population}}
+\end{equation}
+
+For our simulation study, we can simplify our defintion of \gls{incidence rate} by assuming that each person in the population is exposed for the entire study period,
+which for simplicity we can set to one (1).
+
+\begin{defn}
+    The \textbf{\gls{incidence rate}} is the number of new cases in the study period divided by the total population.
+    \begin{equation}
+        \mbox{\Gls{incidence rate}} = \frac{\mbox{number of new cases in a time period}}
+                                        {\mbox{number of persons}}
+    \end{equation}
+\end{defn}
+
+\Glspl{incidence rate} are always expressed in cases per person-time units.
+For example, 10 cases of asthma per 100,000 people per year is a valid \gls{incidence rate}.
+
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Spatial point processes
@@ -22,7 +55,7 @@
 \section{Spatial point processes}
 \label{sec:theory:spatial_point_processes}
 
-The theoretical results in this chapter are taken from \citet{diggle1983spatial},
+The theoretical results in this section are taken from \citet{diggle1983spatial},
 \citet{diggle1988equivalence},
 \citet{guan2008consistent},
 \citet{silverman1986density},
@@ -33,7 +66,7 @@ we consider points in two-dimensional space $\RS$.
 We begin by defining
 
 \begin{defn}
-    A \textbf{study} area $\gls{W} \subset \RS$ is a region in the plane where we make observations.
+    A \textbf{study area} $\gls{W} \subset \RS$ is a region in the plane where we make observations.
 \end{defn}
 
 The observations we are interested in are points distributed in \gls{W} which we call
@@ -65,7 +98,7 @@ We are interested both in the number of events, and even more so in the pattern 
 
 Let \gls{Lambda} be a \gls{spp}, and let $\gls{W} \subset \RS $ be the study area.
 
-The intensity \gls{lambda} at $(s_1, s_2) \in \RS$ is defined as:
+The intensity \gls{lambda} at $(s_1, s_2) \in RS$ is defined as:
 
 \begin{equation}
 \label{eq:lambda_differential}
