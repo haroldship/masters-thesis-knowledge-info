@@ -40,11 +40,11 @@ We then run a set of experiments, varying one parameter at a time, or in some ca
 
 The rest of this chapter is organized as follows:
 \Cref{sec:method:computing} describes how an estimate \gls{lambda_hat} for a risk function \gls{lambda} in the plane is estimated using the \gls{dkd}.
-In \cref{sec:method:accuracy}, we define the measures of accuracy we use to evaluate the \gls{dkd}.
+In \Cref{sec:method:accuracy}, we define the measures of accuracy we use to evaluate the \gls{dkd}.
 \Cref{sec:method:data generation} describes how sample data is generated.
-Our use of \gls{cv} for bandwidth selection is discussed in  \cref{sec:method:cross-validation}.
+Our use of \gls{cv} for bandwidth selection is discussed in  \Cref{sec:method:cross-validation}.
 \Cref{sec:method:experiment_structure} describes the steps of each experiment, together with the measurements taken.
-Finally, in \cref{sec:method:combining_experiments}, we describe how the effect of different variables are studied by combining several experiments and comparing their results.
+Finally, in \Cref{sec:method:combining_experiments}, we describe how the effect of different variables are studied by combining several experiments and comparing their results.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -121,7 +121,7 @@ In our experiments, we run $M$ monte carlo simulations, and approximate the \gls
 
 In many of our analyses, we compare the accuracy of several experiments.
 \gls{mise} is computed from the \gls{ise},
-and \gls{ise} as computed using \cref{eq:ise}.
+and \gls{ise} as computed using \Cref{eq:ise}.
 For any $\gls{lambda_hat} = \gls{mu} \hat f $,
 we have $ \gls{mise}(\gls{lambda_hat}) = \gls{mu}^2 \gls{mise}(\hat f) $.
 
@@ -198,7 +198,7 @@ The analogous definitions are \gls{rmiae} and \gls{nmiae}, as defined below.
         \mbox{\gls{miae}}(\gls{relative_lambda_hat}) \\
 \end{equation}
 
-where \gls{relative_lambda_hat} is defined above in \cref{eq:relative_lambda_hat},
+where \gls{relative_lambda_hat} is defined above in \Cref{eq:relative_lambda_hat},
 and
 
 \begin{equation}
@@ -393,7 +393,7 @@ This technique randomly determines whether or not each member of the population 
 
 The next step is to compute the \gls{oracle} bandwidths \gls{h_o1} and \gls{h_o2}.
 These bandwidths will be used in later steps to compare the accuracy of the \gls{dkd} estimator using multiple bandwidth selection schemes.
-The bandwidths \gls{h_o1} and \gls{h_o2} are chosen by running a small number of 49 simulations and taking the bandwidth pair \gls{h_1} and \gls{h_2} that minimize the approximate \gls{mise} which is computed for each pair using \cref{eq:mise_tilde}.
+The bandwidths \gls{h_o1} and \gls{h_o2} are chosen by running a small number of 49 simulations and taking the bandwidth pair \gls{h_1} and \gls{h_2} that minimize the approximate \gls{mise} which is computed for each pair using \Cref{eq:mise_tilde}.
 
 We now can begin the main simulations.
 For each experiment, we run 1,000 simulations.
@@ -406,7 +406,7 @@ In each simulation, we peform the following:
     Also compute the relative values for these measures.
     \item\label{itm:method:simulation:silverman_lambda_i} Repeat steps \ref{itm:method:simulation:oracle_lambda_i} to \ref{itm:method:simulation:accuracy} using the bandwith computed with \gls{silverman}.
     \item\label{itm:method:simulation:cv_lambda_i} Repeat steps \ref{itm:method:simulation:oracle_lambda_i} to \ref{itm:method:simulation:accuracy} using the bandwidths computed by \gls{cv}.
-    This computation is described in \cref{sec:method:cross-validation}.
+    This computation is described in \Cref{sec:method:cross-validation}.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -418,7 +418,7 @@ In each simulation, we peform the following:
 \label{sec:method:combining_experiments}
 
 We now take our ability to run experiments under different setups,
-and create combinations of experiments that examine the impact of different variables on the various accuracy measures described in \cref{sec:method:accuracy},
+and create combinations of experiments that examine the impact of different variables on the various accuracy measures described in \Cref{sec:method:accuracy},
 and in some cases also on the selected bandwidths.
 The first combination will look at how the expected number of incidents for a fixed population size and distribution affects the accuracy and selected bandwidths.
 Next, we will examine how the \gls{factor} affects the accuracy and bandwidth selection.

@@ -55,9 +55,17 @@
 
 ### TODO
 
- - [ ] lambda_i used for intensity AND for index: change intensity to lambda_I/lambda_P
+ - [ ] Results: (and everywhere) in population and incidents scatter use a different size/symbol instead of colour
+ - [ ] Results: make all charts b/w or greyscale (not colour)
+ - [ ] Results: only 2 charts per row
+ - [ ] Results: bandwidth histograms: lighten fill; why shadow in printed?
+ - [ ] Results: all subsections: compare peak, centroid, etc.
+ - [ ] Results: all subsections: compare selectors.
+ - [ ] Results: all subsections: make more clear MISE chart discussion is for all selectors, etc
+ - [ ] Theory: (and everywhere) lambda_i used for intensity AND for index: change intensity to lambda_I/lambda_P
  - [ ] Introduction: define "statistical properties"
  - [ ] Theoretical background: describe rejection sampling
+ - [ ] Method: better describe centroid
  - [ ] Method: 4.1 desribe the study area
  - [ ] Method: 4.1 put in a picture of pop and incident points
  - [ ] Method: 4.1 Discuss the real-life underlying story of the data with examples
@@ -82,6 +90,8 @@
  - [ ] Appendix: A.10 table: Silverman is better than CV
  - [ ] Appendix: for each section, plot accuracy measures vs. expected number of incidents
  - [ ] Appendix: A.8 mention in subsection title that peaks are in same place
+ - [ ] Discussion: Create Boxplot of MISE distribution comparing Oracle to Silverman to CV selection, possibly OTHER accuracy measures
+ - [ ] Discussion: Create Boxplot of MISE difference between S-O and CV-O (MISE only)
  - [ ] Discussion: Why is MISE going up?
  - [ ] Discussion: Silverman's peak bias is positive in some cases: explain
  - [ ] Discussion: overall plot of everything e.g. NMISE of CV, Silv, Oracle vs. experiment number

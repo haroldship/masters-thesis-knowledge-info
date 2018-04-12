@@ -49,10 +49,10 @@ We attempted to speed up the cross-validation bandwidth selection by using gradi
 We found the gradient descent algorithm often resulted in severe oversmoothing,
 as the cross-validation error would decrease slowly as the bandwidth increased.
 This required a lot of manual tuning of the learning rate parameter, and so required re-running the experiment several times.
-We added \textit{momentum} to our gradient descent implementation but it did not help in every case, and so we changed our strategy to the one described in \cref{ch:method}.
+We added \textit{momentum} to our gradient descent implementation but it did not help in every case, and so we changed our strategy to the one described in \Cref{ch:method}.
 
 \section{Accuracy using Silverman}
 
-In \cref{tab:mean_error_rates:p0.7_100_1.0_1h} we see that the accuracy measure \gls{mise} using the \gls{silverman} rule of thumb is even better than was obtained using the \gls{oracle}.
+In \Cref{tab:mean_error_rates:p0.7_100_1.0_1h} we see that the accuracy measure \gls{mise} using the \gls{silverman} rule of thumb is even better than was obtained using the \gls{oracle}.
 We tried to run with an additional experiment with 499 monte carlo simulations, and found that in this case the \gls{silverman} rule did not outperform the \gls{oracle}.
 
