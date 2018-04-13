@@ -19,22 +19,33 @@ We study of chronic diseases in order to better understand the degree to which d
 We also are interested in discovering and describing the association between environmental factors and this ``risk''.
 For example, one could ask if air pollution emitted by a factory is associated with an increased ``risk'' of lung cancer among people that live close by.
 
-In order to be more precise, we begin by defining
+In order to be more precise, we begin by defining the \textbf{risk}:
 
 \begin{defn}
     The \textbf{risk} is the probability of contracting a disease in a specific time period.
 \end{defn}
 
 One way to estimate the risk, is to look at the historical frequency of contracting of the disease.
-The common measure of frequency used in the literature compares the number of new cases of a disease to the total exposure time of the population:
+The type of study we are interested in involves incidents of a chronic disease.
+Therefore, we separately consider those people who contracted the disease under study.
+In particular, we are interested in people who did not have the disease at the beginning of the study,
+but developed the disease within the study period.
+These are new cases of the disease, which we call \textbf{incidents}.
+
+\begin{defn}
+    An \textbf{\gls{incident}} is a new case of the disease during the study period.
+\end{defn}
+
+The common measure of frequency used in the literature compares the number of new cases of a disease to the total exposure time of the population is called the \gls{incidence rate}.
 
 \begin{equation}
-    \mbox{\Gls{incidence rate}} = \frac{\mbox{number of new cases}}
+    \mbox{\Gls{incidence rate} (common definition)} = \frac{\mbox{number of new cases}}
                                 {\displaystyle\smashoperator{\sum\limits_{\mbox{persons}}}\mbox{time spent by person in population}}
 \end{equation}
 
 For our simulation study, we can simplify our defintion of \gls{incidence rate} by assuming that each person in the population is exposed for the entire study period,
 which for simplicity we can set to one (1).
+Our simplified defintion of incidence rate is then:
 
 \begin{defn}
     The \textbf{\gls{incidence rate}} is the number of new cases in the study period divided by the total population.
@@ -69,10 +80,10 @@ We begin by defining
     A \textbf{study area} $\gls{W} \subset \RS$ is a region in the plane where we make observations.
 \end{defn}
 
-The observations we are interested in are points distributed in \gls{W} which we call
+The observations we are interested in are points distributed in \gls{W} which we call \textbf{events}.
 
 \begin{defn}
-    \textbf{Events} are points in a study area \gls{W} that we are interested in observing together.
+    An \textbf{event} is a point $\xvec \in \RS$, situated in a study area \gls{W} that we are interested in observing.
 \end{defn}
 
 For example, in the study area of the boundaries of a city, we consider the events of the addresses of the residents.
@@ -82,15 +93,9 @@ We call this set of events
     The \textbf{population} \gls{P} is the set of home addresses of the residents of the study area \gls{W}.
 \end{defn}
 
-The type of study we are interested in involves incidents of a chronic disease.
-Therefore, we separately consider those people who contracted the disease under study.
-
-\begin{defn}
-    The subset \gls{I} of the population \gls{P} consisting of the home addresses of people who contracted the disease under study we call the \textbf{incidents}.
-\end{defn}
-
 In general, we are interested in the understanding they mechanism by which the events occurred.
 We are interested both in the number of events, and even more so in the pattern by which their locations are distributed in \gls{W}.
+We take a spatial statistical approach, and model this mechanism using the following definition:
 
 \begin{defn}
     A \textbf{\gls{spp}} is a stochastic mechanism which generates a set of events.
