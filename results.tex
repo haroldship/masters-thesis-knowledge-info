@@ -80,10 +80,8 @@ We then ran several sets of experiments while changing one parameter at a time.
 \section[Results of single-peak risk on uniform population]
     {Results of a single experiment with risk function having single peak with \glsentryname{spread} 1.0 and \glsentryname{factor} of 100 on a fixed, uniform population of 10,000}
 \label{sec:results:unif_100_1.0_1h}
-\graphicspath{{./results/unif_100_1.0_1h/}}
-\makeatletter
-\def\input@path{{./results/unif_100_1.0_1h/}}
-\makeatother
+
+\setpath{results/unif_100_1.0_1h/}
 
 In this section, we look at how well the \gls{dkd} performs when there is a single, central cause of disease incidents.
 The strength of this source to generate incidents degrades with the distance from it.
@@ -189,7 +187,7 @@ and the black cross is the location of the centroid estimated peak.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[htbp]
     \centering
-    \input{output/mean_table.tex}
+    \input{\mypath /output/mean_table.tex}
     \caption{Mean error rates for uniform population, single-peak risk with \glsentryname{spread} 1.0 of \glsentryname{factor} 100}
     \label{tab:errors:unif_100_1.0_1h}
 \end{table}
@@ -368,10 +366,7 @@ while \Cref{fig:bandwidths:unif_100_1.0_1h:diff} shows that they often differ si
 The distribution of the \gls{silverman} selected bandwidths is much more symmetric, and has a lower mean value (\Cref{fig:bandwidths:unif_100_1.0_1h:silverman}).
 
 % Restore graphics and input path
-\graphicspath{{./}}
-\makeatletter
-\def\input@path{{./}}
-\makeatother
+\setpath{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -1111,5 +1106,5 @@ indicating polynomial increase with positive coefficient of \gls{mise} when the 
 We see in \Cref{tab:results:nmise_convergence_by_pop_incident_gap} that the exponent is just over 1,
 indicating just worse than linear.
 
-
-\graphicspath{{./}}
+% ensure the path is set back
+\setpath{}

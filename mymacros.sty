@@ -45,6 +45,13 @@
 \newtheorem{defn}[thm]{Definition}% definition numbers are dependent on theorem numbers
 \newtheorem{exmp}[thm]{Example}% same for example numbers
 
+\newcommand{\mypath}{}
+\newcommand{\setpath}[1]{
+    \renewcommand{\mypath}{#1}
+}
+
+\let\includegraphicsOld\includegraphics
+\renewcommand{\includegraphics}[2][]{\includegraphicsOld[#1]{\mypath#2}}
 
 
 
