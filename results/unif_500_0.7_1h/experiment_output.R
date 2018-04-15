@@ -56,6 +56,7 @@ pdf(file=paste(outdir, "population-heatmap.pdf", sep="/"))
 p <- levelplot(experiment$pop.true,
                row.values=experiment$region$x1,
                column.values=experiment$region$x2,
+               col.regions=gray.colors(100),
                xlab=expression(x[1]),
                ylab=expression(x[2]))
 print(p)
@@ -67,6 +68,8 @@ names(pop) <- c('X1', 'X2')
 pdf(file=paste(outdir, "population-points.pdf", sep="/"))
 p <- xyplot(X2 ~ X1, data=pop,
             cex=0.2,
+            alpha=0.5,
+            col="black",
             aspect=1,
             xlim=c(experiment$region$x1.min, experiment$region$x1.max),
             ylim=c(experiment$region$x2.min, experiment$region$x2.max),
@@ -98,16 +101,25 @@ error_hist <- function(df, title, e, m, filename) {
     xlab(NULL) +
     scale_linetype_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
                           values=c("twodash", "solid", "dashed")) +
-    scale_colour_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
-                        values=brewer.pal(3, "Dark2")) +
-    stat_density(aes_string(x=oe, colour='"Oracle"', linetype='"Oracle"'), geom='line', size=0.8) +
-    stat_density(aes_string(x=se, colour='"Silverman"', linetype='"Silverman"'), geom='line', size=0.8) +
-    stat_density(aes_string(x=ce, colour='"CV"', linetype='"CV"'), geom='line', size=0.8) +
-    geom_vline(data=mean_values, aes_string(xintercept=om, colour='"Oracle"', linetype='"Oracle"'),
+#    scale_colour_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
+#                        values=gray.colors(3)) +
+#    stat_density(aes_string(x=oe, colour='"Oracle"', linetype='"Oracle"'), geom='line', size=0.8) +
+#    stat_density(aes_string(x=se, colour='"Silverman"', linetype='"Silverman"'), geom='line', size=0.8) +
+#    stat_density(aes_string(x=ce, colour='"CV"', linetype='"CV"'), geom='line', size=0.8) +
+#    geom_vline(data=mean_values, aes_string(xintercept=om, colour='"Oracle"', linetype='"Oracle"'),
+#               size=0.8, show.legend=FALSE) +
+#    geom_vline(data=mean_values, aes_string(xintercept=sm, colour='"Silverman"', linetype='"Silverman"'),
+#               size=0.8, show.legend=FALSE) +
+#    geom_vline(data=mean_values, aes_string(xintercept=cm, colour='"CV"', linetype='"CV"'),
+#               size=0.8, show.legend=FALSE)
+    stat_density(aes_string(x=oe, linetype='"Oracle"'), geom='line', size=0.8) +
+    stat_density(aes_string(x=se, linetype='"Silverman"'), geom='line', size=0.8) +
+    stat_density(aes_string(x=ce, linetype='"CV"'), geom='line', size=0.8) +
+    geom_vline(data=mean_values, aes_string(xintercept=om, linetype='"Oracle"'),
                size=0.8, show.legend=FALSE) +
-    geom_vline(data=mean_values, aes_string(xintercept=sm, colour='"Silverman"', linetype='"Silverman"'),
+    geom_vline(data=mean_values, aes_string(xintercept=sm, linetype='"Silverman"'),
                size=0.8, show.legend=FALSE) +
-    geom_vline(data=mean_values, aes_string(xintercept=cm, colour='"CV"', linetype='"CV"'),
+    geom_vline(data=mean_values, aes_string(xintercept=cm, linetype='"CV"'),
                size=0.8, show.legend=FALSE)
   print(g)
   if (hasArg(filename)) {
@@ -137,28 +149,32 @@ pdf(file=paste(outdir, "bandwidths-x1.pdf", sep="/"))
 ggplot(compare_peaks.result) +
   xlab(NULL) +
   ylab(NULL) +
-  geom_histogram(aes(x=cv.bandwidth.x1), alpha=.5, bins=16)
+  theme_classic() +
+  geom_histogram(aes(x=cv.bandwidth.x1), alpha=.5, bins=16, colour="black", fill="white")
 dev.off()
 
 pdf(file=paste(outdir, "bandwidths-x2.pdf", sep="/"))
 ggplot(compare_peaks.result) +
   xlab(NULL) +
   ylab(NULL) +
-  geom_histogram(aes(x=cv.bandwidth.x2), alpha=.5, bins=16)
+  theme_classic() +
+  geom_histogram(aes(x=cv.bandwidth.x2), alpha=.5, bins=16, colour="black", fill="white")
 dev.off()
 
 pdf(file=paste(outdir, "bandwidths-silverman.pdf", sep="/"))
 ggplot(compare_peaks.result) +
   xlab(NULL) +
   ylab(NULL) +
-  geom_histogram(aes(x=silverman.bandwidth), alpha=.5, bins=16)
+  theme_classic() +
+  geom_histogram(aes(x=silverman.bandwidth), alpha=.5, bins=16, colour="black", fill="white")
 dev.off()
 
 pdf(file=paste(outdir, "bandwidths-difference.pdf", sep="/"))
 ggplot(compare_peaks.result) +
   xlab(NULL) +
   ylab(NULL) +
-  geom_histogram(aes(x=cv.bandwidth.x1 - cv.bandwidth.x2), fill="blue", alpha=0.5, bins=16)
+  theme_classic() +
+  geom_histogram(aes(x=cv.bandwidth.x1 - cv.bandwidth.x2), alpha=0.5, bins=16, colour="black", fill="white")
 dev.off()
 
 # 5 output results table
