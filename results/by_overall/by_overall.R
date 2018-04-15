@@ -2,7 +2,7 @@ library(ggplot2)
 
 setwd("/Users/harold/Dropbox/MA_Knowledge_and_Info/Thesis/thesis/results/by_overall")
 
-Dirs <- list.files("..", pattern="^[u].*", full.names=TRUE)
+Dirs <- list.files("..", pattern="^[up].*", full.names=TRUE)
 Files <- sapply(Dirs, function(dir) paste(dir, '/output/mean_table.tex', sep=''))
 
 N <- length(Files)
@@ -13,9 +13,14 @@ matO <- NULL
 matS <- NULL
 matC <- NULL
 
+PopPeaks <- c()
 
 for (i in 1:N) {
   File <- Files[i]
+  UnifPeak <- substring(File,4,4)
+  PopPeak <- (UnifPeak=='p')
+  PopPeaks <- c(PopPeaks, PopPeak)
+  print(paste("File=", File, " UnifPeak=", UnifPeak, " PopPeak=", PopPeak, sep=""))
   lines <- readLines(File)
   lines <- lines[7:22]
   Os <- numeric()
@@ -47,53 +52,70 @@ for (i in 1:N) {
 
 dfO <- as.data.frame(matO)
 dfO$Bandwidth <- "Oracle"
+dfO$PopPeak <- PopPeaks
 
 dfS <- as.data.frame(matS)
 dfS$Bandwidth <- "Silverman"
+dfS$PopPeak <- PopPeaks
 
 dfC <- as.data.frame(matC)
 dfC$Bandwidth <- "CV"
+dfC$PopPeak <- PopPeaks
 
 df <- rbind(dfO, dfS, dfC)
 df$Bandwidth <- factor(df$Bandwidth, levels=c("Oracle", "CV", "Silverman"))
 
 dfS.diff <- dfS[,1:3] - dfO[,1:3]
 dfS.diff$Bandwidth <- "Silverman"
+dfS.diff$PopPeak <- PopPeaks
 
 dfC.diff <- dfC[,1:3] - dfO[,1:3]
 dfC.diff$Bandwidth <- "CV"
+dfC.diff$PopPeak <- PopPeaks
 
 df.diff <- rbind(dfC.diff, dfS.diff)
 df.diff$Bandwidth <- as.factor(df.diff$Bandwidth)
 
+# NMISE
 pdf("normalized-mise-boxplot.pdf")
-boxplot(df$`Normalized MISE` ~ df$Bandwidth)
+boxplot(df[df$PopPeak==FALSE,]$`Normalized MISE` ~ df[df$PopPeak==FALSE,]$Bandwidth)
+dev.off()
+pdf("normalized-mise-peakpop-boxplot.pdf")
+boxplot(df[df$PopPeak==TRUE,]$`Normalized MISE` ~ df[df$PopPeak==TRUE,]$Bandwidth)
 dev.off()
 
+# NMIAE
 pdf("normalized-miae-boxplot.pdf")
-boxplot(df$`Normalized MIAE` ~ df$Bandwidth)
+boxplot(df[df$PopPeak==FALSE,]$`Normalized MIAE` ~ df[df$PopPeak==FALSE,]$Bandwidth)
+dev.off()
+pdf("normalized-miae-peakpop-boxplot.pdf")
+boxplot(df[df$PopPeak==TRUE,]$`Normalized MIAE` ~ df[df$PopPeak==TRUE,]$Bandwidth)
 dev.off()
 
+# NSUP
 pdf("normalized-sup-error-boxplot.pdf")
-boxplot(df$`Normalized Sup error` ~ df$Bandwidth)
+boxplot(df[df$PopPeak==FALSE,]$`Normalized Sup error` ~ df[df$PopPeak==FALSE,]$Bandwidth)
+dev.off()
+pdf("normalized-sup-error-peakpop-boxplot.pdf")
+boxplot(df[df$PopPeak==TRUE,]$`Normalized Sup error` ~ df[df$PopPeak==TRUE,]$Bandwidth)
 dev.off()
 
 pdf("relative-peak-bias-boxplot.pdf")
-boxplot(df$`Relative Peak bias` ~ df$Bandwidth)
+boxplot(df[df$PopPeak==FALSE,]$`Relative Peak bias` ~ df[df$PopPeak==FALSE,]$Bandwidth)
 dev.off()
 
 pdf("relative-centroid-bias-boxplot.pdf")
-boxplot(df$`Relative Centroid bias` ~ df$Bandwidth)
+boxplot(df[df$PopPeak==FALSE,]$`Relative Centroid bias` ~ df[df$PopPeak==FALSE,]$Bandwidth)
 dev.off()
 
 pdf("relative-peak-drift-boxplot.pdf")
-boxplot(df$`Relative Peak drift` ~ df$Bandwidth)
+boxplot(df[df$PopPeak==FALSE,]$`Relative Peak drift` ~ df[df$PopPeak==FALSE,]$Bandwidth)
 dev.off()
 
 pdf("relative-centroid-drift-boxplot.pdf")
-boxplot(df$`Relative Centroid drift` ~ df$Bandwidth)
+boxplot(df[df$PopPeak==FALSE,]$`Relative Centroid drift` ~ df[df$PopPeak==FALSE,]$Bandwidth)
 dev.off()
 
 pdf("normalized-mise-diff-boxplot.pdf")
-boxplot(df.diff$`Normalized MISE` ~ df.diff$Bandwidth)
+boxplot(df.diff[df.diff$PopPeak==FALSE,]$`Normalized MISE` ~ df.diff[df.diff$PopPeak==FALSE,]$Bandwidth)
 dev.off()
