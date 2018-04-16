@@ -100,22 +100,42 @@ pdf("normalized-sup-error-peakpop-boxplot.pdf")
 boxplot(df[df$PopPeak==TRUE,]$`Normalized Sup error` ~ df[df$PopPeak==TRUE,]$Bandwidth)
 dev.off()
 
+# Relative peak bias
 pdf("relative-peak-bias-boxplot.pdf")
 boxplot(df[df$PopPeak==FALSE,]$`Relative Peak bias` ~ df[df$PopPeak==FALSE,]$Bandwidth)
 dev.off()
+pdf("relative-peak-bias-peakpop-boxplot.pdf")
+boxplot(df[df$PopPeak==TRUE,]$`Relative Peak bias` ~ df[df$PopPeak==TRUE,]$Bandwidth)
+dev.off()
 
+# Relative centroid bias
 pdf("relative-centroid-bias-boxplot.pdf")
 boxplot(df[df$PopPeak==FALSE,]$`Relative Centroid bias` ~ df[df$PopPeak==FALSE,]$Bandwidth)
 dev.off()
+pdf("relative-centroid-bias-peakpop-boxplot.pdf")
+boxplot(df[df$PopPeak==TRUE,]$`Relative Centroid bias` ~ df[df$PopPeak==TRUE,]$Bandwidth)
+dev.off()
 
+# Relative peak drift
 pdf("relative-peak-drift-boxplot.pdf")
 boxplot(df[df$PopPeak==FALSE,]$`Relative Peak drift` ~ df[df$PopPeak==FALSE,]$Bandwidth)
 dev.off()
+pdf("relative-peak-drift-peakpop-boxplot.pdf")
+boxplot(df[df$PopPeak==TRUE,]$`Relative Peak drift` ~ df[df$PopPeak==TRUE,]$Bandwidth)
+dev.off()
 
+# Relative centroid drift
 pdf("relative-centroid-drift-boxplot.pdf")
 boxplot(df[df$PopPeak==FALSE,]$`Relative Centroid drift` ~ df[df$PopPeak==FALSE,]$Bandwidth)
 dev.off()
+pdf("relative-centroid-drift-peakpop-boxplot.pdf")
+boxplot(df[df$PopPeak==TRUE,]$`Relative Centroid drift` ~ df[df$PopPeak==TRUE,]$Bandwidth)
+dev.off()
 
+# NMISE difference
 pdf("normalized-mise-diff-boxplot.pdf")
 boxplot(df.diff[df.diff$PopPeak==FALSE,]$`Normalized MISE` ~ df.diff[df.diff$PopPeak==FALSE,]$Bandwidth)
+dev.off()
+pdf("normalized-mise-diff-peakpop-boxplot.pdf")
+boxplot(df.diff[df.diff$PopPeak==TRUE,]$`Normalized MISE` ~ df.diff[df.diff$PopPeak==TRUE,]$Bandwidth)
 dev.off()

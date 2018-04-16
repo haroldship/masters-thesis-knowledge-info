@@ -39,6 +39,22 @@ the variance of the \gls{cv} selector is much higher.
     \label{fig:discussion:overall_nmise_boxplot}
 \end{figure}
 
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{results/by_overall/normalized-mise-diff-boxplot}
+        \subcaption{Uniform populations}
+        \label{fig:discussion:overall_nmise_diff_boxplot:unif}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{results/by_overall/normalized-mise-diff-peakpop-boxplot}
+        \subcaption{Peaked populations}
+        \label{fig:discussion:overall_nmise_diff_boxplot:peak}
+    \end{subfigure}
+    \caption{Overall distribution of \glsentryname{nmise} difference from the \Glsentryname{oracle}}
+    \label{fig:discussion:overall_nmise_diff_boxplot}
+\end{figure}
+
 As with \gls{nmise}, the \gls{cv} and \gls{silverman} selectors performed similarly to each other.
 The 
 \begin{figure}[htbp]
@@ -62,13 +78,6 @@ The
   \includegraphics[width=0.45\textwidth]{results/by_overall/normalized-sup-error-boxplot}
   \caption{Overall distribution of \glsentryname{normalized supremum error}}
   \label{fig:discussion:overall_nsup_boxplot}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.45\textwidth]{results/by_overall/normalized-mise-diff-boxplot}
-  \caption{Overall distribution of \glsentryname{nmise} difference from the \Glsentryname{oracle}}
-  \label{fig:discussion:overall_nmise_diff_boxplot}
 \end{figure}
 
 

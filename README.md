@@ -2,6 +2,7 @@
 ## Harold Ship, University of Haifa
 
 ### Fixed in version 0.9
+ - [x] Discussion: major rewrite
  - [x] Theory: major rewrite
  - [x] Method: double integral with (x1, x2) in W as limits
  - [x] Method: 4.2.1: "in many cases": when & how?
