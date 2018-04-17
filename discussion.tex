@@ -74,12 +74,84 @@ The
 \end{figure}
 
 \begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.45\textwidth]{results/by_overall/normalized-sup-error-boxplot}
-  \caption{Overall distribution of \glsentryname{normalized supremum error}}
-  \label{fig:discussion:overall_nsup_boxplot}
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{results/by_overall/normalized-sup-error-boxplot}
+        \subcaption{Uniform populations}
+        \label{fig:discussion:overall_nsup_boxplot:unif}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{results/by_overall/normalized-sup-error-peakpop-boxplot}
+        \subcaption{Peaked populations}
+        \label{fig:discussion:overall_nsup_boxplot:peak}
+    \end{subfigure}
+    \caption{Overall distribution of \glsentryname{normalized supremum error}}
+    \label{fig:discussion:overall_nsup_boxplot}
 \end{figure}
 
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{results/by_overall/relative-peak-bias-boxplot}
+        \subcaption{Uniform populations}
+        \label{fig:discussion:overall_peakbias_boxplot:unif}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{results/by_overall/relative-peak-bias-peakpop-boxplot}
+        \subcaption{Peaked populations}
+        \label{fig:discussion:overall_peakbias_boxplot:peak}
+    \end{subfigure}
+    \caption{Overall distribution of \glsentryname{peak bias}}
+    \label{fig:discussion:overall_peakbias_boxplot}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{results/by_overall/relative-peak-drift-boxplot}
+        \subcaption{Uniform populations}
+        \label{fig:discussion:overall_peakdrift_boxplot:unif}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{results/by_overall/relative-peak-drift-peakpop-boxplot}
+        \subcaption{Peaked populations}
+        \label{fig:discussion:overall_peakdrift_boxplot:peak}
+    \end{subfigure}
+    \caption{Overall distribution of \glsentryname{peak drift}}
+    \label{fig:discussion:overall_peakdrift_boxplot}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{results/by_overall/relative-centroid-bias-boxplot}
+        \subcaption{Uniform populations}
+        \label{fig:discussion:overall_centroidbias_boxplot:unif}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{results/by_overall/relative-centroid-bias-peakpop-boxplot}
+        \subcaption{Peaked populations}
+        \label{fig:discussion:overall_centroidbias_boxplot:peak}
+    \end{subfigure}
+    \caption{Overall distribution of \glsentryname{centroid bias}}
+    \label{fig:discussion:overall_centroidbias_boxplot}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{results/by_overall/relative-centroid-drift-boxplot}
+        \subcaption{Uniform populations}
+        \label{fig:discussion:overall_centroiddrift_boxplot:unif}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{results/by_overall/relative-centroid-drift-peakpop-boxplot}
+        \subcaption{Peaked populations}
+        \label{fig:discussion:overall_centroiddrift_boxplot:peak}
+    \end{subfigure}
+    \caption{Overall distribution of \glsentryname{centroid drift}}
+    \label{fig:discussion:overall_centroiddrift_boxplot}
+\end{figure}
 
 \section{Gradient descent for cross-validation}
 \label{sec:discussion:gradient_descent}
