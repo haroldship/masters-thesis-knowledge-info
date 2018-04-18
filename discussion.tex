@@ -6,15 +6,24 @@
 %%
 %%
 
-We are investigating the effectiveness of the \gls{dkd} in estimating the incidence risk of chronic diseases. 
-The \gls{dkd} is computed by taking a kernel estimate of the disease incidence intensity and dividing by a kernel estimate of the population density at any given point.
-We ran several scenarios to examine how variations in the incidence risk function,
-the population, and the sample size affect the accuracy of the estimation. 
-We used several methods to measure the accuracy of the \gls{dkd} estimate,
+The contribution of this thesis is an empirical statistical analysis of the accuracy of the \gls{dkd}
+as a tool for estimating the incidence risk of chronic diseases.
+We examined the effect of several factors on the \gls{dkd} accuracy,
+and we used several methods to measure the accuracy of the \gls{dkd} estimate,
 as described in \Cref{sec:method:accuracy}.
+We ran several scenarios to examine how variations in these factors which affect the incidence risk function,
+the population distribution, and the sample size affect the accuracy of \gls{dkd} for estimation.
+We compared two bandwidth selection techniques, \gls{silverman}'s rule of thumb,
+and least-squares \glsentrylong{cv}.
+We also compared these two techniques to an \gls{oracle},
+which is an approximation of the theoretical optimal bandwidth.
 
-As can be seen in \Cref{fig:discussion:overall_nmise_boxplot},
-the \gls{nmise} for the \gls{oracle} selected bandwidth was, on average,
+As we discussed in \Cref{subsec:method:mise},
+the \glsentrylong{mise} is the measure used by both \gls{silverman} and \gls{cv} for choosing the bandwidth.
+In order to compare the results of different experiments which have different scales of \gls{risk} functions,
+we normalized the \gls{mise} as \gls{nmise}. 
+\Cref{fig:discussion:overall_nmise_boxplot} shows the overall distribution between experiments of the \gls{nmise}.
+The \gls{nmise} for the \gls{oracle} selected bandwidth was, on average,
 lower than for the other bandwidth selectors.
 The \gls{cv} and \gls{silverman} selectors had similar performance.
 All of these bandwidth selection techniques are optimized to minimize \gls{mise},
