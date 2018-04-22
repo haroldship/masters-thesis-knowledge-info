@@ -1,7 +1,6 @@
-library(ggplot2)
-library(Hmisc)
-
 setwd("/Users/harold/Dropbox/MA_Knowledge_and_Info/Thesis/thesis/results/by_pop_size")
+
+source("../plots.R")
 
 Incidents <- c(50, 100, 200, 500, 1000)
 PopStrs <- c("5k_50", "10k_100", "20k_200", "50k_500", "100k_1000")
@@ -69,31 +68,16 @@ coefC <- coef(lm(log(dfC$`Relative MISE`) ~ log(dfC$Incidents)))
 
 
 pdf(file="MISE-vs-population.pdf")
-ggplot(df) +
-  xlab(expression(N[i])) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Incidents, y=MISE, colour=Bandwidth, shape=Bandwidth))
+make_accuracy_plot(df, expression(N[I])) +
+  geom_point(aes(x=Incidents, y=MISE, shape=Bandwidth), size=3)
 dev.off()
 pdf(file="RMISE-vs-population.pdf")
-ggplot(df) +
-  xlab(expression(N[i])) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Incidents, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth))
+make_accuracy_plot(df, expression(N[I])) +
+  geom_point(aes(x=Incidents, y=`Relative MISE`, shape=Bandwidth), size=3)
 dev.off()
 pdf(file="RMISE-vs-population-log-log.pdf")
-ggplot(df) +
-  xlab(expression(N[i])) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Incidents, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth)) +
+make_accuracy_plot(df, expression(N[I])) +
+  geom_point(aes(x=Incidents, y=`Relative MISE`, shape=Bandwidth), size=3) +
   coord_trans(x='log10', y='log10') +
   annotation_logticks(scaled=FALSE)
 dev.off()
@@ -103,28 +87,18 @@ coefS <- coef(lm(log(dfS$`Normalized MISE`) ~ log(dfS$Incidents)))
 coefC <- coef(lm(log(dfC$`Normalized MISE`) ~ log(dfC$Incidents)))
 
 pdf(file="NMISE-vs-population.pdf")
-ggplot(df) +
-  xlab(expression(N[i])) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(40,1100)) +
-  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(40,1100)) +
-  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(40,1100)) +
-  geom_point(aes(x=Incidents, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth))
+make_accuracy_plot(df, expression(N[I])) +
+  geom_point(aes(x=Incidents, y=`Normalized MISE`, shape=Bandwidth), size=3) +
+  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(linetype="Oracle"), xlim=c(40,1100)) +
+  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(linetype="Silverman"), xlim=c(40,1100)) +
+  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(linetype="CV"), xlim=c(40,1100))
 dev.off()
 pdf(file="NMISE-vs-population-log-log.pdf")
-ggplot(df) +
-  xlab(expression(N[i])) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Incidents, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth)) +
-  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(40,1100)) +
-  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(40,1100)) +
-  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(40,1100)) +
+make_accuracy_plot(df, expression(N[I])) +
+  geom_point(aes(x=Incidents, y=`Normalized MISE`, shape=Bandwidth), size=3) +
+  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(linetype="Oracle"), xlim=c(40,1100)) +
+  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(linetype="Silverman"), xlim=c(40,1100)) +
+  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(linetype="CV"), xlim=c(40,1100)) +
   coord_trans(x='log10', y='log10') +
   annotation_logticks(scaled=FALSE)
 dev.off()

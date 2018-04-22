@@ -361,9 +361,14 @@ That is, the centroid technique improves both the estimated location and estimat
 \end{figure}
 
 The bandwidths selected by \gls{cv} were allowed to vary in the $x_1$ and $x_2$ directions.
-In \Cref{fig:bandwidths:unif_100_1.0_1h:x1,fig:bandwidths:unif_100_1.0_1h:x2} we see that the distributions of these bandwidths observed in this experiment are quite similar,
-while \Cref{fig:bandwidths:unif_100_1.0_1h:diff} shows that they often differ significantly in the indidual realizations.
+In \Cref{fig:bandwidths:unif_100_1.0_1h:x1,fig:bandwidths:unif_100_1.0_1h:x2} we see that the distributions of these bandwidths observed in this experiment are quite similar.
+Since the true \gls{risk} function is invariant under a change of coordinates,
+this is the behavior that we expect.
+\Cref{fig:bandwidths:unif_100_1.0_1h:diff} shows that the $x_1$ and $x_2$ coordinate distributions often differ significantly in the indidual realizations.
+This is due to the randomness of the locations of the \glspl{incident},
+which can cause the observed distribution of the points to vary between realizations.
 The distribution of the \gls{silverman} selected bandwidths is much more symmetric, and has a lower mean value (\Cref{fig:bandwidths:unif_100_1.0_1h:silverman}).
+This results in a slightly undersmoothed \gls{silverman} estimate.
 
 % Restore graphics and input path
 \setpath{}
@@ -492,22 +497,23 @@ The observed values for the power of $n$ as represented by $N_I$ are shown in \C
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
-    \begin{subfigure}[b]{0.24\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_num_cases/MISE-vs-cases}
         \subcaption{\glsentryname{mise}}
         \label{fig:ise:unif_NCases_1h:mise}
     \end{subfigure}
-    \begin{subfigure}[b]{0.24\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_num_cases/RMISE-vs-cases}
         \subcaption{\glsentryname{rmise}}
         \label{fig:ise:unif_NCases_1h:rmise}
     \end{subfigure}
-    \begin{subfigure}[b]{0.24\textwidth}
+
+    \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_num_cases/NMISE-vs-cases}
         \subcaption{\glsentryname{nmise}}
         \label{fig:ise:unif_NCases_1h:nmise}
     \end{subfigure}
-    \begin{subfigure}[b]{0.24\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_num_cases/NMISE-vs-cases-log-log}
         \subcaption{\glsentryname{nmise} log-log}
         \label{fig:ise:unif_NCases_1h:nmise_log_log}
@@ -625,22 +631,23 @@ The \gls{rmise} takes a local view of relative error, and here we see that as th
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
-    \begin{subfigure}[t]{0.24\textwidth}
+    \begin{subfigure}[t]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_cases_spread/MISE-vs-risk-spread}
         \caption{\glsentryname{mise}}
         \label{fig:ise:unif_Spreads_1h:mise}
     \end{subfigure}
-    \begin{subfigure}[t]{0.24\textwidth}
+    \begin{subfigure}[t]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_cases_spread/RMISE-vs-risk-spread}
         \caption{\glsentryname{rmise}}
         \label{fig:ise:unif_Spreads_1h:rmise}
     \end{subfigure}
-    \begin{subfigure}[t]{0.24\textwidth}
+
+    \begin{subfigure}[t]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_cases_spread/NMISE-vs-risk-spread}
         \caption{\glsentryname{nmise}}
         \label{fig:ise:unif_Spreads_1h:nmise}
     \end{subfigure}
-    \begin{subfigure}[t]{0.24\textwidth}
+    \begin{subfigure}[t]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_cases_spread/NMISE-vs-risk-spread-log-log}
         \caption{\glsentryname{nmise} log-log}
         \label{fig:ise:unif_Spreads_1h:nmise_log_log}
@@ -735,22 +742,23 @@ while the incident samples are concentrated around the peak in the center.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
-    \begin{subfigure}[b]{0.24\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_pop_size/MISE-vs-population}
         \caption{\glsentryname{mise}}
         \label{fig:ise:unifNpop_1h:mise}
     \end{subfigure}
-    \begin{subfigure}[b]{0.24\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_pop_size/RMISE-vs-population}
         \caption{\glsentryname{rmise}}
         \label{fig:ise:unifNpop_1h:rmise}
     \end{subfigure}
-    \begin{subfigure}[b]{0.24\textwidth}
+
+    \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_pop_size/NMISE-vs-population}
         \caption{\glsentryname{nmise}}
         \label{fig:ise:unifNpop_1h:nmise}
     \end{subfigure}
-    \begin{subfigure}[b]{0.24\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_pop_size/NMISE-vs-population-log-log}
         \caption{\glsentryname{nmise} log-log}
         \label{fig:ise:unifNpop_1h:nmise_log_log}
@@ -781,7 +789,7 @@ The \gls{cv} produces much more accurate estimates of \gls{peak drift} than \gls
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Varying the spread of the population density}
-\label{sec:results:pSD_100_1h}
+\label{sec:results:pop_spread}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Parameter table
@@ -801,7 +809,7 @@ The \gls{cv} produces much more accurate estimates of \gls{peak drift} than \gls
         \bottomrule
     \end{tabular}
     \caption{Parameters used for varying the \glsentryname{spread} of the population peak of 10,000}
-    \label{tab:params:pSD_100_1h}
+    \label{tab:params:pop_spread}
 \end{table}
 
 In this section, we compare the effect of different population distributions on the estimation of a single, fixed risk function.
@@ -811,8 +819,8 @@ We conduct five experiments, using the values 0.7, 1.0, 1.4, 2.0, and 2.8 for \g
 An important consideration is that the \gls{factor} \gls{mu} is computed under the assumption of a \textit{uniformly distributed} population.
 Since our populations are not uniformly distributed, we expect that the actual number of incidents observed will differ significantly from \gls{mu}.
 The results of the experiments described in this section are summarized in \Cref{tab:mean_error_rates:p0.7_100_1.0_1h,tab:mean_error_rates:p1.0_100_1.0_1h,tab:mean_error_rates:p1.4_100_1.0_1h,tab:mean_error_rates:p2.0_100_1.0_1h,tab:mean_error_rates:p2.8_100_1.0_1h}.
-An single realization for each of $\gls{sigma_p} = 1.0$ and $\gls{sigma_p} = 2.8$ can be seen in \Cref{fig:one_sample:pSD_100_1h}.
-In \subref{fig:one_sample:pSD_100_1h:1.0} we see the population more densely packed into the center.
+An single realization for each of $\gls{sigma_p} = 1.0$ and $\gls{sigma_p} = 2.8$ can be seen in \Cref{fig:one_sample:pop_spread}.
+In \subref{fig:one_sample:pop_spread:1.0} we see the population more densely packed into the center.
 Consequently there are more incidents,
 because the population is greater in the same place that the risk of incidence is higher.
 
@@ -824,16 +832,16 @@ because the population is greater in the same place that the risk of incidence i
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=\textwidth]{results/p1.0_100_1.0_1h/output/population_and_incidents_scatter}
         \caption{\gls{sigma_p} = 1.0}
-        \label{fig:one_sample:pSD_100_1h:1.0}
+        \label{fig:one_sample:pop_spread:1.0}
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=\textwidth]{results/p2.8_100_1.0_1h/output/population_and_incidents_scatter}
         \caption{\gls{sigma_p} = 2.8}
-        \label{fig:one_sample:pSD_100_1h:2.8}
+        \label{fig:one_sample:pop_spread:2.8}
     \end{subfigure}
     \caption[Examples showing population spread]
         {A single realization of different sample sizes from a single-peak risk on a single-peak population, obtained by varying the population \gls{spread} while keeping population size and the risk function $\lambda \xvec$ fixed.}
-    \label{fig:one_sample:pSD_100_1h}
+    \label{fig:one_sample:pop_spread}
 \end{figure}
 
 
@@ -842,32 +850,33 @@ because the population is greater in the same place that the risk of incidence i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
-    \begin{subfigure}[t]{0.24\textwidth}
+    \begin{subfigure}[t]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_population_spread/MISE-vs-population-spread}
         \caption{\glsentryname{mise}}
-        \label{fig:ise:pSD_100_1h:mise}
+        \label{fig:ise:pop_spread:mise}
     \end{subfigure}
-    \begin{subfigure}[t]{0.24\textwidth}
+    \begin{subfigure}[t]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_population_spread/RMISE-vs-population-spread}
         \caption{\glsentryname{rmise}}
-        \label{fig:ise:pSD_100_1h:rmise}
+        \label{fig:ise:pop_spread:rmise}
     \end{subfigure}
-    \begin{subfigure}[t]{0.24\textwidth}
+
+    \begin{subfigure}[t]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_population_spread/NMISE-vs-population-spread}
         \caption{\glsentryname{nmise}}
-        \label{fig:ise:pSD_100_1h:nmise}
+        \label{fig:ise:pop_spread:nmise}
     \end{subfigure}
-    \begin{subfigure}[t]{0.24\textwidth}
+    \begin{subfigure}[t]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_population_spread/NMISE-vs-population-spread-log-log}
         \caption{\glsentryname{nmise} log-log}
-        \label{fig:ise:pSD_100_1h:nmise_log_log}
+        \label{fig:ise:pop_spread:nmise_log_log}
     \end{subfigure}
     \caption[\glsentryname{mise}: by population \glsentryname{spread}]{\glsentryname{mise} vs. population \glsentryname{spread}}
-    \label{fig:ise:pSD_100_1h}
+    \label{fig:ise:pop_spread}
 \end{figure}
 
-\Cref{fig:ise:pSD_100_1h} shows how \gls{mise}, \gls{rmise} and \gls{nmise} are affected by population spread.
-In \subref{fig:ise:pSD_100_1h:nmise_log_log} it does not appear that there is any linear relationship,
+\Cref{fig:ise:pop_spread} shows how \gls{mise}, \gls{rmise} and \gls{nmise} are affected by population spread.
+In \subref{fig:ise:pop_spread:nmise_log_log} it does not appear that there is any linear relationship,
 and there does not appear to be any convergence to zero of any of these measures as $\gls{sigma_p} \to \infty$.
 In fact, it appears that as long as the population distribution does not change too rapidly,
 the \gls{dkd} gives similar performance for any population \gls{spread}.
@@ -877,25 +886,25 @@ in that for $\gls{sigma_p} = 0.7$ the values are very high,
 but they are generally low for other values of \gls{sigma_p}.
 Because the risk function $\gls{lambda} \xvec$ is identical across experiments,
 the relative, normal and absolute measures all have similar patterns
-as seen in \Cref{fig:other_measures:pSD_100_1h}.
+as seen in \Cref{fig:other_measures:pop_spread}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Other accuracy measures by population spread
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
-    \begin{subfigure}[t]{0.24\textwidth}
+    \begin{subfigure}[t]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_population_spread/MIAE-vs-population-spread}
-        \caption{\glsentryname{miae}}
-        \label{fig:other_measures:pSD_100_1h:miae}
+        \subcaption{\glsentryname{miae}}
+        \label{fig:other_measures:pop_spread:miae}
     \end{subfigure}
-    \begin{subfigure}[t]{0.24\textwidth}
+    \begin{subfigure}[t]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_population_spread/maxerr-vs-population-spread}
-        \caption{\Gls{supremum error}}
-        \label{fig:other_measures:pSD_100_1h:maxerr}
+        \subcaption{\Glsentryname{supremum error}}
+        \label{fig:other_measures:pop_spread:maxerr}
     \end{subfigure}
-    \caption{\glsentryname{miae} and \Gls{supremum error} by population \glsentryname{spread}}
-    \label{fig:other_measures:pSD_100_1h}
+    \caption{\glsentryname{miae} and \Glsentryname{supremum error} by population \glsentryname{spread}}
+    \label{fig:other_measures:pop_spread}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -958,15 +967,16 @@ The results of the experiments described in this section are summarized in \Cref
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
-    \begin{subfigure}[b]{0.24\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_two_peaks/MISE-vs-risk-peak-gap}
         \caption{\glsentryname{mise}}
     \end{subfigure}
-    \begin{subfigure}[b]{0.24\textwidth}
+
+    \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_two_peaks/RMISE-vs-risk-peak-gap}
         \caption{\glsentryname{rmise}}
     \end{subfigure}
-    \begin{subfigure}[b]{0.24\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_two_peaks/NMISE-vs-risk-peak-gap}
         \caption{\glsentryname{nmise}}
     \end{subfigure}
@@ -979,22 +989,23 @@ The results of the experiments described in this section are summarized in \Cref
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
-    \begin{subfigure}[b]{0.24\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_two_peaks/peak-bias-vs-risk-peak-gap}
         \caption{\glsentryname{peak bias}}
         \label{fig:other_measures:p1.4_100_G:peak_bias}
     \end{subfigure}
-    \begin{subfigure}[b]{0.24\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_two_peaks/peak-drift-vs-risk-peak-gap}
         \caption{\glsentryname{peak drift}}
         \label{fig:other_measures:p1.4_100_G:peak_drift}
     \end{subfigure}
-    \begin{subfigure}[b]{0.24\textwidth}
+
+    \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_two_peaks/centroid-bias-vs-risk-peak-gap}
         \caption{\glsentryname{centroid bias}}
         \label{fig:other_measures:p1.4_100_G:centroid_bias}
     \end{subfigure}
-    \begin{subfigure}[b]{0.24\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_two_peaks/centroid-drift-vs-risk-peak-gap}
         \caption{\glsentryname{centroid drift}}
         \label{fig:other_measures:p1.4_100_G:centroid_drift}
@@ -1068,28 +1079,23 @@ The results of the experiments described in this section are summarized in \Cref
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
-    \begin{subfigure}[b]{0.24\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_pop_risk_distance/MISE-vs-population-risk-gap}
         \caption{\glsentryname{mise}}
         \label{fig:ise:p1.4_100_Gap_risk:mise}
     \end{subfigure}
-    \begin{subfigure}[b]{0.24\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_pop_risk_distance/RMISE-vs-population-risk-gap}
         \caption{\glsentryname{rmise}}
         \label{fig:ise:p1.4_100_Gap_risk:rmise}
     \end{subfigure}
-    \begin{subfigure}[b]{0.24\textwidth}
+
+    \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_pop_risk_distance/NMISE-vs-population-risk-gap}
         \caption{\glsentryname{nmise}}
         \label{fig:ise:p1.4_100_Gap_risk:nmise}
     \end{subfigure}
-
-    \begin{subfigure}[b]{0.24\textwidth}
-        \includegraphics[width=\textwidth]{results/by_pop_risk_distance/RMISE-vs-population-risk-gap-log-log}
-        \caption{Log-log of \glsentryname{rmise}}
-        \label{fig:ise:p1.4_100_Gap_risk:rmise_log_log}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.24\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth]{results/by_pop_risk_distance/NMISE-vs-population-risk-gap-log-log}
         \caption{Log-log of \glsentryname{nmise}}
         \label{fig:ise:p1.4_100_Gap_risk:nmise_log_log}
@@ -1101,7 +1107,7 @@ The results of the experiments described in this section are summarized in \Cref
 \input{results/by_pop_risk_distance/nmise_convergence_table}
 
 \Cref{fig:ise:p1.4_100_Gap_risk} shows the different measures of \gls{mise} accuracy.
-We can see from \Cref{fig:ise:p1.4_100_Gap_risk:rmise_log_log,fig:ise:p1.4_100_Gap_risk:nmise_log_log} that there is a linear relationship in the log-log graph,
+We can see from \Cref{fig:ise:p1.4_100_Gap_risk:nmise_log_log} that there is a linear relationship in the log-log graph,
 indicating polynomial increase with positive coefficient of \gls{mise} when the distance between the incident and population peaks increases.
 We see in \Cref{tab:results:nmise_convergence_by_pop_incident_gap} that the exponent is just over 1,
 indicating just worse than linear.

@@ -1,7 +1,6 @@
-library(ggplot2)
-library(Hmisc)
-
 setwd("/Users/harold/Dropbox/MA_Knowledge_and_Info/Thesis/thesis/results/by_pop_risk_distance")
+
+source("../plots.R")
 
 Gaps <- c(0, 1, 2, 3, 4)
 GapStrs <- c("_1.0_1h", "_1_1h_1s", "_1_1h_2s", "_1_1h_3s", "_1_1h_4s")
@@ -69,34 +68,22 @@ coefC <- coef(lm(log(dfC$`Relative MISE`) ~ dfC$Gap))
 
 
 pdf(file="MISE-vs-population-risk-gap.pdf")
-ggplot(df) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Gap, y=MISE, colour=Bandwidth, shape=Bandwidth), size=3)
+make_accuracy_plot(df, "Gap") +
+  geom_point(aes(x=Gap, y=MISE, shape=Bandwidth), size=3)
 dev.off()
 pdf(file="RMISE-vs-population-risk-gap.pdf")
-ggplot(df) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Gap, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
-  stat_function(fun=function(x) {exp(coefO[2] * x + coefO[1])}, aes(colour="Oracle"), xlim=c(0, 4)) +
-  stat_function(fun=function(x) {exp(coefS[2] * x + coefS[1])}, aes(colour="Silverman"), xlim=c(0, 4)) +
-  stat_function(fun=function(x) {exp(coefC[2] * x + coefC[1])}, aes(colour="CV"), xlim=c(0, 4))
+make_accuracy_plot(df, "Gap") +
+  geom_point(aes(x=Gap, y=`Relative MISE`, shape=Bandwidth), size=3) +
+  stat_function(fun=function(x) {exp(coefO[2] * x + coefO[1])}, aes(linetype="Oracle"), xlim=c(0, 4)) +
+  stat_function(fun=function(x) {exp(coefS[2] * x + coefS[1])}, aes(linetype="Silverman"), xlim=c(0, 4)) +
+  stat_function(fun=function(x) {exp(coefC[2] * x + coefC[1])}, aes(linetype="CV"), xlim=c(0, 4))
 dev.off()
 pdf(file="RMISE-vs-population-risk-gap-log-log.pdf")
-ggplot(df) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Gap, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
-  stat_function(fun=function(x) {exp(coefO[2] * x + coefO[1])}, aes(colour="Oracle"), xlim=c(0, 4)) +
-  stat_function(fun=function(x) {exp(coefS[2] * x + coefS[1])}, aes(colour="Silverman"), xlim=c(0, 4)) +
-  stat_function(fun=function(x) {exp(coefC[2] * x + coefC[1])}, aes(colour="CV"), xlim=c(0, 4)) +
+make_accuracy_plot(df, "Gap") +
+  geom_point(aes(x=Gap, y=`Relative MISE`, shape=Bandwidth), size=3) +
+  stat_function(fun=function(x) {exp(coefO[2] * x + coefO[1])}, aes(linetype="Oracle"), xlim=c(0, 4)) +
+  stat_function(fun=function(x) {exp(coefS[2] * x + coefS[1])}, aes(linetype="Silverman"), xlim=c(0, 4)) +
+  stat_function(fun=function(x) {exp(coefC[2] * x + coefC[1])}, aes(linetype="CV"), xlim=c(0, 4)) +
   coord_trans(y='log10') +
   annotation_logticks(sides="l", scaled=FALSE)
 dev.off()
@@ -121,26 +108,18 @@ coefS <- coef(lm(log(dfS$`Normalized MISE`) ~ dfS$Gap))
 coefC <- coef(lm(log(dfC$`Normalized MISE`) ~ dfC$Gap))
 
 pdf(file="NMISE-vs-population-risk-gap.pdf")
-ggplot(df) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Gap, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
-  stat_function(fun=function(x) {exp(coefO[2] * x + coefO[1])}, aes(colour="Oracle"), xlim=c(0, 4)) +
-  stat_function(fun=function(x) {exp(coefS[2] * x + coefS[1])}, aes(colour="Silverman"), xlim=c(0, 4)) +
-  stat_function(fun=function(x) {exp(coefC[2] * x + coefC[1])}, aes(colour="CV"), xlim=c(0, 4))
+make_accuracy_plot(df, "Gap") +
+  geom_point(aes(x=Gap, y=`Normalized MISE`, shape=Bandwidth), size=3) +
+  stat_function(fun=function(x) {exp(coefO[2] * x + coefO[1])}, aes(linetype="Oracle"), xlim=c(0, 4)) +
+  stat_function(fun=function(x) {exp(coefS[2] * x + coefS[1])}, aes(linetype="Silverman"), xlim=c(0, 4)) +
+  stat_function(fun=function(x) {exp(coefC[2] * x + coefC[1])}, aes(linetype="CV"), xlim=c(0, 4))
 dev.off()
 pdf(file="NMISE-vs-population-risk-gap-log-log.pdf")
-ggplot(df) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Gap, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
-  stat_function(fun=function(x) {exp(coefO[2] * x + coefO[1])}, aes(colour="Oracle"), xlim=c(0, 4)) +
-  stat_function(fun=function(x) {exp(coefS[2] * x + coefS[1])}, aes(colour="Silverman"), xlim=c(0, 4)) +
-  stat_function(fun=function(x) {exp(coefC[2] * x + coefC[1])}, aes(colour="CV"), xlim=c(0, 4)) +
+make_accuracy_plot(df, "Gap") +
+  geom_point(aes(x=Gap, y=`Normalized MISE`, shape=Bandwidth), size=3) +
+  stat_function(fun=function(x) {exp(coefO[2] * x + coefO[1])}, aes(linetype="Oracle"), xlim=c(0, 4)) +
+  stat_function(fun=function(x) {exp(coefS[2] * x + coefS[1])}, aes(linetype="Silverman"), xlim=c(0, 4)) +
+  stat_function(fun=function(x) {exp(coefC[2] * x + coefC[1])}, aes(linetype="CV"), xlim=c(0, 4)) +
   coord_trans(y='log10') +
   annotation_logticks(sides="l", scaled=FALSE)
 dev.off()

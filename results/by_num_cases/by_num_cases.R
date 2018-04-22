@@ -1,7 +1,6 @@
-library(ggplot2)
-library(Hmisc)
-
 setwd("/Users/harold/Dropbox/MA_Knowledge_and_Info/Thesis/thesis/results/by_num_cases")
+
+source("../plots.R")
 
 Cases <- c(50, 100, 200, 500, 1000)
 Dirs <- sapply(Cases, function(case) paste('../unif_', case, '_1.0_1h/output/', sep=''))
@@ -67,34 +66,19 @@ coefS <- coef(lm(log(dfS$`Relative MISE`) ~ log(dfS$Case)))
 coefC <- coef(lm(log(dfC$`Relative MISE`) ~ log(dfC$Case)))
 
 pdf(file="MISE-vs-cases.pdf")
-ggplot(df) +
-  xlab(expression(mu)) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Case, y=MISE, colour=Bandwidth, shape=Bandwidth), size=3)
+make_accuracy_plot(df, expression(mu)) +
+  geom_point(aes(x=Case, y=MISE, shape=Bandwidth), size=3)
 dev.off()
 pdf(file="RMISE-vs-cases.pdf")
-ggplot(df) +
-  xlab(expression(mu)) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Case, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth), size=3)
+make_accuracy_plot(df, expression(mu)) +
+  geom_point(aes(x=Case, y=`Relative MISE`, shape=Bandwidth), size=3)
 dev.off()
 pdf(file="RMISE-vs-cases-log-log.pdf")
-ggplot(df) +
-  xlab(expression(mu)) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Case, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
-  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(45,1100)) +
-  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(45,1100)) +
-  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(45,1100)) +
+make_accuracy_plot(df, expression(mu)) +
+  geom_point(aes(x=Case, y=`Relative MISE`, shape=Bandwidth), size=3) +
+  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(linetype="Oracle"), xlim=c(45,1100)) +
+  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(linetype="Silverman"), xlim=c(45,1100)) +
+  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(linetype="CV"), xlim=c(45,1100)) +
   coord_trans(x='log10', y='log10') +
   annotation_logticks(scaled=FALSE)
 dev.off()
@@ -105,28 +89,18 @@ coefS <- coef(lm(log(dfS$`Normalized MISE`) ~ log(dfS$Case)))
 coefC <- coef(lm(log(dfC$`Normalized MISE`) ~ log(dfC$Case)))
 
 pdf(file="NMISE-vs-cases.pdf")
-ggplot(df) +
-  xlab(expression(mu)) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Case, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
-  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(45,1100)) +
-  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(45,1100)) +
-  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(45,1100))
+make_accuracy_plot(df, expression(mu)) +
+  geom_point(aes(x=Case, y=`Normalized MISE`, shape=Bandwidth), size=3) +
+  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(linetype="Oracle"), xlim=c(45,1100)) +
+  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(linetype="Silverman"), xlim=c(45,1100)) +
+  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(linetype="CV"), xlim=c(45,1100))
 dev.off()
 pdf(file="NMISE-vs-cases-log-log.pdf")
-ggplot(df) +
-  xlab(expression(mu)) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Case, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
-  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(45,1100)) +
-  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(45,1100)) +
-  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(45,1100)) +
+make_accuracy_plot(df, expression(mu)) +
+  geom_point(aes(x=Case, y=`Normalized MISE`, shape=Bandwidth), size=3) +
+  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(linetype="Oracle"), xlim=c(45,1100)) +
+  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(linetype="Silverman"), xlim=c(45,1100)) +
+  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(linetype="CV"), xlim=c(45,1100)) +
   coord_trans(x='log10', y='log10') +
   annotation_logticks(scaled=FALSE)
 dev.off()
@@ -145,3 +119,4 @@ df.alpha.latex <- latex(df.alpha,
                         caption.loc="bottom",
                         caption="NMISE onvergence rate by number of cases for different bandwidth selectors for a single-peak risk function with spread of 1.0 on a uniform population of 10,000.",
                         caption.lot="NMISE Convergence rate by number of cases for spread 1.0")
+

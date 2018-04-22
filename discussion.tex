@@ -64,8 +64,20 @@ the variance of the \gls{cv} selector is much higher.
     \label{fig:discussion:overall_nmise_diff_boxplot}
 \end{figure}
 
-As with \gls{nmise}, the \gls{cv} and \gls{silverman} selectors performed similarly to each other.
-The 
+We now look at the \gls{miae}.
+As mentioned in \Cref{subsec:method:miae},
+the \glsentrylong{miae} is the natural measure that shows the average overall accuracy of the \gls{dkd} estimate of the \gls{risk} function.
+By normalizing the \gls{miae}, we obtain the \gls{nmiae}.
+Our theoretical optimal bandwidth \gls{h_opt} and our \gls{oracle} which is our estimation of it,
+are based on minimizing \gls{mise}.
+Also, both of \gls{silverman} and \gls{cv} are bandwidth selectors that attempt to minimize \gls{mise}.
+It is not necessarily the case that a bandwith that minimizes \gls{ise} may also be the minimizer of \gls{iae}.
+Nevertheless, our results show that for the types of \gls{risk} intensities we studied,
+the \gls{cv} and \gls{silverman} selectors performed similarly to each other for \gls{nmiae}.
+\Cref{fig:discussion:overall_nmiae_boxplot} shows the distribution of \gls{nmiae} over the entire set of experiments.
+We note the large difference in scale between the experiments with uniform populations shown in \subref{fig:discussion:overall_nmiae_boxplot:unif} and those with peaked populations in \subref{fig:discussion:overall_nmiae_boxplot:peak}.
+
+
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[t]{0.45\textwidth}
@@ -97,6 +109,11 @@ The
     \caption{Overall distribution of \glsentryname{normalized supremum error}}
     \label{fig:discussion:overall_nsup_boxplot}
 \end{figure}
+
+Our \gls{supremum error} measure intuitively describes the expected worst case error of the \gls{dkd} estimate.
+\Cref{fig:discussion:overall_nsup_boxplot} shows the overall distribution of the \gls{supremum error} over our experiments.
+The results for uniform and peaked populations are shown in \Cref{fig:discussion:overall_nsup_boxplot:unif,fig:discussion:overall_nsup_boxplot:peak} respectively.
+Why is the scale so much higher? See \Cref{sec:results:spread}.
 
 \begin{figure}[htbp]
     \centering

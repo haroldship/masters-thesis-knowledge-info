@@ -1,7 +1,6 @@
-library(ggplot2)
-library(Hmisc)
-
 setwd("/Users/harold/Dropbox/MA_Knowledge_and_Info/Thesis/thesis/results/by_population_spread")
+
+source("../plots.R")
 
 Spreads <- c(0.7, 1.0, 1.4, 2.0, 2.8)
 Dirs <- sapply(Spreads, function(rate) paste('../p', format(rate, nsmall=1), '_100_1.0_1h/output/', sep=''))
@@ -71,31 +70,16 @@ coefC <- coef(lm(log(dfC$`Relative MISE`) ~ log(dfC$Spread)))
 
 
 pdf(file="MISE-vs-population-spread.pdf")
-ggplot(df) +
-  xlab(expression(sigma[p])) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Spread, y=MISE, colour=Bandwidth, shape=Bandwidth))
+make_accuracy_plot(df, expression(sigma[P])) +
+  geom_point(aes(x=Spread, y=MISE, shape=Bandwidth))
 dev.off()
 pdf(file="RMISE-vs-population-spread.pdf")
-ggplot(df) +
-  xlab(expression(sigma[p])) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Spread, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth))
+make_accuracy_plot(df, expression(sigma[P])) +
+  geom_point(aes(x=Spread, y=`Relative MISE`, shape=Bandwidth))
 dev.off()
 pdf(file="RMISE-vs-population-spread-log-log.pdf")
-ggplot(df) +
-  xlab(expression(sigma[p])) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Spread, y=`Relative MISE`, colour=Bandwidth, shape=Bandwidth)) +
+make_accuracy_plot(df, expression(sigma[P])) +
+  geom_point(aes(x=Spread, y=`Relative MISE`, shape=Bandwidth)) +
   coord_trans(x='log10', y='log10') +
   annotation_logticks(scaled=FALSE)
 dev.off()
@@ -105,28 +89,18 @@ coefS <- coef(lm(log(dfS$`Normalized MISE`) ~ log(dfS$Spread)))
 coefC <- coef(lm(log(dfC$`Normalized MISE`) ~ log(dfC$Spread)))
 
 pdf(file="NMISE-vs-population-spread.pdf")
-ggplot(df) +
-  geom_point(aes(x=Spread, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
-  xlab(expression(sigma[p])) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) #+
-  # stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(0.4, 3.0)) +
-  # stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(0.4, 3.0)) +
-  # stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(0.4, 3.0))
+make_accuracy_plot(df, expression(sigma[P])) +
+  geom_point(aes(x=Spread, y=`Normalized MISE`, shape=Bandwidth), size=3) #+
+  # stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(linetype="Oracle"), xlim=c(0.4, 3.0)) +
+  # stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(linetype="Silverman"), xlim=c(0.4, 3.0)) +
+  # stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(linetype="CV"), xlim=c(0.4, 3.0))
 dev.off()
 pdf(file="NMISE-vs-population-spread-log-log.pdf")
-ggplot(df) +
-  geom_point(aes(x=Spread, y=`Normalized MISE`, colour=Bandwidth, shape=Bandwidth), size=3) +
-  xlab(expression(sigma[p])) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(colour="Oracle"), xlim=c(0.4, 3.0)) +
-  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(colour="Silverman"), xlim=c(0.4, 3.0)) +
-  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(colour="CV"), xlim=c(0.4, 3.0)) +
+make_accuracy_plot(df, expression(sigma[P])) +
+  geom_point(aes(x=Spread, y=`Normalized MISE`, shape=Bandwidth), size=3) +
+  stat_function(fun=function(x) {exp(coefO[1])*x**(coefO[2])}, aes(linetype="Oracle"), xlim=c(0.4, 3.0)) +
+  stat_function(fun=function(x) {exp(coefS[1])*x**(coefS[2])}, aes(linetype="Silverman"), xlim=c(0.4, 3.0)) +
+  stat_function(fun=function(x) {exp(coefC[1])*x**(coefC[2])}, aes(linetype="CV"), xlim=c(0.4, 3.0)) +
   coord_trans(x='log10', y='log10') +
   annotation_logticks(scaled=FALSE)
 dev.off()
@@ -148,49 +122,24 @@ df.alpha.latex <- latex(df.alpha,
 
 
 pdf(file="MIAE-vs-population-spread.pdf")
-ggplot(df) +
-  xlab(expression(sigma[p])) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Spread, y=MIAE, colour=Bandwidth, shape=Bandwidth))
+make_accuracy_plot(df, expression(sigma[P])) +
+  geom_point(aes(x=Spread, y=MIAE, shape=Bandwidth))
 dev.off()
 pdf(file="RMIAE-vs-population-spread.pdf")
-ggplot(df) +
-  xlab(expression(sigma[p])) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Spread, y=`Relative MIAE`, colour=Bandwidth, shape=Bandwidth))
+make_accuracy_plot(df, expression(sigma[P])) +
+  geom_point(aes(x=Spread, y=`Relative MIAE`, shape=Bandwidth))
 dev.off()
 pdf(file="NMIAE-vs-population-spread.pdf")
-ggplot(df) +
-  xlab(expression(sigma[p])) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Spread, y=`Normalized MIAE`, colour=Bandwidth, shape=Bandwidth))
+make_accuracy_plot(df, expression(sigma[P])) +
+  geom_point(aes(x=Spread, y=`Normalized MIAE`, shape=Bandwidth))
 dev.off()
 pdf(file="maxerr-vs-population-spread.pdf")
-ggplot(df) +
-  xlab(expression(sigma[p])) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Spread, y=`Supremum error`, colour=Bandwidth, shape=Bandwidth))
+make_accuracy_plot(df, expression(sigma[P])) +
+  geom_point(aes(x=Spread, y=`Supremum error`, shape=Bandwidth))
 dev.off()
 pdf(file="normal-maxerr-vs-population-spread.pdf")
-ggplot(df) +
-  xlab(expression(sigma[p])) +
-  theme(axis.title=element_text(size=20)) +
-  theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.title=element_text(size=16, family='NewCenturySchoolbook'),
-        legend.key.size=unit(1.5, 'cm')) +
-  geom_point(aes(x=Spread, y=`Normalized Sup error`, colour=Bandwidth, shape=Bandwidth))
+make_accuracy_plot(df, expression(sigma[P])) +
+  geom_point(aes(x=Spread, y=`Normalized Sup error`, shape=Bandwidth))
 dev.off()
 
 
