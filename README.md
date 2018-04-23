@@ -7,6 +7,15 @@
  - [x] Method: double integral with (x1, x2) in W as limits
  - [x] Method: 4.2.1: "in many cases": when & how?
  - [x] Method: 4.4: "A common method for bandwidth selection..." to start
+ - [x] Results: (and everywhere) in population and incidents scatter use a different size/symbol instead of colour
+ - [x] Results: make all charts b/w or greyscale (not colour)
+ - [x] Results: only 2 charts per row
+ - [x] Results: bandwidth histograms: lighten fill; why shadow in printed?
+ - [x] Discussion: Create Boxplot of MISE distribution comparing Oracle to Silverman to CV selection, possibly OTHER accuracy measures
+ - [x] Discussion: Create Boxplot of MISE difference between S-O and CV-O (MISE only)
+ - [x] Discussion: overall plot of everything e.g. NMISE of CV, Silv, Oracle vs. experiment number
+ - [x] Appendix: Section A.10 title should say peaks are NOT in same place
+ - [x] Appendix: Section A.8 mention in subsection title that peaks are in same place
 
 ### Fixed in version 0.8
  - [x] Results: major rewrite
@@ -56,10 +65,6 @@
 
 ### TODO
 
- - [ ] Results: (and everywhere) in population and incidents scatter use a different size/symbol instead of colour
- - [ ] Results: make all charts b/w or greyscale (not colour)
- - [ ] Results: only 2 charts per row
- - [ ] Results: bandwidth histograms: lighten fill; why shadow in printed?
  - [ ] Results: all subsections: compare peak, centroid, etc.
  - [ ] Results: all subsections: compare selectors.
  - [ ] Results: all subsections: make more clear MISE chart discussion is for all selectors, etc
@@ -85,17 +90,10 @@
  - [ ] Method: 4.5: add a step to compute lambda_p
  - [ ] Method: 4.6: reword last sentence
  - [ ] Method: Add computing and technical issues and solutions: time, AWS, etc. move from wherever.
- - [ ] Appendix: A.10 title should say peaks are NOT in same place
  - [ ] Appendix: A.47 graph is weird
- - [ ] Appendix: A.10 biases are positive even for Oracle
+ - [ ] Appendix: Section A.10 biases are positive even for Oracle
  - [ ] Appendix: A.10 table: Silverman is better than CV
- - [ ] Appendix: for each section, plot accuracy measures vs. expected number of incidents
- - [ ] Appendix: A.8 mention in subsection title that peaks are in same place
- - [ ] Discussion: Create Boxplot of MISE distribution comparing Oracle to Silverman to CV selection, possibly OTHER accuracy measures
- - [ ] Discussion: Create Boxplot of MISE difference between S-O and CV-O (MISE only)
  - [ ] Discussion: Why is MISE going up?
- - [ ] Discussion: Silverman's peak bias is positive in some cases: explain
- - [ ] Discussion: overall plot of everything e.g. NMISE of CV, Silv, Oracle vs. experiment number
  - [ ] Discussion: 6.2 needs MORE
  - [ ] Discussion: 6.1 needs plot to illustrate
  - [ ] Discussion: bias is negative but not always - when? why?

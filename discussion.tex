@@ -28,7 +28,15 @@ lower than for the other bandwidth selectors.
 The \gls{cv} and \gls{silverman} selectors had similar performance.
 All of these bandwidth selection techniques are optimized to minimize \gls{mise},
 and so these results are what we expected.
+
 The scale of the \gls{nmise} is much higher when the population is not uniform.
+In particular, this seems to happen in two scenarios.
+The first scenario occurs when the \gls{risk} function peak is far from the population peak, resulting in very few people in the high-risk area.
+In a study with a real \gls{incident} \gls{risk},
+this would have the effect of attenuating the actual \gls{risk}.
+The second scenario where the \gls{nmise} is high occurs when the population density \gls{spread} takes its lowest values of 0.7 and 1.0.
+This results in a highly variable denominator in the \gls{dkd} quotient,
+leading to less stable results.
 Although on average, the \gls{cv} and \gls{silverman} selectors have similar performance for the peaked populations,
 the variance of the \gls{cv} selector is much higher.
 
@@ -127,7 +135,7 @@ Why is the scale so much higher? See \Cref{sec:results:spread}.
         \subcaption{Peaked populations}
         \label{fig:discussion:overall_peakbias_boxplot:peak}
     \end{subfigure}
-    \caption{Overall distribution of \glsentryname{peak bias}}
+    \caption{Overall distribution of relative \glsentryname{peak bias}}
     \label{fig:discussion:overall_peakbias_boxplot}
 \end{figure}
 
@@ -143,9 +151,14 @@ Why is the scale so much higher? See \Cref{sec:results:spread}.
         \subcaption{Peaked populations}
         \label{fig:discussion:overall_peakdrift_boxplot:peak}
     \end{subfigure}
-    \caption{Overall distribution of \glsentryname{peak drift}}
+    \caption{Overall distribution of relative \glsentryname{peak drift}}
     \label{fig:discussion:overall_peakdrift_boxplot}
 \end{figure}
+
+The distributions we observed for \gls{peak bias} and \gls{peak drift} are in \Cref{fig:discussion:overall_peakbias_boxplot,fig:discussion:overall_peakdrift_boxplot}.
+First, we note that the \gls{peak bias} nearly always takes negative values when computing the \gls{dkd} with the \gls{oracle} bandwidth,
+for uniformly distributed populations.
+
 
 \begin{figure}[htbp]
     \centering
@@ -159,7 +172,7 @@ Why is the scale so much higher? See \Cref{sec:results:spread}.
         \subcaption{Peaked populations}
         \label{fig:discussion:overall_centroidbias_boxplot:peak}
     \end{subfigure}
-    \caption{Overall distribution of \glsentryname{centroid bias}}
+    \caption{Overall distribution of relative \glsentryname{centroid bias}}
     \label{fig:discussion:overall_centroidbias_boxplot}
 \end{figure}
 
@@ -175,7 +188,7 @@ Why is the scale so much higher? See \Cref{sec:results:spread}.
         \subcaption{Peaked populations}
         \label{fig:discussion:overall_centroiddrift_boxplot:peak}
     \end{subfigure}
-    \caption{Overall distribution of \glsentryname{centroid drift}}
+    \caption{Overall distribution of relative \glsentryname{centroid drift}}
     \label{fig:discussion:overall_centroiddrift_boxplot}
 \end{figure}
 

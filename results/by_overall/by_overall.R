@@ -2,7 +2,7 @@ library(ggplot2)
 
 setwd("/Users/harold/Dropbox/MA_Knowledge_and_Info/Thesis/thesis/results/by_overall")
 
-Dirs <- list.files("..", pattern="^[up].*", full.names=TRUE)
+Dirs <- list.files("..", pattern="^[up][^l].*", full.names=TRUE)
 Files <- sapply(Dirs, function(dir) paste(dir, '/output/mean_table.tex', sep=''))
 
 N <- length(Files)
@@ -14,13 +14,17 @@ matS <- NULL
 matC <- NULL
 
 PopPeaks <- c()
+RiskPeaks <- c()
 
 for (i in 1:N) {
   File <- Files[i]
   UnifPeak <- substring(File,4,4)
   PopPeak <- (UnifPeak=='p')
   PopPeaks <- c(PopPeaks, PopPeak)
-  print(paste("File=", File, " UnifPeak=", UnifPeak, " PopPeak=", PopPeak, sep=""))
+  UnifPeakR <- substring(strsplit(File, "_")[[1]][3],1,1)
+  RiskPeak <- (UnifPeakR!='u')
+  RiskPeaks <- c(RiskPeaks, RiskPeak)
+  print(paste("File=", File, " UnifPeak=", UnifPeak, " PopPeak=", PopPeak, " UnifPeakR=", UnifPeakR, " RiskPeak=", RiskPeak, sep=""))
   lines <- readLines(File)
   lines <- lines[7:22]
   Os <- numeric()
@@ -53,14 +57,17 @@ for (i in 1:N) {
 dfO <- as.data.frame(matO)
 dfO$Bandwidth <- "Oracle"
 dfO$PopPeak <- PopPeaks
+dfO$RiskPeak <- RiskPeaks
 
 dfS <- as.data.frame(matS)
 dfS$Bandwidth <- "Silverman"
 dfS$PopPeak <- PopPeaks
+dfS$RiskPeak <- RiskPeaks
 
 dfC <- as.data.frame(matC)
 dfC$Bandwidth <- "CV"
 dfC$PopPeak <- PopPeaks
+dfC$RiskPeak <- RiskPeaks
 
 df <- rbind(dfO, dfS, dfC)
 df$Bandwidth <- factor(df$Bandwidth, levels=c("Oracle", "CV", "Silverman"))
@@ -68,10 +75,12 @@ df$Bandwidth <- factor(df$Bandwidth, levels=c("Oracle", "CV", "Silverman"))
 dfS.diff <- dfS[,1:3] - dfO[,1:3]
 dfS.diff$Bandwidth <- "Silverman"
 dfS.diff$PopPeak <- PopPeaks
+dfS.diff$RiskPeak <- RiskPeaks
 
 dfC.diff <- dfC[,1:3] - dfO[,1:3]
 dfC.diff$Bandwidth <- "CV"
 dfC.diff$PopPeak <- PopPeaks
+dfC.diff$RiskPeak <- RiskPeaks
 
 df.diff <- rbind(dfC.diff, dfS.diff)
 df.diff$Bandwidth <- as.factor(df.diff$Bandwidth)
@@ -100,42 +109,42 @@ pdf("normalized-sup-error-peakpop-boxplot.pdf")
 boxplot(df[df$PopPeak==TRUE,]$`Normalized Sup error` ~ df[df$PopPeak==TRUE,]$Bandwidth)
 dev.off()
 
-# Relative peak bias
-pdf("relative-peak-bias-boxplot.pdf")
-boxplot(df[df$PopPeak==FALSE,]$`Relative Peak bias` ~ df[df$PopPeak==FALSE,]$Bandwidth)
-dev.off()
-pdf("relative-peak-bias-peakpop-boxplot.pdf")
-boxplot(df[df$PopPeak==TRUE,]$`Relative Peak bias` ~ df[df$PopPeak==TRUE,]$Bandwidth)
-dev.off()
-
-# Relative centroid bias
-pdf("relative-centroid-bias-boxplot.pdf")
-boxplot(df[df$PopPeak==FALSE,]$`Relative Centroid bias` ~ df[df$PopPeak==FALSE,]$Bandwidth)
-dev.off()
-pdf("relative-centroid-bias-peakpop-boxplot.pdf")
-boxplot(df[df$PopPeak==TRUE,]$`Relative Centroid bias` ~ df[df$PopPeak==TRUE,]$Bandwidth)
-dev.off()
-
-# Relative peak drift
-pdf("relative-peak-drift-boxplot.pdf")
-boxplot(df[df$PopPeak==FALSE,]$`Relative Peak drift` ~ df[df$PopPeak==FALSE,]$Bandwidth)
-dev.off()
-pdf("relative-peak-drift-peakpop-boxplot.pdf")
-boxplot(df[df$PopPeak==TRUE,]$`Relative Peak drift` ~ df[df$PopPeak==TRUE,]$Bandwidth)
-dev.off()
-
-# Relative centroid drift
-pdf("relative-centroid-drift-boxplot.pdf")
-boxplot(df[df$PopPeak==FALSE,]$`Relative Centroid drift` ~ df[df$PopPeak==FALSE,]$Bandwidth)
-dev.off()
-pdf("relative-centroid-drift-peakpop-boxplot.pdf")
-boxplot(df[df$PopPeak==TRUE,]$`Relative Centroid drift` ~ df[df$PopPeak==TRUE,]$Bandwidth)
-dev.off()
-
 # NMISE difference
 pdf("normalized-mise-diff-boxplot.pdf")
 boxplot(df.diff[df.diff$PopPeak==FALSE,]$`Normalized MISE` ~ df.diff[df.diff$PopPeak==FALSE,]$Bandwidth)
 dev.off()
 pdf("normalized-mise-diff-peakpop-boxplot.pdf")
 boxplot(df.diff[df.diff$PopPeak==TRUE,]$`Normalized MISE` ~ df.diff[df.diff$PopPeak==TRUE,]$Bandwidth)
+dev.off()
+
+# Relative peak bias
+pdf("relative-peak-bias-boxplot.pdf")
+boxplot(df[df$PopPeak==FALSE&df$RiskPeak==TRUE,]$`Relative Peak bias` ~ df[df$PopPeak==FALSE&df$RiskPeak==TRUE,]$Bandwidth)
+dev.off()
+pdf("relative-peak-bias-peakpop-boxplot.pdf")
+boxplot(df[df$PopPeak==TRUE&df$RiskPeak==TRUE,]$`Relative Peak bias` ~ df[df$PopPeak==TRUE&df$RiskPeak==TRUE,]$Bandwidth)
+dev.off()
+
+# Relative centroid bias
+pdf("relative-centroid-bias-boxplot.pdf")
+boxplot(df[df$PopPeak==FALSE&df$RiskPeak==TRUE,]$`Relative Centroid bias` ~ df[df$PopPeak==FALSE&df$RiskPeak==TRUE,]$Bandwidth)
+dev.off()
+pdf("relative-centroid-bias-peakpop-boxplot.pdf")
+boxplot(df[df$PopPeak==TRUE&df$RiskPeak==TRUE,]$`Relative Centroid bias` ~ df[df$PopPeak==TRUE&df$RiskPeak==TRUE,]$Bandwidth)
+dev.off()
+
+# Relative peak drift
+pdf("relative-peak-drift-boxplot.pdf")
+boxplot(df[df$PopPeak==FALSE&df$RiskPeak==TRUE,]$`Relative Peak drift` ~ df[df$PopPeak==FALSE&df$RiskPeak==TRUE,]$Bandwidth)
+dev.off()
+pdf("relative-peak-drift-peakpop-boxplot.pdf")
+boxplot(df[df$PopPeak==TRUE&df$RiskPeak==TRUE,]$`Relative Peak drift` ~ df[df$PopPeak==TRUE&df$RiskPeak==TRUE,]$Bandwidth)
+dev.off()
+
+# Relative centroid drift
+pdf("relative-centroid-drift-boxplot.pdf")
+boxplot(df[df$PopPeak==FALSE&df$RiskPeak==TRUE,]$`Relative Centroid drift` ~ df[df$PopPeak==FALSE&df$RiskPeak==TRUE,]$Bandwidth)
+dev.off()
+pdf("relative-centroid-drift-peakpop-boxplot.pdf")
+boxplot(df[df$PopPeak==TRUE&df$RiskPeak==TRUE,]$`Relative Centroid drift` ~ df[df$PopPeak==TRUE&df$RiskPeak==TRUE,]$Bandwidth)
 dev.off()
