@@ -204,7 +204,7 @@ However, the \gls{oracle} and \gls{cv} bandwidths resulted in negative biases,
 which is what we expected,
 since the process of smoothing generally lowers high values (peaks) and raises low values.
 The \gls{silverman} bandwidth, on the other hand, produced a positive value,
-which may indicate undersmoothing.
+which may indicate under-smoothing.
 This requires further study.
 
 In \Cref{fig:ise:unif_100_1.0_1h}, we look at the distribution of the \gls{ise}.
@@ -312,7 +312,7 @@ selected bandwidths and their corresponding mean values had similar performance 
         \includegraphics[width=\textwidth]{output/centroid-height-histogram}
         \subcaption{Centroid peak height error}
     \end{subfigure}
-    \caption[Centroid accuracy: Single-peak of 100 on uniform population]{Peak accuracy measures densitiesu sing centroid technique for a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population. Vertical lines indicate the mean values of the simulations.}
+    \caption[Centroid accuracy: Single-peak of 100 on uniform population]{Peak accuracy measures densities sing centroid technique for a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population. Vertical lines indicate the mean values of the simulations.}
     \label{fig:centroids:unif_100_1.0_1h}
 \end{figure}
 
@@ -320,7 +320,7 @@ For both of the peak distance errors (\Cref{fig:peaks:unif_100_1.0_1h:dist}) and
 we see the \gls{cv} bandwidth selection outperforms the \gls{silverman} rule of thumb, and that the \gls{oracle} seems to outperform them both.
 In fact, the \gls{peak bias}, which we estimate using the mean \gls{peak error},
 is positive for \gls{silverman}.
-This indicates a tendency towards undersmoothing.
+This indicates a tendency towards under-smoothing.
 We note that all three of bandwidth selection techniques are designed to minimize \gls{mise}.
 We also note the multi-modal peak distance distributions.
 We believe this is an artifact of the experimental design,
@@ -364,11 +364,11 @@ The bandwidths selected by \gls{cv} were allowed to vary in the $x_1$ and $x_2$ 
 In \Cref{fig:bandwidths:unif_100_1.0_1h:x1,fig:bandwidths:unif_100_1.0_1h:x2} we see that the distributions of these bandwidths observed in this experiment are quite similar.
 Since the true \gls{risk} function is invariant under a change of coordinates,
 this is the behavior that we expect.
-\Cref{fig:bandwidths:unif_100_1.0_1h:diff} shows that the $x_1$ and $x_2$ coordinate distributions often differ significantly in the indidual realizations.
+\Cref{fig:bandwidths:unif_100_1.0_1h:diff} shows that the $x_1$ and $x_2$ coordinate distributions often differ significantly in the individual realizations.
 This is due to the randomness of the locations of the \glspl{incident},
 which can cause the observed distribution of the points to vary between realizations.
 The distribution of the \gls{silverman} selected bandwidths is much more symmetric, and has a lower mean value (\Cref{fig:bandwidths:unif_100_1.0_1h:silverman}).
-This results in a slightly undersmoothed \gls{silverman} estimate.
+This results in a slightly under-smoothed \gls{silverman} estimate.
 
 % Restore graphics and input path
 \setpath{}
@@ -457,7 +457,7 @@ The observed values for the power of $n$ as represented by $N_I$ are shown in \C
 \input{results/by_h_per_mu/alpha_by_selector}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Selected bandwidty by factor
+% Selected bandwidth by factor
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering

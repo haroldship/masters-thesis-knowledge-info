@@ -67,18 +67,19 @@
 
 ### TODO
 
- - [ ] Results: all subsections: compare peak, centroid, etc.
+ - [ ] Results: text mentions colours
+ - [ ] Results: all subsections: compare peak, centroid, etc in each section briefly
  - [ ] Results: all subsections: compare selectors.
  - [ ] Results: all subsections: make more clear MISE chart discussion is for all selectors, etc
  - [ ] Theory: (and everywhere) lambda_i used for intensity AND for index: change intensity to lambda_I/lambda_P
  - [ ] Introduction: define "statistical properties"
  - [ ] Theoretical background: describe rejection sampling
  - [ ] Method: better describe centroid
- - [ ] Method: 4.1 desribe the study area
+ - [ ] Method: 4.1 describe the study area
  - [ ] Method: 4.1 put in a picture of pop and incident points
  - [ ] Method: 4.1 Discuss the real-life underlying story of the data with examples
  - [ ] Method: 4.1 Discuss how the real-life underlying story is modeled with SPP or Poisson
- - [ ] Method: 4.1 Describe the kernel method of intensit estimation, assumes some data, "if someone has incident location data, they can use this method"
+ - [ ] Method: 4.1 Describe the kernel method of intensity estimation, assumes some data, "if someone has incident location data, they can use this method"
  - [ ] Method: 4.1 mention 2 kernel methods, incidents vs population
  - [ ] Method: 4.2 define lambda := lambda(., .) to show lambda is a function
  - [ ] Method: 4.2.5: motivation for centroid
