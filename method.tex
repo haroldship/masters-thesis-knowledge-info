@@ -91,7 +91,7 @@ we use several accuracy measures.
 
 \Gls{mise} is a measure of the expected squared difference between an estimated risk function \gls{lambda_hat},
 computed using the \gls{dkd}, and the true risk function \gls{lambda}.
-\Gls{mise} allows for additional analysis by being broken down into the mean integraged squared bias and mean integrated variance.
+\Gls{mise} allows for additional analysis by being broken down into the mean integrated squared bias and mean integrated variance.
 It can also be easily approximated by cross-validation error.
 
 For any given data sample, we can use the \gls{dkd} to compute the estimated risk function \gls{lambda_hat}.
@@ -356,7 +356,7 @@ In order to compute the \gls{cv} bandwidths, the following steps are taken.
 \section{Experiment structure}
 \label{sec:method:experiment_structure}
 
-In order to ensure repeatability of the experiements, we begin by setting the random number seed to the same fixed value.
+In order to ensure repeatability of the experiments, we begin by setting the random number seed to the same fixed value.
 We arbitrarily chose the number 12.
 
 The first step in each experimental run is to define the study area \gls{W}. 
@@ -397,14 +397,14 @@ The bandwidths \gls{h_o1} and \gls{h_o2} are chosen by running a small number of
 
 We now can begin the main simulations.
 For each experiment, we run 1,000 simulations.
-In each simulation, we peform the following:
+In each simulation, we perform the following:
 \begin{enumerate}
     \item\label{itm:method:simulation:generate} Generate a sample of incidents \gls{I} from the population \gls{P}, based on the risk function \gls{lambda}.
     \item\label{itm:method:simulation:oracle_lambda_i} Using the \gls{oracle} bandwidths \gls{h_o1} and \gls{h_o2}, compute the \gls{oracle} estimate of \gls{lambda_i}.
     \item\label{itm:method:simulation:oracle_lambda_hat} At each grid point $(x_{1,i}, x_{2,i})$, divide the oracle estimate of \gls{lambda_i}$(x_{1,i}, x_{2,i})$ by \gls{lambda_p}$(x_{i,i}, x_{2,i})$ to obtain \gls{lambda_hat_o}$(x_{1,i}, x_{2,i})$.
     \item\label{itm:method:simulation:accuracy} Compute the accuracy measures \gls{ise}, \gls{iae}, \gls{supremum error}, \gls{peak error}, \gls{peak drift} for the \gls{oracle}.
     Also compute the relative values for these measures.
-    \item\label{itm:method:simulation:silverman_lambda_i} Repeat steps \ref{itm:method:simulation:oracle_lambda_i} to \ref{itm:method:simulation:accuracy} using the bandwith computed with \gls{silverman}.
+    \item\label{itm:method:simulation:silverman_lambda_i} Repeat steps \ref{itm:method:simulation:oracle_lambda_i} to \ref{itm:method:simulation:accuracy} using the bandwidth computed with \gls{silverman}.
     \item\label{itm:method:simulation:cv_lambda_i} Repeat steps \ref{itm:method:simulation:oracle_lambda_i} to \ref{itm:method:simulation:accuracy} using the bandwidths computed by \gls{cv}.
     This computation is described in \Cref{sec:method:cross-validation}.
 \end{enumerate}
@@ -422,7 +422,7 @@ and create combinations of experiments that examine the impact of different vari
 and in some cases also on the selected bandwidths.
 The first combination will look at how the expected number of incidents for a fixed population size and distribution affects the accuracy and selected bandwidths.
 Next, we will examine how the \gls{factor} affects the accuracy and bandwidth selection.
-We do this by keeping the true risk function fixed, and allowing both the size of the population and the expectd number of incidents vary in tandem.
+We do this by keeping the true risk function fixed, and allowing both the size of the population and the expected number of incidents vary in tandem.
 Third, we examine the effect of the risk function spread on the accuracy, followed by the effect of the population spread.
 Finally, we examine the effect of the distance between two peaks in a bimodal risk function affects the accuracy of the estimate.
 

@@ -10,7 +10,7 @@
  - [x] Method: 4.2.1: "in many cases": when & how?
  - [x] Method: 4.4: "A common method for bandwidth selection..." to start
  - [x] Results: (and everywhere) in population and incidents scatter use a different size/symbol instead of colour
- - [x] Results: make all charts b/w or greyscale (not colour)
+ - [x] Results: make all charts b/w or grayscale (not colour)
  - [x] Results: only 2 charts per row
  - [x] Results: bandwidth histograms: lighten fill; why shadow in printed?
  - [x] Discussion: Create Boxplot of MISE distribution comparing Oracle to Silverman to CV selection, possibly OTHER accuracy measures
