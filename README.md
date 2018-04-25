@@ -1,6 +1,8 @@
 # Investigating the Statistical Properties of the Double Kernel Density Estimator
 ## Harold Ship, University of Haifa
 
+### Fixed in version 0.10
+
 ### Fixed in version 0.9
  - [x] Discussion: major rewrite
  - [x] Theory: major rewrite
