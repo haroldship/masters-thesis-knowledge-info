@@ -50,6 +50,7 @@ Our simplified definition of incidence rate is then:
 \begin{defn}
     The \textbf{\gls{incidence rate}} is the number of new cases in the study period divided by the total population.
     \begin{equation}
+        \label{eq:incidencerate}
         \mbox{\Gls{incidence rate}} = \frac{\mbox{number of new cases in a time period}}
                                         {\mbox{number of persons}}
     \end{equation}
@@ -58,8 +59,20 @@ Our simplified definition of incidence rate is then:
 \Glspl{incidence rate} are always expressed in cases per person-time units.
 For example, 10 cases of asthma per 100,000 people per year is a valid \gls{incidence rate}.
 
-The \gls{dkd} is computed by taking a kernel estimate of the disease incidence intensity and dividing by a kernel estimate of the population density at any given point.
+For a given population, time period, and set of \glspl{incident},
+we can compute the overall \gls{incidence rate} by taking the total number of \glspl{incident} and dividing by the total population.
+However, if we wish to compare the \gls{incidence rate} at different locations,
+we need to look at these values locally.
+If we knew these values exactly at a point $\xvec$,
+then we could compute the \gls{incidence rate} point-wise.
+This is the idea behind the \gls{dkd}.
 
+\begin{defn}
+    \label{defn:dkd-interim}
+    The \textbf{\gls{dkd} (interim definition)} is a function that estimates the \gls{incidence rate} at a point by dividing the point-wise value of the number of new cases by the point-wise value of the population.
+\end{defn}
+
+We will give a more precise definition of the \gls{dkd} in \Cref{sec:theory:spatial_point_processes}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -109,7 +122,7 @@ Let \gls{Lambda} be a \gls{spp}, and let $\gls{W} \subset \RS $ be the study are
 The intensity \gls{lambda} at $(s_1, s_2) \in RS$ is defined as:
 
 \begin{equation}
-\label{eq:lambda_differential}
+    \label{eq:lambda_differential}
     \lambda \xvec = \lim_{|\ds| \to 0}
         \left\{
             \frac{\mathbb{E}[N(\ds)]}% /
@@ -122,7 +135,7 @@ Qualitatively, an intensity function differs from a probability density function
 In particular, we can write $\lambda$ as a scaled probability density function:
 
 \begin{equation}
-\label{eq:lambda_mu}
+    \label{eq:lambda_mu}
     \lambda(s_1, s_2) = \mu f\!(s_1, s_2)
 \end{equation}
 
@@ -132,7 +145,7 @@ Goal of intensity estimate: obtain an estimate of the function $\lambda((s_1, s_
 
 Kernel intensity estimator (my simplification):
 \begin{equation}
-\label{eq:lambda_hat}
+    \label{eq:lambda_hat}
     \hat{\lambda}((s_1, s_2); h) 
         = \frac{1}{h} \sum_{\xvec \in N \cap W}
             {k((\xvec-(s_1, s_2))/h)}
