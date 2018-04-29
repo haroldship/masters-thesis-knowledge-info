@@ -2,6 +2,9 @@
 ## Harold Ship, University of Haifa
 
 ### Fixed in version 0.10
+ - [x] Theory: rewrite
+ - [x] Literature search: start
+ - [x] Results: text mentions colours
 
 ### Fixed in version 0.9
  - [x] Discussion: major rewrite
@@ -67,7 +70,6 @@
 
 ### TODO
 
- - [ ] Results: text mentions colours
  - [ ] Results: all subsections: compare peak, centroid, etc in each section briefly
  - [ ] Results: all subsections: compare selectors.
  - [ ] Results: all subsections: make more clear MISE chart discussion is for all selectors, etc

@@ -61,18 +61,16 @@ For example, 10 cases of asthma per 100,000 people per year is a valid \gls{inci
 
 For a given population, time period, and set of \glspl{incident},
 we can compute the overall \gls{incidence rate} by taking the total number of \glspl{incident} and dividing by the total population.
-However, if we wish to compare the \gls{incidence rate} at different locations,
-we need to look at these values locally.
-If we knew these values exactly at a point $\xvec$,
+However, we may wish to compare the \gls{incidence rate} at different locations within an area.
+To do this, we need to look at the number of cases and the population in the areas that are close to these locations.
+If we take can make these areas infinitesimally small,
 then we could compute the \gls{incidence rate} point-wise.
-This is the idea behind the \gls{dkd}.
 
 \begin{defn}
-    \label{defn:dkd-interim}
-    The \textbf{\gls{dkd} (interim definition)} is a function that estimates the \gls{incidence rate} at a point by dividing the point-wise value of the number of new cases by the point-wise value of the population.
+    The \textbf{point-wise \gls{incidence rate}} is a function that computes the local \gls{incidence rate} at a point by dividing the point-wise value of the number of new cases by the point-wise value of the population.
 \end{defn}
 
-We will give a more precise definition of the \gls{dkd} in \Cref{sec:theory:spatial_point_processes}.
+From this point onwards, the term \gls{incidence rate} refers to the point-wise \gls{incidence rate}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -226,6 +224,16 @@ However it's variance does not diminish because the number of events in any fixe
 
 The paper develops a \textit{new nonparametric intensity estimator} that is consistent under ``some suitable yet reasonable conditions.''
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Estimation of the mode
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Estimation of the mode}
+\label{sec:theory:mode}
+
+From \citet{bickel2006fast} and \citet{hedges2003comparison}.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -233,7 +241,7 @@ The paper develops a \textit{new nonparametric intensity estimator} that is cons
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Data generation process}
-\label{sec:theory:data generation}
+\label{sec:theory:data}
 
 We generate data for each experiment as follows.
 Before we begin, we set the random number seed to a fixed value for all experiments.
