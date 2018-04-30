@@ -88,9 +88,9 @@ The strength of this source to generate incidents degrades with the distance fro
 We simulate this phenomenon with a risk function having a single peak with with \glsentryname{spread} 1.0 and \glsentryname{factor} of 100 on a fixed, uniform population of 10,000.
 These parameters are summarized in \Cref{tab:params:unif_100_1.0_1h}.
 \Cref{fig:cases_scatter:unif_100_1.0_1h} shows a realization, generated from the model.
-The distribution of the population in \subref{fig:cases_scatter:unif_100_1.0_1h:popdist},
-the population points that were generated in \subref{fig:cases_scatter:unif_100_1.0_1h:poppts},
-and the incidents on top of the population in \subref{fig:cases_scatter:unif_100_1.0_1h:incidentspts}.
+The distribution of the population is shown in \subref{fig:cases_scatter:unif_100_1.0_1h:popdist},
+the population points that were generated are in \subref{fig:cases_scatter:unif_100_1.0_1h:poppts},
+and the incidents as triangles on top of the population are shown in \subref{fig:cases_scatter:unif_100_1.0_1h:incidentspts}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Parameter table - unif_100_1.0_1h
@@ -132,7 +132,7 @@ and the incidents on top of the population in \subref{fig:cases_scatter:unif_100
     \end{subfigure}%
     \begin{subfigure}[t]{0.32\textwidth}
         \includegraphics[width=\textwidth]{output/population_and_incidents_scatter}
-        \subcaption{With incidents (red)}
+        \subcaption{With incidents (triangles)}
         \label{fig:cases_scatter:unif_100_1.0_1h:incidentspts}
     \end{subfigure}%
     \caption[Example population and incidents: single-peak risk on uniform population]
@@ -167,20 +167,20 @@ and the incidents on top of the population in \subref{fig:cases_scatter:unif_100
         \label{fig:cases_heatmap:unif_100_1.0_1h:cv}
     \end{subfigure}
     \caption[Example incidents: uniform incident risk on uniform population, 100 cases]
-        {Example incidents: uniform incident risk on uniform population, 100 cases. The red dots are the true peak. The blue diamonds are the peaks of the estimates. The black crosses are the centroid peaks of the estimates.}
+        {Example incidents: uniform incident risk on uniform population, 100 cases. The solid circles are the true peak. The diamonds are the peaks of the estimates. The crosses are the centroid peaks of the estimates.}
     \label{fig:cases_heatmap:unif_100_1.0_1h}
 \end{figure}
 
 In order to better understand the incident risk and the estimates,
 we use a two-dimensional geographic heatmap of the study area \gls{W} to show a single simulation realization in
 \Cref{fig:cases_heatmap:unif_100_1.0_1h}.
-The color of a point $\xvec$ represents the risk or estimated risk of an incident at that point.
+The lighter regions indicate a greater risk or estimated risk of an incident at that a point $\xvec$.
 \Cref{fig:cases_heatmap:unif_100_1.0_1h:true} shows a heatmap of the true distribution function.
 We see the \gls{dkd} estimates obtained using the \gls{oracle} in \subref{fig:cases_heatmap:unif_100_1.0_1h:oracle},
 \gls{silverman} in \subref{fig:cases_heatmap:unif_100_1.0_1h:silverman} and \gls{cv} in \subref{fig:cases_heatmap:unif_100_1.0_1h:cv}.
-The red dot is the location of the true peak.
-The blue diamond is the location of the estimated peak,
-and the black cross is the location of the centroid estimated peak.
+The solid circles are the true peak.
+The diamonds are the peaks of the estimates.
+The crosses are the centroid peaks of the estimates.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Mean errors - unif_100_1.0_1h
@@ -715,8 +715,13 @@ and in the next experiment the \gls{factor} is 100 and the population is 10,000.
 For this set of experiments, the population is uniformly distributed and the risk intensity has a single peak in the center with a fixed \gls{sigma_i} of 1.0.
 Mean and standard deviations of accuracy measures for the experiments of this section are found in \Cref{tab:mean_error_rates:unif5k_50_1.0_1h,tab:mean_error_rates:unif10k_100_1.0_1h,tab:mean_error_rates:unif20k_200_1.0_1h,tab:mean_error_rates:unif50k_500_1.0_1h,tab:mean_error_rates:unif100k_1000_1.0_1h}.
 
-\Cref{fig:one_sample:unifNpop_1h} shows the denser population, as represented by the blue dots, and the larger sample size, represented by the red dots.
-In both cases, the population is distributed uniformly throughout the study area,
+\Cref{fig:one_sample:unifNpop_1h} shows two populations of size 10,000 and 50,000,
+as represented by the small points,
+and two corresponding realizations of \glspl{incident},
+with sizes 100 and 500 respectively,
+indicated by triangles.
+In both cases,
+the population is distributed uniformly throughout the study area,
 while the incident samples are concentrated around the peak in the center.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

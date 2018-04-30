@@ -61,18 +61,16 @@ For example, 10 cases of asthma per 100,000 people per year is a valid \gls{inci
 
 For a given population, time period, and set of \glspl{incident},
 we can compute the overall \gls{incidence rate} by taking the total number of \glspl{incident} and dividing by the total population.
-However, if we wish to compare the \gls{incidence rate} at different locations,
-we need to look at these values locally.
-If we knew these values exactly at a point $\xvec$,
+However, we may wish to compare the \gls{incidence rate} at different locations within an area.
+To do this, we need to look at the number of cases and the population in the areas that are close to these locations.
+If we take can make these areas infinitesimally small,
 then we could compute the \gls{incidence rate} point-wise.
-This is the idea behind the \gls{dkd}.
 
 \begin{defn}
-    \label{defn:dkd-interim}
-    The \textbf{\gls{dkd} (interim definition)} is a function that estimates the \gls{incidence rate} at a point by dividing the point-wise value of the number of new cases by the point-wise value of the population.
+    The \textbf{point-wise \gls{incidence rate}} is a function that computes the local \gls{incidence rate} at a point by dividing the point-wise value of the number of new cases by the point-wise value of the population.
 \end{defn}
 
-We will give a more precise definition of the \gls{dkd} in \Cref{sec:theory:spatial_point_processes}.
+From this point onwards, the term \gls{incidence rate} refers to the point-wise \gls{incidence rate}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -106,20 +104,28 @@ For example, in the study area of the boundaries of a city, we consider the even
 We call this set of events
 
 \begin{defn}
-    The \textbf{population} \gls{P} is the set of home addresses of the residents of the study area \gls{W}.
+    The \textbf{population} \gls{P} is the set of home address events of the residents of the study area \gls{W}.
 \end{defn}
 
-In general, we are interested in the understanding they mechanism by which the events occurred.
+In general, we are interested in the understanding the mechanism by which the events occurred.
 We are interested both in the number of events, and even more so in the pattern by which their locations are distributed in \gls{W}.
-We take a spatial statistical approach, and model this mechanism using the following definition:
+Taking a spatial statistical approach, we model the underlying mechanism that generates events using the following:
 
 \begin{defn}
-    A \textbf{\gls{spp}} is a stochastic mechanism which generates a set of events.
+    A \textbf{\gls{spp}} $\boldsymbol{\gls{Lambda}}$ is a stochastic mechanism which generates a random set of events.
 \end{defn}
 
-Let \gls{Lambda} be a \gls{spp}, and let $\gls{W} \subset \RS $ be the study area.
-
-The intensity \gls{lambda} at $(s_1, s_2) \in RS$ is defined as:
+Suppose we have a \gls{spp} \gls{Lambda} on a study area $\gls{W} \subset \RS$.
+We can count the total number of \glspl{event} and divide it by the total area of \gls{W}.
+This gives us a quantity we call the \textbf{average \gls{intensity}} of \gls{Lambda}.
+Sometimes the points are spread uniformly throughout \gls{W}.
+In that case, we say that \gls{Lambda} is a homogeneous point process.
+On the other hand, it is often the case that \gls{Lambda} is not uniform,
+and we call it a heterogeneous point process.
+When \gls{Lambda} is heterogeneous,
+we would like to know the average \gls{intensity} around different points in \gls{W}.
+For this, we define $\ds$ as an infinitesimal area around the point $\xvec$,
+and the \textbf{\gls{intensity}} $\boldsymbol{\gls{lambda}\xvec}$ at $\xvec \in RS$ as:
 
 \begin{equation}
     \label{eq:lambda_differential}
@@ -130,25 +136,33 @@ The intensity \gls{lambda} at $(s_1, s_2) \in RS$ is defined as:
         \right\}
 \end{equation}
 
-And $\lambda(s_1, s_2) \ds$ is the approximate probability of \ds~ containing a single incident.
+And $\gls{lambda}\xvec \ds$ is the approximate probability of \ds~ containing a single incident.
 Qualitatively, an intensity function differs from a probability density function in that it does not necessarily integrate to $1$.
-In particular, we can write $\lambda$ as a scaled probability density function:
+In particular, we can write $\gls{lambda}$ as a scaled probability density function:
 
 \begin{equation}
     \label{eq:lambda_mu}
-    \lambda(s_1, s_2) = \mu f\!(s_1, s_2)
+    \gls{lambda}\xvec = \mu f\!\xvec
 \end{equation}
 
 where $f$ is a probability density function and \gls{mu} is a constant.
 
-Goal of intensity estimate: obtain an estimate of the function $\lambda((s_1, s_2))$ on the study area by inference on a data sample.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Kernel estimation of the intensity
+%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Kernel estimation of the intensity}
+\label{sec:theory:kernelestimation}
+
+Goal of intensity estimate: obtain an estimate of the function $\gls{lambda}\xvec$ on the study area by inference on a data sample.
 
 Kernel intensity estimator (my simplification):
 \begin{equation}
     \label{eq:lambda_hat}
-    \hat{\lambda}((s_1, s_2); h) 
-        = \frac{1}{h} \sum_{\xvec \in N \cap W}
-            {k((\xvec-(s_1, s_2))/h)}
+    \gls{lambda_hat}(\xvec; h) 
+        = \frac{1}{h} \sum_{(s_1, s_2) \in N \cap W}
+            {k\left( \frac{\xvec-(s_1, s_2)}{h} \right)}
 \end{equation}
 
 where \gls{mu} is ... and \gls{k} is ...
@@ -226,6 +240,16 @@ However it's variance does not diminish because the number of events in any fixe
 
 The paper develops a \textit{new nonparametric intensity estimator} that is consistent under ``some suitable yet reasonable conditions.''
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Estimation of the mode
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Estimation of the mode}
+\label{sec:theory:mode}
+
+From \citet{bickel2006fast} and \citet{hedges2003comparison}.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -233,7 +257,7 @@ The paper develops a \textit{new nonparametric intensity estimator} that is cons
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Data generation process}
-\label{sec:theory:data generation}
+\label{sec:theory:data}
 
 We generate data for each experiment as follows.
 Before we begin, we set the random number seed to a fixed value for all experiments.
