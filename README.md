@@ -2,6 +2,7 @@
 ## Harold Ship, University of Haifa
 
 ### Fixed in version 0.10
+ - [x] Theory: major rewrite
 
 ### Fixed in version 0.9
  - [x] Discussion: major rewrite
