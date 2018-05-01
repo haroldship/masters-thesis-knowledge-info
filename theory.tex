@@ -67,6 +67,7 @@ If we take can make these areas infinitesimally small,
 then we could compute the \gls{incidence rate} point-wise.
 
 \begin{defn}
+    \label{defn:incidence_rate}
     The \textbf{point-wise \gls{incidence rate}} is a function that computes the local \gls{incidence rate} at a point by dividing the point-wise value of the number of new cases by the point-wise value of the population.
 \end{defn}
 
@@ -138,14 +139,19 @@ and the \textbf{\gls{intensity}} $\boldsymbol{\gls{lambda}\xvec}$ at $\xvec \in 
 
 And $\gls{lambda}\xvec \ds$ is the approximate probability of \ds~ containing a single incident.
 Qualitatively, an intensity function differs from a probability density function in that it does not necessarily integrate to $1$.
-In particular, we can write $\gls{lambda}$ as a scaled probability density function:
+In particular, we can write $\gls{lambda}$ as a scaled probability density function
+where $f$ is a probability density function and \gls{mu} is a constant.
 
 \begin{equation}
     \label{eq:lambda_mu}
     \gls{lambda}\xvec = \mu f\!\xvec
 \end{equation}
 
-where $f$ is a probability density function and \gls{mu} is a constant.
+For a point-wise \gls{incidence rate} function,
+we can compute two separate \gls{intensity} functions.
+The first \gls{intensity} returns the point-wise expected number of cases of the disease,
+while the second returns the point-wise population density.
+Dividing the value obtained from first by the value obtained from the second results in the \gls{incidence rate} described in \Cref{defn:incidence_rate}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
