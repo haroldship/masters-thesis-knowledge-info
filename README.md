@@ -2,7 +2,8 @@
 ## Harold Ship, University of Haifa
 
 ### Fixed in version 0.10
- - [x] Theory: rewrite
+<<<<<<< HEAD
+ - [x] Theory: major rewrite
  - [x] Literature search: start
  - [x] Results: text mentions colours
 
