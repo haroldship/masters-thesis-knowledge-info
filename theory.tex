@@ -98,6 +98,7 @@ We begin by defining
 The observations we are interested in are points distributed in \gls{W} which we call \textbf{events}.
 
 \begin{defn}
+    \label{defn:event}
     An \textbf{event} is a point $\xvec \in \RS$, situated in a study area \gls{W} that we are interested in observing.
 \end{defn}
 
@@ -161,17 +162,68 @@ Dividing the value obtained from first by the value obtained from the second res
 \section{Kernel estimation of the intensity}
 \label{sec:theory:kernelestimation}
 
-Goal of intensity estimate: obtain an estimate of the function $\gls{lambda}\xvec$ on the study area by inference on a data sample.
+This section is based on \citet{silverman1986density} and \citet{wand1994kernel}.
+The usual case in practice is to start with a set of \glspl{event} that have been observed in a study area.
+For example, we can have new cases of a disease in a city that were diagnosed over the course of a defined time period.
+By our \Cref{defn:event},
+we consider the location coordinates such as those of the home addresses of the people who were diagnosed.
+Our goal is to estimate the \gls{intensity} function for disease cases using these observed \glspl{event}.
+Similarly for the population,
+we would like to estimate the population \gls{intensity} function.
 
-Kernel intensity estimator (my simplification):
-\begin{equation}
-    \label{eq:lambda_hat}
-    \gls{lambda_hat}(\xvec; h) 
-        = \frac{1}{h} \sum_{(s_1, s_2) \in N \cap W}
-            {k\left( \frac{\xvec-(s_1, s_2)}{h} \right)}
-\end{equation}
+A common method for estimating \gls{intensity} functions is known as
+\textbf{\gls{kernel intensity estimator}}.
+This technique utilizes a special function known as a \textbf{\gls{kernel}},
+denoted by $\gls{K}\xvec$,
+that satisfies
 
-where \gls{mu} is ... and \gls{k} is ...
+\begin{align}
+    \gls{K}\xvec \ge 0~ \forall \xvec \in W, \text{and} \label{eq:k_pos} \\
+    \iintW{\gls{K}\xvec} & = 1 \label{eq:k_1} \text{.}
+\end{align}
+
+\Cref{eq:k_pos,eq:k_1} are equivalent to stating that \Kdots is a probability density on $\RS$.
+Starting with a set of \glspl{event} $\gls{N} \subset \RS$,
+and a positive value \gls{h} known as the bandwidth,
+we define the the \gls{kernel intensity estimator} as follows:
+
+\begin{defn}
+    \label{defn:lambda_hat}
+    The \textbf{\gls{kernel intensity estimator}} $\gls{lambda_hat}(\xvec;h)$
+    is a technique for estimating the \gls{intensity} of an \gls{spp}
+    from observed \glspl{event} \gls{N}.
+    The formula for computing the \gls{kernel intensity estimator} is:
+    \begin{equation}
+        \label{eq:lambda_hat}
+        \gls{lambda_hat}(\xvec; h) 
+            = \sumS{\gls{K}\left(\frac{\xvec-(s_1, s_2)}{h^2}\right)} \text{.}%
+    \end{equation}
+\end{defn}
+
+This is similar to the two dimensional kernel density estimate,
+used to estimate a probability density function.
+Both are natural extensions to $\RS$ of the one dimensional kernel density estimate,
+which has the formula
+
+\begin{equation*}
+    f(s) = \sumSone{K_1\left(\frac{x - s}{h}\right)} \text{.}%
+\end{equation*}
+
+Here, $K_1(x)$ is a one-dimensional kernel function.
+
+In order to compute \gls{lambda_hat} using \Cref{eq:lambda_hat},
+there are two choices to be made: the choice of the bandwidth \gls{h}
+and the choice of \gls{kernel} \gls{K}.
+The role of the \gls{kernel} function \Kdots is to smooth the information obtained
+from the observed \glspl{event} to an area around their locations.
+The width of this area is controlled by the bandwidth \gls{h}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{img/kernel1d}
+    \caption{One-dimensional \glsentryname{kernel} function. The dots on the $x1$ axis are the observed \glsentryplural{event}. The dashed lines are the kernel functions around these \glsentryplural{event} and the solid line is the estimate \gls{lambda_hat}\xvec.}
+    \label{fig:theory:kernel1d}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
