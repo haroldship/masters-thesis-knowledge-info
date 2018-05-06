@@ -22,9 +22,20 @@
 \newcommand*{\ds}{\ensuremath{\diff{\mathbf{s}}}}% ds (vector)
 
 % integrals
-\newcommand{\iintW}[1]{
-    \iint\limits_{\xvec \in W}\!{#1 \diff{x_2} \diff{x_1}}
-}
+\newcommand{\iintW}[1]{%
+    \iint\limits_{\xvec \in W}\!{#1 \diff{x_2} \diff{x_1}}%
+}%
+
+% sums
+\newcommand{\sumSone}[1]{%
+    \frac{1}{h} \sum\limits_{s \in N} { #1 }%
+}%
+\newcommand{\sumS}[1]{%
+    \frac{1}{h^2} \sum\limits_{(s_1, s_2) \in N} { #1 }%
+}%
+
+% kernel macros
+\newcommand{\Kdots}{\ensuremath{K(\cdot, \cdot)}}%
 
 % math symbols
 \newcommand{\E}{\ensuremath{\mathbb{E}}}% expected value
