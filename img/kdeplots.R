@@ -5,7 +5,6 @@ N <- length(pts)
 
 evals <- seq(0.3, 2.3, 0.02)
 
-h <- 0.3
 
 K <- function(x, x0, h=1) {
   d2 <- (x-x0)^2/h^2
@@ -14,15 +13,43 @@ K <- function(x, x0, h=1) {
   R
 }
 
-pdf(file="kernel1d.pdf")
-plot(pts, rep(0, N), ylim=c(0,1.5), xlim=c(0.3,2.3), pch=20, xlab=NA, ylab=NA)
+pdf(file="kernel1d-02.pdf")
+plot(pts, rep(0, N), ylim=c(0,1.5), xlim=c(0.3,2.3), pch=20, xlab=NA, ylab=NA, cex=3)
 
 F <- rep(0, length(evals))
 for (pt in pts) {
-  Y <- K(evals, pt, h)
+  Y <- K(evals, pt, 0.2)
   F <- F + Y
   lines(evals, Y, lty="longdash", lwd=1.5)
 }
 
 lines(evals, F, lwd=1.5)
 dev.off()
+
+
+pdf(file="kernel1d-04.pdf")
+plot(pts, rep(0, N), ylim=c(0,1.5), xlim=c(0.3,2.3), pch=20, xlab=NA, ylab=NA, cex=3)
+
+F <- rep(0, length(evals))
+for (pt in pts) {
+  Y <- K(evals, pt, 0.4)
+  F <- F + Y
+  lines(evals, Y, lty="longdash", lwd=1.5)
+}
+
+lines(evals, F, lwd=1.5)
+dev.off()
+
+pdf(file="kernel1d-08.pdf")
+plot(pts, rep(0, N), ylim=c(0,1.5), xlim=c(0.3,2.3), pch=20, xlab=NA, ylab=NA, cex=3)
+
+F <- rep(0, length(evals))
+for (pt in pts) {
+  Y <- K(evals, pt, 0.8)
+  F <- F + Y
+  lines(evals, Y, lty="longdash", lwd=1.5)
+}
+
+lines(evals, F, lwd=1.5)
+dev.off()
+
