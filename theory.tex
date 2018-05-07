@@ -200,14 +200,13 @@ we define the the \gls{kernel intensity estimator} as follows:
     \end{equation}
 \end{defn}
 
-This is similar to the two dimensional kernel density estimate,
-used to estimate a probability density function.
-Both are natural extensions to $\RS$ of the one dimensional kernel density estimate,
+This is a natural extension to $\RS$ of the one dimensional \gls{kernel intensity estimator} $\hat{\lambda}_1(x;h)$,
 which has the formula
 
-\begin{equation*}
-    f(s) = \sumSone{K_1\left(\frac{x - s}{h}\right)} \text{.}%
-\end{equation*}
+\begin{equation}
+    \label{eq:lambda_hat_1}
+    \hat{\lambda}_1(x;h) = \sumSone{K_1\left(\frac{x - s}{h}\right)} \text{.}%
+\end{equation}
 
 Here, $K_1(x)$ is a one-dimensional kernel function.
 
@@ -216,12 +215,41 @@ there are two choices to be made: the choice of the bandwidth \gls{h}
 and the choice of \gls{kernel} \gls{K}.
 The role of the \gls{kernel} function \Kdots is to smooth the information obtained
 from the observed \glspl{event} to an area around their locations.
-The width of this area is controlled by the bandwidth \gls{h}.
+Choosing different \glspl{kernel} results in different shapes to this smoothing.
+However, this has only a small effect on the resulting \gls{intensity} estimate.
+On the other hand,
+the choice of bandwidth \gls{h} has a major effect on the \gls{intensity} estimate.
+The bandwidth controls the width of the area smoothed by the \gls{kernel} function and hence on the overall amount of smoothing.
+
+\Cref{fig:theory:kernel1d} shows an example of how \gls{kernel} smoothing works in  one-dimension for three different bandwidths.
+The two-dimensional case is analogous.
+The dots along the bottom are the observed \glspl{event}.
+The dashed lines show the \gls{kernel} functions around each of these \glspl{event},
+while the upper solid line is the \gls{intensity} estimate produced using \Cref{eq:lambda_hat_1}.
+\Cref{fig:theory:kernel1d:02} shows the estimate with $h=0.2$.
+It has two local modes, each with a bit of fluctuation at the peaks.
+In \Cref{fig:theory:kernel1d:04} we still see two modes with $h=0.4$, but with smoother peaks.
+\Cref{fig:theory:kernel1d:08} has smoothed the two peaks together into a single,
+large peak by using the larger bandwidth of $h=0.8$.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=\textwidth]{img/kernel1d}
-    \caption{One-dimensional \glsentryname{kernel} function. The dots on the $x1$ axis are the observed \glsentryplural{event}. The dashed lines are the kernel functions around these \glsentryplural{event} and the solid line is the estimate \gls{lambda_hat}\xvec.}
+    \begin{subfigure}[t]{0.32\textwidth}
+        \includegraphics[width=\textwidth]{img/kernel1d-02}
+        \subcaption{$h=0.2$}
+        \label{fig:theory:kernel1d:02}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.32\textwidth}
+        \includegraphics[width=\textwidth]{img/kernel1d-04}
+        \subcaption{$h=0.4$}
+        \label{fig:theory:kernel1d:04}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.32\textwidth}
+        \includegraphics[width=\textwidth]{img/kernel1d-08}
+        \subcaption{$h=0.8$}
+        \label{fig:theory:kernel1d:08}
+    \end{subfigure}
+    \caption{One-dimensional \glsentryname{kernel} functions. The dots on the $x1$ axis are the observed \glsentryplural{event}. The dashed lines are the kernel functions around these \glsentryplural{event} and the solid line is the \glsentryname{intensity} estimate $\hat{\lambda_1}$.}
     \label{fig:theory:kernel1d}
 \end{figure}
 
