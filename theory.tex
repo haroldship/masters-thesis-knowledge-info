@@ -261,6 +261,45 @@ large peak by using the larger bandwidth of $h=0.8$.
 \section{Bandwidth selection}
 \label{sec:theory:bandwidth}
 
+This section is based on \citet{silverman1986density} and \citet{wand1994kernel}.
+A common statistical problem is to find the ``best'' estimate \gls{lambda_hat}
+for the \gls{intensity} of an unknown \gls{spp}
+based on a set of observed \glspl{event}.
+In order to do this using \gls{kernel intensity estimator},
+we must select the ``best'' bandwidth.
+From \Cref{fig:theory:kernel1d} we can see that different values of bandwidth \gls{h} result in different estimates for the \gls{intensity}.
+Our goal is to find a decision procedure that gives us the ``best'' result.
+
+The first thing we must do is define what we mean by the ``best'' result.
+We do this by choosing a measure of accuracy for the estimate,
+and selecting the bandwidth which gives the optimal value for this measure.
+One common accuracy measure used for function estimation is the \gls{mise},
+because it has several useful mathematical properties.
+It allows for additional analysis by being broken down into the mean integrated squared bias and mean integrated variance.
+It can also be easily approximated by cross-validation error.
+
+Given an estimate \gls{lambda_hat} for any function \gls{lambda},
+we can compute the squared error at any given point $\xvec \in \RS$ as
+$\left( \hat{\lambda}\xvec - \lambda\xvec \right)^2$.
+However,
+we would like to compute the accuracy of the whole function.
+We do this by integrating the squared error of the estimate over the study area to obtain the \gls{ise}.
+
+\begin{equation}
+\label{eq:ise}
+    \mbox{ISE}(\hat{\lambda}) = \iintW{
+            \left( \hat{\lambda}\xvec - \lambda\xvec \right)^2
+        }
+\end{equation}
+
+Compute the expected value of the \gls{ise} to obtain the \gls{mise}.
+
+\begin{equation}
+\label{eq:mise}
+    \mbox{MISE} = \E [\mbox{ISE}(\hat{\lambda})]
+\end{equation}
+
+
 \Gls{silverman}'s Rule of Thumb for selecting bandwidth in $\RS$:
 
 \begin{equation}
