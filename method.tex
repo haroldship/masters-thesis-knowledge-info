@@ -95,29 +95,15 @@ computed using the \gls{dkd}, and the true risk function \gls{lambda}.
 It can also be easily approximated by cross-validation error.
 
 For any given data sample, we can use the \gls{dkd} to compute the estimated risk function \gls{lambda_hat}.
-We then integrate the squared error in the estimate over the plane to obtain the \gls{ise}.
+We wish to compute the \gls{mise} as described in \Cref{eq:mise}.
+However, it is computationally impractical to compute this integral.
+Instead,
+we run $M$ monte carlo simulations and approximate the \gls{mise} by taking the empirical average of the \glspl{ise}.
 
 \begin{equation}
-\label{eq:ise}
-    \mbox{ISE}(\hat{\lambda}) = \iintW{
-            \left( \hat{\lambda}\xvec - \lambda\xvec \right)^2
-        }
-\end{equation}
-
-We can then compute the expected value of the \gls{ise} to obtain the \gls{mise}.
-
-\begin{equation}
-\label{eq:mise}
-    \mbox{MISE} = \E [\mbox{ISE}(\hat{\lambda})]
-\end{equation}
-
-In our experiments, we run $M$ monte carlo simulations, and approximate the \gls{mise} by taking the empirical average of the \glspl{ise}.
-
-\begin{equation}
-\label{eq:mise_tilde}
+    \label{eq:mise_tilde}
     \widetilde{\mbox{MISE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{ISE}(\hat{\lambda_i})
 \end{equation}
-
 
 In many of our analyses, we compare the accuracy of several experiments.
 \gls{mise} is computed from the \gls{ise},
