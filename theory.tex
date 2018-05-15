@@ -278,9 +278,10 @@ because it has several useful mathematical properties.
 It allows for additional analysis by being broken down into the mean integrated squared bias and mean integrated variance.
 It can also be easily approximated by cross-validation error.
 
-Given an estimate \gls{lambda_hat} for any function \gls{lambda},
+Given a realized estimate \gls{lambda_hat} for any function \gls{lambda},
 we can compute the squared error at any given point $\xvec \in \RS$ as
-$\left( \hat{\lambda}\xvec - \lambda\xvec \right)^2$.
+$\left( \hat{\lambda}\xvec - \lambda\xvec \right)^2$,
+and its expected value at $\xvec$ is called the \gls{mse}.
 However,
 we would like to compute the accuracy of the whole function.
 We do this by integrating the squared error of the estimate over the study area to obtain the \gls{ise}.
@@ -292,23 +293,23 @@ We do this by integrating the squared error of the estimate over the study area 
         }
 \end{equation}
 
-Compute the expected value of the \gls{ise} to obtain the \gls{mise}.
+The \gls{mise} is the expected value of the \gls{ise} over the sample space of realizations of \gls{Lambda}.
 
-\begin{equation}
-\label{eq:mise}
-    \mbox{MISE} = \E [\mbox{ISE}(\hat{\lambda})]
-\end{equation}
+\begin{align}
+    \mbox{MISE}(\hat{\lambda}) & = \E [\mbox{ISE}(\hat{\lambda})] \nonumber \\
+                & = \E \iintW{ \left( \hat{\lambda}\xvec - \lambda\xvec \right)^2 } \label{eq:mise_base}
+\end{align}
 
+The integrand of \Cref{eq:mise_base} is non-negative.
+Therefore, by Fubini's Theorem, we can change the order of integration and expectation.
 
-\Gls{silverman}'s Rule of Thumb for selecting bandwidth in $\RS$:
-
-\begin{equation}
-\label{eq:silverman}
-    h_S = 2.04 * \sigma * n^{-1/6}
-\end{equation}
-
-Where $n$ is the observed number of incidents,
-$\sigma$ the arithmetic mean of the standard deviations in the $x_1$ and $x_2$ directions.
+\begin{align}
+    \mbox{MISE}(\hat{\lambda}) & = \iintW{ \E \left( \hat{\lambda}\xvec - \lambda\xvec \right)^2 } \nonumber \\
+                & = \iintW{ \E \left( \hat{\lambda}\xvec - \E \hat{\lambda}\xvec + \E \hat{\lambda}\xvec - \lambda\xvec \right)^2 } \nonumber \\
+                & = \iintW{ \left( \hat{\lambda}\xvec - \E \hat{\lambda}\xvec \right)^2 } \nonumber \\
+                    & \qquad + 2 \iintW{ \left( \hat{\lambda}\xvec - \E \hat{\lambda}\xvec \right) \left( \E \hat{\lambda}\xvec - \lambda\xvec \right) } \nonumber \\
+                    & \qquad + \iintW{ \left( \E \hat{\lambda}\xvec - \lambda\xvec \right)^2 } \label{eq:mise_expanded}
+\end{align}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -343,7 +344,17 @@ but the relative variance being $O(\mu^{1/3})$.
 \section{Asymptotic behavior of the bandwidth}
 \label{sec:theory:asymptotic_bandwidth}
 
-TBD
+\Gls{silverman}'s Rule of Thumb for selecting bandwidth in $\RS$:
+
+\begin{equation}
+\label{eq:silverman}
+    h_S = 2.04 * \sigma * n^{-1/6}
+\end{equation}
+
+Where $n$ is the observed number of incidents,
+$\sigma$ the arithmetic mean of the standard deviations in the $x_1$ and $x_2$ directions.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
