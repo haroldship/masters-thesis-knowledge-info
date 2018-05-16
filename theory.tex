@@ -296,21 +296,49 @@ We do this by integrating the squared error of the estimate over the study area 
 The \gls{mise} is the expected value of the \gls{ise} over the sample space of realizations of \gls{Lambda}.
 
 \begin{align}
-    \mbox{MISE}(\hat{\lambda}) & = \E [\mbox{ISE}(\hat{\lambda})] \nonumber \\
-                & = \E \iintW{ \left( \hat{\lambda}\xvec - \lambda\xvec \right)^2 } \label{eq:mise_base}
+    \mbox{MISE}(\gls{lambda_hat}) & = \E [\mbox{ISE}(\hat{\lambda})] \nonumber \\
+                & = \E \iintW{ \left( \hat{\lambda}\xvec - \lambda\xvec \right)^2 } \label{eq:mise}
 \end{align}
 
-The integrand of \Cref{eq:mise_base} is non-negative.
+The integrand of \Cref{eq:mise} is non-negative.
 Therefore, by Fubini's Theorem, we can change the order of integration and expectation.
 
 \begin{align}
-    \mbox{MISE}(\hat{\lambda}) & = \iintW{ \E \left( \hat{\lambda}\xvec - \lambda\xvec \right)^2 } \nonumber \\
+    \mbox{MISE}(\gls{lambda_hat}) & = \iintW{ \E \left( \hat{\lambda}\xvec - \lambda\xvec \right)^2 } \nonumber \\
                 & = \iintW{ \E \left( \hat{\lambda}\xvec - \E \hat{\lambda}\xvec + \E \hat{\lambda}\xvec - \lambda\xvec \right)^2 } \nonumber \\
-                & = \iintW{ \left( \hat{\lambda}\xvec - \E \hat{\lambda}\xvec \right)^2 } \nonumber \\
-                    & \qquad + 2 \iintW{ \left( \hat{\lambda}\xvec - \E \hat{\lambda}\xvec \right) \left( \E \hat{\lambda}\xvec - \lambda\xvec \right) } \nonumber \\
-                    & \qquad + \iintW{ \left( \E \hat{\lambda}\xvec - \lambda\xvec \right)^2 } \label{eq:mise_expanded}
+                & = \iintW{ \E \left( \hat{\lambda}\xvec - \E \hat{\lambda}\xvec \right)^2 } \nonumber \\
+                    & \qquad + 2 \iintW{
+                    \E \left\{
+                        \left( \hat{\lambda}\xvec - \E \hat{\lambda}\xvec \right)
+                        \left( \E \hat{\lambda}\xvec - \lambda\xvec \right)
+                    \right\} } \nonumber \\
+                    & \qquad + \iintW{ \E \left( \E \hat{\lambda}\xvec - \lambda\xvec \right)^2 } \label{eq:mise_expanded}
 \end{align}
 
+The second term of \Cref{eq:mise_expanded} evaluates to zero,
+because $\E \hat{\lambda}\xvec$ and $\lambda\xvec$ are numbers,
+so
+$$\E \left\{
+    \left( \hat{\lambda}\xvec - \E \hat{\lambda}\xvec \right)
+    \left( \E \hat{\lambda}\xvec - \lambda\xvec \right)
+\right\}
+$$
+is equivalent to
+$$ 
+\left( \E \hat{\lambda}\xvec - \E \hat{\lambda}\xvec \right)
+\left( \E \hat{\lambda}\xvec - \lambda\xvec \right) \text{,}
+$$
+a product whose first term is zero.
+We then have 
+
+\begin{align}
+    \mbox{MISE}(\gls{lambda_hat}) & = \iintW{
+        \E \left( \hat{\lambda}\xvec - \E \hat{\lambda}\xvec \right)^2 } \nonumber \\
+                                  & \qquad 
+        + \iintW{ \E \left( \E \hat{\lambda}\xvec - \lambda\xvec \right)^2 } \label{eq:mise_bias_variance}
+\end{align}
+
+which we call the integrated squared bias and the integrated variance of \gls{lambda_hat}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
