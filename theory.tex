@@ -200,12 +200,12 @@ we define the the \gls{kernel intensity estimator} as follows:
     \end{equation}
 \end{defn}
 
-This is a natural extension to $\RS$ of the one dimensional \gls{kernel intensity estimator} $\hat{\lambda}_1(x;h)$,
+This is a natural extension to $\RS$ of the one dimensional \gls{kernel intensity estimator} $\gls{lambda_hat}_1(x;h)$,
 which has the formula
 
 \begin{equation}
     \label{eq:lambda_hat_1}
-    \hat{\lambda}_1(x;h) = \sumSone{K_1\left(\frac{x - s}{h}\right)} \text{.}%
+    \gls{lambda_hat}_1(x;h) = \sumSone{K_1\left(\frac{x - s}{h}\right)} \text{.}%
 \end{equation}
 
 Here, $K_1(x)$ is a one-dimensional kernel function.
@@ -333,12 +333,12 @@ We then have
 
 \begin{align}
     \mbox{MISE}(\gls{lambda_hat}) & = \iintW{
-        \E \left( \hat{\lambda}\xvec - \E \hat{\lambda}\xvec \right)^2 } \nonumber \\
-                                  & \qquad 
-        + \iintW{ \E \left( \E \hat{\lambda}\xvec - \lambda\xvec \right)^2 } \label{eq:mise_bias_variance}
+        \E \left( \gls{lambda_hat}\xvec - \E \hat{\lambda}\xvec \right)^2 } \nonumber \\%
+                                  & \qquad %
+        + \iintW{ \E \left( \E \gls{lambda_hat}\xvec - \lambda\xvec \right)^2 } \label{eq:mise_bias_variance}%
 \end{align}
 
-which we call the integrated squared bias and the integrated variance of \gls{lambda_hat}.
+which is the integrated variance of \gls{lambda_hat} and the integrated squared bias of \gls{lambda_hat}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -347,6 +347,22 @@ which we call the integrated squared bias and the integrated variance of \gls{la
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Bias and variance of kernel intensity estimator}
 \label{sec:theory:bias_variance}
+
+
+The bias of any estimate \gls{lambda_hat} is:
+
+\begin{equation}
+    \mbox{bias}(\gls{lambda_hat}) = \E \gls{lambda_hat}\xvec - \gls{lambda}\xvec%
+\end{equation}
+
+For the \gls{kernel intensity estimator}, the bias depends on the bandwidth.
+
+\begin{equation}
+    \mbox{bias}_h(\gls{lambda_hat}) = \E \left\{%
+            \sumS{\gls{K}\left(\frac{\xvec-(s_1, s_2)}{h^2}\right)}%
+        \right\}%
+        - \gls{lambda}\xvec%
+\end{equation}
 
 If we let $\gls{lambda} = \gls{mu} f$ where $f$ is a probability density, then at a point $\xvec \in \RS$,
 \begin{align}
