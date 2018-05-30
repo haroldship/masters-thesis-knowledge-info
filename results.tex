@@ -6,6 +6,15 @@
 %%
 %%
 
+% macros used in some of the plot captions
+\newcommand{\scatterplotcaption}[0]{Small dots are population; triangles are incidents.}%
+\newcommand{\errorplotcaption}[0]{%
+Triangles and solid lines are using the \glsentryname{oracle} bandwidth.%
+Circles and dot-dash lines are \glsentryname{cv} bandwidth.%
+Squares and dashed lines are \glsentryname{silverman} bandwidth.%
+}%
+
+
 This chapter describes the results of several experiments, each run with a variation of the same setup.
 In each case, we compare the results of 1,000 simulations using several accuracy measures.
 Each section describes a set of experiments, which, together, examine the effect of changes to a single factor on the performance of the \gls{dkd}.
@@ -85,7 +94,7 @@ We then ran several sets of experiments while changing one parameter at a time.
 
 In this section, we look at how well the \gls{dkd} performs when there is a single, central cause of disease incidents.
 The strength of this source to generate incidents degrades with the distance from it.
-We simulate this phenomenon with a risk function having a single peak with with \glsentryname{spread} 1.0 and \glsentryname{factor} of 100 on a fixed, uniform population of 10,000.
+We simulate this phenomenon with a risk function having a single peak with \glsentryname{spread} 1.0 and \glsentryname{factor} of 100 on a fixed, uniform population of 10,000.
 These parameters are summarized in \Cref{tab:params:unif_100_1.0_1h}.
 \Cref{fig:cases_scatter:unif_100_1.0_1h} shows a realization, generated from the model.
 The distribution of the population is shown in \subref{fig:cases_scatter:unif_100_1.0_1h:popdist},
@@ -136,7 +145,8 @@ and the incidents as triangles on top of the population are shown in \subref{fig
         \label{fig:cases_scatter:unif_100_1.0_1h:incidentspts}
     \end{subfigure}%
     \caption[Example population and incidents: single-peak risk on uniform population]
-        {Example population and incidents of one realization of single-peak risk of \glsentryname{factor} 100 with \glsentryname{spread} of 1.0 on a uniform population of 10,000.}
+        {Example population and incidents of one realization of single-peak risk of \glsentryname{factor} 100 with \glsentryname{spread} of 1.0 on a uniform population of 10,000.
+        \scatterplotcaption.}
     \label{fig:cases_scatter:unif_100_1.0_1h}    
 \end{figure}
 
@@ -163,31 +173,40 @@ and the incidents as triangles on top of the population are shown in \subref{fig
     \end{subfigure}%
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{output/CV_intensity_heatmap}
-        \subcaption{Incident risk estimate using Cross-validation bandwidth}
+        \subcaption{Incident risk estimate using \gls{cv} bandwidth}
         \label{fig:cases_heatmap:unif_100_1.0_1h:cv}
     \end{subfigure}
     \caption[Example incidents: uniform incident risk on uniform population, 100 cases]
-        {Example incidents: uniform incident risk on uniform population, 100 cases. The solid circles are the true peak. The diamonds are the peaks of the estimates. The crosses are the centroid peaks of the estimates.}
+        {Example incidents: uniform incident risk on uniform population, 100 cases.
+        The solid circles are the true peak.
+        The diamonds are the peaks of the estimates.
+        The centroid peaks are indicated by $\times$ symbols.}
     \label{fig:cases_heatmap:unif_100_1.0_1h}
 \end{figure}
 
 In order to better understand the incident risk and the estimates,
 we use a two-dimensional geographic heatmap of the study area \gls{W} to show a single simulation realization in
 \Cref{fig:cases_heatmap:unif_100_1.0_1h}.
-The lighter regions indicate a greater risk or estimated risk of an incident at that a point $\xvec$.
+The lighter regions indicate a greater risk or estimated risk of an incident at that point $\xvec$.
 \Cref{fig:cases_heatmap:unif_100_1.0_1h:true} shows a heatmap of the true distribution function.
 We see the \gls{dkd} estimates obtained using the \gls{oracle} in \subref{fig:cases_heatmap:unif_100_1.0_1h:oracle},
 \gls{silverman} in \subref{fig:cases_heatmap:unif_100_1.0_1h:silverman} and \gls{cv} in \subref{fig:cases_heatmap:unif_100_1.0_1h:cv}.
 The solid circles are the true peak.
 The diamonds are the peaks of the estimates.
-The crosses are the centroid peaks of the estimates.
+The centroid peaks, as defined in \Cref{subsec:method:centroid_bias} are indicated by $\times$ symbols.
+The \gls{oracle} estimate is slightly misshapen,
+but retains the single peak of the true risk function.
+On the other hand,
+the \gls{silverman} and \gls{cv} based estimates have a few artifacts of the estimation process in the form of local minima and maxima.
+These are indicated by the slightly dark spots around $(-1.4, -1.5)$
+and the slightly bright spots around $(-1.5, -2.5)$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Mean errors - unif_100_1.0_1h
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[htbp]
     \centering
-    \input{\mypath /output/mean_table.tex}
+    \input{\mypath /output/mean_table_annotated.tex}
     \caption{Mean error rates for uniform population, single-peak risk with \glsentryname{spread} 1.0 of \glsentryname{factor} 100}
     \label{tab:errors:unif_100_1.0_1h}
 \end{table}
@@ -198,8 +217,10 @@ Since the \gls{oracle} bandwidth is designed to approximate the \gls{mise}-optim
 this is not surprising.
 However, in real world scenarios, the true function is unknown, and hence it is impossible to compute the \gls{oracle} bandwidth.
 Therefore, we are interested in knowing how close the \gls{silverman} and \gls{cv} bandwidth selection methods can get to the \gls{oracle} for the different measures.
-One exception is the \gls{peak bias}, which measures the difference between the maximum of the estimated risk and the maximum of the true risk (see \Cref{subsec:method:peak_bias}).
-In this experiment, the \gls{silverman} and \gls{cv} bandwidths produced lower absolute \gls{peak bias} values than the \gls{oracle}. 
+One exception is the \gls{peak bias}, in bold,
+which measures the difference between the maximum of the estimated risk and the maximum of the true risk (see \Cref{subsec:method:peak_bias}).
+In this experiment,
+the \gls{silverman} and \gls{cv} bandwidths produced lower absolute \gls{peak bias} values than the \gls{oracle}. 
 However, the \gls{oracle} and \gls{cv} bandwidths resulted in negative biases,
 which is what we expected,
 since the process of smoothing generally lowers high values (peaks) and raises low values.
@@ -209,12 +230,13 @@ This requires further study.
 
 In \Cref{fig:ise:unif_100_1.0_1h}, we look at the distribution of the \gls{ise}.
 As described in \Cref{subsec:method:mise},
-the \gls{iae} gives a summary of the error of the estimate over all of \gls{W},
+the \gls{ise} gives a summary of the error of the estimate over all of \gls{W},
 that penalizes higher error values.
 In particular, we see that the relative and normalized \gls{ise} have similarly shaped distributions, although the scale is different.
 We also observe that the distributions are skewed to the right,
 indicating that for this simple setup,
-the accuracy of the \gls{dkd} for a specific sample is more likely to be below the \gls{mise}.
+the median and mode of the \gls{ise} of the \gls{dkd} estimate are below the \gls{mise}.
+This means that more replications had \gls{ise} accuracy below the \gls{mise}.
 Finally, we note that the estimates calculated with \gls{silverman} and \gls{cv}
 selected bandwidths and their corresponding mean values had similar performance in \gls{ise}.
 
@@ -262,20 +284,21 @@ selected bandwidths and their corresponding mean values had similar performance 
     \label{fig:maxerr:unif_100_1.0_1h}
 \end{figure}
 
-\Cref{fig:ise:unif_100_1.0_1h} shows the relative and normalized distributions of the \gls{iae}.
+\Cref{fig:iae:unif_100_1.0_1h} shows the relative and normalized distributions of the \gls{iae}.
 As described in \Cref{subsec:method:miae},
 the \gls{iae} gives a summary of the error of the estimate over all of \gls{W},
 giving equal weight to all error values.
 Once again, the normalized and relative error measures have similar distributions.
-The \gls{oracle} bandwidth selection technique is still notably more accurate when comparing with \gls{iae} than with \gls{ise}.
-However, for \gls{iae} we see that \gls{cv} bandwidth selection results in a wider distribution than with \gls{silverman}.
+The \gls{oracle} bandwidth selection technique is still notably more accurate when compared with \gls{iae} than with \gls{ise}.
+However, as mentioned above, the \gls{oracle} can not be used when inferring from data.
+For \gls{iae} we see that \gls{cv} bandwidth selection results in a wider distribution than with \gls{silverman}.
 
 In \Cref{fig:maxerr:unif_100_1.0_1h}, we look at the distribution of the \gls{supremum error}.
 As described in \Cref{subsec:method:sup_error},
 the \gls{supremum error} is the worst-case error of the estimate on \gls{W}.
 We observe that the distributions are once again skewed to the right,
 indicating that for this simple setup,
-the worst-case accuracy of the \gls{dkd} for a specific sample is more likely to be below the average \gls{supremum error}.
+the median and mode of the \gls{supremum error} of the \gls{dkd} estimate are below the mean value.
 Finally, we note that the estimates calculated with \gls{silverman} and \gls{cv}
 selected bandwidths and their corresponding mean values had similar performance in \gls{supremum error}.
 
@@ -324,7 +347,7 @@ This indicates a tendency towards under-smoothing.
 We note that all three of bandwidth selection techniques are designed to minimize \gls{mise}.
 We also note the multi-modal peak distance distributions.
 We believe this is an artifact of the experimental design,
-since our estimate of the peak will always be at one of a fixed, discrete number of points on a grid in the study area.
+since our estimate of the peak will always be at one of a fixed discrete number of points on a grid in the study area.
 
 In \Cref{fig:centroids:unif_100_1.0_1h} we see the distributions of \gls{peak error} and \gls{peak drift} using the centroid estimation technique.
 We note that the scales of both types of error are markedly improved.
@@ -362,8 +385,8 @@ That is, the centroid technique improves both the estimated location and estimat
 
 The bandwidths selected by \gls{cv} were allowed to vary in the $x_1$ and $x_2$ directions.
 In \Cref{fig:bandwidths:unif_100_1.0_1h:x1,fig:bandwidths:unif_100_1.0_1h:x2} we see that the distributions of these bandwidths observed in this experiment are quite similar.
-Since the true \gls{risk} function is invariant under a change of coordinates,
-this is the behavior that we expect.
+This is due to the symmetry of the gaussian distribution function,
+upon which the \gls{risk} function is based.
 \Cref{fig:bandwidths:unif_100_1.0_1h:diff} shows that the $x_1$ and $x_2$ coordinate distributions often differ significantly in the individual realizations.
 This is due to the randomness of the locations of the \glspl{incident},
 which can cause the observed distribution of the points to vary between realizations.
@@ -431,12 +454,15 @@ We note that as in \Cref{sec:results:unif_100_1.0_1h}, the \gls{peak bias} value
         \includegraphics[width=\textwidth]{results/unif_500_1.0_1h/output/population_and_incidents_scatter}
         \caption{500 incidents}
     \end{subfigure}
-        \caption{A single realization of different \glspl{factor} from a single-peak risk on a uniform population}
+        \caption{A single realization of different \glspl{factor} from a single-peak risk on a uniform population.
+        \scatterplotcaption.}
         \label{fig:one_sample:unif_NCases_1h}
 \end{figure}
 
-According to the theory developed in \Cref{sec:theory:bandwidth},
-the bandwidth should decrease as the \textit{observed} sample size increases according to the formula
+According to the theory reviewed in \Cref{sec:theory:bandwidth},
+the bandwidth should decrease as the observed sample size,
+denoted by $n$,
+increases according to the formula
 
 \begin{equation}
     \label{eq:h_opt}
@@ -518,7 +544,7 @@ The observed values for the power of $n$ as represented by $N_I$ are shown in \C
         \subcaption{\glsentryname{nmise} log-log}
         \label{fig:ise:unif_NCases_1h:nmise_log_log}
     \end{subfigure}
-    \caption{\glsentryname{mise} by number of cases}
+    \caption[\glsentryname{mise} by number of cases]{\glsentryname{mise} by number of cases. \errorplotcaption.}
     \label{fig:ise:unif_NCases_1h}
 \end{figure}
 
@@ -602,7 +628,7 @@ We note that as in \Cref{sec:results:unif_100_1.0_1h}, the \gls{peak bias} value
         \caption{\gls{sigma_i} = 2.8}
     \end{subfigure}
     \caption[Examples showing incident spread]
-        {A single realization of different incident \glspl{spread} from a single-peak risk on a uniform population}
+        {A single realization of different incident \glspl{spread} from a single-peak risk on a uniform population. \scatterplotcaption}
     \label{fig:one_sample:unif_Spreads_1h}
 \end{figure}
 
@@ -653,7 +679,7 @@ The \gls{rmise} takes a local view of relative error, and here we see that as th
         \label{fig:ise:unif_Spreads_1h:nmise_log_log}
     \end{subfigure}
     \caption[\glsentryname{mise}: by risk \glsentryname{spread}]
-        {The effect of \glsentryname{spread} on \glsentryname{mise} for different bandwidth selectors for a single-peak risk function with \gls{factor} 100 on a uniform population of 10,000}
+        {The effect of \glsentryname{spread} on \glsentryname{mise} for different bandwidth selectors for a single-peak risk function with \gls{factor} 100 on a uniform population of 10,000. \errorplotcaption.}
     \label{fig:ise:unif_Spreads_1h}
 \end{figure}
 
@@ -737,8 +763,9 @@ while the incident samples are concentrated around the peak in the center.
         \includegraphics[width=\textwidth]{results/unif50k_500_1.0_1h/output/population_and_incidents_scatter}
         \caption{500 incidents from population of 50,000}
     \end{subfigure}
-    \caption[Examples showing sample size]
-        {A single realization of different sample sizes from a single-peak risk on a uniform population, obtained by varying the \gls{factor} and population size in lockstep while keeping the risk function $\lambda \xvec$ fixed}
+    \caption[Example realizations showing sample size]
+        {A single realization of different sample sizes from a single-peak risk on a uniform population, obtained by varying the \gls{factor} and population size in lockstep while keeping the risk function $\lambda \xvec$ fixed.
+        \scatterplotcaption.}
     \label{fig:one_sample:unifNpop_1h}
 \end{figure}
 
@@ -768,7 +795,11 @@ while the incident samples are concentrated around the peak in the center.
         \caption{\glsentryname{nmise} log-log}
         \label{fig:ise:unifNpop_1h:nmise_log_log}
     \end{subfigure}
-    \caption[\glsentryname{mise}: by sample and population size]{\glsentryname{mise} vs. sample and population size}
+    \caption[\glsentryname{mise}: by incident and population size]
+        {\glsentryname{mise} for different sample sizes.
+        The expected number of incidents and the population sizes are scaled up by the same multiplication factor,
+        resulting in the same incidence rate function.
+        \errorplotcaption.}
     \label{fig:ise:unifNpop_1h}
 \end{figure}
 
@@ -845,7 +876,8 @@ because the population is greater in the same place that the risk of incidence i
         \label{fig:one_sample:pop_spread:2.8}
     \end{subfigure}
     \caption[Examples showing population spread]
-        {A single realization of different sample sizes from a single-peak risk on a single-peak population, obtained by varying the population \gls{spread} while keeping population size and the risk function $\lambda \xvec$ fixed.}
+        {A single realization of different sample sizes from a single-peak risk on a single-peak population, obtained by varying the population \gls{spread} while keeping population size and the risk function $\lambda \xvec$ fixed.
+        \scatterplotcaption.}
     \label{fig:one_sample:pop_spread}
 \end{figure}
 
@@ -876,7 +908,7 @@ because the population is greater in the same place that the risk of incidence i
         \caption{\glsentryname{nmise} log-log}
         \label{fig:ise:pop_spread:nmise_log_log}
     \end{subfigure}
-    \caption[\glsentryname{mise}: by population \glsentryname{spread}]{\glsentryname{mise} vs. population \glsentryname{spread}}
+    \caption[\glsentryname{mise}: by population \glsentryname{spread}]{\glsentryname{mise} vs. population \glsentryname{spread}. \errorplotcaption.}
     \label{fig:ise:pop_spread}
 \end{figure}
 
@@ -908,7 +940,7 @@ as seen in \Cref{fig:other_measures:pop_spread}.
         \subcaption{\Glsentryname{supremum error}}
         \label{fig:other_measures:pop_spread:maxerr}
     \end{subfigure}
-    \caption{\glsentryname{miae} and \Glsentryname{supremum error} by population \glsentryname{spread}}
+    \caption{\glsentryname{miae} and \Glsentryname{supremum error} by population \glsentryname{spread}. \errorplotcaption.}
     \label{fig:other_measures:pop_spread}
 \end{figure}
 
@@ -962,7 +994,7 @@ The results of the experiments described in this section are summarized in \Cref
         \label{fig:one_sample:p1.4_100_G:4}
     \end{subfigure}
     \caption[Examples showing distance between two peaks]
-        {A single realization of different sample sizes from a double-peak risk on a uniform population, obtained by varying the distance between two peaks in the incident risk function.}
+        {A single realization of different sample sizes from a double-peak risk on a uniform population, obtained by varying the distance between two peaks in the incident risk function. \scatterplotcaption.}
     \label{fig:one_sample:p1.4_100_G}
 \end{figure}
 
@@ -985,7 +1017,7 @@ The results of the experiments described in this section are summarized in \Cref
         \includegraphics[width=\textwidth]{results/by_two_peaks/NMISE-vs-risk-peak-gap}
         \caption{\glsentryname{nmise}}
     \end{subfigure}
-    \caption{\glsentryname{mise} by distance between two risk peaks}
+    \caption[\glsentryname{mise} by distance between two risk peaks]{\glsentryname{mise} by distance between two risk peaks. \errorplotcaption.}
     \label{fig:ise:p1.4_100_G}
 \end{figure}
 
@@ -1015,7 +1047,8 @@ The results of the experiments described in this section are summarized in \Cref
         \caption{\glsentryname{centroid drift}}
         \label{fig:other_measures:p1.4_100_G:centroid_drift}
     \end{subfigure}
-    \caption{Other accuracy measures by distance between two risk peaks}
+    \caption[Other accuracy measures by distance between two risk peaks]
+        {Other accuracy measures by distance between two risk peaks. \errorplotcaption.}
     \label{fig:other_measures:p1.4_100_G}
 \end{figure}
 
@@ -1074,7 +1107,7 @@ The results of the experiments described in this section are summarized in \Cref
         \label{fig:one_sample:p1.4_100_Gap_risk:4}
     \end{subfigure}
     \caption[Examples showing distance between population and incident peaks]
-        {A single realization of different sample sizes from a single-peak risk on a single-peak population, obtained by varying the distance between two peaks.}
+        {A single realization of different sample sizes from a single-peak risk on a single-peak population, obtained by varying the distance between two peaks. \scatterplotcaption.}
     \label{fig:one_sample:p1.4_100_Gap_risk}
 \end{figure}
 
@@ -1105,7 +1138,8 @@ The results of the experiments described in this section are summarized in \Cref
         \caption{Log-log of \glsentryname{nmise}}
         \label{fig:ise:p1.4_100_Gap_risk:nmise_log_log}
     \end{subfigure}    
-    \caption{\glsentryname{mise} by distance between two risk peaks}
+    \caption[\glsentryname{mise} by distance between two risk peaks]
+        {\glsentryname{mise} by distance between two risk peaks. \errorplotcaption.}
     \label{fig:ise:p1.4_100_Gap_risk}
 \end{figure}
 
