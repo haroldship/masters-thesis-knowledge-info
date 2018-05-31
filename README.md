@@ -3,6 +3,7 @@
 
 ### Fixed in version 0.12
  - [x] Theory: continue major rewrite
+ - [x] Results: account for comments
 
 ### Fixed in version 0.11
  - [x] Theory: continue major rewrite

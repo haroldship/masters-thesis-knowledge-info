@@ -211,10 +211,11 @@ and the slightly bright spots around $(-1.5, -2.5)$.
     \label{tab:errors:unif_100_1.0_1h}
 \end{table}
 
-\Cref{tab:errors:unif_100_1.0_1h} contains a summary of all of the measures of accuracy for this experiment.
+\Cref{tab:errors:unif_100_1.0_1h} contains a summary of all of the measures of accuracy,
+described in \Cref{sec:method:accuracy}, for this experiment.
 We can see that for most measures, the \gls{oracle} selected bandwidth provides the best results.
-Since the \gls{oracle} bandwidth is designed to approximate the \gls{mise}-optimal bandwidth \gls{h_opt},
-this is not surprising.
+This is not surprising, since the \gls{oracle} bandwidth is designed to approximate the \gls{mise}-optimal bandwidth \gls{h_opt},
+described in \Cref{sec:theory:bandwidth}.
 However, in real world scenarios, the true function is unknown, and hence it is impossible to compute the \gls{oracle} bandwidth.
 Therefore, we are interested in knowing how close the \gls{silverman} and \gls{cv} bandwidth selection methods can get to the \gls{oracle} for the different measures.
 One exception is the \gls{peak bias}, in bold,
@@ -648,7 +649,7 @@ This provides evidence that the \gls{dkd} may be better suited to situations whe
 In \Cref{fig:ise:unif_Spreads_1h} we take a closer look at the distributions of \gls{mise}, \gls{rmise}, and \gls{nmise}.
 \textbf{We see is that as $\boldsymbol{\gls{sigma_i}}$ increases, both absolute and normalized \gls{mise} decrease but relative \gls{mise} increases.}
 This is the same for all bandwidth selection methods.
-Since we keep \gls{mu} constant throughout the experiment, we would expect absolute and normalized \gls{mise} behave similarly.
+Since we keep \gls{mu} constant throughout the experiment, we would expect absolute and normalized \gls{mise} to behave similarly.
 The \gls{rmise} takes a local view of relative error, and here we see that as the \gls{spread} increase, the \gls{mise} decreases but at a slower rate than the true function.
 
 
@@ -683,7 +684,9 @@ The \gls{rmise} takes a local view of relative error, and here we see that as th
     \label{fig:ise:unif_Spreads_1h}
 \end{figure}
 
-We look now at the asymptotic behavior of \gls{nmise} as $\gls{sigma_i} \to \infty$.
+As we expect, the rate of convergence of the \gls{dkd} depends on smoothness,
+as the theory states for non-parametric estimates \textcolor{red}{(REFERENCE)}.
+We look now at the asymptotic behavior of \gls{nmise} as \gls{sigma_i} increases.
 From \Cref{fig:ise:unif_Spreads_1h:nmise_log_log} we see a polynomial relationship between \gls{nmise} and \gls{sigma_i} (\Cref{eq:nmise:spread}).
 \Cref{tab:results:nmise_convergence_by_cases_spread} shows the slope $\alpha_S$ that we observed for each bandwidth selection method.
 
@@ -696,7 +699,7 @@ From \Cref{fig:ise:unif_Spreads_1h:nmise_log_log} we see a polynomial relationsh
 We now look at the convergence rate of \gls{rmise} as the number of incidents grow.
 We see from \Cref{tab:results:rmise_convergence_by_cases_and_spread} that independent of bandwidth selection method,
 there is no clear pattern in the convergence rates.
-For each value of the \gls{spread}, there is negative polynomial convergence as incidents go to infinity.
+For each value of the \gls{spread}, there is negative polynomial convergence as the number of incidents increase.
 However, we did not observe a monotonic growth rate of the exponent with the spread.
 
 \input{results/by_num_cases_multi/rmise_convergence_table}
@@ -814,10 +817,12 @@ We also note that selected the bandwidth using \gls{cv} appears to result in a s
 \input{results/by_pop_size/nmise_convergence_table}
 
 Regarding the other measures of accuracy, the \gls{miae} and \gls{supremum error} both follow the same pattern as the \gls{mise}:
-decreasing as $N_i \to \infty$,
-\gls{cv} selected bandwidth producing slightly more accurate \gls{miae} and \glspl{supremum error} than \gls{silverman}.
-However, the \gls{peak bias} of the \gls{silverman} bandwidth \glspl{dkd} is still positive, although the \gls{centroid bias} is not.
-The \gls{cv} produces much more accurate estimates of \gls{peak drift} than \gls{silverman}, but consistently underestimates the \gls{peak bias} by a greater value.
+decreasing as $N_I$ increases,
+with the \gls{cv} selected bandwidth producing slightly more accurate \gls{miae} and \glspl{supremum error} than \gls{silverman}.
+However, the \gls{peak bias} of the \gls{silverman} bandwidth \glspl{dkd} is still positive,\
+although the \gls{centroid bias} is not.
+The \gls{cv} produces much more accurate estimates of \gls{peak drift} than \gls{silverman},
+but consistently underestimates the \gls{peak bias} by a greater value.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -914,7 +919,7 @@ because the population is greater in the same place that the risk of incidence i
 
 \Cref{fig:ise:pop_spread} shows how \gls{mise}, \gls{rmise} and \gls{nmise} are affected by population spread.
 In \subref{fig:ise:pop_spread:nmise_log_log} it does not appear that there is any linear relationship,
-and there does not appear to be any convergence to zero of any of these measures as $\gls{sigma_p} \to \infty$.
+and there does not appear to be any convergence to zero of any of these measures as \gls{sigma_p} increases.
 In fact, it appears that as long as the population distribution does not change too rapidly,
 the \gls{dkd} gives similar performance for any population \gls{spread}.
 
