@@ -684,8 +684,9 @@ The \gls{rmise} takes a local view of relative error, and here we see that as th
     \label{fig:ise:unif_Spreads_1h}
 \end{figure}
 
-As we expect, the rate of convergence of the \gls{dkd} depends on smoothness,
-as the theory states for non-parametric estimates \textcolor{red}{(REFERENCE)}.
+We saw in \Cref{sec:theory:bias_variance} that the bias, and hence the \gls{mse} of a kernel estimate at a point depends on $\lambda^{\prime \prime}$, the second deriviative of the true intensity.
+Thus we expect that the rate of convergence of the \gls{dkd} depends on the smoothness of the true \gls{lambda},
+which increases linearly with the \gls{spread}.
 We look now at the asymptotic behavior of \gls{nmise} as \gls{sigma_i} increases.
 From \Cref{fig:ise:unif_Spreads_1h:nmise_log_log} we see a polynomial relationship between \gls{nmise} and \gls{sigma_i} (\Cref{eq:nmise:spread}).
 \Cref{tab:results:nmise_convergence_by_cases_spread} shows the slope $\alpha_S$ that we observed for each bandwidth selection method.
