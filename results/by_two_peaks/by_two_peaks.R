@@ -68,11 +68,11 @@ coefC <- coef(lm(log(dfC$`Relative MISE`) ~ dfC$Gap))
 
 
 pdf(file="MISE-vs-risk-peak-gap.pdf")
-make_accuracy_plot(df, "Gap") +
+make_accuracy_plot(df, "Distance between peaks") +
   geom_point(aes(x=Gap, y=MISE, shape=Bandwidth), size=3)
 dev.off()
 pdf(file="RMISE-vs-risk-peak-gap.pdf")
-make_accuracy_plot(df, "Gap") +
+make_accuracy_plot(df, "Distance between peaks") +
   geom_point(aes(x=Gap, y=`Relative MISE`, shape=Bandwidth), size=3)
 dev.off()
 
@@ -81,24 +81,24 @@ coefS <- coef(lm(log(dfS$`Normalized MISE`) ~ dfS$Gap))
 coefC <- coef(lm(log(dfC$`Normalized MISE`) ~ dfC$Gap))
 
 pdf(file="NMISE-vs-risk-peak-gap.pdf")
-make_accuracy_plot(df, "Gap") +
+make_accuracy_plot(df, "Distance between peaks") +
   geom_point(aes(x=Gap, y=`Normalized MISE`, shape=Bandwidth), size=3)
 dev.off()
 
 pdf(file="peak-bias-vs-risk-peak-gap.pdf")
-make_accuracy_plot(df, "Gap") +
+make_accuracy_plot(df, "Distance between peaks") +
   geom_point(aes(x=Gap, y=`Peak bias`, shape=Bandwidth), size=3)
 dev.off()
 pdf(file="peak-drift-vs-risk-peak-gap.pdf")
-make_accuracy_plot(df, "Gap") +
+make_accuracy_plot(df, "Distance between peaks") +
   geom_point(aes(x=Gap, y=`Peak drift`, shape=Bandwidth), size=3)
 dev.off()
 pdf(file="centroid-bias-vs-risk-peak-gap.pdf")
-make_accuracy_plot(df, "Gap") +
+make_accuracy_plot(df, "Distance between peaks") +
   geom_point(aes(x=Gap, y=`Centroid bias`, shape=Bandwidth), size=3)
 dev.off()
 pdf(file="centroid-drift-vs-risk-peak-gap.pdf")
-make_accuracy_plot(df, "Gap") +
+make_accuracy_plot(df, "Distance between peaks") +
   geom_point(aes(x=Gap, y=`Centroid drift`, shape=Bandwidth), size=3)
 dev.off()
 

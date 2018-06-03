@@ -9,9 +9,9 @@
 % macros used in some of the plot captions
 \newcommand{\scatterplotcaption}[0]{Small dots are population; triangles are incidents.}%
 \newcommand{\errorplotcaption}[0]{%
-Triangles and solid lines are using the \glsentryname{oracle} bandwidth.%
-Circles and dot-dash lines are \glsentryname{cv} bandwidth.%
-Squares and dashed lines are \glsentryname{silverman} bandwidth.%
+Triangles and solid lines are using the \glsentryname{oracle} bandwidth. %
+Circles and dot-dash lines are \glsentryname{cv} bandwidth. %
+Squares and dashed lines are \glsentryname{silverman} bandwidth. %
 }%
 
 
@@ -545,7 +545,7 @@ The observed values for the power of $n$ as represented by $N_I$ are shown in \C
         \subcaption{\glsentryname{nmise} log-log}
         \label{fig:ise:unif_NCases_1h:nmise_log_log}
     \end{subfigure}
-    \caption[\glsentryname{mise} by number of cases]{\glsentryname{mise} by number of cases. \errorplotcaption.}
+    \caption[\glsentryname{mise} by number of cases]{\glsentryname{mise} by number of cases. \errorplotcaption}
     \label{fig:ise:unif_NCases_1h}
 \end{figure}
 
@@ -680,7 +680,7 @@ The \gls{rmise} takes a local view of relative error, and here we see that as th
         \label{fig:ise:unif_Spreads_1h:nmise_log_log}
     \end{subfigure}
     \caption[\glsentryname{mise}: by risk \glsentryname{spread}]
-        {The effect of \glsentryname{spread} on \glsentryname{mise} for different bandwidth selectors for a single-peak risk function with \gls{factor} 100 on a uniform population of 10,000. \errorplotcaption.}
+        {The effect of \glsentryname{spread} on \glsentryname{mise} for different bandwidth selectors for a single-peak risk function with \gls{factor} 100 on a uniform population of 10,000. \errorplotcaption}
     \label{fig:ise:unif_Spreads_1h}
 \end{figure}
 
@@ -802,7 +802,7 @@ while the incident samples are concentrated around the peak in the center.
         {\glsentryname{mise} for different sample sizes.
         The expected number of incidents and the population sizes are scaled up by the same multiplication factor,
         resulting in the same incidence rate function.
-        \errorplotcaption.}
+        \errorplotcaption}
     \label{fig:ise:unifNpop_1h}
 \end{figure}
 
@@ -844,7 +844,7 @@ but consistently underestimates the \gls{peak bias} by a greater value.
         Population size & 10,000 \\
         Population \gls{spread} & 0.7, 1.0, 1.4, 2.0, 2.8 \\
         Population center & (0,0) \\
-        \Gls{factor} & 100 \\
+        Scaling factor & 100 \\
         Incident \gls{spread} & 1.0 \\
         Incident center & (0,0) \\
         \bottomrule
@@ -913,13 +913,17 @@ because the population is greater in the same place that the risk of incidence i
         \caption{\glsentryname{nmise} log-log}
         \label{fig:ise:pop_spread:nmise_log_log}
     \end{subfigure}
-    \caption[\glsentryname{mise}: by population \glsentryname{spread}]{\glsentryname{mise} vs. population \glsentryname{spread}. \errorplotcaption.}
+    \caption[\glsentryname{mise}: by population \glsentryname{spread}]{\glsentryname{mise} vs. population \glsentryname{spread}. \errorplotcaption}
     \label{fig:ise:pop_spread}
 \end{figure}
 
 \Cref{fig:ise:pop_spread} shows how \gls{mise}, \gls{rmise} and \gls{nmise} are affected by population spread.
 In \subref{fig:ise:pop_spread:nmise_log_log} it does not appear that there is any linear relationship,
-and there does not appear to be any convergence to zero of any of these measures as \gls{sigma_p} increases.
+and there does not appear to be any convergence to zero of any of these measures as \gls{sigma_p} increases,
+although they do seem to reach a stable value of around 0.00003-0.00004 for the \gls{mise}.
+There is no discernable difference between the \gls{silverman} and \gls{cv} selected bandwidths as far as \gls{mise} is concerned,
+although \gls{cv} is better in every case.
+As expected, the \gls{mise} of the \gls{oracle} is slightly better.
 In fact, it appears that as long as the population distribution does not change too rapidly,
 the \gls{dkd} gives similar performance for any population \gls{spread}.
 
@@ -945,7 +949,7 @@ as seen in \Cref{fig:other_measures:pop_spread}.
         \subcaption{\Glsentryname{supremum error}}
         \label{fig:other_measures:pop_spread:maxerr}
     \end{subfigure}
-    \caption{\glsentryname{miae} and \Glsentryname{supremum error} by population \glsentryname{spread}. \errorplotcaption.}
+    \caption{\glsentryname{miae} and \Glsentryname{supremum error} by population \glsentryname{spread}. \errorplotcaption}
     \label{fig:other_measures:pop_spread}
 \end{figure}
 
@@ -979,9 +983,10 @@ as seen in \Cref{fig:other_measures:pop_spread}.
 \end{table}
 
 In this section, we look at incident risk functions that have two peaks.
-The major peak has a \gls{factor} of 60, while the second, minor peak has a \gls{factor} of 40.
-We do this to see how the minor peak affects the accuracy of the measuring the \gls{dkd} in general and the \gls{peak bias} and \gls{peak drift} in particular.
-The results of the experiments described in this section are summarized in \Cref{tab:mean_error_rates:unif_100_1_2h_1,tab:mean_error_rates:unif_100_1_2h_2,tab:mean_error_rates:unif_100_1_2h_3,tab:mean_error_rates:unif_100_1_2h_4}.
+The major peak has \gls{factor} of 60, while the second, minor peak has \gls{factor} of 40.
+We do this to see how a multiple peaks affect the \gls{peak bias} and \gls{peak drift} in particular.
+\citet{devroye1985nonparametric} note that ``it is intuitively obvious that multimodal densities are more difficult to estimate.''
+This is also true for intensity estimation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Examples showing distance between two peaks
@@ -1005,29 +1010,7 @@ The results of the experiments described in this section are summarized in \Cref
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% MISE by peak distance
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.49\textwidth}
-        \includegraphics[width=\textwidth]{results/by_two_peaks/MISE-vs-risk-peak-gap}
-        \caption{\glsentryname{mise}}
-    \end{subfigure}
-
-    \begin{subfigure}[b]{0.49\textwidth}
-        \includegraphics[width=\textwidth]{results/by_two_peaks/RMISE-vs-risk-peak-gap}
-        \caption{\glsentryname{rmise}}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.49\textwidth}
-        \includegraphics[width=\textwidth]{results/by_two_peaks/NMISE-vs-risk-peak-gap}
-        \caption{\glsentryname{nmise}}
-    \end{subfigure}
-    \caption[\glsentryname{mise} by distance between two risk peaks]{\glsentryname{mise} by distance between two risk peaks. \errorplotcaption.}
-    \label{fig:ise:p1.4_100_G}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Other measures by peak distance
+% Peak bias and drift by peak distance
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htbp]
     \centering
@@ -1053,13 +1036,20 @@ The results of the experiments described in this section are summarized in \Cref
         \label{fig:other_measures:p1.4_100_G:centroid_drift}
     \end{subfigure}
     \caption[Other accuracy measures by distance between two risk peaks]
-        {Other accuracy measures by distance between two risk peaks. \errorplotcaption.}
+        {Other accuracy measures by distance between two risk peaks. \errorplotcaption}
     \label{fig:other_measures:p1.4_100_G}
 \end{figure}
 
-We observe that \gls{mise}, \gls{rmise} and \gls{nmise} all increase when the distance between two peaks increases (\Cref{fig:ise:p1.4_100_G}).
-The \gls{peak drift} and \gls{centroid drift} also increase when the distance between the two peaks increases (\Cref{fig:other_measures:p1.4_100_G:peak_drift,fig:other_measures:p1.4_100_G:centroid_drift}).
-However, we also observe that \gls{peak bias} and \gls{centroid bias} decrease as the distance between the two peaks increases (\Cref{fig:other_measures:p1.4_100_G:peak_bias,fig:other_measures:p1.4_100_G:centroid_bias}).
+The results of the experiments described in this section are summarized in \Cref{tab:mean_error_rates:unif_100_1_2h_1,tab:mean_error_rates:unif_100_1_2h_2,tab:mean_error_rates:unif_100_1_2h_3,tab:mean_error_rates:unif_100_1_2h_4}.
+The \gls{peak drift} and \gls{centroid drift} increase when the distance between the two peaks increases (\Cref{fig:other_measures:p1.4_100_G:peak_drift,fig:other_measures:p1.4_100_G:centroid_drift}).
+We rely on intuition to explain how this comes about.
+When there are two peaks in the intensity,
+then many events are generated near each peak.
+A point that is generated near the secondary peak is more likely to reside far from the primary peak when the two peaks are further apart.
+Such points can pull the peak of the \gls{dkd} towards the secondary peak and away from the true, primary peak.
+We also observe that \gls{peak bias} and \gls{centroid bias} decrease as the distance between the two peaks increases (\Cref{fig:other_measures:p1.4_100_G:peak_bias,fig:other_measures:p1.4_100_G:centroid_bias}).
+When the secondary peak is farther away,
+incidents generated around it have less influence on the value of the \gls{dkd} near the true peak.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1144,7 +1134,7 @@ The results of the experiments described in this section are summarized in \Cref
         \label{fig:ise:p1.4_100_Gap_risk:nmise_log_log}
     \end{subfigure}    
     \caption[\glsentryname{mise} by distance between two risk peaks]
-        {\glsentryname{mise} by distance between two risk peaks. \errorplotcaption.}
+        {\glsentryname{mise} by distance between two risk peaks. \errorplotcaption}
     \label{fig:ise:p1.4_100_Gap_risk}
 \end{figure}
 

@@ -68,18 +68,18 @@ coefC <- coef(lm(log(dfC$`Relative MISE`) ~ dfC$Gap))
 
 
 pdf(file="MISE-vs-population-risk-gap.pdf")
-make_accuracy_plot(df, "Gap") +
+make_accuracy_plot(df, "Distance between peaks") +
   geom_point(aes(x=Gap, y=MISE, shape=Bandwidth), size=3)
 dev.off()
 pdf(file="RMISE-vs-population-risk-gap.pdf")
-make_accuracy_plot(df, "Gap") +
+make_accuracy_plot(df, "Distance between peaks") +
   geom_point(aes(x=Gap, y=`Relative MISE`, shape=Bandwidth), size=3) +
   stat_function(fun=function(x) {exp(coefO[2] * x + coefO[1])}, aes(linetype="Oracle"), xlim=c(0, 4)) +
   stat_function(fun=function(x) {exp(coefS[2] * x + coefS[1])}, aes(linetype="Silverman"), xlim=c(0, 4)) +
   stat_function(fun=function(x) {exp(coefC[2] * x + coefC[1])}, aes(linetype="CV"), xlim=c(0, 4))
 dev.off()
 pdf(file="RMISE-vs-population-risk-gap-log-log.pdf")
-make_accuracy_plot(df, "Gap") +
+make_accuracy_plot(df, "Distance between peaks") +
   geom_point(aes(x=Gap, y=`Relative MISE`, shape=Bandwidth), size=3) +
   stat_function(fun=function(x) {exp(coefO[2] * x + coefO[1])}, aes(linetype="Oracle"), xlim=c(0, 4)) +
   stat_function(fun=function(x) {exp(coefS[2] * x + coefS[1])}, aes(linetype="Silverman"), xlim=c(0, 4)) +
@@ -108,14 +108,14 @@ coefS <- coef(lm(log(dfS$`Normalized MISE`) ~ dfS$Gap))
 coefC <- coef(lm(log(dfC$`Normalized MISE`) ~ dfC$Gap))
 
 pdf(file="NMISE-vs-population-risk-gap.pdf")
-make_accuracy_plot(df, "Gap") +
+make_accuracy_plot(df, "Distance between peaks") +
   geom_point(aes(x=Gap, y=`Normalized MISE`, shape=Bandwidth), size=3) +
   stat_function(fun=function(x) {exp(coefO[2] * x + coefO[1])}, aes(linetype="Oracle"), xlim=c(0, 4)) +
   stat_function(fun=function(x) {exp(coefS[2] * x + coefS[1])}, aes(linetype="Silverman"), xlim=c(0, 4)) +
   stat_function(fun=function(x) {exp(coefC[2] * x + coefC[1])}, aes(linetype="CV"), xlim=c(0, 4))
 dev.off()
 pdf(file="NMISE-vs-population-risk-gap-log-log.pdf")
-make_accuracy_plot(df, "Gap") +
+make_accuracy_plot(df, "Distance between peaks") +
   geom_point(aes(x=Gap, y=`Normalized MISE`, shape=Bandwidth), size=3) +
   stat_function(fun=function(x) {exp(coefO[2] * x + coefO[1])}, aes(linetype="Oracle"), xlim=c(0, 4)) +
   stat_function(fun=function(x) {exp(coefS[2] * x + coefS[1])}, aes(linetype="Silverman"), xlim=c(0, 4)) +
