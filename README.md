@@ -3,6 +3,9 @@
 
 ### Fixed in version 0.12
  - [x] Results: account for comments
+ - [x] Results: all subsections: compare peak, centroid, etc in each section briefly
+ - [x] Results: all subsections: compare selectors.
+ - [x] Results: all subsections: make more clear MISE chart discussion is for all selectors, etc
 
 ### Fixed in version 0.11
  - [x] Theory: continue major rewrite
@@ -76,9 +79,6 @@
 
 ### TODO
 
- - [ ] Results: all subsections: compare peak, centroid, etc in each section briefly
- - [ ] Results: all subsections: compare selectors.
- - [ ] Results: all subsections: make more clear MISE chart discussion is for all selectors, etc
  - [ ] Theory: (and everywhere) lambda_i used for intensity AND for index: change intensity to lambda_I/lambda_P
  - [ ] Introduction: define "statistical properties"
  - [ ] Theoretical background: describe rejection sampling
