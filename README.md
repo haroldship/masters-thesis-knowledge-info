@@ -1,6 +1,9 @@
 # Investigating the Statistical Properties of the Double Kernel Density Estimator
 ## Harold Ship, University of Haifa
 
+### Fixed in version 0.13
+ - [x] Derivations: bias-variance
+
 ### Fixed in version 0.12
  - [x] Results: account for comments
  - [x] Results: all subsections: compare peak, centroid, etc in each section briefly

@@ -5,3 +5,61 @@
 %% derivations
 %%
 %%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Bias and variance
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Bias and variance}
+\label{sec:derivations:biasvariance}
+
+For a given point $\xvec \in \RS$,
+the \gls{se} of \gls{lambda_hat} at $\xvec$ is defined as:
+\begin{equation}
+    \mbox{\gls{se}}(\gls{lambda_hat}, \xvec) = \Big(\lmbdhat - \lmbd \Big)^2 \text{.}
+\end{equation}
+
+Taking expectation over the randomness in $\xvec$, we compute the \gls{mse}:
+\begin{align}
+    \mbox{\gls{mse}}(\gls{lambda_hat}, \xvec)
+        & = \E \Big(\lmbdhat - \lmbd \Big)^2 \nonumber \\
+        & = \E \Big(\lmbdhat - \E\lmbdhat + \E\lmbdhat - \lmbd \Big)^2 \nonumber \\
+        & = \E \Big( \lmbdhat - \E\lmbdhat \Big)^2 \nonumber \\
+        &    \qquad + 2 \E \Big[ \Big( \lmbdhat - \E\lmbdhat \Big) \Big( \E\lmbdhat - \lmbd \Big) \Big] \nonumber \\
+        &    \qquad + \Big( \E\lmbdhat - \lmbd \Big)^2 \label{eq:mse:expanded}
+\end{align}
+
+The middle term of \Cref{eq:mse:expanded} evaluates to zero,
+because $\E\lmbdhat$ and $\lmbd$ are numbers,
+so
+\begin{equation*}\begin{split}
+    & \E \Big[ \Big( \lmbdhat - \E\lmbdhat \Big) \Big( \E\lmbdhat - \lmbd \Big) \Big] \\
+    &    \qquad = \Big( \E\lmbdhat - \lmbd \Big) \E \Big( \lmbdhat - \E\lmbdhat \Big)
+\end{split}\end{equation*}
+and
+\begin{equation*}\begin{split}
+    \E \Big( \lmbdhat - \E\lmbdhat \Big) \nonumber & = \E \lmbdhat - \E\lmbdhat \\
+        & = 0 \text{.}
+\end{split}\end{equation*}
+
+Therefore, the calculation for \gls{mse} can be simplified and rearranged to 
+\begin{equation}
+    \label{eq:mse:biasvariance}
+    \mbox{\gls{mse}}(\gls{lambda_hat}, \xvec)
+        + \E \Big( \lmbdhat - \E\lmbdhat \Big)^2
+        = \Big( \E\lmbdhat - \lmbd \Big)^2 
+\end{equation}
+
+\Cref{eq:mse:biasvariance} shows that $\mbox{\gls{mse}}(\gls{lambda_hat}, \xvec)$
+is composed of two parts.
+We call the first part, $\E \Big( \lmbdhat - \E\lmbdhat \Big)^2$ the \textbf{variance} of $\lmbdhat$,
+and the square root of the second part, $\E\lmbdhat - \lmbd$ the \textbf{bias} of $\lmbdhat$,
+and we say that $\mbox{\gls{mse}}(\gls{lambda_hat}, \xvec)$ is equal to the squared bias plus the variance.
+
+\begin{align}
+    \mbox{bias}(\gls{lambda_hat}, \xvec) & = \E\lmbdhat - \lmbd \label{eq:estimator:bias} \\
+    \mbox{variance}(\gls{lambda_hat}, \xvec) & = \E \Big( \lmbdhat - \E\lmbdhat \Big)^2 \label{eq:estimator:variance} \\
+    \mbox{\gls{mse}}(\gls{lambda_hat}, \xvec) & = \mbox{bias}^2 (\gls{lambda_hat}, \xvec) + \mbox{variance} (\gls{lambda_hat}, \xvec) \label{eq:estimator:mse} 
+\end{align}
+

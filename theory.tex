@@ -255,11 +255,11 @@ large peak by using the larger bandwidth of $h=0.8$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% Bandwidth selection
+%% Measuring the accuracy of the estimate
 %%
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Bandwidth selection}
-\label{sec:theory:bandwidth}
+\section{Measuring the accuracy of the estimate}
+\label{sec:theory:accuracy}
 
 This section is based on \citet{silverman1986density} and \citet{wand1994kernel}.
 A common statistical problem is to find the ``best'' estimate \gls{lambda_hat}
@@ -280,7 +280,7 @@ It can also be easily approximated by cross-validation error.
 
 Given a realized estimate \gls{lambda_hat} for any function \gls{lambda},
 we can compute the squared error at any given point $\xvec \in \RS$ as
-$\left( \hat{\lambda}\xvec - \lambda\xvec \right)^2$,
+$\left( \lmbdhat - \lmbd \right)^2$,
 and its expected value at $\xvec$ is called the \gls{mse}.
 However,
 we would like to compute the accuracy of the whole function.
@@ -288,57 +288,39 @@ We do this by integrating the squared error of the estimate over the study area 
 
 \begin{equation}
 \label{eq:ise}
-    \mbox{ISE}(\hat{\lambda}) = \iintW{
-            \left( \hat{\lambda}\xvec - \lambda\xvec \right)^2
-        }
+    \mbox{\gls{ise}}(\gls{lambda_hat}) = \iintW{
+            \left( \lmbdhat - \lmbd \right)^2
+    }
 \end{equation}
 
 The \gls{mise} is the expected value of the \gls{ise} over the sample space of realizations of \gls{Lambda}.
 
 \begin{align}
-    \mbox{MISE}(\gls{lambda_hat}) & = \E [\mbox{ISE}(\hat{\lambda})] \nonumber \\
-                & = \E \iintW{ \left( \hat{\lambda}\xvec - \lambda\xvec \right)^2 } \label{eq:mise}
+    \mbox{\gls{mise}}(\gls{lambda_hat}) 
+        & = \E [\mbox{\gls{ise}}(\gls{lambda_hat})] \nonumber \\
+        & = \E \iintW{ \left( \lmbdhat - \lmbd \right)^2 } \label{eq:mise}
 \end{align}
 
 The integrand of \Cref{eq:mise} is non-negative.
 Therefore, by Fubini's Theorem, we can change the order of integration and expectation.
 
 \begin{align}
-    \mbox{MISE}(\gls{lambda_hat}) & = \iintW{ \E \left( \hat{\lambda}\xvec - \lambda\xvec \right)^2 } \nonumber \\
-                & = \iintW{ \E \left( \hat{\lambda}\xvec - \E \hat{\lambda}\xvec + \E \hat{\lambda}\xvec - \lambda\xvec \right)^2 } \nonumber \\
-                & = \iintW{ \E \left( \hat{\lambda}\xvec - \E \hat{\lambda}\xvec \right)^2 } \nonumber \\
-                    & \qquad + 2 \iintW{
-                    \E \left\{
-                        \left( \hat{\lambda}\xvec - \E \hat{\lambda}\xvec \right)
-                        \left( \E \hat{\lambda}\xvec - \lambda\xvec \right)
-                    \right\} } \nonumber \\
-                    & \qquad + \iintW{ \E \left( \E \hat{\lambda}\xvec - \lambda\xvec \right)^2 } \label{eq:mise_expanded}
+    \mbox{\gls{mise}}(\gls{lambda_hat}) 
+        & = \iintW{ \E \left( \lmbdhat - \lmbd \right)^2 } \nonumber \\
+        & = \iintW{ \mbox{\gls{mse}}(\gls{lambda_hat}, \xvec) } \nonumber
 \end{align}
 
-The second term of \Cref{eq:mise_expanded} evaluates to zero,
-because $\E \hat{\lambda}\xvec$ and $\lambda\xvec$ are numbers,
-so
-$$\E \left\{
-    \left( \hat{\lambda}\xvec - \E \hat{\lambda}\xvec \right)
-    \left( \E \hat{\lambda}\xvec - \lambda\xvec \right)
-\right\}
-$$
-is equivalent to
-$$ 
-\left( \E \hat{\lambda}\xvec - \E \hat{\lambda}\xvec \right)
-\left( \E \hat{\lambda}\xvec - \lambda\xvec \right) \text{,}
-$$
-a product whose first term is zero.
-We then have 
+We decompose \gls{mse} into the squared bias and squared variance (\Cref{eq:mse:biasvariance}),
+giving us
 
 \begin{align}
-    \mbox{MISE}(\gls{lambda_hat}) & = \iintW{
-        \E \left( \gls{lambda_hat}\xvec - \E \hat{\lambda}\xvec \right)^2 } \nonumber \\%
-                                  & \qquad %
-        + \iintW{ \E \left( \E \gls{lambda_hat}\xvec - \lambda\xvec \right)^2 } \label{eq:mise_bias_variance}%
+    \mbox{\gls{mise}}(\gls{lambda_hat}) 
+        & = \iintW{ \Big( \E\lmbdhat - \lmbd \Big)^2 } \nonumber \\
+        & \qquad + \iintW{ \E \Big( \lmbdhat - \E\lmbdhat \Big)^2 } \label{eq:mise:intbiasvariance}
 \end{align}
 
-which is the integrated variance of \gls{lambda_hat} and the integrated squared bias of \gls{lambda_hat}.
+We call the first part of \Cref{eq:mise:intbiasvariance} the \gls{isb} and the second part the \gls{iv}.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -346,39 +328,27 @@ which is the integrated variance of \gls{lambda_hat} and the integrated squared 
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Bias and variance of kernel intensity estimator}
-\label{sec:theory:bias_variance}
+\label{sec:theory:biasvariance}
 
+We wish to compute the bias of our \gls{kernel intensity estimator} \gls{lambda_hat},
+where the bias is defined in \Cref{eq:estimator:bias}.
+In order to do this, we need to compute
 
-The bias of any estimate \gls{lambda_hat} is:
-
-\begin{equation}
-    \mbox{bias}(\gls{lambda_hat}) = \E \gls{lambda_hat}\xvec - \gls{lambda}\xvec%
-\end{equation}
-
-For the \gls{kernel intensity estimator}, the bias depends on the bandwidth.
-
-\begin{equation}
-    \mbox{bias}_h(\gls{lambda_hat}) = \E \left\{%
-            \sumS{\gls{K}\left(\frac{\xvec-(s_1, s_2)}{h^2}\right)}%
-        \right\}%
-        - \gls{lambda}\xvec%
-\end{equation}
-
-If we let $\gls{lambda} = \gls{mu} f$ where $f$ is a probability density, then at a point $\xvec \in \RS$,
 \begin{align}
-    \mbox{bias}(\gls{lambda_hat}(\xvec;h)) & \approx
-        \frac{1}{2} \mu h^2 ~ \gls{grad}^2\!\left[ f\xvec \right]
-            \int { z^2 K(z_1, z_2) \diff{z_1} \diff{z_2)} } \\
-    \mbox{var}(\gls{lambda_hat}(\xvec;h)) & \approx
-        h^{-2} \mu
-            \int { K(z_1, z_2)^2\diff{z_1} \diff{z_2} } f\xvec
+    \E \lmbdhat
+        &= \E \left[ \sumS{\gls{K}\left(\frac{\xvec-(s_1, s_2)}{h^2}\right)} \right] \nonumber \\
+        &= \frac{n^2}{h^2} \E \gls{K}\left(\frac{\xvec-(S_1, S_2)}{h^2}\right) 
+            ~\text{where}~(S_1,S_2)~\text{is a random variable} \nonumber \\
 \end{align}
 
-Taking derivative by $h$ and setting to $0$, we get that $h_{\mbox{opt}}$ is $O(\mu^{-1/6})$.
 
-Also, as $\mu \to \infty$, both the bias and variance also $\to \infty$,
-but the \textit{relative} MISE, taken by dividing by $\mu^2$ results in the relative bias being $O(\mu^{-1/3})$
-but the relative variance being $O(\mu^{1/3})$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Choosing the bandwidth
+%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Choosing the bandwidth}
+\label{sec:theory:bandwidth}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
