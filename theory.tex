@@ -330,15 +330,48 @@ We call the first part of \Cref{eq:mise:intbiasvariance} the \gls{isb} and the s
 \section{Bias and variance of kernel intensity estimator}
 \label{sec:theory:biasvariance}
 
+While there is a great deal of research in \gls{kde},
+there is some work available for \gls{kernel intensity estimator}.
+According to \Citet{diggle1988equivalence},
+the optimal bandwidth used for computing the \gls{kernel intensity estimator} is the same as that for computing the related \gls{kde} function,
+and can be determined by the same techniques.
+The \gls{kde} is used to estimate a probability density function,
+while the \gls{kernel intensity estimator} is used to compute an intensity function.
+Computationally, the difference is that a density must integrate to one,
+and in order to do that,
+we divide by $n$,
+the number of observations.
+This section is derived from \Citet{silverman1986density} and \Citet{wand1994kernel}.
+In this section and in the related derivations in \Cref{ch:derivations},
+we work with the \gls{mise} of the \gls{kde},
+keeping in mind that we will scale things up afterwards by a factor of $n^2$.
+Most of the existing work in kernel estimation is in one dimension,
+while this study is in two dimensions.
+
+See \Cref{sec:derivations:biasvariancekernel} for derivations for the \gls{kde}.
 We wish to compute the bias of our \gls{kernel intensity estimator} \gls{lambda_hat},
 where the bias is defined in \Cref{eq:estimator:bias}.
-In order to do this, we need to compute
-
+In order to do this, we need to compute the expected value of $\hat{f} = \mu \hat{\lambda}$ at $\xvec$
 \begin{align}
-    \E \lmbdhat
-        &= \E \left[ \sumS{\gls{K}\left(\frac{\xvec-(s_1, s_2)}{h^2}\right)} \right] \nonumber \\
-        &= \frac{n^2}{h^2} \E \gls{K}\left(\frac{\xvec-(S_1, S_2)}{h^2}\right) 
-            ~\text{where}~(S_1,S_2)~\text{is a random variable} \nonumber \\
+    \E \hat{f}\xvec
+        &= \E \left[ \frac{1}{n}\sumS{\gls{K}\left(\frac{\xvec-(s_1, s_2)}{h}\right)} \right] \nonumber \\
+        &= \frac{1}{h^2} \E 
+                \left[ 
+                    \gls{K}\left(\frac{\xvec-(X_1, X_2)}{h}\right) 
+                \right] 
+            ~\text{where}~(X_1,X_2)~\text{is a random vector.} \nonumber
+\end{align}
+This allows us to compute the approximate bias and approximate variance of \gls{lambda_hat},
+which are computed in \Cref{sec:derivations:biasvariancekernel}.
+They are
+\begin{align}
+    \mbox{bias}(\hat{f}; h) & \approx \frac{h^2}{2} \alpha \gls{grad}^2 \! f \xvec \\
+    \mbox{variance}(\hat{f}; h) & \approx \left(\frac{1}{h}\right)^{2} \beta f \xvec
+\end{align}
+where
+\begin{align}
+    \alpha & = \iintR{x_1^2 K(x_1,x_2)} \\
+    \beta & = \iintR{K(x_1,x_2)^2} \text{.}
 \end{align}
 
 

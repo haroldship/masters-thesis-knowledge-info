@@ -13,6 +13,7 @@
 %\renewcommand{\vec}[1]{\ensuremath{({#1}_1, {#1}_2})} % vector as (x_1, x_2)
 \newcommand{\norm}[1]{\ensuremath{\lVert#1\rVert}}% vector norm
 \newcommand{\xvec}{\ensuremath{(x_1, x_2)}}%
+\newcommand{\zvec}{\ensuremath{(z_1, z_2)}}%
 
 \newcommand{\transpose}[1]{\ensuremath{#1}^{\mathrm{T}}}% matrix transpose
 
@@ -21,9 +22,23 @@
 \newcommand*\diff{\mathop{}\!\mathrm{d}}% \diff for differentiator symbol 'd'
 \newcommand*{\ds}{\ensuremath{\diff{\mathbf{s}}}}% ds (vector)
 
+% math symbols
+\newcommand{\E}{\ensuremath{\mathbb{E}}}% expected value
+\newcommand{\R}{\ensuremath{\mathbb{R}}}% R - the reals
+\newcommand{\RS}{\ensuremath{\mathbb{R}^2}}% R^2 the plane
+
+\DeclareMathOperator*{\argmin}{\arg\!\min}% argmin
+\DeclareMathOperator*{\argmax}{\arg\!\max}% argmax
+
 % integrals
 \newcommand{\iintW}[1]{%
     \hspace{-1em} \iint\limits_{\xvec \in W} \hspace{-1em} {#1 \diff{x_2} \diff{x_1}}%
+}%
+\newcommand{\iintR}[1]{%
+    \hspace{-1em} \iint\limits_{\xvec \in \RS} \hspace{-1em} {#1 \diff{x_2} \diff{x_1}}%
+}%
+\newcommand{\iintRZ}[1]{%
+    \hspace{-1em} \iint\limits_{\zvec \in \RS} \hspace{-1em} {#1 \diff{z_2} \diff{z_1}}%
 }%
 
 % sums
@@ -36,14 +51,6 @@
 
 % kernel macros
 \newcommand{\Kdots}{\ensuremath{K(\cdot, \cdot)}}%
-
-% math symbols
-\newcommand{\E}{\ensuremath{\mathbb{E}}}% expected value
-\newcommand{\R}{\ensuremath{\mathbb{R}}}% R - the reals
-\newcommand{\RS}{\ensuremath{\mathbb{R}^2}}% R^2 the plane
-
-\DeclareMathOperator*{\argmin}{\arg\!\min}% argmin
-\DeclareMathOperator*{\argmax}{\arg\!\max}% argmax
 
 % Set up research question label, override equation label to use brackets (autoref)
 \newtheorem{researchquestion}{Research question}%

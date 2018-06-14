@@ -11,7 +11,7 @@
 %% Bias and variance
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Bias and variance}
+\section{Bias and variance }
 \label{sec:derivations:biasvariance}
 
 For a given point $\xvec \in \RS$,
@@ -62,4 +62,43 @@ and we say that $\mbox{\gls{mse}}(\gls{lambda_hat}, \xvec)$ is equal to the squa
     \mbox{variance}(\gls{lambda_hat}, \xvec) & = \E \Big( \lmbdhat - \E\lmbdhat \Big)^2 \label{eq:estimator:variance} \\
     \mbox{\gls{mse}}(\gls{lambda_hat}, \xvec) & = \mbox{bias}^2 (\gls{lambda_hat}, \xvec) + \mbox{variance} (\gls{lambda_hat}, \xvec) \label{eq:estimator:mse} 
 \end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Approximate bias and variance of kernel density estimator
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Approximate bias and variance ofkernel density estimator}
+\label{sec:derivations:biasvariancekernel}
+
+\begin{align}
+    \E \lmbdhat
+        &= \E \left[ \sumS{\gls{K}\left(\frac{\xvec-(s_1, s_2)}{n h^2}\right)} \right] \nonumber \\%
+        &= \frac{1}{h^2} \E%
+                \left[%
+                    \gls{K}\left(\frac{\xvec-(X_1, X_2)}{h^2}\right)%
+                \right] \nonumber \\%
+        &= \frac{1}{h^2} \iintW{%
+                \left[%
+                    \gls{K}\left(\frac{\xvec-(X_1, X_2)}{h^2}\right)f(x_1, x_2)%
+                \right]}%
+            ~\text{where}~(X_1,X_2)~\text{is a random vector.} \nonumber%
+\end{align}
+
+Make a change of variables
+$(z_1, z_2) = \left( \frac{x_1-X_1}{h},\frac{x_2-X_2}{h} \right)$:
+\begin{align}
+    \E \lmbdhat%
+        &= \frac{1}{h^2} \E%
+                \left[%
+                    \gls{K}\left(\frac{\xvec-(X_1, X_2)}{h^2}\right)%
+                \right] \\%
+        &= \frac{1}{h^2} \iintRZ{%
+            K \zvec%
+            f\!\!\left(z_1 + h X_1, z_2 + h X_2\right)%
+        }%
+\end{align}
+
+Use Taylor expansion.
+
 
