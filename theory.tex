@@ -15,17 +15,17 @@
 \label{sec:theory:incidence}
 
 The theory described in this section is based on \citet{rothman2008modern}.
-We study of chronic diseases in order to better understand the degree to which different groups of people are ``at risk'' of contracting a disease.
+We study chronic diseases in order to better understand the degree to which different groups of people are ``at risk'' of contracting a disease.
 We also are interested in discovering and describing the association between environmental factors and this ``risk''.
 For example, one could ask if air pollution emitted by a factory is associated with an increased ``risk'' of lung cancer among people that live close by.
 
-In order to be more precise, we begin by defining the \textbf{\gls{risk}}:
+In order to be more precise, we begin by defining \textbf{\gls{risk}}:
 
 \begin{defn}
-    The \textbf{\gls{risk}} is the probability of contracting a disease in a specific time period.
+    \textbf{\glspl{risk}} is the probability of an individual person contracting a disease in a specific time period.
 \end{defn}
 
-One way to estimate the \gls{risk}, is to look at the historical frequency of contracting of the disease.
+One way to estimate the \gls{risk} is to look at the historical frequency of contracting of the disease.
 The type of study we are interested in involves incidents of a chronic disease.
 Therefore, we separately consider those people who contracted the disease under study.
 In particular, we are interested in people who did not have the disease at the beginning of the study,
@@ -36,7 +36,8 @@ These are new cases of the disease, which we call \textbf{\glspl{incident}}.
     An \textbf{\gls{incident}} is a new case of the disease during the study period.
 \end{defn}
 
-The common measure of frequency used in the literature compares the number of new cases of a disease to the total exposure time of the population is called the \gls{incidence rate}.
+The common measure of frequency used in the literature compares the number of new cases of a disease to the total time spent by members of the population in the study.
+This measure is called the \gls{incidence rate}.
 
 \begin{equation}
     \mbox{\Gls{incidence rate} (common definition)} = \frac{\mbox{number of new cases}}
@@ -63,7 +64,7 @@ For a given population, time period, and set of \glspl{incident},
 we can compute the overall \gls{incidence rate} by taking the total number of \glspl{incident} and dividing by the total population.
 However, we may wish to compare the \gls{incidence rate} at different locations within an area.
 To do this, we need to look at the number of cases and the population in the areas that are close to these locations.
-If we take can make these areas infinitesimally small,
+If we then make these areas infinitesimally small,
 then we could compute the \gls{incidence rate} point-wise.
 
 \begin{defn}
@@ -158,7 +159,7 @@ Dividing the value obtained from first by the value obtained from the second res
 %%
 %% Kernel estimation of the intensity
 %%
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Kernel estimation of the intensity}
 \label{sec:theory:kernelestimation}
 
@@ -257,10 +258,21 @@ large peak by using the larger bandwidth of $h=0.8$.
 %%
 %% Measuring the accuracy of the estimate
 %%
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Measuring the accuracy of the estimate}
 \label{sec:theory:accuracy}
 
+While there is a great deal of research in \gls{kde},
+there is some work available for \gls{kernel intensity estimator}.
+According to \Citet{diggle1988equivalence},
+the optimal bandwidth used for computing the \gls{kernel intensity estimator} is the same as that for computing the related \gls{kde} function,
+and can be determined by the same techniques.
+The \gls{kde} is used to estimate a probability density function,
+while the \gls{kernel intensity estimator} is used to compute an intensity function.
+Computationally, the difference is that a density must integrate to one,
+and in order to do that,
+we divide by $n$,
+the number of observations.
 This section is based on \citet{silverman1986density} and \citet{wand1994kernel}.
 A common statistical problem is to find the ``best'' estimate \gls{lambda_hat}
 for the \gls{intensity} of an unknown \gls{spp}
@@ -285,25 +297,20 @@ and its expected value at $\xvec$ is called the \gls{mse}.
 However,
 we would like to compute the accuracy of the whole function.
 We do this by integrating the squared error of the estimate over the study area to obtain the \gls{ise}.
-
 \begin{equation}
 \label{eq:ise}
     \mbox{\gls{ise}}(\gls{lambda_hat}) = \iintW{
             \left( \lmbdhat - \lmbd \right)^2
     }
 \end{equation}
-
 The \gls{mise} is the expected value of the \gls{ise} over the sample space of realizations of \gls{Lambda}.
-
 \begin{align}
     \mbox{\gls{mise}}(\gls{lambda_hat}) 
         & = \E [\mbox{\gls{ise}}(\gls{lambda_hat})] \nonumber \\
         & = \E \iintW{ \left( \lmbdhat - \lmbd \right)^2 } \label{eq:mise}
 \end{align}
-
 The integrand of \Cref{eq:mise} is non-negative.
 Therefore, by Fubini's Theorem, we can change the order of integration and expectation.
-
 \begin{align}
     \mbox{\gls{mise}}(\gls{lambda_hat}) 
         & = \iintW{ \E \left( \lmbdhat - \lmbd \right)^2 } \nonumber \\
@@ -312,14 +319,14 @@ Therefore, by Fubini's Theorem, we can change the order of integration and expec
 
 We decompose \gls{mse} into the squared bias and squared variance (\Cref{eq:mse:biasvariance}),
 giving us
-
 \begin{align}
     \mbox{\gls{mise}}(\gls{lambda_hat}) 
         & = \iintW{ \Big( \E\lmbdhat - \lmbd \Big)^2 } \nonumber \\
         & \qquad + \iintW{ \E \Big( \lmbdhat - \E\lmbdhat \Big)^2 } \label{eq:mise:intbiasvariance}
 \end{align}
-
 We call the first part of \Cref{eq:mise:intbiasvariance} the \gls{isb} and the second part the \gls{iv}.
+
+In \Cref{sec:derivations:biasvariancekernel}, we derive the \gls{amise} for the \gls{kde}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
