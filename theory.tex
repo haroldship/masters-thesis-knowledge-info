@@ -262,17 +262,6 @@ large peak by using the larger bandwidth of $h=0.8$.
 \section{Measuring the accuracy of the estimate}
 \label{sec:theory:accuracy}
 
-While there is a great deal of research in \gls{kde},
-there is some work available for \gls{kernel intensity estimator}.
-According to \Citet{diggle1988equivalence},
-the optimal bandwidth used for computing the \gls{kernel intensity estimator} is the same as that for computing the related \gls{kde} function,
-and can be determined by the same techniques.
-The \gls{kde} is used to estimate a probability density function,
-while the \gls{kernel intensity estimator} is used to compute an intensity function.
-Computationally, the difference is that a density must integrate to one,
-and in order to do that,
-we divide by $n$,
-the number of observations.
 This section is based on \citet{silverman1986density} and \citet{wand1994kernel}.
 A common statistical problem is to find the ``best'' estimate \gls{lambda_hat}
 for the \gls{intensity} of an unknown \gls{spp}
@@ -281,6 +270,18 @@ In order to do this using \gls{kernel intensity estimator},
 we must select the ``best'' bandwidth.
 From \Cref{fig:theory:kernel1d} we can see that different values of bandwidth \gls{h} result in different estimates for the \gls{intensity}.
 Our goal is to find a decision procedure that gives us the ``best'' result.
+While there is a great deal of research in \gls{kde},
+there is also some work available for \gls{kernel intensity estimator}.
+We make use of one such result:
+the optimal bandwidth used for computing the \gls{kernel intensity estimator} is the same as that for computing the related \gls{kde} function,
+and can be determined by the same techniques \Citep{diggle1988equivalence}.
+However, the \gls{kde} is used to estimate a probability density function,
+while the \gls{kernel intensity estimator} is used to compute an intensity function.
+Computationally, the difference is that a density must integrate to one,
+and in order to do that,
+we divide by $n$,
+the number of observed events.
+
 
 The first thing we must do is define what we mean by the ``best'' result.
 We do this by choosing a measure of accuracy for the estimate,
@@ -326,7 +327,32 @@ giving us
 \end{align}
 We call the first part of \Cref{eq:mise:intbiasvariance} the \gls{isb} and the second part the \gls{iv}.
 
-In \Cref{sec:derivations:biasvariancekernel}, we derive the \gls{amise} for the \gls{kde}.
+For the \gls{kernel intensity estimator},
+the \gls{mise} cannot be computed directly.
+Instead,
+we approximate it with the \gls{amise}.
+In \Cref{sec:derivations:biasvariancekernel} we derive the \gls{amise},
+first for the \gls{kde}:
+\begin{equation}
+    \mbox{\gls{amise}}(\hat{f}; h) = 
+        \frac{1}{4} h^{4} \alpha^2 \iintW{\left( \nabla^2 f \xvec \right) } +
+        n^{-1} h^{-2} \beta \label{eq:amise}
+\end{equation}
+where
+\begin{align}
+    \alpha & = \iintR{x_1^2 K(x_1,x_2)} \\
+    \beta & = \iintR{K(x_1,x_2)^2} \\
+    \nabla^2 f \xvec & = \frac{\diffsq{f}\xvec}{\diff{x_1^2}} + \frac{\diffsq{f}\xvec}{\diff{x_2^2}} \text{.}
+\end{align}
+
+By taking the derivative of \Cref{eq:amise} by $h$ and setting it to zero,
+we derive the optimal bandwidth \gls{h_opt}:
+\begin{align}
+    \gls{h_opt}^{6} & = C n^{-1} \nonumber ~ \text{or} \\
+    \gls{h_opt} & = C n^{-\frac{1}{6}}
+\end{align}
+where $C$ is a constant that depends on $f$ and $K$.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
