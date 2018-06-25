@@ -215,7 +215,7 @@ and the slightly bright spots around $(-1.5, -2.5)$.
 described in \Cref{sec:method:accuracy}, for this experiment.
 We can see that for most measures, the \gls{oracle} selected bandwidth provides the best results.
 This is not surprising, since the \gls{oracle} bandwidth is designed to approximate the \gls{mise}-optimal bandwidth \gls{h_opt},
-described in \Cref{sec:theory:bandwidth}.
+described in \Cref{sec:theory:accuracy}.
 However, in real world scenarios, the true function is unknown, and hence it is impossible to compute the \gls{oracle} bandwidth.
 Therefore, we are interested in knowing how close the \gls{silverman} and \gls{cv} bandwidth selection methods can get to the \gls{oracle} for the different measures.
 One exception is the \gls{peak bias}, in bold,
@@ -460,7 +460,7 @@ We note that as in \Cref{sec:results:unif_100_1.0_1h}, the \gls{peak bias} value
         \label{fig:one_sample:unif_NCases_1h}
 \end{figure}
 
-According to the theory reviewed in \Cref{sec:theory:bandwidth},
+According to the theory reviewed in \Cref{sec:theory:accuracy},
 the bandwidth should decrease as the observed sample size,
 denoted by $n$,
 increases according to the formula
@@ -684,7 +684,7 @@ The \gls{rmise} takes a local view of relative error, and here we see that as th
     \label{fig:ise:unif_Spreads_1h}
 \end{figure}
 
-We saw in \Cref{sec:theory:biasvariance} that the bias, and hence the \gls{mse} of a kernel estimate at a point depends on $\lambda^{\prime \prime}$, the second deriviative of the true intensity.
+We saw in \Cref{sec:theory:accuracy} that the bias, and hence the \gls{mse} of a kernel estimate at a point depends on $\lambda^{\prime \prime}$, the second deriviative of the true intensity.
 Thus we expect that the rate of convergence of the \gls{dkd} depends on the smoothness of the true \gls{lambda},
 which increases linearly with the \gls{spread}.
 We look now at the asymptotic behavior of \gls{nmise} as \gls{sigma_i} increases.

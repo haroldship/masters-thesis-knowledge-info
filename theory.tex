@@ -330,9 +330,11 @@ We call the first part of \Cref{eq:mise:intbiasvariance} the \gls{isb} and the s
 For the \gls{kernel intensity estimator},
 the \gls{mise} cannot be computed directly.
 Instead,
-we approximate it with the \gls{amise}.
-In \Cref{sec:derivations:biasvariancekernel} we derive the \gls{amise},
-first for the \gls{kde}:
+we approximate the bias,
+the variance,
+and finally the \gls{amise} which is the sum of the variance and the square of the bias.
+In \Cref{sec:derivations:biasvariancekernel} we derive the \gls{amise}
+for the \gls{kde}:
 \begin{equation}
     \mbox{\gls{amise}}(\hat{f}; h) = 
         \frac{1}{4} h^{4} \alpha^2 \iintW{\left( \nabla^2 f \xvec \right) } +
@@ -345,76 +347,26 @@ where
     \nabla^2 f \xvec & = \frac{\diffsq{f}\xvec}{\diff{x_1^2}} + \frac{\diffsq{f}\xvec}{\diff{x_2^2}} \text{.}
 \end{align}
 
-By taking the derivative of \Cref{eq:amise} by $h$ and setting it to zero,
-we derive the optimal bandwidth \gls{h_opt}:
+We can now take the derivative of \Cref{eq:amise} by $h$ and set it to zero,
+giving us the optimal bandwidth \gls{h_opt}:
 \begin{align}
     \gls{h_opt}^{6} & = C n^{-1} \nonumber ~ \text{or} \\
     \gls{h_opt} & = C n^{-\frac{1}{6}}
 \end{align}
 where $C$ is a constant that depends on $f$ and $K$.
+\begin{defn}
+    The \gls{mise} \textbf{optimal bandwidth} $\mathbf{\gls{h_opt}}$ is the value of $h$ that minimizes the \gls{mise} of the \gls{kde} for a given distribution function $f$ and kernel function $K$.
+\end{defn}
+As noted above,
+the optimal bandwidth of the \gls{kde} in the \gls{mise} sense is the same for the \gls{kernel intensity estimator}.
 
+There are other accuracy measures that can be used to evaluate the estimate of the \gls{kernel intensity estimator}.
+We discuss some of these in \Cref{sec:method:accuracy}.
+Although we use these measures to characterize the behavior of the \gls{kernel intensity estimator} and the \gls{dkd},
+our bandwidth is chosen by techniques that try to achieve \gls{h_opt} and minimize \gls{mise}.
+However, as noted above,
+our approximation \gls{amise} depends on the true function $f$.
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-%% Bias and variance
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Bias and variance of kernel intensity estimator}
-\label{sec:theory:biasvariance}
-
-While there is a great deal of research in \gls{kde},
-there is some work available for \gls{kernel intensity estimator}.
-According to \Citet{diggle1988equivalence},
-the optimal bandwidth used for computing the \gls{kernel intensity estimator} is the same as that for computing the related \gls{kde} function,
-and can be determined by the same techniques.
-The \gls{kde} is used to estimate a probability density function,
-while the \gls{kernel intensity estimator} is used to compute an intensity function.
-Computationally, the difference is that a density must integrate to one,
-and in order to do that,
-we divide by $n$,
-the number of observations.
-This section is derived from \Citet{silverman1986density} and \Citet{wand1994kernel}.
-In this section and in the related derivations in \Cref{ch:derivations},
-we work with the \gls{mise} of the \gls{kde},
-keeping in mind that we will scale things up afterwards by a factor of $n^2$.
-Most of the existing work in kernel estimation is in one dimension,
-while this study is in two dimensions.
-
-See \Cref{sec:derivations:biasvariancekernel} for derivations for the \gls{kde}.
-We wish to compute the bias of our \gls{kernel intensity estimator} \gls{lambda_hat},
-where the bias is defined in \Cref{eq:estimator:bias}.
-In order to do this, we need to compute the expected value of $\hat{f} = \mu \hat{\lambda}$ at $\xvec$
-\begin{align}
-    \E \hat{f}\xvec
-        &= \E \left[ \frac{1}{n}\sumS{\gls{K}\left(\frac{\xvec-(s_1, s_2)}{h}\right)} \right] \nonumber \\
-        &= \frac{1}{h^2} \E 
-                \left[ 
-                    \gls{K}\left(\frac{\xvec-(X_1, X_2)}{h}\right) 
-                \right] 
-            ~\text{where}~(X_1,X_2)~\text{is a random vector.} \nonumber
-\end{align}
-This allows us to compute the approximate bias and approximate variance of \gls{lambda_hat},
-which are computed in \Cref{sec:derivations:biasvariancekernel}.
-They are
-\begin{align}
-    \mbox{bias}(\hat{f}; h) & \approx \frac{h^2}{2} \alpha \gls{grad}^2 \! f \xvec \\
-    \mbox{variance}(\hat{f}; h) & \approx \left(\frac{1}{h}\right)^{2} \beta f \xvec
-\end{align}
-where
-\begin{align}
-    \alpha & = \iintR{x_1^2 K(x_1,x_2)} \\
-    \beta & = \iintR{K(x_1,x_2)^2} \text{.}
-\end{align}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-%% Choosing the bandwidth
-%%
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Choosing the bandwidth}
-\label{sec:theory:bandwidth}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -423,6 +375,12 @@ where
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Asymptotic behavior of the bandwidth}
 \label{sec:theory:asymptotic_bandwidth}
+
+In practice,
+we don't know the true density or intensity functions.
+Therefore we need techniques that give us approximations for \gls{h_opt},
+\gls{mise},
+and other accuracy measures.
 
 \Gls{silverman}'s Rule of Thumb for selecting bandwidth in $\RS$:
 
