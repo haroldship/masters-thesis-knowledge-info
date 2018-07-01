@@ -364,9 +364,10 @@ and finally the \gls{amise} which is the sum of the variance and the square of t
 In \Cref{sec:derivations:biasvariancekernel} we derive the \gls{amise}
 for the \gls{kde}:
 \begin{equation}
+    \label{eq:amise}
     \mbox{\gls{amise}}(\hat{f}; h) = 
         \frac{1}{4} h^{4} \alpha^2 \iintW{\left( \nabla^2 f \xvec \right) } +
-        n^{-1} h^{-2} \beta \label{eq:amise}
+        n^{-1} h^{-2} \beta
 \end{equation}
 where
 \begin{align}
@@ -378,7 +379,6 @@ where
 We can now take the derivative of \Cref{eq:amise} by $h$ and set it to zero,
 giving us the optimal bandwidth \gls{h_opt}:
 \begin{align}
-    \gls{h_opt}^{6} & = C n^{-1} \nonumber ~ \text{or} \\
     \gls{h_opt} & = C n^{-\frac{1}{6}}
 \end{align}
 where $C$ is a constant that depends on $f$ and $K$.
@@ -432,10 +432,10 @@ which approximates the \gls{mise}.
 For the \gls{kde}, the formula for the \gls{cv} error of bandwidth $h$ for \gls{lambda_hat} is
 \begin{equation}
     \mbox{\Gls{cv}}%
-        = \iintW{\gls{lambda_hat}_h \xvec^2}
-        - 2 n^{-1} \sum\limits_{i=1}^n \gls{lambda_hat}_{-i,h}\xvec%
+        = \iintW{\hat{f}_h \xvec^2}
+        - 2 n^{-1} \sum\limits_{i=1}^n \hat{f}_{-i,h}\xvec%
 \end{equation}
-where $\gls{lambda_hat}_{-i,h}\xvec$ is the \gls{kde} computed using the bandwidth $h$ and leaving out the $i^\text{th}$ point.
+where $\hat{f}_{-i,h}\xvec$ is the \gls{kde} computed using the bandwidth $h$ and leaving out the $i^\text{th}$ point.
 \Citet{brooks1991asymptotic} show that the \gls{cv} error computed with the selected bandwidth approximates the \gls{mise} very well,
 and the ratio $\frac{\mbox{\gls{cv}}}{\mbox{\gls{mise}}} \to 1$ as $n$ increases.
 
@@ -450,17 +450,18 @@ in the sense that the bandwidths which minimize the \gls{mise} of the \gls{kerne
 \section{Inconsistency of the kernel intensity estimator}
 \label{sec:theory:inconsistency}
 
-From \citet{guan2008consistent}:
-
-{
-\color{red}
-\textbf{The kernel intensity estimator is not consistent.}
-This is because, although the kernel only uses local information around the point of interest to compute the estimate.
-The resulting estimate has bias that tends to zero.
-However it's variance does not diminish because the number of events in any fixed region is of order 1.
-}
-
-The paper develops a \textit{new nonparametric intensity estimator} that is consistent under ``some suitable yet reasonable conditions.''
+This section is based on \citet{guan2008consistent}.
+The \gls{kernel intensity estimator} above is not consistent,
+in the sense that the \gls{mise} does not go to zero as the number of observed events $n$ increases.
+We recall from \Cref{eq:amise},
+that the \gls{amise} is composed of two terms.
+The first term is proportional to $h^4$ while the second is proportional to $h^{-2}$.
+Since the optimal bandwidth \gls{h_opt} is proportional to $n^{-\frac{1}{6}}$,
+we see that the first term,
+which is the asymptotic bias,
+is $O(n^{-\frac{2}{3}})$.
+However the second term,
+which is the asymptotic variance is $O(n^{\frac{1}{3}})$ which does not go to zero as $n$ increases.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -470,8 +471,20 @@ The paper develops a \textit{new nonparametric intensity estimator} that is cons
 \section{Estimation of the mode}
 \label{sec:theory:mode}
 
-From \citet{bickel2006fast} and \citet{hedges2003comparison}.
-
+This section is based on \citet{bickel2006fast} and \citet{hedges2003comparison}.
+Often, one of the goals of intensity estimation is to find the point with the greatest \gls{risk} of coming down with a particular disease.
+Mathematically, the point where this occurs in a probability distribution is called the mode.
+For intensity, we refer to it as the peak and it is the point where the true intensity function takes its highest value.
+However, when it comes to estimating the peak,
+using the point with the highest value does not always give good results,
+having both high bias and high variance.
+There are some techniques, such as those described in \citep{dalenius1965mode},
+which provide more stable estimates.
+In addition to the computing the simple peak, use a simplified version of one of Dalenius' methods.
+We take the highest five percent of the estimated intensity,
+and find its center of mass.
+This point $\xvec$~and the value of the estimate $\gls{lambda_hat} \xvec$ are our estimate of the peak.
+We expect that this will give us a more stable estimate of where the disease risk is highest.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -484,7 +497,8 @@ From \citet{bickel2006fast} and \citet{hedges2003comparison}.
 We generate data for each experiment as follows.
 Before we begin, we set the random number seed to a fixed value for all experiments.
 The first step is to generate a population.
-We choose a distribution function $f_p$ over \gls{W}, and scale it to obtain an the population intensity function \gls{lambda_p} of a \gls{spp} \gls{Lambda} with an expected number of points the same as our chosen population size.
+We choose a distribution function $f_p$ over \gls{W},
+and scale it to obtain an the population intensity function \gls{lambda_p} of a \gls{spp} \gls{Lambda} with an expected number of points the same as our chosen population size.
 This means that the actual population size may not be exactly what we have chosen.
 We then generate points $\xvec$ uniformly in \gls{W} and keep them with probability \gls{lambda_p}$\xvec$.
 This gives us our population \gls{P} which use throughout the experiment.
@@ -499,3 +513,4 @@ We then take the points $\xvec \in \gls{P}$ and keep each one with probability \
 This gives us our set of incidents \gls{I}.
 Once again, when \gls{I}$\xvec$ is higher than \gls{I}$(y_1, y_2)$,
 then the probability of $\xvec \in \gls{I}$ is correspondingly higher than that of $(y_1, y_2)$.
+
