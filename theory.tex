@@ -19,10 +19,11 @@ We study chronic diseases in order to better understand the degree to which diff
 We also are interested in discovering and describing the association between environmental factors and this ``risk''.
 For example, one could ask if air pollution emitted by a factory is associated with an increased ``risk'' of lung cancer among people that live close by.
 
-In order to be more precise, we begin by defining \textbf{\gls{risk}}:
+In order to be more precise,
+let us define
 
 \begin{defn}
-    \textbf{\glspl{risk}} is the probability of an individual person contracting a disease in a specific time period.
+    \textbf{\Gls{risk}} is the probability of an individual person contracting a disease in a specific time period.
 \end{defn}
 
 One way to estimate the \gls{risk} is to look at the historical frequency of contracting of the disease.
@@ -90,7 +91,7 @@ and \citet{wand1994kernel}.
 
 In order to understand the geospatial patterns of disease incidence,
 we consider points in two-dimensional space $\RS$.
-We begin by defining
+We begin with
 
 \begin{defn}
     A \textbf{study area} $\gls{W} \subset \RS$ is a region in the plane where we make observations.
@@ -110,7 +111,7 @@ We call this set of events
     The \textbf{population} \gls{P} is the set of home address events of the residents of the study area \gls{W}.
 \end{defn}
 
-In general, we are interested in the understanding the mechanism by which the events occurred.
+In general, we are interested in understanding the mechanism by which the events occurred.
 We are interested both in the number of events, and even more so in the pattern by which their locations are distributed in \gls{W}.
 Taking a spatial statistical approach, we model the underlying mechanism that generates events using the following:
 
@@ -127,19 +128,21 @@ On the other hand, it is often the case that \gls{Lambda} is not uniform,
 and we call it a heterogeneous point process.
 When \gls{Lambda} is heterogeneous,
 we would like to know the average \gls{intensity} around different points in \gls{W}.
-For this, we define $\ds$ as an infinitesimal area around the point $\xvec$,
-and the \textbf{\gls{intensity}} $\boldsymbol{\gls{lambda}\xvec}$ at $\xvec \in RS$ as:
+For this
+we define $\ds$ as an infinitesimal area around the point $\xvec$,
+and $N\!(\ds)$ as the number of \glspl{event} inside $\ds$.
+Then the \textbf{\gls{intensity}} $\boldsymbol{\gls{lambda}\xvec}$ at $\xvec \in \RS$ is
 
 \begin{equation}
     \label{eq:lambda_differential}
-    \lambda \xvec = \lim_{|\ds| \to 0}
+    \lambda \xvec := \lim_{|\ds| \to 0}
         \left\{
-            \frac{\mathbb{E}[N(\ds)]}% /
+            \frac{\mathbb{E}[N\!(\ds)]}% /
             {|\ds|}
         \right\}
 \end{equation}
 
-And $\gls{lambda}\xvec \ds$ is the approximate probability of \ds~ containing a single incident.
+We can think of $\gls{lambda}\xvec \!\! \ds$ as the approximate probability of the infinitesimal area \ds~ containing a single \gls{event}.
 Qualitatively, an intensity function differs from a probability density function in that it does not necessarily integrate to $1$.
 In particular, we can write $\gls{lambda}$ as a scaled probability density function
 where $f$ is a probability density function and \gls{mu} is a constant.
@@ -150,7 +153,7 @@ where $f$ is a probability density function and \gls{mu} is a constant.
 \end{equation}
 
 For a point-wise \gls{incidence rate} function,
-we can compute two separate \gls{intensity} functions.
+we compute two separate \gls{intensity} functions.
 The first \gls{intensity} returns the point-wise expected number of cases of the disease,
 while the second returns the point-wise population density.
 Dividing the value obtained from first by the value obtained from the second results in the \gls{incidence rate} described in \Cref{defn:incidence_rate}.
@@ -179,34 +182,41 @@ denoted by $\gls{K}\xvec$,
 that satisfies
 
 \begin{align}
-    \gls{K}\xvec \ge 0~ \forall \xvec \in W, \text{and} \label{eq:k_pos} \\
-    \iintW{\gls{K}\xvec} & = 1 \label{eq:k_1} \text{.}
+    \gls{K}\xvec \ge 0~ \forall \xvec \in W, \text{and} \label{eq:k_pos} \\%
+    \iintW{\gls{K}\xvec} & = 1 \label{eq:k_1} \text{.}%
 \end{align}
 
-\Cref{eq:k_pos,eq:k_1} are equivalent to stating that \Kdots is a probability density on $\RS$.
+\Cref{eq:k_pos,eq:k_1} are equivalent to stating that \Kdots~is a probability density on $\RS$.
 Starting with a set of \glspl{event} $\gls{N} \subset \RS$,
 and a positive value \gls{h} known as the bandwidth,
 we define the the \gls{kernel intensity estimator} as follows:
 
 \begin{defn}
     \label{defn:lambda_hat}
-    The \textbf{\gls{kernel intensity estimator}} $\gls{lambda_hat}(\xvec;h)$
+    The \textbf{\gls{kernel intensity estimator}} $\gls{lambda_hat}_h \xvec$
     is a technique for estimating the \gls{intensity} of an \gls{spp}
     from observed \glspl{event} \gls{N}.
     The formula for computing the \gls{kernel intensity estimator} is:
     \begin{equation}
         \label{eq:lambda_hat}
-        \gls{lambda_hat}(\xvec; h) 
-            = \sumS{\gls{K}\left(\frac{\xvec-(s_1, s_2)}{h^2}\right)} \text{.}%
+        \gls{lambda_hat}_h \xvec%
+            = \sumS{\gls{K}\left( \frac{\xvec-(s_1, s_2)}{h} \right)}%
+              \text{where} \xvec-(s_1, s_2) \text{.}%
     \end{equation}
 \end{defn}
 
-This is a natural extension to $\RS$ of the one dimensional \gls{kernel intensity estimator} $\gls{lambda_hat}_1(x;h)$,
+Where $\xvec-(s_1, s_2)$ is ordinary vector subtraction,
+and $\frac{\xvec-(s_1, s_2)}{h}$ is scalar multiplication by $\frac{1}{h}$.
+For the remainder of this section we treat $h$ as a scalar for ease of explanation.
+However, with no loss of generality we will use separate bandwidths in each coordinate,
+that is $\mathbf{h}=(h_1, h_2)$.
+
+This is a natural extension to $\RS$ of the one dimensional \gls{kernel intensity estimator} $\gls{lambda_hat}_{1,h}$,
 which has the formula
 
 \begin{equation}
     \label{eq:lambda_hat_1}
-    \gls{lambda_hat}_1(x;h) = \sumSone{K_1\left(\frac{x - s}{h}\right)} \text{.}%
+    \gls{lambda_hat}_{1,h} = \sumSone{K_1\left( \frac{x - s}{h} \right)} \text{.}%
 \end{equation}
 
 Here, $K_1(x)$ is a one-dimensional kernel function.
@@ -250,9 +260,19 @@ large peak by using the larger bandwidth of $h=0.8$.
         \subcaption{$h=0.8$}
         \label{fig:theory:kernel1d:08}
     \end{subfigure}
-    \caption{One-dimensional \glsentryname{kernel} functions. The dots on the $x1$ axis are the observed \glsentryplural{event}. The dashed lines are the kernel functions around these \glsentryplural{event} and the solid line is the \glsentryname{intensity} estimate $\hat{\lambda_1}$.}
+    \caption{One-dimensional \glsentryname{kernel} functions. The dots on the $x_1$ axis are the observed \glsentryplural{event}. The dashed lines are the kernel functions around these \glsentryplural{event} and the solid line is the \glsentryname{intensity} estimate $\hat{\lambda_1}$.}
     \label{fig:theory:kernel1d}
 \end{figure}
+
+In this study we use the two-dimensional biweight kernel found in \citet{silverman1986density} with formula
+\begin{equation}
+    \label{eq:biweightkernel2d}
+    K \xvec =%
+    \begin{cases}%
+        \frac{3}{\pi}\left( 1 - x_1^2 - x_2^2 \right)^2 & \text{if}~x_1^2+x_2^2<1 \\%
+        0 & \text{otherwise.}%
+    \end{cases}%
+\end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -271,7 +291,7 @@ we must select the ``best'' bandwidth.
 From \Cref{fig:theory:kernel1d} we can see that different values of bandwidth \gls{h} result in different estimates for the \gls{intensity}.
 Our goal is to find a decision procedure that gives us the ``best'' result.
 While there is a great deal of research in \gls{kde},
-there is also some work available for \gls{kernel intensity estimator}.
+there is much less work available for \gls{kernel intensity estimator}.
 We make use of one such result:
 the optimal bandwidth used for computing the \gls{kernel intensity estimator} is the same as that for computing the related \gls{kde} function,
 and can be determined by the same techniques \Citep{diggle1988equivalence}.
@@ -289,7 +309,7 @@ and selecting the bandwidth which gives the optimal value for this measure.
 One common accuracy measure used for function estimation is the \gls{mise},
 because it has several useful mathematical properties.
 It allows for additional analysis by being broken down into the mean integrated squared bias and mean integrated variance.
-It can also be easily approximated by cross-validation error.
+It can also be estimated by cross-validation.
 
 Given a realized estimate \gls{lambda_hat} for any function \gls{lambda},
 we can compute the squared error at any given point $\xvec \in \RS$ as
