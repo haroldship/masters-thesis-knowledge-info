@@ -9,23 +9,25 @@
 The contribution of this thesis is an empirical statistical analysis of the accuracy of the \gls{dkd}
 as a tool for estimating the incidence risk of chronic diseases.
 We examined the effect of several factors on the \gls{dkd} accuracy,
-and we used several methods to measure the accuracy of the \gls{dkd} estimate,
+and we measured the accuracy of the \gls{dkd} using \gls{mise},
+\gls{miae}, \gls{supremum error}, as well as \gls{peak bias}, \gls{peak drift} and \gls{centroid bias} and \gls{centroid drift},
 as described in \Cref{sec:method:accuracy}.
 We ran several scenarios to examine how variations in these factors which affect the incidence risk function,
 the population distribution, and the sample size affect the accuracy of \gls{dkd} for estimation.
 We compared two bandwidth selection techniques, \gls{silverman}'s rule of thumb,
 and least-squares \glsentrylong{cv}.
 We also compared these two techniques to an \gls{oracle},
-which is an approximation of the theoretical optimal bandwidth.
+which is an approximation of the theoretical optimal bandwidth,
+keeping in mind that the oracle is only computable for simulations because we know the true function we wish to estimate.
 
 In order to discuss the overall accuracy of all of the experiments,
 we divided the experiments into two groups.
 The first group, which comprises most of the experiments,
 consist of different \gls{risk} functions on \textbf{uniform populations}.
 The second group consists of different \gls{risk} functions on population distributions with a \textbf{single peak}.
-The results of the second group are found in \Cref{sec:results:pop_spread,sec:results:p1.4_Gap_risk} while the results of the first group comprise the remainder.
-In general, the scale of our accuracy measures for the first group of experiments is lower than the second.
-This indicates that the population distribution has a noticeable effect on the accuracy of the \gls{dkd}.
+The results of the second group are found in \Cref{sec:results:pop_spread} while the results of the first group comprise the remainder.
+In general, the estimation errors observed for the first group of experiments were much higher than the second.
+This indicates that the population distribution has a noticeable negative effect on the accuracy of the \gls{dkd}.
 
 As we discussed in \Cref{subsec:method:mise},
 the \glsentrylong{mise} is the measure used by both \gls{silverman} and \gls{cv} for choosing the bandwidth.
@@ -48,8 +50,6 @@ The resulting estimated \gls{risk} would then have high variance even when norma
 The second scenario where the \gls{nmise} is high occurs when the population density \gls{spread} takes its lowest values of 0.7 and 1.0.
 This results in a highly variable denominator in the \gls{dkd} quotient,
 leading to less stable results.
-Although on average, the \gls{cv} and \gls{silverman} selectors have similar performance for the peaked populations,
-the variance of the \gls{cv} selector is much higher.
 
 \begin{figure}[htbp]
     \centering
@@ -63,7 +63,7 @@ the variance of the \gls{cv} selector is much higher.
         \subcaption{Peaked populations}
         \label{fig:discussion:overall_nmise_boxplot:peak}
     \end{subfigure}
-    \caption{Overall distribution of \glsentryname{nmise}}
+    \caption{Overall distribution of \glsentryname{nmise}. The error scale in \autoref{fig:discussion:overall_nmise_boxplot:peak} is higher by a factor of 15.}
     \label{fig:discussion:overall_nmise_boxplot}
 \end{figure}
 
@@ -79,7 +79,7 @@ the variance of the \gls{cv} selector is much higher.
         \subcaption{Peaked populations}
         \label{fig:discussion:overall_nmise_diff_boxplot:peak}
     \end{subfigure}
-    \caption{Overall distribution of \glsentryname{nmise} difference from the \Glsentryname{oracle}}
+    \caption{Overall distribution of \glsentryname{nmise} difference from the \Glsentryname{oracle}. The error scale in \autoref{fig:discussion:overall_nmise_boxplot:peak} is higher by a factor of 20.}
     \label{fig:discussion:overall_nmise_diff_boxplot}
 \end{figure}
 
@@ -132,7 +132,6 @@ We note the large difference in scale between the experiments with uniform popul
 Our \gls{supremum error} measure intuitively describes the expected worst case error of the \gls{dkd} estimate.
 \Cref{fig:discussion:overall_nsup_boxplot} shows the overall distribution of the \gls{supremum error} over our experiments.
 The results for uniform and peaked populations are shown in \Cref{fig:discussion:overall_nsup_boxplot:unif,fig:discussion:overall_nsup_boxplot:peak} respectively.
-Why is the scale so much higher? See \Cref{sec:results:spread}.
 
 \begin{figure}[htbp]
     \centering
@@ -167,7 +166,7 @@ Why is the scale so much higher? See \Cref{sec:results:spread}.
 \end{figure}
 
 The distributions we observed for \gls{peak bias} and \gls{peak drift} are shown in \Cref{fig:discussion:overall_peakbias_boxplot,fig:discussion:overall_peakdrift_boxplot}.
-First, we note that the \gls{peak bias} always is always negative when computing the \gls{dkd} with the \gls{oracle} bandwidth,
+First, we note that the \gls{peak bias} is always negative when computing the \gls{dkd} with the \gls{oracle} bandwidth,
 for uniformly distributed populations.
 This is in line with what we would expect,
 as, in general, we expect smoothing techniques to underestimate high values and overestimate low values.
@@ -211,7 +210,7 @@ This needs further investigation.
     \label{fig:discussion:overall_centroiddrift_boxplot}
 \end{figure}
 
-The \gls{centroid bias} performed much better than then the \gls{peak bias} for measuring the highest risk.
+The \gls{centroid bias} performed much better than the \gls{peak bias} for measuring the highest risk.
 For the \gls{oracle} selected bandwidths, the distribution was similar to the \gls{peak bias} for uniform populations but much better for populations with peaked distributions.
 However, for both \gls{silverman} and \gls{cv} bandwidths, the \gls{centroid bias} was consistently lower in both groups.
 The \gls{centroid drift} was lower for all bandwidth selection methods for both groups of experiments.
@@ -231,4 +230,19 @@ We added \textit{momentum} to our gradient descent implementation but it did not
 
 In \Cref{tab:mean_error_rates:p0.7_100_1.0_1h} we see that the accuracy measure \gls{mise} using the \gls{silverman} rule of thumb is even better than was obtained using the \gls{oracle}.
 We tried to run with an additional experiment with 499 monte carlo simulations, and found that in this case the \gls{silverman} rule did not outperform the \gls{oracle}.
+
+\section{Summary}
+
+We used monte carlo simulations to empirically estimate the accuracy of the \acrlong{dkd} estimate of simulated disease risk intensity functions.
+For this, we used several accuracy measures that measure the overall accuracy as well as the accuracy of the peak.
+We also used two bandwidth selection methods to choose the bandwidth of the \gls{dkd}.
+We did this while varying several factors.
+In \Cref{sec:results:number_of_incidents} increasing the \gls{factor} resulted in decreased selected bandwidths
+and increase relative accuracy, although absolute accuracy decreased.
+Increasing the incidence \gls{spread} also resulted in increased relative accuracy.
+Increasing the population size also resulted in increased accuracy,
+while changing the population \gls{spread} resulted in unpredictable accuracy measures.
+These results are interesting,
+and there are are many opportunities for further work.
+
 
