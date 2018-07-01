@@ -309,7 +309,7 @@ and selecting the bandwidth which gives the optimal value for this measure.
 One common accuracy measure used for function estimation is the \gls{mise},
 because it has several useful mathematical properties.
 It allows for additional analysis by being broken down into the mean integrated squared bias and mean integrated variance.
-It can also be estimated by cross-validation.
+It can also be estimated by \acrlong{cv}.
 
 Given a realized estimate \gls{lambda_hat} for any function \gls{lambda},
 we can compute the squared error at any given point $\xvec \in \RS$ as
@@ -346,6 +346,14 @@ giving us
         & \qquad + \iintW{ \E \Big( \lmbdhat - \E\lmbdhat \Big)^2 } \label{eq:mise:intbiasvariance}
 \end{align}
 We call the first part of \Cref{eq:mise:intbiasvariance} the \gls{isb} and the second part the \gls{iv}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Asymptotic behavior of the bandwidth
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Asymptotic behavior of the bandwidth}
+\label{sec:theory:asymptotic_bandwidth}
 
 For the \gls{kernel intensity estimator},
 the \gls{mise} cannot be computed directly.
@@ -390,29 +398,49 @@ our approximation \gls{amise} depends on the true function $f$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% Asymptotic behavior of the bandwidth
+%% Bandwidth selection from data
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Asymptotic behavior of the bandwidth}
-\label{sec:theory:asymptotic_bandwidth}
+\section{Bandwidth selection from data}
+\label{sec:theory:bandwidthselection}
 
 In practice,
 we don't know the true density or intensity functions.
-Therefore we need techniques that give us approximations for \gls{h_opt},
-\gls{mise},
-and other accuracy measures.
+Therefore we need cannot compute  \gls{h_opt},
+\gls{mise} directly.
+We use techniques that give us approximations for these values.
+The two techniques we use are optimized to find a bandwidth that minimizes \gls{mise}.
+The selected bandwidth may or may not be close to \gls{h_opt},
+depending on the particular sample.
 
-\Gls{silverman}'s Rule of Thumb for selecting bandwidth in $\RS$:
-
+The first technique we will use is known as \textbf{\Gls{silverman}'s Rule of Thumb}.
+We use the version for selecting bandwidth in $\RS$,
+which has forumula
 \begin{equation}
-\label{eq:silverman}
-    h_S = 2.04 * \sigma * n^{-1/6}
+    \label{eq:silverman}
+    h_S = 2.04 * \sigma * n^{-1/6}%
 \end{equation}
+where $n$ is the observed number of incidents,
+$\sigma$ the arithmetic mean of the standard deviations of the $x_1$ and $x_2$ coordinates of the sample points.
+\citet{silverman1986density} shows that for a large class of intensity functions,
+including ones based on Gaussian functions,
+this bandwidth provides a good approximation to the optimal bandwidth \gls{h_opt}. 
 
-Where $n$ is the observed number of incidents,
-$\sigma$ the arithmetic mean of the standard deviations in the $x_1$ and $x_2$ directions.
+Our second technique is to use leave-one-out \textbf{\gls{cv}} over a set of bandwidths.
+We select the bandwidth which minimizes the \gls{cv} error,
+which approximates the \gls{mise}.
+For the \gls{kde}, the formula for the \gls{cv} error of bandwidth $h$ for \gls{lambda_hat} is
+\begin{equation}
+    \mbox{\Gls{cv}}%
+        = \iintW{\gls{lambda_hat}_h \xvec^2}
+        - 2 n^{-1} \sum\limits_{i=1}^n \gls{lambda_hat}_{-i,h}\xvec%
+\end{equation}
+where $\gls{lambda_hat}_{-i,h}\xvec$ is the \gls{kde} computed using the bandwidth $h$ and leaving out the $i^\text{th}$ point.
+\Citet{brooks1991asymptotic} show that the \gls{cv} error computed with the selected bandwidth approximates the \gls{mise} very well,
+and the ratio $\frac{\mbox{\gls{cv}}}{\mbox{\gls{mise}}} \to 1$ as $n$ increases.
 
-
+The technique for \gls{kernel intensity estimator} is identical to the \gls{kde},
+in the sense that the bandwidths which minimize the \gls{mise} of the \gls{kernel intensity estimator} are the same. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
