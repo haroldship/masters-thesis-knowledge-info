@@ -176,7 +176,7 @@ Similarly for the population,
 we would like to estimate the population \gls{intensity} function.
 
 A common method for estimating \gls{intensity} functions is known as
-\textbf{\gls{kernel intensity estimator}}.
+\textbf{\gls{kernel intensity estimation}}.
 This technique utilizes a special function known as a \textbf{\gls{kernel}},
 denoted by $\gls{K}\xvec$,
 that satisfies
@@ -200,8 +200,7 @@ we define the the \gls{kernel intensity estimator} as follows:
     \begin{equation}
         \label{eq:lambda_hat}
         \gls{lambda_hat}_h \xvec%
-            = \sumS{\gls{K}\left( \frac{\xvec-(s_1, s_2)}{h} \right)}%
-              \text{where} \xvec-(s_1, s_2) \text{.}%
+            = \sumS{\gls{K}\left( \frac{\xvec-(s_1, s_2)}{h} \right)} \text{.}%
     \end{equation}
 \end{defn}
 
@@ -224,7 +223,7 @@ Here, $K_1(x)$ is a one-dimensional kernel function.
 In order to compute \gls{lambda_hat} using \Cref{eq:lambda_hat},
 there are two choices to be made: the choice of the bandwidth \gls{h}
 and the choice of \gls{kernel} \gls{K}.
-The role of the \gls{kernel} function \Kdots is to smooth the information obtained
+The role of the \gls{kernel} function \Kdots~is to smooth the information obtained
 from the observed \glspl{event} to an area around their locations.
 Choosing different \glspl{kernel} results in different shapes to this smoothing.
 However, this has only a small effect on the resulting \gls{intensity} estimate.
@@ -286,12 +285,12 @@ This section is based on \citet{silverman1986density} and \citet{wand1994kernel}
 A common statistical problem is to find the ``best'' estimate \gls{lambda_hat}
 for the \gls{intensity} of an unknown \gls{spp}
 based on a set of observed \glspl{event}.
-In order to do this using \gls{kernel intensity estimator},
+In order to do this using \gls{kernel intensity estimation},
 we must select the ``best'' bandwidth.
 From \Cref{fig:theory:kernel1d} we can see that different values of bandwidth \gls{h} result in different estimates for the \gls{intensity}.
 Our goal is to find a decision procedure that gives us the ``best'' result.
 While there is a great deal of research in \gls{kde},
-there is much less work available for \gls{kernel intensity estimator}.
+there is much less work available for \gls{kernel intensity estimation}.
 We make use of one such result:
 the optimal bandwidth used for computing the \gls{kernel intensity estimator} is the same as that for computing the related \gls{kde} function,
 and can be determined by the same techniques \Citep{diggle1988equivalence}.
@@ -439,7 +438,7 @@ where $\hat{f}_{-i,h}\xvec$ is the \gls{kde} computed using the bandwidth $h$ an
 \Citet{brooks1991asymptotic} show that the \gls{cv} error computed with the selected bandwidth approximates the \gls{mise} very well,
 and the ratio $\frac{\mbox{\gls{cv}}}{\mbox{\gls{mise}}} \to 1$ as $n$ increases.
 
-The technique for \gls{kernel intensity estimator} is identical to the \gls{kde},
+The technique for \gls{kernel intensity estimation} is identical to the \gls{kde},
 in the sense that the bandwidths which minimize the \gls{mise} of the \gls{kernel intensity estimator} are the same. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
