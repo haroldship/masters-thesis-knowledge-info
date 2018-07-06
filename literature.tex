@@ -6,6 +6,90 @@
 %%
 %%
 
-Our research is concerned with non-parametric intensity estimation.
+Our research is concerned with two-dimensional non-parametric intensity estimation,
+that is estimating functions in the plane while making only minimal assumptions about the underlying distribution of the data. 
+In particular, we are interested in estimating an incidence rate,
+which is the ratio of incidence count and of population which were each individually computed using kernel methods.
+This technique has been applied in several areas of spatial analysis including epidemiology.
 
-Kernel smoothing is a highly fexible and popular approach for estimation of probability density and intensity functions of continuous spatial data. In this role it also forms an integral part of estimation of functionals such as the density-ratio or ``relative risk surface''. Originally developed with the epidemiological motivation of examining fluctuations in disease risk based on samples of cases and controls collected over a given geographical region, such functions have also been successfully employed across a diverse range of disciplines where a relative comparison of spatial density functions has been of interest. This versatility has demanded ongoing developments and improvements to the relevant methodology, including use spatially adaptive smoothers; tests of significantly elevated risk based on asymptotic theory; extension to the spatiotemporal domain; and novel computational methods for their evaluation. In this tutorial paper we review the current methodology, including the most recent developments in estimation, computation and inference. All techniques are implemented in the new software package sparr, publicly available for the R language, and we illustrate its use with a pair of epidemiological examples. \citep{davies2018tutorial}
+\section{Spatial pattern analysis}
+
+The estimation of intensity is part of the wider field of spatial pattern analysis.
+For event data such as disease incidence,
+spatial point processes including Poisson processes are often used to model the statistical and spatial properties of events.
+\Citet{diggle1983spatial} is the first book to extensively cover spatial-statistical analysis of point patterns such as these.
+While there is some theoretical work available for \gls{kernel intensity estimation},
+it is usually based on and compared to \acrfull{kde}.
+\Gls{kde} is a popular method of non-parametric estimation of probability density functions from observed data.
+
+\section{Kernel density estimation}
+ 
+The primary reference for probability density estimation is \citep{silverman1986density},
+which covers both parametric and non-parametric methods.
+In particular,
+it covers kernel methods,
+including the multi-dimensional \gls{kernel intensity estimation} used in this research.
+We note that both of our bandwidth selection methods,
+the \Gls{silverman} rule of thumb and least-squares \acrlong{cv} are discussed in this book.
+Another book, \citet{wand1994kernel}, gives an in-depth look at kernel methods
+including several techniques for selecting the bandwidth.
+In examining how both the \gls{kde} and \gls{kernel intensity estimation} can use data to learn about underlying structure,
+it describes how these similar techniques are used in comparison to parametric methods.
+In addition to single and multi-variable kernel methods to estimate functions,
+it also describes how kernel regression techniques for supervised learning and prediction.
+
+A different perspective can be found in \citet{devroye1985nonparametric},
+which analyses non-parametric density estimation from an $L_1$ perspective,
+which is in line with our use of the \gls{miae} measure of accuracy.
+
+\section{Kernel intensity estimation}
+
+The first paper to discuss \gls{kde} for probability density functions was \citet{rosenblatt1956remarks},
+which contains derivations of the bias, variance, and \acrfull{mise} for general density estimates in one dimension,
+and introduces the class of kernel estimates.
+The idea to use \gls{kernel intensity estimation} to estimate the intensity of one-dimensional point processes can be found in 
+\Citet{diggle1985kernel}.
+Based on the kernel methods described by \citet{rosenblatt1956remarks},
+the paper includes estimates for \gls{mise} as well as a performance evaluation using simulated data.
+The equivalence of the bandwidth in kernel density and intensity was shown in \citet{diggle1988equivalence}.
+However,
+the \gls{kernel intensity estimator} is not consistent,
+meaning that the \gls{mise} does not converge to zero as the number of incidents increases.
+There is some work in this area,
+with \citet{guan2008consistent,fuentes2016consistent} developing techniques for \gls{kernel intensity estimation} that are consistent under certain conditions.
+The research mentioned above is mostly concerned with one-dimensional data.
+However, kernel technieques have successfully been used in two dimensions as well \citep{scott1992multivariate}.
+
+\section{Application to epidemiology}
+
+Current research in kernel estimation continues.
+Like our research, the tutorial paper \citet{davies2018tutorial} looks at using the ratio of two kernel estimates for estimating epidemiological risk functions.
+It is based on the technique developed by \citet{bithell1990application,bithell1991estimation}.
+They compute two \gls{kde} estimates in order to compare the relative risk between two samples representing the case and control populations on a common study area.
+This relative risk ratio represents a different quantity from the incidence rate or our current research.
+As a tutorial, the paper goes in-depth into several bandwidth selection techniques,
+edge corrections, and other methods that extend the basic \gls{kde}.
+
+\section{The double kernel}
+
+We also see kernel estimation techniques used in epidemiological research.
+In many studies,
+incidents of disease are aggregated together instead of using spatial analysis.
+This is referred to as ``zonal analysis'' and suffers from several issues,
+mainly due to information that is lost when aggregating and computing \glspl{asr}.
+One of the motivations of spatial analysis is to provide more informative results than can be done with aggregation.
+An example of how the results of studies based on such aggregation can be misleading can be found in \citet{portnov2007ecological}.
+
+The use of the \acrfull{dkd} in epidemiological studies has been around since at least 2004 \citep{rushton2004analyzing}.
+\citet{kloog2009using} is another recent study which using the \gls{dkd}.
+In particular, it identifies the \gls{maup},
+which occurs when changes to the arbitrary administration zones that are used to aggregate incidents can result in different observations and findings.
+\citet{zusman2012residential} is another study that uses the \gls{dkd} discusses the advantages of the \gls{dkd} over \glspl{asr}.
+A recent examination of the properties of the \gls{dkd} can be found in \citet{zusman2016application}.
+
+While the \gls{dkd} has been used frequently in epidemiological and non-epidemiological spatial analysis,
+its statistical properties have not been adequately studied.
+In order to understand these properties,
+both a theoretical and an empirical analysis is required.
+The scope of this research is to provide a beginning to the empirical analysis by studying the sensitivity of the \gls{dkd} to several factors using monte carlo simulations.
+
