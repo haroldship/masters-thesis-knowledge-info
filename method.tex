@@ -55,16 +55,16 @@ Finally, in \Cref{sec:method:combining_experiments}, we describe how the effect 
 \label{sec:method:computing}
 
 The \gls{dkd} is computed over the study area \gls{W} as the ratio of two positive-valued functions.
-At any given point $\xvec$ in the plane, we can compute \gls{lambda_i}$\xvec$, the \gls{factor} at that point.
-We call \gls{lambda_i}$\xvec$ the \textit{incident intensity} at $\xvec$.
-Next, at the same point, we can compute \gls{lambda_p}$\xvec$, the \textit{population intensity} at $\xvec$.
+At any given point $\xvec$ in the plane, we can compute \gls{lambda_I}$\xvec$, the \gls{factor} at that point.
+We call \gls{lambda_I}$\xvec$ the \textit{incident intensity} at $\xvec$.
+Next, at the same point, we can compute \gls{lambda_P}$\xvec$, the \textit{population intensity} at $\xvec$.
 Ideally, we would know how to compute these functions exactly, and we would then compute $\lambda\xvec$ the risk,
 or probability of an incident at $\xvec$ with the ratio:
 \begin{equation}
-    \lambda\xvec = \frac{\gls{lambda_i}\xvec}{\gls{lambda_p}\xvec}.
+    \lambda\xvec = \frac{\gls{lambda_I}\xvec}{\gls{lambda_P}\xvec}.
 \end{equation}
 
-In practice, these functions are not known and we cannot compute \gls{lambda_i}$\xvec$ and \gls{lambda_p}$\xvec$ exactly, 
+In practice, these functions are not known and we cannot compute \gls{lambda_I}$\xvec$ and \gls{lambda_P}$\xvec$ exactly, 
 so we estimate them from observational data as follows.
 
 TBD intensity kernel
@@ -102,7 +102,7 @@ we run $M$ monte carlo simulations and approximate the \gls{mise} by taking the 
 
 \begin{equation}
     \label{eq:mise_tilde}
-    \widetilde{\mbox{MISE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{ISE}(\hat{\lambda_i})
+    \widetilde{\mbox{MISE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{ISE}(\hat{\lambda_I})
 \end{equation}
 
 In many of our analyses, we compare the accuracy of several experiments.
@@ -172,7 +172,7 @@ As above, we run $M$ monte carlo simulations,
 and approximate the \gls{miae} by taking the empirical average of the \glspl{iae}.
 
 \begin{equation}
-    \widetilde{\mbox{MIAE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{IAE}(\hat{\lambda_i})
+    \widetilde{\mbox{MIAE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{IAE}(\hat{\lambda_I})
 \end{equation}
 
 As with \gls{mise}, we need to compare experiments with different values of \gls{mu}.
@@ -214,7 +214,7 @@ We define the \gls{supremum error} as follows:
 As in the previous accuracy measures, we run $M$ monte carlo simulations, and approximate the \mbox{supremum error}, by taking the empirical average of the supremum error of the estimates.
 
 \begin{equation}
-    \widetilde{\mbox{\gls{supremum error}}}(\gls{lambda_hat}) = \frac{1}{M} \sum_{i=1}^{M} \mbox{supremum error}(\hat{\lambda_i})
+    \widetilde{\mbox{\gls{supremum error}}}(\gls{lambda_hat}) = \frac{1}{M} \sum_{i=1}^{M} \mbox{supremum error}(\hat{\lambda_I})
 \end{equation}
 
 Furthermore, we need to compare experiments with different values of \gls{mu}.
@@ -256,7 +256,7 @@ The \gls{peak bias} gives us a feel for how much the \gls{dkd} tends to over or 
                                 \right]
                             \right]
                             \\
-    \widetilde{\mbox{\gls{peak bias}}}(\gls{lambda_hat}) & = \frac{1}{M} \sum_{i=1}^{M} \mbox{peak bias}(\hat{\lambda_i})
+    \widetilde{\mbox{\gls{peak bias}}}(\gls{lambda_hat}) & = \frac{1}{M} \sum_{i=1}^{M} \mbox{peak bias}(\hat{\lambda_I})
 \end{align}
 
 The second measure associated with the peak we call the \gls{peak drift}.
@@ -266,7 +266,7 @@ It is defined as the expected value of the distance in $\RS$ between the locatio
     \mbox{\gls{peak drift}} & = \E \left[
                             |\widehat{(p_1, p_2)} - (p_1, p_2)|
                         \right]
-    \widetilde{\mbox{\gls{peak drift}}}(\gls{lambda_hat}) & = \frac{1}{M} \sum_{i=1}^{M} \mbox{peak drift}(\hat{\lambda_i})
+    \widetilde{\mbox{\gls{peak drift}}}(\gls{lambda_hat}) & = \frac{1}{M} \sum_{i=1}^{M} \mbox{peak drift}(\hat{\lambda_I})
 \end{align}
 
 The \gls{relative peak bias} is the \gls{peak bias} divided by the value of the true peak.
@@ -283,6 +283,7 @@ In fact, they are nearly identical to the preceding two accuracy measures.
 However, unlike the \gls{peak error} and \gls{peak bias}, they do not use the exact peak of \gls{lambda_hat}.
 Instead, they use the centroid and average value of \gls{lambda_hat} over the 5\% of the study area where \gls{lambda_hat} is highest.
 We call the corresponding accuracy measures \gls{centroid bias} and \gls{centroid drift}.
+This is a simplified version of one of \citet{dalenius1965mode} methods.
 
 The \gls{relative centroid bias} is the \gls{centroid bias} divided by the value of the true peak.
 The \gls{relative centroid drift} is the \gls{centroid drift} divided by the range of $x_1$ or $x_2$, whichever is larger.
@@ -296,19 +297,19 @@ The \gls{relative centroid drift} is the \gls{centroid drift} divided by the ran
 We generate data for each experiment as follows.
 Before we begin, we set the random number seed to a fixed value for all experiments.
 The first step is to generate a population.
-We choose a distribution function $f_p$ over \gls{W}, and scale it to obtain the population intensity function \gls{lambda_p} of a \gls{spp} \gls{Lambda} with an expected number of points the same as our chosen population size.
+We choose a distribution function $f_p$ over \gls{W}, and scale it to obtain the population intensity function \gls{lambda_P} of a \gls{spp} \gls{Lambda} with an expected number of points the same as our chosen population size.
 This means that in a given realization, the actual population size may not be exactly what we have chosen.
 We then generate points $\xvec$ in \gls{W} from the uniform random vector $(X_1,X_2)$,
-and keep them with probability \gls{lambda_p}$\xvec$.
+and keep them with probability \gls{lambda_P}$\xvec$.
 This gives us our population \gls{P} which we use throughout the experiment.
 In this way,
-if \gls{lambda_p}$\xvec$ has twice the value of \gls{lambda_p}$(y_1, y_2)$ for two points $\xvec$ and $(y_1, y_2)$ in \gls{W},
+if \gls{lambda_P}$\xvec$ has twice the value of \gls{lambda_P}$(y_1, y_2)$ for two points $\xvec$ and $(y_1, y_2)$ in \gls{W},
 then we expect to see about twice as many points around $\xvec$ than around $(y_1, y_2)$ in \gls{P}.
 
 Once we have a fixed population, we have to decide which members of the population constitute the incidents.
 The process to generate the incidents is similar to that of the population.
-We create an incident intensity function \gls{lambda_i} of a \gls{spp} for incidents.
-We then take the points $\xvec \in \gls{P}$ and keep each one with probability \gls{lambda_i}$\xvec$.
+We create an incident intensity function \gls{lambda_I} of a \gls{spp} for incidents.
+We then take the points $\xvec \in \gls{P}$ and keep each one with probability \gls{lambda_I}$\xvec$.
 This gives us our set of incidents \gls{I}.
 Once again, when \gls{I}$\xvec$ is higher than \gls{I}$(y_1, y_2)$,
 then the probability of $\xvec \in \gls{I}$ is correspondingly higher than that of $(y_1, y_2)$.
@@ -386,12 +387,12 @@ For each experiment, we run 1,000 simulations.
 In each simulation, we perform the following:
 \begin{enumerate}
     \item\label{itm:method:simulation:generate} Generate a sample of incidents \gls{I} from the population \gls{P}, based on the risk function \gls{lambda}.
-    \item\label{itm:method:simulation:oracle_lambda_i} Using the \gls{oracle} bandwidths \gls{h_o1} and \gls{h_o2}, compute the \gls{oracle} estimate of \gls{lambda_i}.
-    \item\label{itm:method:simulation:oracle_lambda_hat} At each grid point $(x_{1,i}, x_{2,i})$, divide the oracle estimate of \gls{lambda_i}$(x_{1,i}, x_{2,i})$ by \gls{lambda_p}$(x_{i,i}, x_{2,i})$ to obtain \gls{lambda_hat_o}$(x_{1,i}, x_{2,i})$.
+    \item\label{itm:method:simulation:oracle_lambda_I} Using the \gls{oracle} bandwidths \gls{h_o1} and \gls{h_o2}, compute the \gls{oracle} estimate of \gls{lambda_I}.
+    \item\label{itm:method:simulation:oracle_lambda_hat} At each grid point $(x_{1,i}, x_{2,i})$, divide the oracle estimate of \gls{lambda_I}$(x_{1,i}, x_{2,i})$ by \gls{lambda_P}$(x_{i,i}, x_{2,i})$ to obtain \gls{lambda_hat_o}$(x_{1,i}, x_{2,i})$.
     \item\label{itm:method:simulation:accuracy} Compute the accuracy measures \gls{ise}, \gls{iae}, \gls{supremum error}, \gls{peak error}, \gls{peak drift} for the \gls{oracle}.
     Also compute the relative values for these measures.
-    \item\label{itm:method:simulation:silverman_lambda_i} Repeat steps \ref{itm:method:simulation:oracle_lambda_i} to \ref{itm:method:simulation:accuracy} using the bandwidth computed with \gls{silverman}.
-    \item\label{itm:method:simulation:cv_lambda_i} Repeat steps \ref{itm:method:simulation:oracle_lambda_i} to \ref{itm:method:simulation:accuracy} using the bandwidths computed by \gls{cv}.
+    \item\label{itm:method:simulation:silverman_lambda_I} Repeat steps \ref{itm:method:simulation:oracle_lambda_I} to \ref{itm:method:simulation:accuracy} using the bandwidth computed with \gls{silverman}.
+    \item\label{itm:method:simulation:cv_lambda_I} Repeat steps \ref{itm:method:simulation:oracle_lambda_I} to \ref{itm:method:simulation:accuracy} using the bandwidths computed by \gls{cv}.
     This computation is described in \Cref{sec:method:cross-validation}.
 \end{enumerate}
 

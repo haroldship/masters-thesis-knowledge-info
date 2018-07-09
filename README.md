@@ -1,8 +1,22 @@
 # Investigating the Statistical Properties of the Double Kernel Density Estimator
 ## Harold Ship, University of Haifa
 
-### Fixed in version 0.14
-
+### Fixed in version 0.15
+ - [x] Literature: first draft
+ - [x] Theory: (and everywhere) lambda_i used for intensity AND for index: change intensity to lambda_I/lambda_P
+ - [x] Theory: 2.2 describe N(ds) distribution as Poisson Process; define PP
+ - [x] Theory: 2.2 lambda(x,x)ds approx prob: derive (from Bernoulli/Poisson)
+ - [x] Theory: 2.3 do 1D before 2D and move 1D plots after 1D
+ - [x] Theory: 2.3 1D plot - specify which kernel
+ - [x] Theory: 2.3 for biweight explain radius is 1 but can be changed by bandwith
+ - [x] Theory: 2.5 explain K has mean 0 and 3X differentiable with positive variance and radial symmetry
+ - [x] Theory: 2.5 assumptions on f
+ - [x] Theory: 2.5 replace section A2 with ref to Silverman and clean up derivations
+ - [x] Theory: 2.6 define oracle bandwidth and add to glossary
+ - [x] Theory: 2.7 implications of inconsistency (error increase) so we normalize
+ - [x] Theory: 2.7 verify n^{1/3} as others state O(1)
+ - [x] Theory: 2.8 remove this section and mention Dalenius in method
+ - [x] Theory: 2.9 mention rejection sampling and give reference
 
 ### Fixed in version 0.14
  - [x] Theory: finished draft
@@ -89,20 +103,6 @@
 
 ### TODO
 
- - [ ] Theory: (and everywhere) lambda_i used for intensity AND for index: change intensity to lambda_I/lambda_P
- - [ ] Theory: 2.2 describe N(ds) distribution as Poisson Process; define PP
- - [ ] Theory: 2.2 lambda(x,x)ds approx prob: derive (from Bernoulli/Poisson)
- - [ ] Theory: 2.3 do 1D before 2D and move 1D plots after 1D
- - [ ] Theory: 2.3 1D plot - specify which kernel
- - [ ] Theory: 2.3 for biweight explain radius is 1 but can be changed by bandwith
- - [ ] Theory: 2.5 explain K has mean 0 and 3X differentiable with positive variance and radial symmetry
- - [ ] Theory: 2.5 assumptions on f
- - [ ] Theory: 2.5 replace section A2 with ref to Silverman and clean up derivations
- - [ ] Theory: 2.6 define oracle bandwidth and add to glossary
- - [ ] Theory: 2.7 implications of inconsistency (error increase) so we normalize
- - [ ] Theory: 2.7 verify n^{1/3} as others state O(1)
- - [ ] Theory: 2.8 remove this section and mention Dalenius in method
- - [ ] Theory: 2.9 mention rejection sampling and give reference
  - [ ] Introduction: define "statistical properties"
  - [ ] Method: better describe centroid
  - [ ] Method: 4.1 describe the study area
@@ -123,9 +123,6 @@
  - [ ] Method: 4.5: add a step to compute lambda_p
  - [ ] Method: 4.6: reword last sentence
  - [ ] Method: Add computing and technical issues and solutions: time, AWS, etc. move from wherever.
- - [ ] Appendix: A.47 graph is weird
- - [ ] Appendix: Section A.10 biases are positive even for Oracle
- - [ ] Appendix: A.10 table: Silverman is better than CV
  - [ ] Compare bandwidths for 2 peaks: peak drift vs centroid drift, same for bias
  - [ ] Conclusion: needs BOTTOM LINE
  - [ ] Conclusion: How good is Silverman?

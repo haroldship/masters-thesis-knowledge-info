@@ -31,6 +31,9 @@ it covers kernel methods,
 including the multi-dimensional \gls{kernel intensity estimation} used in this research.
 We note that both of our bandwidth selection methods,
 the \Gls{silverman} rule of thumb and least-squares \acrlong{cv} are discussed in this book.
+\Citet{wand1993comparison} take an in-depth look at smoothing parameters in two dimensions.
+In particular,
+they find that using a two-dimensional bandwidth vector is adequate for smoothing in each coordinate direction.
 Another book, \citet{wand1994kernel}, gives an in-depth look at kernel methods
 including several techniques for selecting the bandwidth.
 In examining how both the \gls{kde} and \gls{kernel intensity estimation} can use data to learn about underlying structure,
@@ -52,7 +55,10 @@ The idea to use \gls{kernel intensity estimation} to estimate the intensity of o
 Based on the kernel methods described by \citet{rosenblatt1956remarks},
 the paper includes estimates for \gls{mise} as well as a performance evaluation using simulated data.
 The equivalence of the bandwidth in kernel density and intensity was shown in \citet{diggle1988equivalence}.
-However,
+\Citet{brooks1991asymptotic} show that the \gls{cv} bandwidth is asymptotically optimal,
+building on similar results for the \gls{kde} \citep{hall1983large,burman1985data,stone1984asymptotically}.
+
+Unlike the \gls{kde} however,
 the \gls{kernel intensity estimator} is not consistent,
 meaning that the \gls{mise} does not converge to zero as the number of incidents increases.
 There is some work in this area,

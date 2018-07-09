@@ -142,7 +142,19 @@ Then the \textbf{\gls{intensity}} $\boldsymbol{\gls{lambda}\xvec}$ at $\xvec \in
         \right\}
 \end{equation}
 
-We can think of $\gls{lambda}\xvec \!\! \ds$ as the approximate probability of the infinitesimal area \ds~ containing a single \gls{event}.
+We model disease incidence as a special kind of \gls{spp} known as an Inhomogeneous Poisson Process.
+\begin{defn}
+    An \textbf{Inhomogeneous Poisson Process} is a \gls{spp} which has the following properties:
+    \begin{enumerate}
+        \item The number of events $N(A)$ in any area $A$ has a Poisson distribution with mean $\iint\limits_{\xvec \in A}{\lambda \xvec \diff{x_2} \diff{x_1}}$.
+        \item Given $N(A) = n$,
+            the $n$ events in $A$ form an independent random sample from the distribution on $A$ with probability density function \textit{proportional} to $\lambda$.
+    \end{enumerate}
+\end{defn}
+
+From above, we can see that for an infinitesimal area \ds~,
+the expected number of events in \ds~ is $\gls{lambda}\xvec \! \ds$.
+We can think of $\gls{lambda}\xvec$ as the approximate probability of the infinitesimal area \ds~ containing a single \gls{event}.
 Qualitatively, an intensity function differs from a probability density function in that it does not necessarily integrate to $1$.
 In particular, we can write $\gls{lambda}$ as a scaled probability density function
 where $f$ is a probability density function and \gls{mu} is a constant.
@@ -180,50 +192,25 @@ A common method for estimating \gls{intensity} functions is known as
 This technique utilizes a special function known as a \textbf{\gls{kernel}},
 denoted by $\gls{K}\xvec$,
 that satisfies
-
 \begin{align}
-    \gls{K}\xvec \ge 0~ \forall \xvec \in W, \text{and} \label{eq:k_pos} \\%
-    \iintW{\gls{K}\xvec} & = 1 \label{eq:k_1} \text{.}%
+    & \hspace{1.75em} \gls{K}\xvec \ge 0~ \forall \xvec \in W, \text{and} \label{eq:k_pos} \\%
+    & \iintW{\gls{K}\xvec} = 1 \label{eq:k_1} \text{.}%
 \end{align}
 
 \Cref{eq:k_pos,eq:k_1} are equivalent to stating that \Kdots~is a probability density on $\RS$.
-Starting with a set of \glspl{event} $\gls{N} \subset \RS$,
-and a positive value \gls{h} known as the bandwidth,
-we define the the \gls{kernel intensity estimator} as follows:
 
-\begin{defn}
-    \label{defn:lambda_hat}
-    The \textbf{\gls{kernel intensity estimator}} $\gls{lambda_hat}_h \xvec$
-    is a technique for estimating the \gls{intensity} of an \gls{spp}
-    from observed \glspl{event} \gls{N}.
-    The formula for computing the \gls{kernel intensity estimator} is:
-    \begin{equation}
-        \label{eq:lambda_hat}
-        \gls{lambda_hat}_h \xvec%
-            = \sumS{\gls{K}\left( \frac{\xvec-(s_1, s_2)}{h} \right)} \text{.}%
-    \end{equation}
-\end{defn}
-
-Where $\xvec-(s_1, s_2)$ is ordinary vector subtraction,
-and $\frac{\xvec-(s_1, s_2)}{h}$ is scalar multiplication by $\frac{1}{h}$.
-For the remainder of this section we treat $h$ as a scalar for ease of explanation.
-However, with no loss of generality we will use separate bandwidths in each coordinate,
-that is $\mathbf{h}=(h_1, h_2)$.
-
-This is a natural extension to $\RS$ of the one dimensional \gls{kernel intensity estimator} $\gls{lambda_hat}_{1,h}$,
-which has the formula
-
+Spatial analysis uses a two-dimensional version of \gls{kernel intensity estimator}
+which is a natural extension to $\RS$ of the one dimensional \gls{kernel intensity estimator} $\gls{lambda_hat}_{1,h}$.
 \begin{equation}
     \label{eq:lambda_hat_1}
     \gls{lambda_hat}_{1,h} = \sumSone{K_1\left( \frac{x - s}{h} \right)} \text{.}%
 \end{equation}
-
 Here, $K_1(x)$ is a one-dimensional kernel function.
 
-In order to compute \gls{lambda_hat} using \Cref{eq:lambda_hat},
+In order to compute $\gls{lambda_hat}_{1,h}$ using \Cref{eq:lambda_hat_1},
 there are two choices to be made: the choice of the bandwidth \gls{h}
-and the choice of \gls{kernel} \gls{K}.
-The role of the \gls{kernel} function \Kdots~is to smooth the information obtained
+and the choice of \gls{kernel} $K_1(\cdot)$.
+The role of the \gls{kernel} function $K_1(\cdot)$~is to smooth the information obtained
 from the observed \glspl{event} to an area around their locations.
 Choosing different \glspl{kernel} results in different shapes to this smoothing.
 However, this has only a small effect on the resulting \gls{intensity} estimate.
@@ -231,18 +218,7 @@ On the other hand,
 the choice of bandwidth \gls{h} has a major effect on the \gls{intensity} estimate.
 The bandwidth controls the width of the area smoothed by the \gls{kernel} function and hence on the overall amount of smoothing.
 
-\Cref{fig:theory:kernel1d} shows an example of how \gls{kernel} smoothing works in  one-dimension for three different bandwidths.
-The two-dimensional case is analogous.
-The dots along the bottom are the observed \glspl{event}.
-The dashed lines show the \gls{kernel} functions around each of these \glspl{event},
-while the upper solid line is the \gls{intensity} estimate produced using \Cref{eq:lambda_hat_1}.
-\Cref{fig:theory:kernel1d:02} shows the estimate with $h=0.2$.
-It has two local modes, each with a bit of fluctuation at the peaks.
-In \Cref{fig:theory:kernel1d:04} we still see two modes with $h=0.4$, but with smoother peaks.
-\Cref{fig:theory:kernel1d:08} has smoothed the two peaks together into a single,
-large peak by using the larger bandwidth of $h=0.8$.
-
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \begin{subfigure}[t]{0.32\textwidth}
         \includegraphics[width=\textwidth]{img/kernel1d-02}
@@ -259,11 +235,50 @@ large peak by using the larger bandwidth of $h=0.8$.
         \subcaption{$h=0.8$}
         \label{fig:theory:kernel1d:08}
     \end{subfigure}
-    \caption{One-dimensional \glsentryname{kernel} functions. The dots on the $x_1$ axis are the observed \glsentryplural{event}. The dashed lines are the kernel functions around these \glsentryplural{event} and the solid line is the \glsentryname{intensity} estimate $\hat{\lambda_1}$.}
+    \caption{One-dimensional \glsentryname{kernel} functions using the biweight(quartic) kernel \citep{silverman1986density}.
+        The dots on the $x_1$ axis are the observed \glsentryplural{event}.
+        The dashed lines are the kernel functions around these \glsentryplural{event}
+        and the solid line is the \glsentryname{intensity} estimate $\hat{\lambda_1}$.}
     \label{fig:theory:kernel1d}
 \end{figure}
 
-In this study we use the two-dimensional biweight kernel found in \citet{silverman1986density} with formula
+\Cref{fig:theory:kernel1d} shows an example of how \gls{kernel} smoothing works in  one-dimension for three different bandwidths.
+The dots along the bottom are the observed \glspl{event}.
+The dashed lines show the \gls{kernel} functions around each of these \glspl{event},
+while the upper solid line is the \gls{intensity} estimate produced using \Cref{eq:lambda_hat_1}.
+\Cref{fig:theory:kernel1d:02} shows the estimate with $h=0.2$.
+It has two local modes, each with a bit of fluctuation at the peaks.
+In \Cref{fig:theory:kernel1d:04} we still see two modes with $h=0.4$, but with smoother peaks.
+\Cref{fig:theory:kernel1d:08} has smoothed the two peaks together into a single,
+large peak by using the larger bandwidth of $h=0.8$.
+
+The two-dimensional case is analogous.
+Starting with a set of \glspl{event} $\gls{N} \subset \RS$,
+and a positive value \gls{h} known as the bandwidth,
+we define the the \gls{kernel intensity estimator} as follows:
+\begin{defn}
+    \label{defn:lambda_hat}
+    The \textbf{\gls{kernel intensity estimator}} $\gls{lambda_hat}_h \xvec$
+    is a technique for estimating the \gls{intensity} of an \gls{spp}
+    from observed \glspl{event} \gls{N}.
+    The formula for computing the \gls{kernel intensity estimator} is:
+    \begin{equation}
+        \label{eq:lambda_hat}
+        \gls{lambda_hat}_h \xvec%
+            = \sumS{\gls{K}\left( \frac{\xvec-(s_1, s_2)}{h} \right)} \text{.}%
+    \end{equation}
+\end{defn}
+where $\xvec-(s_1, s_2)$ is ordinary vector subtraction,
+and $\frac{\xvec-(s_1, s_2)}{h}$ is scalar multiplication by $\frac{1}{h}$.
+For the remainder of this section we treat $h$ as a scalar for ease of explanation.
+However, with no loss of generality we will use separate bandwidths in each coordinate,
+that is $\mathbf{h}=(h_1, h_2)$.
+
+There are many kernels which satisfy \Cref{eq:k_pos,eq:k_1},
+including two-dimensional versions of the square kernel, the Gaussian kernel and the Epanechnikov kernel.
+In this study we use the two-dimensional biweight kernel,
+also known as the quartic kernel,
+which can be found in \citet{silverman1986density} with formula
 \begin{equation}
     \label{eq:biweightkernel2d}
     K \xvec =%
@@ -272,6 +287,10 @@ In this study we use the two-dimensional biweight kernel found in \citet{silverm
         0 & \text{otherwise.}%
     \end{cases}%
 \end{equation}
+This kernel spreads the weight of each event \xvec~ into a circle of radius one, centered at \xvec.
+The effect of the bandwidth $h$ is to change the radius of that circle to $h$.
+The advantage of the kernels over the Epanechnikov kernel is that it twice-differentiable.
+The advantage over the Gaussian kernel is that it much faster to compute.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -360,8 +379,22 @@ Instead,
 we approximate the bias,
 the variance,
 and finally the \gls{amise} which is the sum of the variance and the square of the bias.
-In \Cref{sec:derivations:biasvariancekernel} we derive the \gls{amise}
-for the \gls{kde}:
+This allows us to analyze the behavior of the \gls{mise} asymptotically,
+with dependence only on the true function $f(\cdot, \cdot)$ and the kernel $K(\cdot, \cdot)$.
+
+In order to use Taylor's Theorem,
+we make the following assumptions about $K(\cdot, \cdot)$ and $f(\cdot, \cdot)$ \citep{silverman1986density,wand1994kernel}:
+\begin{enumerate}
+    \item $K(\cdot, \cdot)$ is a probability density function with zero mean \label{amise:assumptions:1}
+    \item $K(\cdot, \cdot)$ is radially symmetric and has non-zero, finite variance \label{amise:assumptions:2}
+    \item $f(\cdot, \cdot)$ has bounded and continuous second derivatives. \label{amise:assumptions:3}
+\end{enumerate}
+
+Under these assumptions,
+the first term of the Taylor expansion is zero (\cref{amise:assumptions:1,amise:assumptions:3}),
+and the second and remainder terms of the Taylor expansion are finite (\cref{amise:assumptions:2}).
+In \citet{silverman1986density} we find the following formula derived for the \gls{amise}
+of the \gls{kde}:
 \begin{equation}
     \label{eq:amise}
     \mbox{\gls{amise}}(\hat{f}; h) = 
@@ -370,8 +403,8 @@ for the \gls{kde}:
 \end{equation}
 where
 \begin{align}
-    \alpha & = \iintR{x_1^2 K(x_1,x_2)} \\
-    \beta & = \iintR{K(x_1,x_2)^2} \\
+    \alpha & = \iintR{x_1^2 K(x_1,x_2)} ~\text{since}~K(\cdot,\cdot)~\text{is radially symmetric,}\\
+    \beta & = \iintR{K(x_1,x_2)^2} \text{, and} \\
     \nabla^2 f \xvec & = \frac{\diffsq{f}\xvec}{\diff{x_1^2}} + \frac{\diffsq{f}\xvec}{\diff{x_2^2}} \text{.}
 \end{align}
 
@@ -386,6 +419,7 @@ where $C$ is a constant that depends on $f$ and $K$.
 \end{defn}
 As noted above,
 the optimal bandwidth of the \gls{kde} in the \gls{mise} sense is the same for the \gls{kernel intensity estimator}.
+For $h < \gls{h_opt}$, the variance will be higher, while $h > \gls{h_opt}$ will result in a higher bias \Citep{rosenblatt1971curve}.
 
 There are other accuracy measures that can be used to evaluate the estimate of the \gls{kernel intensity estimator}.
 We discuss some of these in \Cref{sec:method:accuracy}.
@@ -404,10 +438,20 @@ our approximation \gls{amise} depends on the true function $f$.
 \label{sec:theory:bandwidthselection}
 
 In practice,
-we don't know the true density or intensity functions.
-Therefore we need cannot compute  \gls{h_opt},
-\gls{mise} directly.
-We use techniques that give us approximations for these values.
+researchers don't know the true density or intensity functions.
+Therefore they cannot compute \gls{h_opt} directly,
+and so they use techniques that give them approximations for this value.
+In this study,
+we do know the true intensity functions,
+since we use them to generate data for the simulations.
+Therefore we can compute the ``best'' bandwidth by comparing to the actual truth.
+We therefore define
+\begin{defn}
+    the \textbf{\gls{oracle bandwidth}} for a given \gls{intensity} is the bandwidth that minimizes the empirical \gls{mise},
+    computed from the data samples generated from the true \gls{intensity} function.
+\end{defn}
+Other schemes for selecting the bandwidth that are based on a specific data sample will not be as good as the \gls{oracle}.
+
 The two techniques we use are optimized to find a bandwidth that minimizes \gls{mise}.
 The selected bandwidth may or may not be close to \gls{h_opt},
 depending on the particular sample.
@@ -435,11 +479,15 @@ For the \gls{kde}, the formula for the \gls{cv} error of bandwidth $h$ for \gls{
         - 2 n^{-1} \sum\limits_{i=1}^n \hat{f}_{-i,h}\xvec%
 \end{equation}
 where $\hat{f}_{-i,h}\xvec$ is the \gls{kde} computed using the bandwidth $h$ and leaving out the $i^\text{th}$ point.
-\Citet{brooks1991asymptotic} show that the \gls{cv} error computed with the selected bandwidth approximates the \gls{mise} very well,
-and the ratio $\frac{\mbox{\gls{cv}}}{\mbox{\gls{mise}}} \to 1$ as $n$ increases.
-
 The technique for \gls{kernel intensity estimation} is identical to the \gls{kde},
 in the sense that the bandwidths which minimize the \gls{mise} of the \gls{kernel intensity estimator} are the same. 
+\Citet{brooks1991asymptotic} show that the \gls{cv} error computed with the selected bandwidth approximates the optimal \gls{ise} very well,
+in the sense that
+\begin{equation*}
+    \frac   {\mbox{\gls{ise}}(\gls{lambda_hat}; h_{\gls{cv}})}%
+            {\mbox{\gls{ise}}(\gls{lambda_hat}; \gls{h_opt})}%
+            \to 1 ~\text{almost surely.}%
+\end{equation*}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -461,29 +509,20 @@ which is the asymptotic bias,
 is $O(n^{-\frac{2}{3}})$.
 However the second term,
 which is the asymptotic variance is $O(n^{\frac{1}{3}})$ which does not go to zero as $n$ increases.
+In contrast,
+\citet{bertrand1978convergence} show that the \gls{kde} converges uniformly to the true function with probability 1 as $n \to \infty$,
+while \citet{devroye1985nonparametric} show that the \gls{kde} converges in $L_1$ to the true function with probability 1.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-%% Estimation of the mode
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Estimation of the mode}
-\label{sec:theory:mode}
+The number of events $n$ can increase in several ways: for example, if the time period of the study is increased,
+or if a larger study area is chosen.
+Since the \gls{mise} does not go to zero as $n$ increases,
+we normalize the \gls{mise} in two ways.
+The first way is to simply divide by the observed number of events $n$ or,
+since we know the true function,
+by the expected number of events.
+The second way is to divide, at every point,
+the estimation error $\gls{lambda_hat}\xvec - \gls{lambda}\xvec$ by the true value $\gls{lambda}\xvec$.
 
-This section is based on \citet{bickel2006fast} and \citet{hedges2003comparison}.
-Often, one of the goals of intensity estimation is to find the point with the greatest \gls{risk} of coming down with a particular disease.
-Mathematically, the point where this occurs in a probability distribution is called the mode.
-For intensity, we refer to it as the peak and it is the point where the true intensity function takes its highest value.
-However, when it comes to estimating the peak,
-using the point with the highest value does not always give good results,
-having both high bias and high variance.
-There are some techniques, such as those described in \citep{dalenius1965mode},
-which provide more stable estimates.
-In addition to the computing the simple peak, use a simplified version of one of Dalenius' methods.
-We take the highest five percent of the estimated intensity,
-and find its center of mass.
-This point $\xvec$~and the value of the estimate $\gls{lambda_hat} \xvec$ are our estimate of the peak.
-We expect that this will give us a more stable estimate of where the disease risk is highest.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -493,22 +532,23 @@ We expect that this will give us a more stable estimate of where the disease ris
 \section{Data generation process}
 \label{sec:theory:data}
 
-We generate data for each experiment as follows.
+We generate data for each experiment using rejection sampling,
+using the technique described in \citet{diggle1983spatial}.
 Before we begin, we set the random number seed to a fixed value for all experiments.
 The first step is to generate a population.
-We choose a distribution function $f_p$ over \gls{W},
-and scale it to obtain an the population intensity function \gls{lambda_p} of a \gls{spp} \gls{Lambda} with an expected number of points the same as our chosen population size.
+We choose a distribution function $f_P$ over \gls{W},
+and scale it to obtain an the population intensity function \gls{lambda_P} of a \gls{spp} \gls{Lambda} with an expected number of points the same as our chosen population size.
 This means that the actual population size may not be exactly what we have chosen.
-We then generate points $\xvec$ uniformly in \gls{W} and keep them with probability \gls{lambda_p}$\xvec$.
+We then generate points $\xvec$ uniformly in \gls{W} and keep them with probability \gls{lambda_P}$\xvec$.
 This gives us our population \gls{P} which use throughout the experiment.
 In this way,
-if \gls{lambda_p}$\xvec$ has twice the value of \gls{lambda_p}$(y_1, y_2)$ for two points $\xvec$ and $(y_1, y_2)$ in \gls{W},
+if \gls{lambda_P}$\xvec$ has twice the value of \gls{lambda_P}$(y_1, y_2)$ for two points $\xvec$ and $(y_1, y_2)$ in \gls{W},
 then we expect to see about twice as many points around $\xvec$ than around $(y_1, y_2)$ in \gls{P}.
 
 Once we have a fixed population, we have need to decide which members of the population constitute the incidents.
 The process to generate the incidents is similar to that of the population.
-We create an incident intensity function \gls{lambda_i} of a \gls{spp} for incidents.
-We then take the points $\xvec \in \gls{P}$ and keep each one with probability \gls{lambda_i}$\xvec$.
+We create an incident intensity function \gls{lambda_I} of a \gls{spp} for incidents.
+We then take the points $\xvec \in \gls{P}$ and keep each one with probability \gls{lambda_I}$\xvec$.
 This gives us our set of incidents \gls{I}.
 Once again, when \gls{I}$\xvec$ is higher than \gls{I}$(y_1, y_2)$,
 then the probability of $\xvec \in \gls{I}$ is correspondingly higher than that of $(y_1, y_2)$.
