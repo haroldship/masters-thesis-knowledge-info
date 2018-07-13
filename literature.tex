@@ -18,12 +18,15 @@ The estimation of intensity is part of the wider field of spatial pattern analys
 For event data such as disease incidence,
 spatial point processes including Poisson processes are often used to model the statistical and spatial properties of events.
 \Citet{diggle1983spatial} is an early publication which extensively covers the spatial-statistical analysis of point patterns such as these.
+It covers several stochastic models and statistical methods,
+and provides examples of biological and epidemiological analyses.
+
+\section{Kernel density estimation}
+ 
 While there is some theoretical work available for \gls{kernel intensity estimation},
 it is usually based on and compared to \acrfull{kde}.
 \Gls{kde} is a popular method of non-parametric estimation of probability density functions from observed data.
 
-\section{Kernel density estimation}
- 
 The primary reference for probability density estimation is \citet{silverman1986density},
 which covers both parametric and non-parametric methods.
 In particular,
@@ -54,6 +57,7 @@ which is in line with our use of the \gls{miae} measure of accuracy.
 
 The idea to use \gls{kernel intensity estimation} to estimate the intensity functions of one-dimensional point processes can be found in \citet{diggle1985kernel}.
 Based on the kernel methods described by \citet{rosenblatt1956remarks},
+and making use of edge-correction,
 Diggle's paper includes estimates for the \gls{mise} as well as a performance evaluation using simulated data.
 The equivalence of the bandwidth in kernel density and intensity was shown in \citet{diggle1988equivalence}.
 \Citet{brooks1991asymptotic} show that the \gls{cv} bandwidth is asymptotically optimal,
@@ -73,10 +77,12 @@ Current research in kernel estimation continues.
 For example, we see kernel estimation techniques used in epidemiology.
 Like our research,
 the tutorial paper \citet{davies2018tutorial} looks at using the ratio of two kernel estimates for estimating epidemiological risk functions.
-It is based on the technique developed by \citet{bithell1990application} and \citet{bithell1991estimation}.
-He computes two \glspl{kde} in order to compare the relative risk between two samples representing the case and control populations on a common study area.
+It is based on the technique developed by \citet{bithell1990application,bithell1991estimation,kelsall1995kernel}.
+By conditioning on sample size,
+they compute two \glspl{kde} instead of \glspl{kernel intensity estimator} in order to compare the relative risk between two samples representing the case and control populations on a common study area.
 This relative risk ratio represents a different quantity from the incidence rate of our current research.
-Because it is a tutorial, \citet{davies2018tutorial} delves into several bandwidth selection techniques,
+Because it is a tutorial,
+\citet{davies2018tutorial} delves into several bandwidth selection techniques,
 edge corrections,
 and other methods that extend the basic \gls{kde}.
 
@@ -96,6 +102,11 @@ it identifies the \gls{maup},
 which occurs when changes to the arbitrary administration zones that are used to aggregate incidents can result in different observations and findings.
 \citet{zusman2012residential} is another study which discusses the advantages of the \gls{dkd} over \glspl{asr}.
 A recent examination of the properties of the \gls{dkd} can be found in \citet{zusman2016application}.
+They find that:
+\begin{quotation}
+The DKD approach provides reasonably stable and consistent estimates, if the following three preconditions are met: (a) the kernel estimation parameters are properly defined, (b) the number of reference points, used for transformation of continuous DKD surfaces into discrete observations, is sufficiently large, and (c) the spatial dependency of neighboring observations is taken into account.
+\end{quotation}
+
 
 While the \gls{dkd} has been used frequently in epidemiological and non-epidemiological spatial analysis,
 its statistical properties have not been adequately studied.

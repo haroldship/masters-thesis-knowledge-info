@@ -94,6 +94,7 @@ we consider points in two-dimensional space $\RS$.
 We begin with
 
 \begin{defn}
+    \label{defn:studyarea}
     A \textbf{study area} $\gls{W} \subset \RS$ is a region in the plane where we make observations.
 \end{defn}
 
@@ -116,6 +117,7 @@ We are interested both in the number of events, and even more so in the pattern 
 Taking a spatial statistical approach, we model the underlying mechanism that generates events using the following:
 
 \begin{defn}
+    \label{defn:spp}
     A \textbf{\gls{spp}} $\boldsymbol{\gls{Lambda}}$ is a stochastic mechanism which generates a random set of events.
 \end{defn}
 
@@ -144,6 +146,7 @@ Then the \textbf{\gls{intensity}} $\boldsymbol{\gls{lambda}\xvec}$ at $\xvec \in
 
 We model disease incidence as a special kind of \gls{spp} known as an Inhomogeneous Poisson Process.
 \begin{defn}
+    \label{defn:inhomogenouspoissonprocess}
     An \textbf{Inhomogeneous Poisson Process} is a \gls{spp} which has the following properties:
     \begin{enumerate}
         \item The number of events $N(A)$ in any area $A$ has a Poisson distribution with mean $\iint\limits_{\xvec \in A}{\lambda \xvec \diff{x_2} \diff{x_1}}$.
@@ -474,6 +477,7 @@ We select the bandwidth which minimizes the \gls{cv} error,
 which approximates the \gls{mise}.
 For the \gls{kde}, the formula for the \gls{cv} error of bandwidth $h$ for \gls{lambda_hat} is
 \begin{equation}
+    \label{eq:cverror}
     \mbox{\Gls{cv}}%
         = \iintW{\hat{f}_h \xvec^2}
         - 2 n^{-1} \sum\limits_{i=1}^n \hat{f}_{-i,h}\xvec%

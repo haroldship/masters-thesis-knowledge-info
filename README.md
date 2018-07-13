@@ -17,6 +17,25 @@
  - [x] Theory: 2.7 verify n^{1/3} as others state O(1)
  - [x] Theory: 2.8 remove this section and mention Dalenius in method
  - [x] Theory: 2.9 mention rejection sampling and give reference
+ - [x] Method: better describe centroid
+ - [x] Method: 4.1 describe the study area
+ - [x] Method: 4.1 put in a picture of pop and incident points
+ - [x] Method: 4.1 Discuss the real-life underlying story of the data with examples
+ - [x] Method: 4.1 Discuss how the real-life underlying story is modeled with SPP or Poisson
+ - [x] Method: 4.1 Describe the kernel method of intensity estimation, assumes some data, "if someone has incident location data, they can use this method"
+ - [x] Method: 4.1 mention 2 kernel methods, incidents vs population
+ - [x] Method: 4.2 define lambda := lambda(., .) to show lambda is a function
+ - [x] Method: 4.2.5: motivation for centroid
+ - [x] Method: 4.2.5: formulas
+ - [x] Method: 4.3: "and scale it" - example
+ - [x] Method: 4.4: Add formulas and a reference for CV
+ - [x] Method: 4.5: Explain buffer with respect to edge effects
+ - [x] Method: 4.5: use \texttt for variable names
+ - [x] Method: 4.5: explain that the oracle knows the true lambda and so creates a baseline that approximates mise-optimal b/w
+ - [x] Method: 4.5: add a step to compute lambda_p
+ - [x] Method: 4.6: reword last sentence
+ - [x] Method: Add computing and technical issues and solutions: time, AWS, etc. move from wherever.
+
 
 ### Fixed in version 0.14
  - [x] Theory: finished draft
@@ -104,25 +123,6 @@
 ### TODO
 
  - [ ] Introduction: define "statistical properties"
- - [ ] Method: better describe centroid
- - [ ] Method: 4.1 describe the study area
- - [ ] Method: 4.1 put in a picture of pop and incident points
- - [ ] Method: 4.1 Discuss the real-life underlying story of the data with examples
- - [ ] Method: 4.1 Discuss how the real-life underlying story is modeled with SPP or Poisson
- - [ ] Method: 4.1 Describe the kernel method of intensity estimation, assumes some data, "if someone has incident location data, they can use this method"
- - [ ] Method: 4.1 mention 2 kernel methods, incidents vs population
- - [ ] Method: 4.2 define lambda := lambda(., .) to show lambda is a function
- - [ ] Method: 4.2.5: motivation for centroid
- - [ ] Method: 4.2.5: formulas
- - [ ] Method: 4.3: "and scale it" - example
- - [ ] Method: 4.4: "A common method for bandwidth selection..." to start
- - [ ] Method: 4.4: Add formulas and a reference for CV
- - [ ] Method: 4.5: Explain buffer with respect to edge effects
- - [ ] Method: 4.5: use \texttt for variable names
- - [ ] Method: 4.5: explain that the oracle knows the true lambda and so creates a baseline that approximates mise-optimal b/w
- - [ ] Method: 4.5: add a step to compute lambda_p
- - [ ] Method: 4.6: reword last sentence
- - [ ] Method: Add computing and technical issues and solutions: time, AWS, etc. move from wherever.
  - [ ] Compare bandwidths for 2 peaks: peak drift vs centroid drift, same for bias
  - [ ] Conclusion: needs BOTTOM LINE
  - [ ] Conclusion: How good is Silverman?
