@@ -1,6 +1,8 @@
 # Investigating the Statistical Properties of the Double Kernel Density Estimator
 ## Harold Ship, University of Haifa
 
+### Fixed in version 0.16
+
 ### Fixed in version 0.15
  - [x] Literature: first draft
  - [x] Theory: (and everywhere) lambda_i used for intensity AND for index: change intensity to lambda_I/lambda_P
