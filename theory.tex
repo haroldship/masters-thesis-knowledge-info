@@ -15,7 +15,7 @@
 \label{sec:theory:incidence}
 
 The theory described in this section is based on \citet{rothman2008modern}.
-We study chronic diseases in order to better understand the degree to which different groups of people are ``at risk'' of contracting a disease.
+We focus on chronic diseases in order to better understand the degree to which different groups of people are ``at risk'' of contracting a disease.
 We also are interested in discovering and describing the association between environmental factors and this ``risk''.
 For example, one could ask if air pollution emitted by a factory is associated with an increased ``risk'' of lung cancer among people that live close by.
 
@@ -147,18 +147,28 @@ Then the \textbf{\gls{intensity}} $\boldsymbol{\gls{lambda}\xvec}$ at $\xvec \in
 We model disease incidence as a special kind of \gls{spp} known as an Inhomogeneous Poisson Process.
 \begin{defn}
     \label{defn:inhomogenouspoissonprocess}
-    An \textbf{Inhomogeneous Poisson Process} is a \gls{spp} which has the following properties:
+    An \textbf{Inhomogeneous Poisson Process} is a \gls{spp} which has the following properties \citep[Section 4.4]{diggle1983spatial}:
     \begin{enumerate}
-        \item The number of events $N(A)$ in any area $A$ has a Poisson distribution with mean $\iint\limits_{\xvec \in A}{\lambda \xvec \diff{x_2} \diff{x_1}}$.
-        \item Given $N(A) = n$,
-            the $n$ events in $A$ form an independent random sample from the distribution on $A$ with probability density function \textit{proportional} to $\lambda$.
+        \item The number of events $N\!(A)$ in any area $A$ has a Poisson distribution with mean
+            $\iint\limits_{\xvec \in A}{\hspace{-1em} \lambda \xvec \diff{x_2} \diff{x_1}}$
+            \label{defn:inhomogenouspoissonprocess:1}.
+        \item With the condition that $N\!(A) \! = \! n$,
+            the $n$ events (locations) in $A$ form an independent random sample from the distribution on $A$ with probability density function \textit{proportional} to $\lambda$ \label{defn:inhomogenouspoissonprocess:2}.
     \end{enumerate}
 \end{defn}
 
-From above, we can see that for an infinitesimal area \ds~,
-the expected number of events in \ds~ is $\gls{lambda}\xvec \! \ds$.
-We can think of $\gls{lambda}\xvec$ as the approximate probability of the infinitesimal area \ds~ containing a single \gls{event}.
-Qualitatively, an intensity function differs from a probability density function in that it does not necessarily integrate to $1$.
+From above, we can see that for an infinitesimal area \ds around a point \xvec,
+we can think of $\lambda \xvec \ds$ as nearly constant in \ds~so
+$$\iint\limits_{\xvec \in A}{\hspace{-1em}\lambda \xvec \diff{x_2} \diff{x_1}} \approx \lambda \xvec \ds \text{.}$$
+By \Cref{defn:inhomogenouspoissonprocess:1} of \Cref{defn:inhomogenouspoissonprocess},
+the probability that the are \ds~ contains exactly one point is
+$\exp(-\lambda \xvec |\!\ds|) \lambda \xvec \ds \text{.}$
+Since we take \ds~ to be infinitesimal,
+$\exp(-\lambda \xvec |\!\ds|) \allowbreak \approx 1$ and so we can think of
+$\lambda \xvec \ds$ as the probability that \ds~ contains exactly one event.
+
+Qualitatively,
+an intensity function differs from a probability density function in that it does not necessarily integrate to $1$.
 In particular, we can write $\gls{lambda}$ as a scaled probability density function
 where $f$ is a probability density function and \gls{mu} is a constant.
 
@@ -379,57 +389,78 @@ We call the first part of \Cref{eq:mise:intbiasvariance} the \gls{isb} and the s
 For the \gls{kernel intensity estimator},
 the \gls{mise} cannot be computed directly.
 Instead,
-we approximate the bias,
+we need to approximate it.
+In order to do this,
+we compute approximate values of the bias,
 the variance,
-and finally the \gls{amise} which is the sum of the variance and the square of the bias.
+and finally we can compute the \gls{amise} which is the sum of the approximate variance and the square of the approximate bias.
 This allows us to analyze the behavior of the \gls{mise} asymptotically,
-with dependence only on the true function $f(\cdot, \cdot)$ and the kernel $K(\cdot, \cdot)$.
+with dependence only on the true function $\gls{lambda}\dotdot$ and the kernel $K\dotdot$.
 
-In order to use Taylor's Theorem,
-we make the following assumptions about $K(\cdot, \cdot)$ and $f(\cdot, \cdot)$ \citep{silverman1986density,wand1994kernel}:
+Following \citep{silverman1986density,wand1994kernel},
+and based on the equivalence of bandwidths for the \gls{kde} and the\gls{kernel intensity estimator} \citep{diggle1988equivalence},
+we begin by using Taylor's Theorem to approximate the \gls{kde}.
+In order to do this we make the following assumptions about $K\dotdot$
+and $f\dotdot$ \citep{silverman1986density,wand1994kernel}:
 \begin{enumerate}
-    \item $K(\cdot, \cdot)$ is a probability density function with zero mean \label{amise:assumptions:1}
-    \item $K(\cdot, \cdot)$ is radially symmetric and has non-zero, finite variance \label{amise:assumptions:2}
-    \item $f(\cdot, \cdot)$ has bounded and continuous second derivatives. \label{amise:assumptions:3}
+    \item $K\dotdot$ is a probability density function with zero mean \label{amise:assumptions:1}
+    \item $K\dotdot$ is radially symmetric and has non-zero, finite variance \label{amise:assumptions:2}
+    \item $f\dotdot$ has bounded and continuous second derivatives. \label{amise:assumptions:3}
 \end{enumerate}
 
 Under these assumptions,
 the first term of the Taylor expansion is zero (\cref{amise:assumptions:1,amise:assumptions:3}),
 and the second and remainder terms of the Taylor expansion are finite (\cref{amise:assumptions:2}).
-In \citet{silverman1986density} we find the following formula derived for the \gls{amise}
-of the \gls{kde}:
-\begin{equation}
-    \label{eq:amise}
-    \mbox{\gls{amise}}(\hat{f}; h) = 
-        \frac{1}{4} h^{4} \alpha^2 \iintW{\left( \nabla^2 f \xvec \right) } +
-        n^{-1} h^{-2} \beta
-\end{equation}
+The following formulas for the \gls{amise} can be found it \citet[Section 4.3]{silverman1986density}.
+\begin{align}
+    \mbox{bias}_h \hat{f} \xvec%
+        & \approx \frac{1}{2} h^{2} \alpha \nabla^2 f \xvec \nonumber \\%
+    \mbox{variance}_h \hat{f} \xvec%
+        & \approx n^{-1} h^{-2} \beta f \xvec \nonumber \\%
+    \mbox{\gls{amise}}(f; h)%
+        & = \frac{1}{4} h^{4} \alpha^2 \iintW{\left( \nabla^2 f \xvec \right)^2 }%
+            + n^{-1} h^{-2} \beta \label{eq:amisef}%
+\end{align}
 where
 \begin{align}
-    \alpha & = \iintR{x_1^2 K(x_1,x_2)} ~\text{since}~K(\cdot,\cdot)~\text{is radially symmetric,}\\
-    \beta & = \iintR{K(x_1,x_2)^2} \text{, and} \\
-    \nabla^2 f \xvec & = \frac{\diffsq{f}\xvec}{\diff{x_1^2}} + \frac{\diffsq{f}\xvec}{\diff{x_2^2}} \text{.}
+    \alpha & = \iintR{x_1^2 K(x_1,x_2)} \text{, since}~K\dotdot~\text{is radially symmetric,} \nonumber \\
+    \beta & = \iintR{K(x_1,x_2)^2} \text{, and} \nonumber \\
+    \nabla^2 f \xvec & = \frac{\diffsq{f}\xvec}{\diff{x_1^2}} + \frac{\diffsq{f}\xvec}{\diff{x_2^2}} \nonumber \text{.}
 \end{align}
 
-We can now take the derivative of \Cref{eq:amise} by $h$ and set it to zero,
+We note that both $\alpha$ and $\beta$ depend only on \Kdots,
+and that $\nabla^2 f$ is the Laplacian operator which is the trace of the Hessian matrix.
+We can now take the derivative of \Cref{eq:amisef} by $h$ and set it to zero,
 giving us the optimal bandwidth \gls{h_opt}:
 \begin{align}
     \gls{h_opt} & = C n^{-\frac{1}{6}}
 \end{align}
-where $C$ is a constant that depends on $f$ and $K$.
+where $C$ is a constant that depends on $\lambda$ and $K$.
 \begin{defn}
-    The \gls{mise} \textbf{optimal bandwidth} $\mathbf{\gls{h_opt}}$ is the value of $h$ that minimizes the \gls{mise} of the \gls{kde} for a given distribution function $f$ and kernel function $K$.
+    The \gls{mise} \textbf{optimal bandwidth} $\mathbf{\gls{h_opt}}$ is the value of $h$ that minimizes the \gls{mise} of the \gls{kde} for a given probability density function $f$ and kernel function $K$.
 \end{defn}
 As noted above,
 the optimal bandwidth of the \gls{kde} in the \gls{mise} sense is the same for the \gls{kernel intensity estimator}.
 For $h < \gls{h_opt}$, the variance will be higher, while $h > \gls{h_opt}$ will result in a higher bias \Citep{rosenblatt1971curve}.
+
+Since we have $\gls{lambda_hat} = n \hat{f}$,
+the formula for the \gls{amise} of $\gls{lambda} = \mu f$ is
+\begin{align}
+    \mbox{bias}_h \gls{lambda_hat} \xvec%
+        & \approx \frac{1}{2} h^{2} \alpha \mu \nabla^2 f \xvec \nonumber \\%
+    \mbox{variance}_h  \gls{lambda_hat} \xvec%
+        & \approx n^{-1} h^{-2} \beta \mu f \xvec \nonumber \\%
+    \mbox{\gls{amise}}(\gls{lambda}; h)%
+        & = \frac{1}{4} h^{4} \alpha^2 \mu^2 \iintW{\left( \nabla^2 f \xvec \right)^2 }%
+            + \mu^2 n^{-1} h^{-2} \beta \label{eq:amiselambda}%
+\end{align}
 
 There are other accuracy measures that can be used to evaluate the estimate of the \gls{kernel intensity estimator}.
 We discuss some of these in \Cref{sec:method:accuracy}.
 Although we use these measures to characterize the behavior of the \gls{kernel intensity estimator} and the \gls{dkd},
 our bandwidth is chosen by techniques that try to achieve \gls{h_opt} and minimize \gls{mise}.
 However, as noted above,
-our approximation \gls{amise} depends on the true function $f$.
+our approximation \gls{amise} depends on the true risk function \gls{lambda}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -441,7 +472,7 @@ our approximation \gls{amise} depends on the true function $f$.
 \label{sec:theory:bandwidthselection}
 
 In practice,
-researchers don't know the true density or intensity functions.
+researchers typically do not know the true density or intensity functions.
 Therefore they cannot compute \gls{h_opt} directly,
 and so they use techniques that give them approximations for this value.
 In this study,
@@ -454,11 +485,9 @@ We therefore define
     computed from the data samples generated from the true \gls{intensity} function.
 \end{defn}
 Other schemes for selecting the bandwidth that are based on a specific data sample will not be as good as the \gls{oracle}.
-
 The two techniques we use are optimized to find a bandwidth that minimizes \gls{mise}.
 The selected bandwidth may or may not be close to \gls{h_opt},
 depending on the particular sample.
-
 The first technique we will use is known as \textbf{\Gls{silverman}'s Rule of Thumb}.
 We use the version for selecting bandwidth in $\RS$,
 which has forumula
@@ -467,24 +496,29 @@ which has forumula
     h_S = 2.04 * \sigma * n^{-1/6}%
 \end{equation}
 where $n$ is the observed number of incidents,
-$\sigma$ the arithmetic mean of the standard deviations of the $x_1$ and $x_2$ coordinates of the sample points.
+$\sigma$ the arithmetic mean of $\sigma_{x_1}$ and $\sigma_{x_2}$,
+he standard deviations of the $x_1$ and $x_2$ coordinates of the sample points respectively:
+\begin{equation*}
+    \sigma = \frac{\sigma_{x_1} + \sigma_{x_1}}{2} \text{.}
+\end{equation*}
 \citet{silverman1986density} shows that for a large class of intensity functions,
 including ones based on Gaussian functions,
 this bandwidth provides a good approximation to the optimal bandwidth \gls{h_opt}. 
 
 Our second technique is to use leave-one-out \textbf{\gls{cv}} over a set of bandwidths.
 We select the bandwidth which minimizes the \gls{cv} error,
-which approximates the \gls{mise}.
-For the \gls{kde}, the formula for the \gls{cv} error of bandwidth $h$ for \gls{lambda_hat} is
+which approximates the \gls{mise} (\Cref{eq:mise}).
+For the \gls{kde},
+he formula for the \gls{cv} error of bandwidth $h$ for \gls{lambda_hat} is
 \begin{equation}
     \label{eq:cverror}
     \mbox{\Gls{cv}}%
-        = \iintW{\hat{f}_h \xvec^2}
-        - 2 n^{-1} \sum\limits_{i=1}^n \hat{f}_{-i,h}\xvec%
+        = \iintW{\gls{lambda_hat}_h \xvec^2}
+        - 2 n^{-1} \sum\limits_{i=1}^n \gls{lambda_hat}_{-i,h}\xvec%
 \end{equation}
-where $\hat{f}_{-i,h}\xvec$ is the \gls{kde} computed using the bandwidth $h$ and leaving out the $i^\text{th}$ point.
+where $\gls{lambda_hat}_{-i,h}\xvec$ is the \gls{kernel intensity estimator} computed using the bandwidth $h$ and leaving out the $i^\text{th}$ point.
 The technique for \gls{kernel intensity estimation} is identical to the \gls{kde},
-in the sense that the bandwidths which minimize the \gls{mise} of the \gls{kernel intensity estimator} are the same. 
+in the sense that the bandwidths which minimize the \gls{mise} of the \gls{kernel intensity estimator} are the same \citep{brooks1991asymptotic}. 
 \Citet{brooks1991asymptotic} show that the \gls{cv} error computed with the selected bandwidth approximates the optimal \gls{ise} very well,
 in the sense that
 \begin{equation*}
@@ -501,32 +535,30 @@ in the sense that
 \section{Inconsistency of the kernel intensity estimator}
 \label{sec:theory:inconsistency}
 
-This section is based on \citet{guan2008consistent}.
-The \gls{kernel intensity estimator} above is not consistent,
-in the sense that the \gls{mise} does not go to zero as the number of observed events $n$ increases.
-We recall from \Cref{eq:amise},
-that the \gls{amise} is composed of two terms.
-The first term is proportional to $h^4$ while the second is proportional to $h^{-2}$.
-Since the optimal bandwidth \gls{h_opt} is proportional to $n^{-\frac{1}{6}}$,
-we see that the first term,
-which is the asymptotic bias,
-is $O(n^{-\frac{2}{3}})$.
-However the second term,
-which is the asymptotic variance is $O(n^{\frac{1}{3}})$ which does not go to zero as $n$ increases.
-In contrast,
+The \gls{kde} $\hat{f}$ can be shown to be a consistent estimator of a density function $f$.
 \citet{bertrand1978convergence} show that the \gls{kde} converges uniformly to the true function with probability 1 as $n \to \infty$,
 while \citet{devroye1985nonparametric} show that the \gls{kde} converges in $L_1$ to the true function with probability 1.
+In contrast to density a density function,
+where the estimate is normalized by the number of observations,
+for a spatial intensity,
+both the magnitude of the scaling factor \gls{mu} of the true intensity
+and the number of observed events $n$ are proportional
+to both the time frame of the study or the size of the study area.
+Therefore,
+in order to discuss the asymptotic behavior of an intensity function,
+it makes sense to look at $\gls{mu} \to \infty$.
+Along these lines,
+\citet{guan2008consistent} note that the \gls{kernel intensity estimator}
+``is not a consistent estimator of the true intensity''.
 
-The number of events $n$ can increase in several ways: for example, if the time period of the study is increased,
-or if a larger study area is chosen.
-Since the \gls{mise} does not go to zero as $n$ increases,
-we normalize the \gls{mise} in two ways.
-The first way is to simply divide by the observed number of events $n$ or,
-since we know the true function,
-by the expected number of events.
+We therefore \textit{normalize} our measures of accuracy in two ways.
+The first way is to simply divide our approximated \gls{mise} by $\gls{mu}^2$
+as suggested by \citet{diggle1988equivalence},
+since we know the true function and therefore \gls{mu}.
 The second way is to divide, at every point,
 the estimation error $\gls{lambda_hat}\xvec - \gls{lambda}\xvec$ by the true value $\gls{lambda}\xvec$.
-
+Our results contain these and similar relative errors for all of the accuracy measures
+as described in \Cref{sec:method:accuracy}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -537,23 +569,33 @@ the estimation error $\gls{lambda_hat}\xvec - \gls{lambda}\xvec$ by the true val
 \label{sec:theory:data}
 
 We generate data for each experiment using rejection sampling,
-using the technique described in \citet{diggle1983spatial}.
-Before we begin, we set the random number seed to a fixed value for all experiments.
-The first step is to generate a population.
-We choose a distribution function $f_P$ over \gls{W},
-and scale it to obtain an the population intensity function \gls{lambda_P} of a \gls{spp} \gls{Lambda} with an expected number of points the same as our chosen population size.
-This means that the actual population size may not be exactly what we have chosen.
-We then generate points $\xvec$ uniformly in \gls{W} and keep them with probability \gls{lambda_P}$\xvec$.
-This gives us our population \gls{P} which use throughout the experiment.
-In this way,
-if \gls{lambda_P}$\xvec$ has twice the value of \gls{lambda_P}$(y_1, y_2)$ for two points $\xvec$ and $(y_1, y_2)$ in \gls{W},
-then we expect to see about twice as many points around $\xvec$ than around $(y_1, y_2)$ in \gls{P}.
+using the technique suggested in \Citet[Section 4.4]{diggle1983spatial},
+based on \citet{lewis1979simulation}.
+Our algorithm can be divided into two parts.
+First, we generate a population \gls{P} as follows:
+\begin{enumerate}
+    \item create the true population intensity function \gls{lambda_P}
+        by scaling a function of the desired shape
+        so that we generate the desired population count $N_P$
+    \item generate events uniformly in the study area \gls{W} (excluding the buffer)
+    \item keep each point \xvec with probability \gls{lambda_P} \xvec
+    \item repeat until we have $N_P$ points.
+\end{enumerate}
+Due to the large size of the population,
+we use the same population \gls{P} for an entire experiment
+in order to perform the experiments in a reasonable amount of time.
 
-Once we have a fixed population, we have need to decide which members of the population constitute the incidents.
-The process to generate the incidents is similar to that of the population.
-We create an incident intensity function \gls{lambda_I} of a \gls{spp} for incidents.
-We then take the points $\xvec \in \gls{P}$ and keep each one with probability \gls{lambda_I}$\xvec$.
-This gives us our set of incidents \gls{I}.
-Once again, when \gls{I}$\xvec$ is higher than \gls{I}$(y_1, y_2)$,
-then the probability of $\xvec \in \gls{I}$ is correspondingly higher than that of $(y_1, y_2)$.
+Once we have a population,
+we can repeatedly simulate sample sets of incidents using the following procedure:
+\begin{enumerate}
+    \item create the incident intensity function \gls{lambda_I}
+        by scaling a function of the desired shape
+        so that the \textit{expected} number of incidents generated will be $N_I$.
+        As will be seen,
+        in order to do this we must take into account both $N_I$ and $N_P$.
+    \item for each ``person'' $p\!=\!(p_1, p_2) \in \gls{P}$,
+        calculate the \textit{risk} of coming down with the disease $\gls{lambda_I}(p_1, p_2)$
+    \item keep $(p_1, p_2)$ in \gls{I} with probability $\gls{lambda_I}(p_1, p_2)$.
+\end{enumerate}
+
 
