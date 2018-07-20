@@ -9,10 +9,12 @@
 In this chapter, we describe the methods used to examine the statistical performance of the \gls{dkd}.
 The basic unit is the \textit{experiment},
 a set of simulations run with the same initial setup with the same measurements taken.
-Each experiment is run with a fixed set of parameters, described below in \Cref{tab:experimental_parameters}.
+Each experiment is run with a fixed set of parameters,
+described below in \Cref{tab:experimental_parameters}.
 We then run a set of experiments,
 varying one parameter at a time, or in some cases two parameters in tandem,
 in order to observe the effect of this parameter on the accuracy of the \gls{dkd}.
+We generate population and incident data in the manner described in \Cref{sec:theory:data}.
 
 \begin{table}[htbp]
     \centering
@@ -71,47 +73,6 @@ In \Cref{sec:method:accuracy}, we define the measures of accuracy we use to eval
 Our use of \gls{cv} for bandwidth selection is discussed in  \Cref{sec:method:cross-validation}.
 \Cref{sec:method:experiment_structure} describes the steps of each experiment, together with the measurements taken.
 Finally, in \Cref{sec:method:combining_experiments}, we describe how the effect of different variables are studied by combining several experiments and comparing their results.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Section: Data generation process
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Data generation process}
-\label{sec:method:data generation}
-
-We generate data for each experiment as follows.
-Before we begin, we set the random number seed to a fixed value for all experiments.
-The first step is to generate a population.
-We choose a distribution function $f_p$ over \gls{W},
-and scale it to obtain the population intensity function \gls{lambda_P} of a \gls{spp} \gls{Lambda}
-with an expected number of points the same as our chosen population size.
-For example,
-start with a 2-dimensional Gaussian function with standard deviation 1 in both directions and no correlation.
-This function has expected value 1, so if we multiply it by 10,000,
-the resulting product will be an intensity function \gls{lambda_P} will have expected value 10,000.
-This function,
-when used as an intensity,
-will generate on average 10,000 people,
-concentrated around the center $(0,0)$.
-However, in a given realization,
-the actual population size may not be exactly what we have chosen.
-
-The actual process of generation is as follows.
-We generate points $\xvec$ in \gls{W} from the \textit{uniform} random vector $(X_1,X_2)$,
-and keep them with probability \gls{lambda_P}$\xvec$.
-This gives us our population \gls{P} which we use throughout the experiment.
-In this way,
-if \gls{lambda_P}$\xvec$ has twice the value of \gls{lambda_P}$(y_1, y_2)$ for two points $\xvec$ and $(y_1, y_2)$ in \gls{W},
-then we expect to see about twice as many points around $\xvec$ than around $(y_1, y_2)$ in \gls{P}.
-
-Once we have a fixed population, we have to decide which members of the population constitute the incidents.
-The process to generate the incidents is similar to that of the population.
-We create an incident intensity function \gls{lambda_I} of a \gls{spp} for incidents.
-We then take the points $\xvec \in \gls{P}$ and keep each one with probability \gls{lambda_I}$\xvec$.
-This gives us our set of incidents \gls{I}.
-Once again, when \gls{I}$\xvec$ is higher than \gls{I}$(y_1, y_2)$,
-then the probability of $\xvec \in \gls{I}$ is correspondingly higher than that of $(y_1, y_2)$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%

@@ -77,14 +77,14 @@ Current research in kernel estimation continues.
 For example, we see kernel estimation techniques used in epidemiology.
 Like our research,
 the tutorial paper \citet{davies2018tutorial} looks at using the ratio of two kernel estimates for estimating epidemiological risk functions.
-It is based on the technique developed by \citet{bithell1990application,bithell1991estimation,kelsall1995kernel}.
+However,
+they also delve into several additional bandwidth selection techniques,
+edge corrections,
+and other methods that extend the basic \gls{kde}.
+Their paper is based on the technique developed by \citet{bithell1990application,bithell1991estimation,kelsall1995kernel}.
 By conditioning on sample size,
 they compute two \glspl{kde} instead of \glspl{kernel intensity estimator} in order to compare the relative risk between two samples representing the case and control populations on a common study area.
 This relative risk ratio represents a different quantity from the incidence rate of our current research.
-Because it is a tutorial,
-\citet{davies2018tutorial} delves into several bandwidth selection techniques,
-edge corrections,
-and other methods that extend the basic \gls{kde}.
 
 In many studies,
 incidents of disease are aggregated together instead of using spatial analysis.
