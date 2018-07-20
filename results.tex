@@ -207,7 +207,8 @@ and the slightly bright spots around $(-1.5, -2.5)$.
 \begin{table}[htbp]
     \centering
     \input{\mypath /output/mean_table_annotated.tex}
-    \caption{Mean error rates for uniform population, single-peak risk with \glsentryname{spread} 1.0 of \glsentryname{factor} 100}
+    \caption[Mean error rates for uniform population single-peak risk]
+        {Mean error rates for uniform population, single-peak risk with \glsentryname{spread} 1.0 of \glsentryname{factor} 100}
     \label{tab:errors:unif_100_1.0_1h}
 \end{table}
 
@@ -281,7 +282,7 @@ selected bandwidths and their corresponding mean values had similar performance 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.45\textwidth]{output/maxerr-histogram}
-    \caption[\glsentryname{supremum error}: Single-peak of 100 on uniform population]{\glsentryname{supremum error} density for a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population. Vertical lines indicate the estimated mean \glsentryname{supremum error} of the simulations.}
+    \caption[\Glsentryname{supremum error}: Single-peak of 100 on uniform population]{\Glsentryname{supremum error} density for a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population. Vertical lines indicate the estimated mean \glsentryname{supremum error} of the simulations.}
     \label{fig:maxerr:unif_100_1.0_1h}
 \end{figure}
 
@@ -455,8 +456,9 @@ We note that as in \Cref{sec:results:unif_100_1.0_1h}, the \gls{peak bias} value
         \includegraphics[width=\textwidth]{results/unif_500_1.0_1h/output/population_and_incidents_scatter}
         \caption{500 incidents}
     \end{subfigure}
-        \caption{A single realization of different \glspl{factor} from a single-peak risk on a uniform population.
-        \scatterplotcaption.}
+        \caption[A single realization of different \glspl{factor}]
+            {A single realization of different \glspl{factor} from a single-peak risk on a uniform population.
+            \scatterplotcaption.}
         \label{fig:one_sample:unif_NCases_1h}
 \end{figure}
 
@@ -950,7 +952,8 @@ as seen in \Cref{fig:other_measures:pop_spread}.
         \subcaption{\Glsentryname{supremum error}}
         \label{fig:other_measures:pop_spread:maxerr}
     \end{subfigure}
-    \caption{\glsentryname{miae} and \Glsentryname{supremum error} by population \glsentryname{spread}. \errorplotcaption}
+    \caption[\glsentryname{miae} and \Glsentryname{supremum error} by population \glsentryname{spread}]
+        {\glsentryname{miae} and \Glsentryname{supremum error} by population \glsentryname{spread}. \errorplotcaption}
     \label{fig:other_measures:pop_spread}
 \end{figure}
 
@@ -979,7 +982,8 @@ as seen in \Cref{fig:other_measures:pop_spread}.
         Incident center & \{(0.5,0), (-0.5,0)\},  \{(1,0), (-1,0)\}, \{(1.5,0), (-1.5,0)\}, \{(2,0), (-2,0)\}\\
         \bottomrule
     \end{tabular}
-    \caption{Parameters used for varying the two peaks of the risk function with \glspl{factor} 40 and 60 on a uniform population of 10,000}
+    \caption[Parameters used for varying the two peaks of the risk function]
+        {Parameters used for varying the two peaks of the risk function with \glspl{factor} 40 and 60 on a uniform population of 10,000}
     \label{tab:params:p1.4_100_G}
 \end{table}
 

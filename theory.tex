@@ -248,7 +248,8 @@ The bandwidth controls the width of the area smoothed by the \gls{kernel} functi
         \subcaption{$h=0.8$}
         \label{fig:theory:kernel1d:08}
     \end{subfigure}
-    \caption{One-dimensional \glsentryname{kernel} functions using the biweight(quartic) kernel \citep{silverman1986density}.
+    \caption[One-dimensional \glsentryname{kernel} functions]
+        {One-dimensional \glsentryname{kernel} functions using the biweight(quartic) kernel \citep{silverman1986density}.
         The dots on the $x_1$ axis are the observed \glsentryplural{event}.
         The dashed lines are the kernel functions around these \glsentryplural{event}
         and the solid line is the \glsentryname{intensity} estimate $\hat{\lambda_1}$.}
@@ -424,7 +425,7 @@ The following formulas for the \gls{amise} can be found it \citet[Section 4.3]{s
 where
 \begin{align}
     \alpha & = \iintR{x_1^2 K(x_1,x_2)} \text{, since}~K\dotdot~\text{is radially symmetric,} \nonumber \\
-    \beta & = \iintR{K(x_1,x_2)^2} \text{, and} \nonumber \\
+    \beta & = \iintR{\Big( K(x_1,x_2) \Big)^2} \text{, and} \nonumber \\
     \nabla^2 f \xvec & = \frac{\diffsq{f}\xvec}{\diff{x_1^2}} + \frac{\diffsq{f}\xvec}{\diff{x_2^2}} \nonumber \text{.}
 \end{align}
 
