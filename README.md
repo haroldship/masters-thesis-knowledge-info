@@ -2,6 +2,7 @@
 ## Harold Ship, University of Haifa
 
 ### Fixed in version 0.16
+ - [x] changes to theory and method based on comments
 
 ### Fixed in version 0.15
  - [x] Literature: first draft
