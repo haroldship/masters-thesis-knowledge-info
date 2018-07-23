@@ -10,8 +10,27 @@
 %% How good is Silverman?
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We compared the performance of the \gls{dkd} under three different bandwidth schemes:
-the \gls{oracle}, \gls{silverman}, and \gls{cv}.
+We compared the performance of the \acrlong{dkd} in a variety of test scenarios
+under two different bandwidth selection schemes:
+\gls{silverman} Rule of Thumb and \acrlong{cv}.
+We did this using several measures of accuracy,
+each of which reflects a real-world concern related to epidemiological studies.
+The global measures \gls{mise} and \gls{miae} showed no significant performance difference
+for the \gls{dkd} using both schemes,
+leading us to consider preference for the \gls{silverman} method due to its greater ease of computation.
+Furthermore,
+the chosen bandwidths and the \gls{mise} in its absolute,
+relative and normalized forms performed in line with the theory of
+\Cref{sec:method:accuracy,sec:theory:bandwidthselection}.
+However,
+for finding the mode,
+or the peak of the risk function,
+the \gls{cv} bandwidths were superior in finding the location of the peak
+while maintaining similar performance for the magnitude.
+
+When we examine the behavior under different population distributions,
+we can conclude that the \gls{dkd} is sensitive to large variations in population density.
+
 In general, the \gls{oracle} performed best, followed by \gls{cv}, then \gls{silverman}.
 On average, the \gls{mise} of \gls{silverman} was between 0\% and 200\% of the \gls{mise} of \gls{cv}.
 However, there were a few cases where \gls{silverman} slightly outperformed \gls{cv}.

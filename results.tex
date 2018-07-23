@@ -17,7 +17,11 @@ Squares and dashed lines are \glsentryname{silverman} bandwidth. %
 
 This chapter describes the results of several experiments, each run with a variation of the same setup.
 In each case, we compare the results of 1,000 simulations using several accuracy measures.
-Each section describes a set of experiments, which, together, examine the effect of changes to a single factor on the performance of the \gls{dkd}.
+\Cref{sec:results:setup} below describes how the configuration of the experimental setup.
+\Cref{sec:results:unif_100_1.0_1h} describes the results of a single experiment in detail.
+Each of
+\Cref{sec:results:number_of_incidents,sec:results:spread,sec:results:unifNpop_1h,sec:results:pop_spread,sec:results:p1.4_100_G}
+describes a set of experiments, which, together, examine the effect of changes to a single factor on the performance of the \gls{dkd}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -75,7 +79,8 @@ The sixth and last row in the the table contains the \textit{incident center}, w
 \end{table}
 
 In \Cref{sec:results:unif_100_1.0_1h} we take a detailed look at a single experiment.
-The rest of this chapter examines the effect of different variables on the \gls{dkd} accuracy, on the selected bandwidths, and on other statistical properties of the \gls{dkd}.
+The rest of this chapter examines the effect of different variables on the \gls{dkd} accuracy,
+on the selected bandwidths, and on other statistical properties of the \gls{dkd}.
 \Cref{sec:results:number_of_incidents} describes the relationship between the accuracy of the \gls{dkd} and the magnitude of the risk function for a fixed population.
 In \Cref{sec:results:spread} we look at how the spread of the risk function affects accuracy.
 We then ran several sets of experiments while changing one parameter at a time.
@@ -218,9 +223,14 @@ We can see that for most measures, the \gls{oracle} selected bandwidth provides 
 This is not surprising, since the \gls{oracle} bandwidth is designed to approximate the \gls{mise}-optimal bandwidth \gls{h_opt},
 described in \Cref{sec:theory:accuracy}.
 However, in real world scenarios, the true function is unknown, and hence it is impossible to compute the \gls{oracle} bandwidth.
-Therefore, we are interested in knowing how close the \gls{silverman} and \gls{cv} bandwidth selection methods can get to the \gls{oracle} for the different measures.
-One exception is the \gls{peak bias}, in bold,
-which measures the difference between the maximum of the estimated risk and the maximum of the true risk (see \Cref{subsec:method:peak_bias}).
+Therefore,
+we are interested in knowing how close the \gls{silverman} and \gls{cv} bandwidth selection methods can get to the \gls{oracle}
+for the different measures.
+One exception where the \gls{silverman} and \gls{cv} bandwidths performed better than the \gls{oracle}
+is the \gls{peak bias},
+in bold,
+which measures the difference between the maximum of the estimated risk and the maximum of the true risk
+(see \Cref{subsec:method:peak_bias}).
 In this experiment,
 the \gls{silverman} and \gls{cv} bandwidths produced lower absolute \gls{peak bias} values than the \gls{oracle}. 
 However, the \gls{oracle} and \gls{cv} bandwidths resulted in negative biases,
