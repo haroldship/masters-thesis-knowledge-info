@@ -2,6 +2,7 @@
 ## Harold Ship, University of Haifa
 
 ### Fixed in version 0.17
+ - [x] Conclusion: needs BOTTOM LINE
 
 ### Fixed in version 0.16
  - [x] changes to theory and method based on comments
@@ -128,8 +129,6 @@
 ### TODO
 
  - [ ] Introduction: define "statistical properties"
- - [ ] Compare bandwidths for 2 peaks: peak drift vs centroid drift, same for bias
- - [ ] Conclusion: needs BOTTOM LINE
  - [ ] Conclusion: How good is Silverman?
  - [ ] Conclusion: "performance" - break down to different measures
  - [ ] Conclusion: for MISE, CV ~~ Oracle which is the best we can hope for; MIAE, Sup are similar but peak bias & drift maybe not

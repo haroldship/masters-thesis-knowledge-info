@@ -18,6 +18,7 @@ each of which reflects a real-world concern related to epidemiological studies.
 The global measures \gls{mise} and \gls{miae} showed no significant performance difference
 for the \gls{dkd} using both schemes,
 leading us to consider preference for the \gls{silverman} method due to its greater ease of computation.
+This was true for the \gls{supremum error} as well.
 Furthermore,
 the chosen bandwidths and the \gls{mise} in its absolute,
 relative and normalized forms performed in line with the theory of
@@ -27,9 +28,24 @@ for finding the mode,
 or the peak of the risk function,
 the \gls{cv} bandwidths were superior in finding the location of the peak
 while maintaining similar performance for the magnitude.
+This was true for both the simple \gls{peak bias} and \gls{peak drift} as well as for the
+\gls{centroid bias} and \gls{centroid drift}.
 
 When we examine the behavior under different population distributions,
 we can conclude that the \gls{dkd} is sensitive to large variations in population density.
+
+\textbf{bottom line:}
+
+Under the right conditions,
+\gls{dkd} can give a good approximation of a true \gls{incidence rate} function.
+This is so in terms of the general accuracy of the rate at any given point,
+as well as for the location of the peak.
+Because the accuracy improves with the number of observations,
+it is prudent to increase the time frame of the study when the number of observations in a given year is small.
+In cases where the population density varies greatly over a study area,
+the \gls{dkd} is less accurate.
+Therefore in such cases,
+it may be beneficial to divide the study area into sub-regions and compute separate \glspl{dkd}.
 
 In general, the \gls{oracle} performed best, followed by \gls{cv}, then \gls{silverman}.
 On average, the \gls{mise} of \gls{silverman} was between 0\% and 200\% of the \gls{mise} of \gls{cv}.
