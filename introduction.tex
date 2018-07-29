@@ -6,37 +6,6 @@
 %%
 %%
 
-% ofer
-% In epidemiological research,
-% datasets available for analysis are often represented by discrete events, such as zip codes or
-% home addresses of individual patients, and have no other attributes, due to data unavailability
-% or privacy concerns (Zusman, Broitman, & Portnov, 2015; Krieger et al., 2002). These data are
-% known as Attributeless Event Point Datasets (AEPDs) that feature observations with one of two
-% possibilities - exposed/unexposed or sick/healthy (Zusman et al., 2015; Cox & Snell, 1989).
-% However, a known weakness associated with using these models for the analysis of AEPDs
-% is information loss due to data aggregation into statistical areas (such as counties or census
-% tracks), which may cause a modifiable areal unit problem (MAUP) (Zusman et al., 2015). The
-% MAUP occurs when the results of the analysis are sensitive to the way in which geographic
-% boundaries of statistical areas, used for disease counts or rate calculations, are delineated
-% (Kloog, Haim, & Portnov, 2009). Another problem associated with using AEPDs arises when
-% the events of interest are localized and the number of the statistical areas available for
-% aggregation is small, which may lead to a low statistical power and often inconclusive results
-% (Li & Lian, 2010; Zusman et al., 2012). Since binary AEPDs are common in epidemiologic
-% research, their analysis is a challenging task (Elliott & Wartenberg, 2004; Jerrett et al., 2003;
-% Goodchild, 1986; Werner & Kalganova, 2003).
-% A known alternative technique for the analysis AEPDs is the Double Kernel Density
-% (DKD) approach (Portnov et al., 2009; Kloog, Haim, & Portnov, 2009; Zusman et al., 2012).
-% and cancer morbidity (Zusman et al., 2012; Davarashvili et al., 2016). The DKD is a
-% nonparametric method produced by normalization of kernel density surfaces, which allows one
-% to compute an incidence rate from smoothed density cases and smoothed population density
-% without dependence on fixed boundaries for aggregation (Zusman et al., 2012).
-
-% diggle
-% Data in the form of a set of points, irregularly distributed within a region of space,
-% arise in many different contexts; examples include locations of trees in a forest,
-% of nests in a breeding colony of birds, or of nuclei in a microscopic section of tissue.
-% We call any such data-set a spatial point pattern and refer to the locations as events,
-% to distinguish these from arbitrary points of the region in question.
 
 There are many examples in epidemiology of data that occurs as points distributed in the plane.
 One example is
@@ -50,7 +19,13 @@ $\gls{lambda} := \gls{lambda}\dotdot$
 which is the ratio of two other functions \gls{lambda_I} and \gls{lambda_P} \citep{portnov2009studying,kloog2009using,zusman2012residential}.
 Each one of \gls{lambda_I} and \gls{lambda_P} is itself estimated by smoothing a set of point observations into a continuous,
 smooth function \citep{bithell1990application},
-and the value of \gls{lambda} at any point is the quotient of the values of \gls{lambda_I} and \gls{lambda_P}.
+and the value of \gls{lambda} at any point is the quotient of the values of
+\gls{lambda_I} and \gls{lambda_P}.
+
+Researchers have recently been motivated to use the \gls{dkd} due to information loss due to data aggregation of incidents into geographical areas such as cities or neighborhoods.
+This aggregation has been deemed necessary both
+to reduce the effects of variance on the relative errors of the results,
+and to preserve the privacy of individuals who have been been stricken with disease.
 
 This study examines some of the statistical properties of the \gls{dkd}.
 In particular,
@@ -58,80 +33,22 @@ we empirically analyse how different factors of the population and incidence dis
 affect the \textit{accuracy} of the \gls{dkd}.
 Our methodology is based on monte marlo simulations under different experimental setups.
 
-% In cancer and other chronic disease epidemiology,
-% health outcomes are often calculated using a technique known as \glspl{asr}.
-% This allows comparison of incidence across populations and time periods \citep{ahmad2001age,curtin1995direct}.
+We set out to answer the following questions:
 
-% From a statistical perspective, there are several disadvantages to this technique
-% For example, the rate for one age group may be higher while another is lower.
-% This information can potentially be lost due to aggregation.
-% Also, the computed rate depends on the specific standardization used.
-% Unless the same scheme is used, it is difficult to compare ASRs from different studies.
-% Furthermore, ASRs are not the true rates observed in the population.
-% \citep[pp. 154--155]{schoenbach2000understanding}.
+\begin{hyp}
+    How is the accuracy of the \gls{dkd} affected by:
+    \begin{itemize}
+        \item The size of the study area
+        \item The duration of the study
+        \item Different rate functions
+        \item Different population distributions
+    \end{itemize}
+\end{hyp}
 
-% When comparing ASRs across different geographical areas, other issues can occur.
-% When there are only a few such areas, comparing ASRs may not have enough statistical power to
-% detect significant effects \citep{hollenbeck2006statistical,lan2010application}.
-% Also, when the number of incidents per area is small, for example, less than 25 cases for all ages in each area,
-% then there may be significant random variation \citep{curtin1995direct}.
-% If that happens to be an age group with a large proportion in the standard population, the effect will be magnified.
-
-% The use of ASR over geographical units has other problems as well. In general, geographical boundaries are arbitrary,
-% and have no relationship with exposures or outcomes.
-% This implies that ASRs can be calculated differently based on different delineations, a phenomenon known as the \textit{modifiable areal unit problem} or MAUP \citep{kloog2009using}.
-% Furthermore, small areas such as census tracts can change over time, complicating longitudinal analysis \citep{bivand2008applied}.
-
-
-% An alternative method, the DKD, which can be used when the precise location of cases is known, can help address some of the drawbacks of ASR mentioned above.
-% This non-parametric approach makes use of smoothing of point data over an area of interest without the use of fixed boundaries for aggregation \citep{donthu1989note,kloog2009using,nakaya2010visualising,portnov2009studying,sanvicente2003use}.
-% Recently DKD has been used in epidemiological studies \citep{portnov2009studying,kloog2009using,zusman2012residential};
-% in particular, DKD technique is used by researchers as part of the Epidemiological Monitoring of the Haifa Bay Area project
-% because of its perceived advantages over the ASR approach \citep{zusman2012residential}.
-% DKD is used to compute the incidence rate of disease as a density function, by taking the quotient of two kernel smoothers: the estimated intensity of the overall incidence divided by the estimated intensity of the population in small raster cells. 
-
-% In that respect, the DKD method has an additional important advantage related to privacy concerns. Indeed, epidemiological research depends on the availability of vital statistics and medical data. For reasons of information privacy, information related to the health of individuals cannot be released by health authorities to researchers \citep{gordis1977privacy,Olson_Grannis_Mandl_2006}.
-% One solution is to aggregate data by geographical area.
-% However, as mentioned above, it is often the case that this is not adequate. When the number of cases in a geographical area is very small, or the population or the area is small, it may be necessary to suppress it for privacy reasons \citep{national2004nchs}.
-% The use of DKD enables the researchers to retrieve vital statistical information while keeping the exact locations and identities of sick people hidden. 
-
-% Although the DKD has been used in various setups, its statistical properties are yet to be fully understood.
-% The goal of this research is to examine the double kernel density technique from a statistical perspective, as described in the next section. 
-
-% Analyzing a statistical method can be carried out theoretically or empirically.
-% Theoretical analysis usually consists of the derivation of asymptotic statistical properties such as consistency, rates of convergence, and asymptotic distributions of the estimation method.
-% On the other hand, an empirical study consists of conducting computer simulations that cover various finite sample scenarios, believed to be relevant in practice. This research will focus on the second approach. 
-
-% We follow the terminology describing of statistical learning found in \citet{hastie2010elements}.
-% In particular, in the Epidemiological Monitoring of the Haifa Bay Area project, the DKD is used for both \textit{unsupervised} and \textit{supervised} learning tasks.
-% \begin{enumerate}
-%     \item \textbf{Unsupervised}: (intensity) describe how the intensity of cancer and other health outcome rates are distributed in space throughout the geographical areas.
-%     \item \textbf{Supervised}: (regression) infer if cancer and other health outcome rates are associated with other variables, which also vary in intensity throughout the study area. 
-% \end{enumerate}
-
-% We would like to study the statistical properties of the DKD method in view of the following statistical model for the generation of the data:
-% as usual in spatial modeling \citep{diggle1983statistical,bivand2008applied} we consider the occurrence of cancer cases and possibly other health outcomes in a defined time period, to follow a Poisson process over a specific geographic area.
-% Population will also be modeled as a Poisson process.
-% Given the statistical model, we would like to study the accuracy of the DKD method, with respect to a ``true'' deterministic quantity that will be defined.
-% Specifically, this will be done by performing extensive Monte Carlo simulations through which we would like to answer the following main question: 
-% \begin{center}
-%     \textbf{Under which real-life scenarios are DKD estimates (both supervised and unsupervised) statistically valid?} 
-% \end{center}
-
-% The simulations will be executed by synthetic generation of cancer cases in different parts of the city of Haifa.
-% Each simulation will consist of randomly generated cancer cases according to a specific statistical model that describes a realistic outcome. 
-% We will run many simulations, varying a variety of model parameters such as the sample size of diseased people, the population size, the size of the effect (intensity), the number of centers of disease, etc. 
-
-% Once the properties of the method are better understood, we plan to compare the DKD method to other approaches mentioned in literature.
-% This will require a review of the literature and practically, will also be carried out using simulation studies.
-
-% This proposal is organized as follows.
-% Following the Introduction, we present our research questions in \autoref{chp:research-question}.
-% Next, in \autoref{chp:theoretical-background} we discuss the theoretical background of the DKD and the behavior of regression with measurement error.
-% After the theoretical background, in \autoref{chp:contribution}, we present what we plan for the contribution of this research.
-% This is followed by a presentation of the method we will use in \autoref{chp:method} and then the schedule for the research in \autoref{chp:schedule}.
-
-
-
-
-
+\begin{hyp}
+    How accurate is the \gls{dkd}:
+    \begin{itemize}
+        \item On average
+        \item At the peaks
+    \end{itemize}
+\end{hyp}
