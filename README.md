@@ -2,7 +2,9 @@
 ## Harold Ship, University of Haifa
 
 ### Fixed in version 0.17
- - [x] Conclusion: needs BOTTOM LINE
+ - [x] Introduction
+ - [x] Further Research
+ - [x] Conclusion
 
 ### Fixed in version 0.16
  - [x] changes to theory and method based on comments
@@ -127,16 +129,4 @@
  - [x] *factor* see if another term is common otherwise use *expected number of incidents*
 
 ### TODO
-
- - [ ] Introduction: define "statistical properties"
- - [ ] Conclusion: How good is Silverman?
- - [ ] Conclusion: "performance" - break down to different measures
- - [ ] Conclusion: for MISE, CV ~~ Oracle which is the best we can hope for; MIAE, Sup are similar but peak bias & drift maybe not
- - [ ] Conclusion: peak vs. centroid for drift & bias
- - [ ] Conclusion: can we look at data and predict which technique would perform better?
- - [ ] Conclusion: Limitation: in real life, distributions can be more complicated
- - [ ] Conclusion: Silverman is nearly as good as CV but **much** easier to compute
- - [ ] Conclusion: when is centroid better than peak?
- - [ ] Conclusion: Is Silverman bandwidth smaller in cases of positive bias?
- - [ ] Conclusion: Further work: more study on other distributions
 
