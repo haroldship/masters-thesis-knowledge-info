@@ -49,6 +49,9 @@
 \newcommand{\sumS}[1]{%
     \frac{1}{h^2} \hspace{-1em} \sum\limits_{(s_1, s_2) \in N} { #1 }%
 }%
+\newcommand{\sumSn}[1]{%
+    \frac{1}{n h^2} \hspace{-1em} \sum\limits_{(s_1, s_2) \in N} { #1 }%
+}%
 
 % kernel macros
 \newcommand{\dotdot}{\ensuremath{(\cdot, \cdot)}}
@@ -67,15 +70,20 @@
 
 \newtheorem{exmp}{Example}[chapter]% same for example numbers
 
-\newtheorem{hyp}{Hypothesis}[chapter]% definition numbers are dependent on theorem numbers
-\crefname{hyp}{hypothesis}{hypotheses}
+\newtheorem{question}{Question}% definition numbers are dependent on theorem numbers
+\crefname{question}{question}{questions}
 
-% ref names for cleverref package
-%\crefname{researchquestion}{research question}{research questions}
-%\crefname{thm}{theorem}{theorems}
-%\crefname{defn}{definition}{definitions}
-%\crefname{exmp}{example}{examples}
+\newlist{subquestions}{enumerate}{10}
+\setlist[subquestions]{label*=\textup{(}\alph*\textup{)},ref=\thequestion(\alph*)}
+\crefname{subquestionsi}{question}{questions}
 
+\newlist{assumptions}{enumerate}{10}
+\setlist[assumptions]{label*=\arabic*.,ref=\arabic*}
+\crefname{assumptionsi}{assumption}{assumptions}
+
+\newlist{properties}{enumerate}{10}
+\setlist[properties]{label*=\arabic*.,ref=\arabic*}
+\crefname{propertiesi}{property}{properties}
 
 \newcommand{\mypath}{}
 \newcommand{\setpath}[1]{

@@ -25,7 +25,7 @@ and the value of \gls{lambda} at any point is the quotient of the values of
 Researchers have recently been motivated to use the \gls{dkd} due to information loss due to data aggregation of incidents into geographical areas such as cities or neighborhoods.
 This aggregation has been deemed necessary both
 to reduce the effects of variance on the relative errors of the results,
-and to preserve the privacy of individuals who have been been stricken with disease.
+and to preserve the privacy of individuals who have been stricken with disease.
 
 This study examines some of the statistical properties of the \gls{dkd}.
 In particular,
@@ -33,22 +33,26 @@ we empirically analyse how different factors of the population and incidence dis
 affect the \textit{accuracy} of the \gls{dkd}.
 Our methodology is based on monte marlo simulations under different experimental setups.
 
-We set out to answer the following questions:
+The contribution of this study will be to answer the following research questions:
 
-\begin{hyp}
+\begin{question}
+    \label{thm:accuracy-affected}
     How is the accuracy of the \gls{dkd} affected by:
-    \begin{itemize}
-        \item The size of the study area
-        \item The duration of the study
-        \item Different rate functions
-        \item Different population distributions
-    \end{itemize}
-\end{hyp}
+    \begin{subquestions}
+        \item the size of the population, \label[theorem]{thm:accuracy-affected:popsize}%
+        \item the duration of the study, \label[theorem]{thm:accuracy-affected:duration}%
+        \item different rate functions, \label[theorem]{thm:accuracy-affected:rates}%
+        \item and different population distributions. \label[theorem]{thm:accuracy-affected:popdist}%
+    \end{subquestions}
+\end{question}
 
-\begin{hyp}
+\begin{question}
+    \label{thm:accuracy-scale}
     How accurate is the \gls{dkd}:
-    \begin{itemize}
-        \item On average
-        \item At the peaks
-    \end{itemize}
-\end{hyp}
+    \begin{subquestions}
+        \item globally, over the study area as a whole, \label[theorem]{thm:accuracy-scale:global}%
+        \item and pointwise at the peaks. \label[theorem]{thm:accuracy-scale:peaks}%
+    \end{subquestions}
+\end{question}
+
+

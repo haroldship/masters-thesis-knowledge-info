@@ -148,19 +148,19 @@ We model disease incidence as a special kind of \gls{spp} known as an Inhomogene
 \begin{defn}
     \label{defn:inhomogenouspoissonprocess}
     An \textbf{Inhomogeneous Poisson Process} is a \gls{spp} which has the following properties \citep[Section 4.4]{diggle1983spatial}:
-    \begin{enumerate}
+    \begin{properties}
         \item The number of events $N\!(A)$ in any area $A$ has a Poisson distribution with mean
             $\iint\limits_{\xvec \in A}{\hspace{-1em} \lambda \xvec \diff{x_2} \diff{x_1}}$
             \label{defn:inhomogenouspoissonprocess:1}.
-        \item With the condition that $N\!(A) \! = \! n$,
+        \item Conditioning on $N\!(A) \! = \! n$,
             the $n$ events (locations) in $A$ form an independent random sample from the distribution on $A$ with probability density function \textit{proportional} to $\lambda$ \label{defn:inhomogenouspoissonprocess:2}.
-    \end{enumerate}
+    \end{properties}
 \end{defn}
 
-From above, we can see that for an infinitesimal area \ds around a point \xvec,
+From above, we can see that for an infinitesimal area \ds~ around a point \xvec,
 we can think of $\lambda \xvec \ds$ as nearly constant in \ds~so
 $$\iint\limits_{\xvec \in A}{\hspace{-1em}\lambda \xvec \diff{x_2} \diff{x_1}} \approx \lambda \xvec \ds \text{.}$$
-By \Cref{defn:inhomogenouspoissonprocess:1} of \Cref{defn:inhomogenouspoissonprocess},
+By \cref{defn:inhomogenouspoissonprocess:1} of \Cref{defn:inhomogenouspoissonprocess},
 the probability that the are \ds~ contains exactly one point is
 $\exp(-\lambda \xvec |\!\ds|) \lambda \xvec \ds \text{.}$
 Since we take \ds~ to be infinitesimal,
@@ -384,7 +384,7 @@ We call the first part of \Cref{eq:mise:intbiasvariance} the \gls{isb} and the s
 %% Asymptotic behavior of the bandwidth
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Asymptotic behavior of the bandwidth}
+\section{Asymptotic behavior}
 \label{sec:theory:asymptotic_bandwidth}
 
 For the \gls{kernel intensity estimator},
@@ -401,13 +401,19 @@ with dependence only on the true function $\gls{lambda}\dotdot$ and the kernel $
 Following \citep{silverman1986density,wand1994kernel},
 and based on the equivalence of bandwidths for the \gls{kde} and the\gls{kernel intensity estimator} \citep{diggle1988equivalence},
 we begin by using Taylor's Theorem to approximate the \gls{kde}.
-In order to do this we make the following assumptions about $K\dotdot$
+Let \gls{f} be a probability density function,
+and define the \gls{kde} of \gls{f}:
+\begin{equation*}
+    \gls{f_hat} \xvec%
+            = \sumSn{\gls{K}\left( \frac{\xvec-(s_1, s_2)}{h} \right)} \text{.}%
+\end{equation*}
+We make the following assumptions about $K\dotdot$
 and $f\dotdot$ \citep{silverman1986density,wand1994kernel}:
-\begin{enumerate}
+\begin{assumptions}
     \item $K\dotdot$ is a probability density function with zero mean \label{amise:assumptions:1}
     \item $K\dotdot$ is radially symmetric and has non-zero, finite variance \label{amise:assumptions:2}
     \item $f\dotdot$ has bounded and continuous second derivatives. \label{amise:assumptions:3}
-\end{enumerate}
+\end{assumptions}
 
 Under these assumptions,
 the first term of the Taylor expansion is zero (\cref{amise:assumptions:1,amise:assumptions:3}),
@@ -548,8 +554,7 @@ to both the time frame of the study or the size of the study area.
 Therefore,
 in order to discuss the asymptotic behavior of an intensity function,
 it makes sense to look at $\gls{mu} \to \infty$.
-We describe the behaviour of the \gls{dkd} as \gls{mu} increases
-can be found in in \Cref{sec:results:unifNpop_1h}.
+We describe the behaviour of the \gls{dkd} as \gls{mu} increases in \Cref{sec:results:unifNpop_1h}.
 Along these lines,
 \citet{guan2008consistent} note that the \gls{kernel intensity estimator}
 ``is not a consistent estimator of the true intensity''.
@@ -572,33 +577,51 @@ as described in \Cref{sec:method:accuracy}.
 \label{sec:theory:data}
 
 We generate data for each experiment using rejection sampling,
-using the technique suggested in \Citet[Section 4.4]{diggle1983spatial},
+based on the technique suggested in \Citet[Section 4.4]{diggle1983spatial},
 based on \citet{lewis1979simulation}.
-Our algorithm can be divided into two parts.
-First, we generate a population \gls{P} as follows:
-\begin{enumerate}
-    \item create the true population intensity function \gls{lambda_P}
-        by scaling a function of the desired shape
-        so that we generate the desired population count $N_P$
-    \item generate events uniformly in the study area \gls{W} (excluding the buffer)
-    \item keep each point \xvec with probability \gls{lambda_P} \xvec
-    \item repeat until we have $N_P$ points.
-\end{enumerate}
-Due to the large size of the population,
-we use the same population \gls{P} for an entire experiment
-in order to perform the experiments in a reasonable amount of time.
+However,
+because we are dealing with a \textit{rate} that affects members of a \textit{population},
+our algorithm is slightly different.
+We proceed in two parts.
+First, we generate a population \gls{P} of the chosen size $N_p$ as follows:
+\begin{itemize}
+    \item If the population is uniform,
+            we choose $N_p$ points uniformly in \gls{W}.
+        so that we generate the desired population count $N_P$.
+    \item If the population is peaked,
+            we choose $N_p$ points from a bivariate normal distribution,
+            centered at $(c_1, c_2)$,
+            with covariance matrix
+            $\begin{pmatrix}
+                \sigma_1 & 0 \\
+                0 & \sigma_2
+            \end{pmatrix}$.
+\end{itemize}
 
 Once we have a population,
 we can repeatedly simulate sample sets of incidents using the following procedure:
 \begin{enumerate}
-    \item create the incident intensity function \gls{lambda_I}
-        by scaling a function of the desired shape
-        so that the \textit{expected} number of incidents generated will be $N_I$.
-        As will be seen,
-        in order to do this we must take into account both $N_I$ and $N_P$.
-    \item for each ``person'' $p\!=\!(p_1, p_2) \in \gls{P}$,
-        calculate the \textit{risk} of coming down with the disease $\gls{lambda_I}(p_1, p_2)$
-    \item keep $(p_1, p_2)$ in \gls{I} with probability $\gls{lambda_I}(p_1, p_2)$.
+    \item We create the incident intensity function \gls{lambda_I}
+        by scaling a function of the desired shape.
+        First we divide by $N_P$,
+        because we will apply it on all $N_P$ \glspl{event}.
+        Then we multiply it by $N_I/\E f$
+        so that the expected number of generated \glspl{incident} will be $N_I$.
+    \item For each ``person'' $p\!=\!(p_1, p_2) \in \gls{P}$,
+        we calculate the \textit{risk} of coming down with the disease $\gls{lambda_I}(p_1, p_2)$
+    \item Keep $(p_1, p_2)$ in \gls{I} with probability $\gls{lambda_I}(p_1, p_2)$.
 \end{enumerate}
 
+In this way,
+when the population is uniformly distributed,
+the expected value of the number of \glspl{incident} will be $N_I$,
+and they will be distributed according to \gls{lambda_I}.
+In cases where the population has a peak,
+the risk function \gls{lambda}\dotdot is still the same,
+but the number and distribution of events is not according to $N_I$ and \gls{lambda_I}.
 
+Due to the large size of the population,
+we use the same \textbf{fixed} population \gls{P} for an entire experiment
+in order to perform the experiments in a reasonable amount of time.
+Therefore,
+we do not study the randomness in the population distribution in this study.
