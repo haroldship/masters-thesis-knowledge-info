@@ -34,9 +34,10 @@
 \lstset{language=R}
 
 \frontmatter                            % only in book class (roman page #s)
+\pagenumbering{Roman}                   % only in preamble
 \maketitle                              % Print title page.
-\tableofcontents                        % Print table of contents
 
+\tableofcontents                        % Print table of contents
 \clearpage
 \listoftables
 \clearpage
@@ -49,6 +50,7 @@
 \mainmatter                             % only in book class (arabic page #s)
 \setstretch{1.1}                        % some space around text
 
+\onehalfspacing
 \chapter{Introduction}
 \label{ch:introduction}
 \input{introduction}
@@ -81,7 +83,11 @@
 \label{ch:conclusion}
 \input{conclusion}
 
-\bibliography{thesis} 
+\begingroup
+    \setlength{\bibsep}{4pt}
+    \singlespacing
+    \bibliography{thesis}
+\endgroup
 
 \begin{appendices}
 

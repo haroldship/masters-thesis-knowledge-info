@@ -15,16 +15,14 @@
 \usepackage{float} % force locations with [H]
 \usepackage[section]{placeins} % floats stay in section
 \usepackage[width=0.8\textwidth]{subcaption} % subfigures and subtables
-%\usepackage{capt-of} % for captionof
 \captionsetup{subrefformat=parens,width=0.9\textwidth} % narrower figure and table captions
-%\usepackage{wrapfig} % wrap text around figures with wrapfigure
 
 \usepackage[titletoc,title]{appendix}
 
 %% Headers
 \usepackage[automark]{scrlayer-scrpage}
 \ofoot{\docversion}
-\cfoot{\pagemark}
+\cfoot*{\pagemark}
 \ohead{} % clear outer header
 \ihead{} % clear inner header
 \chead{} % clear middle header
@@ -32,6 +30,7 @@
 \usepackage{pdfpages}
 
 \usepackage[layout=a4paper,left=3cm,right=2cm,top=2cm,bottom=2cm,headheight=20pt]{geometry} % margins
+\setlength{\footheight}{20.0pt}
 
 \usepackage[plainpages=false,pdfpagelabels]{hyperref} % links
 \newcommand*{\Appendixautorefname}{Appendix} % add name for appendix refs
@@ -59,7 +58,6 @@
 \usepackage[T1]{fontenc}
 
 \usepackage{setspace} % allows 1.5 and double spacing
-\onehalfspacing
 \usepackage{microtype} % resizes letters to fill lines better
 \usepackage[english]{babel} % hyphenation
 
