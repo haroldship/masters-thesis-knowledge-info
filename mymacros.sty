@@ -70,12 +70,15 @@
 
 \newtheorem{exmp}{Example}[chapter]% same for example numbers
 
+\newtheorem{rec}{Recommendation}% same for example numbers
+
 \newtheorem{question}{Question}% definition numbers are dependent on theorem numbers
 \crefname{question}{question}{questions}
 
 \newlist{subquestions}{enumerate}{10}
 \setlist[subquestions]{label*=\textup{(}\alph*\textup{)},ref=\thequestion(\alph*)}
 \crefname{subquestionsi}{question}{questions}
+\Crefname{subquestionsi}{Question}{Questions}
 
 \newlist{assumptions}{enumerate}{10}
 \setlist[assumptions]{label*=\arabic*.,ref=\arabic*}

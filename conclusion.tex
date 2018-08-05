@@ -16,10 +16,12 @@ Our results show that under reasonable conditions,
 the \gls{dkd} can give a good approximation of a true \gls{incidence rate} function.
 We find that this is so in two ways:
 \begin{enumerate}
-    \item The average accuracy of the rate over the study area improves when the number of incidents increases.
+    \item In answer to \Cref{thm:accuracy-scale:global},
+    the global accuracy of the rate over the study area improves when the number of incidents increases.
     This is so regardless of whether this is due to an increase in the rate or in the population size.
-    Also, the average accuracy increases when the spread of the rate increases.
-    \item The location and magnitude of the point with the highest rate (the peak) can be reasonably estimated with the \gls{dkd}.
+    Also, the global accuracy increases when the spread of the rate increases.
+    \item In answer to \Cref{thm:accuracy-scale:peaks},
+    the location and magnitude of the point with the highest rate (the peak) can be reasonably estimated with the \gls{dkd}.
 \end{enumerate}
 
 For each experiment,
@@ -32,6 +34,12 @@ while both schemes were outperformed by the \gls{oracle bandwidth},
 the difference was not too great;
 and, since the \gls{oracle} will not be available in real-world studies based on data samples,
 we consider both to be good approximations.
+The range of selected bandwidths for all of these techniques was between $0.5$ and $2.0$ in a study area of dimensions $10.0 \times 10.0$.
+This translates to 5\% -- 20\% of the size, assuming a square.
+\begin{rec}
+    \label{rec:bandwidth}
+    For computing the \gls{dkd}, we recommend a bandwidth of between 5\% and 20\% of the width or height of the study area.
+\end{rec}
 
 We measured the accuracy of the \gls{dkd} using several accuracy measures,
 each of which reflects a real-world concern related to epidemiological studies.
@@ -41,27 +49,44 @@ showed no significant performance difference
 for the \gls{dkd} using both bandwidth selection schemes,
 leading us to consider preference for the \gls{silverman} method due to its greater ease of computation.
 While the \gls{mise} increased as the expected number of incidents \gls{mu} grew,
-the \acrfull{nmise} decreased at a similar rate for \gls{silverman} $(n^{-0.741})$ and \gls{cv} $(n^{-0.775})$.
+the \acrfull{nmise} decreased at a similar rate
+in the examples we considered
+for \gls{silverman} $(n^{-0.741})$ and \gls{cv} $(n^{-0.775})$.
 As far as small samples are concerned,
-we measure an \acrlong{rmise} was around $10\%$ for each bandwidth at 50 incidents.
+in the examples we studied,
+we measured the \acrfull{rmise} at around $10\%$ for each bandwidth at 50 incidents.
 Therefore,
 the \gls{dkd} may provide reasonable estimates,
 on average,
 for samples of 50 incidents or more,
 with increasing average accuracy as the number of incidents grows.
+\begin{rec}
+    \label{rec:small-sample}
+    We recommend a sample size of at least 50 incidents for the \gls{dkd}.
+\end{rec}
 
-In contrast to the average accuracy,
-for finding the peak of the risk function
+In the examples we studied
+in contrast to the average accuracy,
 the \gls{cv} bandwidths were superior to \gls{silverman}
 in finding the location of the peak,
 while maintaining similar performance for the magnitude.
 This was true for both the simple \gls{peak bias} and \gls{peak drift} as well as for the
 \gls{centroid bias} and \gls{centroid drift}.
 The centroid measures were much more accurate than the simple peak.
+\begin{rec}
+    \label{rec:bandwidth-scheme}
+    For overall accuracy, we recommend the \gls{silverman} Rule of Thumb for computing the bandwidth due to its simplicity.
+    However, if the location of the peak is important, we recommend least squares cross-validation.
+\end{rec}
 
 When we examine the behavior under different population distributions,
 we observed that the \gls{dkd} is sensitive to large variations in population density.
 This was true for all types of measures.
+\begin{rec}
+    \label{rec:pop-density}
+    When the population density is highly variable,
+    we do not recommend computing the \gls{dkd} over the entire study area.
+\end{rec}
 
 In summary,
 under the right conditions,
@@ -72,5 +97,4 @@ Because the accuracy improves with the number of observations,
 it is prudent to increase the time frame of the study when the number of observations in a given year is smaller than 50.
 In cases where the population density varies greatly over a study area,
 the \gls{dkd} is less accurate than for smoother varying populations.
-Therefore in such cases,
-it may be beneficial to divide the study area into sub-regions and compute separate \glspl{dkd}.
+

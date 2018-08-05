@@ -9,17 +9,16 @@
 Now that we have empirically examined the accuracy of the \gls{dkd},
 we see opportunities to extend this work both statistically and epidemiologically.
 Statistically,
-we feel that the area of different population distributions needs further research.
-To this end,
-we have some partial results using a population with a single peak
-but with an incident rate function with its single peak in a different location from the populations.
+the aspect of different population distributions needs further research.
+In addition to our results in \Cref{ch:results},
+we have obtained some preliminary measurements using a population with a single peak
+but with an incident rate function with its single peak in a different location from the population's.
 \Cref{tab:mean_error_rates:p1.4_100_1_1h_1s,tab:mean_error_rates:p1.4_100_1_1h_2s,tab:mean_error_rates:p1.4_100_1_1h_3s,tab:mean_error_rates:p1.4_100_1_1h_4s} contain tables of accuracy measures.
-However,
-we did not detect any interesting patterns in these results.
 
 There are also several other bandwidth selection techniques used in \gls{kde}
 and \gls{kernel intensity estimation} that could be studied empirically for the \gls{dkd}.
-\citet{silverman1986density,wand1994kernel} mention a few.
+\citet{silverman1986density,wand1994kernel} mention a few,
+and we think that adaptive bandwidth schemes are particularly interesting.
 Further improvements to our calculations by way of edge correction might improve the accuracy of our results in more realistic populations.
 We also suggest empirical simulation studies of some other statistical properties  
 including confidence intervals, regressions, and statistical power.
@@ -29,5 +28,5 @@ Epidemiologically,
 we could compute other measures of risk such as relative risk or relative odds.
 This would require cases and controls,
 and would likely need to be assessed by different measures of accuracy.
-We also feel that simulations could be used to quantify the level of privacy lost when using the \gls{dkd} to aggregate data.
+We also think that simulations could be used to quantify the level of privacy lost when using the \gls{dkd} to aggregate data.
 It would be interesting to compare the level of privacy maintained by the \gls{dkd} to that of \glspl{asr}.

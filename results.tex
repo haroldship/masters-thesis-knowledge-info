@@ -441,9 +441,13 @@ This results in a slightly under-smoothed \gls{silverman} estimate.
 
 In this section we examine and compare the results of five experiments in which we vary the \glspl{factor}
 of a single-peak risk function.
-The unknown information that one is trying to discover, is the risk of a person catching a specific disease over a defined time period.
-This is analogous to a real-world researcher combining the several years worth of incident data from the same population.
-Our question is, will this lead to more accurate results for the \gls{dkd}?
+The unknown information that one is trying to discover,
+is the risk of a person catching a specific disease over a defined time period.
+This is analogous to a real-world researcher combining the several years worth of incident data from the same population,
+and answers our \Cref{thm:accuracy-affected:duration}.
+In particular,
+our question is,
+will extending the number of years of a study lead to more accurate results for the \gls{dkd}?
 We keep the population size constant at 10,000, distributed uniformly throughout the study area.
 The risk function for each of the five experiments has a single peak,
 centered at the origin,
@@ -614,8 +618,11 @@ They are all near to $-0.75$.
 
 In this section we examine and compare the results of five experiments in which we vary the \gls{spread} \gls{sigma_i}
 of a single-peak risk function.
-The unknown information that one is trying to discover is, how far away from a source of disease risk is safe.
-Our question is, under different \glspl{spread}, how accurate is the \gls{dkd}?
+The unknown information that one is trying to discover is,
+how far away from a source of disease risk is safe.
+Our question is, under different \glspl{spread},
+how accurate is the \gls{dkd}?
+This will help us answer \Cref{thm:accuracy-affected:rates}.
 Differing \glspl{spread} are analogous to different levels of concentration of the risk of disease is in a specific location.
 Another way to look at it is, is how quickly the risk dissipates in space as one moves further away from a single source of disease risk.
 We keep the population size constant at 10,000, distributed uniformly throughout the study area.
@@ -750,7 +757,9 @@ However, we did not observe a monotonic growth rate of the exponent with the spr
 We next examine the effect of increasing the sample size, while keeping the risk intensity function fixed.
 Unlike what we did in \Cref{sec:results:number_of_incidents} where we fixed the size of the population and allowed the risk function to change,
 here we fix the risk function and change the population size.
-This is analogous to increasing the size of the population under study, for example by increasing the study area.
+This is analogous to increasing the size of the population under study,
+for example by increasing the study area,
+and will provide us answers to our \Cref{thm:accuracy-affected:popsize}.
 In order to do this, we increase the population size and the \gls{factor} proportionately.
 For example, in one experiment \gls{factor} is 50 and the population is 5,000,
 and in the next experiment the \gls{factor} is 100 and the population is 10,000.
@@ -866,7 +875,9 @@ but consistently underestimates the \gls{peak bias} by a greater value.
     \label{tab:params:pop_spread}
 \end{table}
 
-In this section, we compare the effect of different population distributions on the estimation of a single, fixed risk function.
+In this section
+we compare the effect of different population distributions on the estimation of a single,
+fixed risk function in order to answer our \Cref{thm:accuracy-affected:popdist}.
 In particular, we vary the \gls{spread} of the population \gls{sigma_p}.
 The population size is fixed at 10,000 and centered around the origin (0,0).
 We conduct five experiments, using the values 0.7, 1.0, 1.4, 2.0, and 2.8 for \gls{sigma_p}.
@@ -997,7 +1008,8 @@ as seen in \Cref{fig:other_measures:pop_spread}.
     \label{tab:params:p1.4_100_G}
 \end{table}
 
-In this section, we look at incident risk functions that have two peaks.
+In this section, we look at incident risk functions that have two peaks,
+in order to provide more answers to our \Cref{thm:accuracy-affected:rates}.
 The major peak has \gls{factor} of 60, while the second, minor peak has \gls{factor} of 40.
 We do this to see how a multiple peaks affect the \gls{peak bias} and \gls{peak drift} in particular.
 \citet{devroye1985nonparametric} note that ``it is intuitively obvious that multimodal densities are more difficult to estimate.''
