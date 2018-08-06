@@ -91,7 +91,7 @@ We then ran several sets of experiments while changing one parameter at a time.
 %% Section: Results of single-peak risk on uniform population
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section[Results of single-peak risk on uniform population]
+\section
     {Results of a single experiment with risk function having single peak with \glsentryname{spread} 1.0 and \glsentryname{factor} of 100 on a fixed, uniform population of 10,000}
 \label{sec:results:unif_100_1.0_1h}
 
@@ -413,7 +413,7 @@ This results in a slightly under-smoothed \gls{silverman} estimate.
 %% Section: Effect of number of incidents with fixed population
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section[Effect of number of incidents with fixed population]
+\section
     {Effect of \glsentryname{factor} for a fixed, uniform population of 10,000 and single peak with \glsentryname{spread} 1.0}
 \label{sec:results:number_of_incidents}
 
@@ -590,7 +590,7 @@ They are all near to $-0.75$.
 %% Section: Effect of risk spread with fixed population
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section[Effect of risk spread with fixed population]
+\section
     {Effect of risk \glsentryname{spread} for a fixed, uniform population of 10,000 and single peak with \glsentryname{spread} 1.0}
 \label{sec:results:spread}
 
@@ -712,7 +712,7 @@ From \Cref{fig:ise:unif_Spreads_1h:nmise_log_log} we see a polynomial relationsh
 
 \begin{equation}
     \label{eq:nmise:spread}
-    \gls{nmise} = O(n^{\alpha_S})
+    \gls{nmise} = O(\gls{sigma_i}^{\alpha_S})
 \end{equation}
 \input{results/by_cases_spread/nmise_convergence_table}
 

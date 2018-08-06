@@ -51,7 +51,7 @@ leading us to consider preference for the \gls{silverman} method due to its grea
 While the \gls{mise} increased as the expected number of incidents \gls{mu} grew,
 the \acrfull{nmise} decreased at a similar rate
 in the examples we considered
-for \gls{silverman} $(n^{-0.741})$ and \gls{cv} $(n^{-0.775})$.
+for \gls{silverman} $(n^{-0.741})$ and \gls{cv} $(n^{-0.775})$ in answer to \Cref{thm:accuracy-affected:duration}.
 As far as small samples are concerned,
 in the examples we studied,
 we measured the \acrfull{rmise} at around $10\%$ for each bandwidth at 50 incidents.
@@ -64,6 +64,13 @@ with increasing average accuracy as the number of incidents grows.
     \label{rec:small-sample}
     We recommend a sample size of at least 50 incidents for the \gls{dkd}.
 \end{rec}
+
+In order to answer \Cref{thm:accuracy-affected:rates} we studied a range of spreads for different single-peak incident rate functions.
+Our results show that the \gls{dkd} accuracy was affected by the spread,
+in that the \gls{mise} decreased sharply as the incidence rate spread increased and the height of the peak was lower.
+In a similar manner,
+our examples of increasing the population spread saw a sharp decrease in the \gls{mise},
+in answer to \Cref{thm:accuracy-affected:popdist}.
 
 In the examples we studied
 in contrast to the average accuracy,
@@ -79,7 +86,7 @@ The centroid measures were much more accurate than the simple peak.
     However, if the location of the peak is important, we recommend least squares cross-validation.
 \end{rec}
 
-When we examine the behavior under different population distributions,
+When we examine the behavior under different population distributions in consideration of \Cref{thm:accuracy-affected:popsize},
 we observed that the \gls{dkd} is sensitive to large variations in population density.
 This was true for all types of measures.
 \begin{rec}
