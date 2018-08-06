@@ -19,8 +19,20 @@
 \usepackage{mystyle}
 \usepackage{mymacros}
 
-\title{Investigating the Statistical Properties of the Double Kernel Density Estimator}
-\author{Harold Ship}
+\title{
+    \textbf{Investigating the Statistical Properties of the Double Kernel Density Estimator}
+}
+\author{
+    \textbf{Harold Ship}\\%
+    \\%
+    \\%
+    THESIS SUBMITTED IN PARTIAL FULFILLMENT OF THE\\%
+    REQUIREMENTS FOR THE MASTER'S DEGREE\\%
+    \\%
+    University of Haifa\\%
+    Faculty of Management\\%
+    The Department of Information and Knowledge Management
+}
 \date{\today}
 
 % will appear in footer
@@ -34,21 +46,25 @@
 \lstset{language=R}
 
 \frontmatter                            % only in book class (roman page #s)
-\pagenumbering{Roman}                   % only in preamble
-\maketitle                              % Print title page.
+\doublespacing
+\maketitle                              % Print outer title page.
 
+\cleardoublepage
+
+\pagenumbering{Roman}                   % only in front matter
+
+\input{innertitlepage}                  % inner title page
+\cleardoublepage
+
+\singlespacing                          % for rest of preamble
 \tableofcontents                        % Print table of contents
-\clearpage
+\cleardoublepage
 \listoftables
-\clearpage
+\cleardoublepage
 \listoffigures
 \printglossaries
-%\clearpage
-%\printnomenclature
-%\clearpage
 
 \mainmatter                             % only in book class (arabic page #s)
-\setstretch{1.1}                        % some space around text
 
 \onehalfspacing
 \chapter{Introduction}
