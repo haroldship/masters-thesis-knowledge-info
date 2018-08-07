@@ -52,6 +52,12 @@ While the \gls{mise} increased as the expected number of incidents \gls{mu} grew
 the \acrfull{nmise} decreased at a similar rate
 in the examples we considered
 for \gls{silverman} $(n^{-0.741})$ and \gls{cv} $(n^{-0.775})$ in answer to \Cref{thm:accuracy-affected:duration}.
+In other words,
+one can expect that using two years worth of data
+to result in the global error \gls{mise} to be about 60\% of a single year.
+Conversely,
+to reduce the \gls{mise} to half of a given value
+one needs 2.5 times as many incidents.
 As far as small samples are concerned,
 in the examples we studied,
 we measured the \acrfull{rmise} at around $10\%$ for each bandwidth at 50 incidents.
@@ -66,8 +72,11 @@ with increasing average accuracy as the number of incidents grows.
 \end{rec}
 
 In order to answer \Cref{thm:accuracy-affected:rates} we studied a range of spreads for different single-peak incident rate functions.
-Our results show that the \gls{dkd} accuracy was affected by the spread,
-in that the \gls{mise} decreased sharply as the incidence rate spread increased and the height of the peak was lower.
+Our results using Gaussian shaped incidence functions show that the \gls{dkd} accuracy was affected by the spread,
+in that the \gls{mise} decreased sharply
+as the incidence rate spread increased and the height of the peak was lower.
+In this case,
+\gls{cv} performed better at $\gls{sigma_i}^{-1.576}$ than $\gls{sigma_i}^{-1.421}$ for \gls{silverman}.
 In a similar manner,
 our examples of increasing the population spread saw a sharp decrease in the \gls{mise},
 in answer to \Cref{thm:accuracy-affected:popdist}.
@@ -89,6 +98,11 @@ The centroid measures were much more accurate than the simple peak.
 When we examine the behavior under different population distributions in consideration of \Cref{thm:accuracy-affected:popsize},
 we observed that the \gls{dkd} is sensitive to large variations in population density.
 This was true for all types of measures.
+What we found was that for population densities with a very sharp peak,
+so that the population was concentrated roughly 10\% of the study area or less,
+the \gls{dkd} accuracy was 2-10 times worse than all other cases.
+When the population density was not so concentrated,
+the accuracy measures were stable.
 \begin{rec}
     \label{rec:pop-density}
     When the population density is highly variable,

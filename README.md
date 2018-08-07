@@ -2,6 +2,11 @@
 ## Harold Ship, University of Haifa
 
 ### Fixed in version 1
+ - [x] Itai's comments
+ - [x] Proper English title pages
+ - [ ] Abstract
+ - [ ] Final formatting
+ - [ ] Include Hebrew title pages and abstract
 
 ### Fixed in version 0.17
  - [x] Introduction

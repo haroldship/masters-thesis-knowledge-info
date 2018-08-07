@@ -581,6 +581,10 @@ based on \citet{lewis1979simulation}.
 However,
 because we are dealing with a \textit{rate} that affects members of a \textit{population},
 our algorithm is slightly different.
+In our case,
+the incidents are members of the population that have something happen to them such as falling ill.
+Therefore,
+we generate incidents by applying the incidence rate to a pre-generated population.
 We proceed in two parts.
 First, we generate a population \gls{P} of the chosen size $N_p$ as follows:
 \begin{itemize}
