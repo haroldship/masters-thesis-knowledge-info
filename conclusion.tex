@@ -103,6 +103,8 @@ so that the population was concentrated roughly 10\% of the study area or less,
 the \gls{dkd} accuracy was 2-10 times worse than all other cases.
 When the population density was not so concentrated,
 the accuracy measures were stable.
+However,
+the estimation errors observed for the uniform populations were much lower than the peaked populations.
 \begin{rec}
     \label{rec:pop-density}
     When the population density is highly variable,
@@ -110,10 +112,13 @@ the accuracy measures were stable.
 \end{rec}
 
 In summary,
-under the right conditions,
-\gls{dkd} can give a good approximation of a true \gls{incidence rate} function.
+under the conditions we studied,
+the \gls{dkd} can give a good approximation of a true \gls{risk} or \gls{incidence rate} function.
 This is so in terms of the general accuracy of the rate at any given point,
 as well as for the location of the peak.
+Our results did not show a large difference between the \gls{silverman} and \gls{cv} bandwidth selection schemes,
+except for in determining the location of the peak.
+Both schemes chose bandwidths between 5\% and 20\% of the size of the study area.
 Because the accuracy improves with the number of observations,
 it is prudent to increase the time frame of the study when the number of observations in a given year is smaller than 50.
 In cases where the population density varies greatly over a study area,

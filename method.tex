@@ -147,7 +147,7 @@ First, we compute \gls{rmise} by dividing $\gls{lambda_hat}\xvec$ by $\gls{lambd
 \begin{equation}
 \label{eq:rmise}
     \mbox{\gls{rmise}}(\gls{lambda_hat}) = 
-        \mbox{\gls{mise}}(\gls{relative_lambda_hat}) \\
+        \mbox{\gls{mise}}(\gls{relative_lambda_hat})
 \end{equation}
 where
 \begin{equation}
@@ -211,7 +211,7 @@ The analogous definitions are \gls{rmiae} and \gls{nmiae}, as defined below.
 \begin{equation}
 \label{eq:rmiae}
     \mbox{\gls{rmiae}} = 
-        \mbox{\gls{miae}}(\gls{relative_lambda_hat}) \\
+        \mbox{\gls{miae}}(\gls{relative_lambda_hat})
 \end{equation}
 
 where \gls{relative_lambda_hat} is defined above in \Cref{eq:relative_lambda_hat},
@@ -253,7 +253,7 @@ The analogous definitions are \gls{relative supremum error} and \gls{normalized 
 \begin{equation}
 \label{eq:relative_supremum_error}
     \mbox{\gls{relative supremum error}}(\gls{lambda_hat}) = 
-        \frac{1}{\lambda_{max}} \mbox{\gls{supremum error}}(\gls{lambda_hat}) \\
+        \frac{1}{\lambda_{max}} \mbox{\gls{supremum error}}(\gls{lambda_hat})
 \end{equation}
 
 where
@@ -346,7 +346,7 @@ We then take the geometrical centroid $C=(c_1,c_2)$ of these points,
 and we compute the value of $\gls{lambda_hat}(c_1,c_2)$.
 \begin{equation}
     \mbox{centroid}(\gls{lambda_hat}) 
-        = (c_1, c_2) | c_1 = \mbox{mean}(x_1),~c_2 = \mbox{mean}(x_2),~(x_1, x_2) \in G \\%
+        = (c_1, c_2) | c_1 = \mbox{mean}(x_1),~c_2 = \mbox{mean}(x_2),~(x_1, x_2) \in G%
 \end{equation}
 We call the corresponding accuracy measures \gls{centroid bias} and \gls{centroid drift}.
 This is a simplified version of one of methods found in \citet{dalenius1965mode},
@@ -453,9 +453,9 @@ In this study, we always use the same value for both directions \texttt{sigma1} 
 Next, we generate the incident risk function, $\gls{lambda}\xvec$, by scaling our base function $f(x_1, x_2$ it so that the expected number of incidents \gls{mu} is equal to the \texttt{EN.i} parameter.
 We begin with a function $f\xvec$ defined on \gls{W}, which is positive-valued and has 
 
-\begin{equation*}
+\begin{equation}
     \iintW{f\xvec} = 1 \text{.}
-\end{equation*}
+\end{equation}
 
 We define the \textit{true incident risk} function for the experiment
 

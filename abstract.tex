@@ -1,0 +1,119 @@
+% !TEX root = thesis.tex
+
+%%
+%%
+%% Abstract
+%%
+%%
+
+
+\begin{onehalfspace}
+
+\begin{center}
+    \vspace*{0.5cm}
+
+    \textbf{\Large Investigating the Statistical Properties of the Double Kernel Density Estimator}
+
+    \vspace*{1.0cm}
+
+    \textbf{Harold Ship}
+
+    \vspace*{1.0cm}
+
+\end{center}
+
+\noindent\textbf{\LARGE Abstract}
+\phantomsection\addcontentsline{toc}{chapter}{Abstract}
+
+\subsection*{Motivation}
+
+There are many examples in epidemiology of data that occur as points distributed in the plane.
+One example is
+the home addresses of persons in a neighborhood and,
+in particular, whether or not they have a particular medical condition.
+These data allow one to compute the \textit{ncidence rate} of this condition.
+Recently,
+a technique known as the \acrfull{dkd} has been used for estimating \glsentryname{incidence rate} functions.
+
+Researchers have recently been motivated to use the \acrshort{dkd} due to information loss due to data aggregation of incidents into geographical areas such as cities or neighborhoods.
+This aggregation has been deemed necessary both
+to reduce the effects of variance on the relative errors of the results,
+and to preserve the privacy of individuals who have been stricken with disease.
+
+This study examines some of the statistical properties of the \acrshort{dkd}.
+In particular,
+we empirically analyse how different factors of the population and incidence distributions
+affect the \textit{accuracy} of the \acrshort{dkd}.
+
+The contribution of this study will be to answer the following research questions:
+\begin{enumerate}
+    \item How is the accuracy of the \acrshort{dkd} affected by different factors?
+    \item How accurate is the \acrshort{dkd} \textit{globally},
+        over the study area as a whole,
+        and \textit{pointwise}, at the peaks?
+\end{enumerate}
+
+\subsection*{Theory and method}
+
+The type of study we are interested in involves incidents of a chronic disease.
+The common measure of frequency used in the literature compares the number of new cases of a disease to the total time spent by members of the population in the study.
+This measure is called the incidence rate.
+For a given population, time period, and set of incidents,
+we can compute the overall incidence rate by taking the total number of incidents and dividing by the total population.
+However, we may wish to compare the incidence rate at different locations within an area.
+To do this, we compute the incidence rate point-wise.
+
+The basic unit of our study is the \textit{experiment},
+a set of monte carlo simulations run with the same initial setup with the same measurements taken.
+Each experiment is run with a fixed set of parameters.
+We run a set of experiments,
+varying one parameter at a time, or in some cases two parameters in tandem,
+in order to observe the effect of this parameter on the accuracy of the \acrshort{dkd}.
+
+In order to compute the \acrshort{dkd},
+a parameter known as the \textit{bandwidth} must be set,
+and the accuracy of the \acrshort{dkd} is highly dependent upon it.
+In each experiment,
+we used two techniques,
+Silverman Rule of Thumb and Least Squares Cross Validation,
+to select the bandwidth.
+We compare the results of these two techniques.
+
+In order to describe the accuracy of the \acrshort{dkd} as a method of estimating the true risk function $\lambda$,
+we use several accuracy measures.
+In particular,
+for each experiment we measure \acrfull{mise},
+\acrfull{miae},
+\glsentryname{supremum error},
+\glsentryname{peak bias},
+\glsentryname{peak drift},
+\glsentryname{centroid bias},
+and \glsentryname{centroid drift}.
+
+\subsection*{Results}
+
+We obtained results that show that increasing the expected number of incidents
+reduces the estimation error of the \acrshort{dkd},
+for both global and point-wise errors.
+We also observed that increases in the spread of the risk (rate) function also results in reduced estimation error.
+We also observed that increasing the expected number of incidents in tandem with the population size reduced the estimation error,
+and that having a non-uniform population increased the estimation error.
+In most cases,
+our results were similar for both Silverman and CV selected bandwidths.
+
+\subsection*{Conclusion}
+
+In the examples we studied,
+we found that statistically,
+the \acrshort{dkd} can give a good approximation of a true risk or incidence rate function.
+This is so in terms of the general accuracy of the rate at any given point,
+as well as for the location of the peak.
+Our results did not show a large difference between the Silverman and \acrshort{cv} bandwidth selection schemes,
+except for in determining the location of the peak.
+Both schemes chose bandwidths between 5\% and 20\% of the size of the study area.
+Because the accuracy improves with the number of observations,
+it is prudent to increase the time frame of the study when the number of observations in a given year is smaller than 50.
+In cases where the population density varies greatly over a study area,
+the \acrshort{dkd} is less accurate than for smoother varying populations.
+
+\end{onehalfspace}

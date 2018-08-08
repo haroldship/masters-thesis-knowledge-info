@@ -34,7 +34,7 @@
 \usepackage[layout=a4paper,left=3cm,right=2cm,top=2cm,bottom=2cm,headheight=24pt]{geometry} % margins
 \setlength{\footheight}{24.0pt}
 
-\usepackage[plainpages=false,pdfpagelabels]{hyperref} % links
+\usepackage[plainpages=false,pdfpagelabels,hypertexnames=false]{hyperref} % links
 \newcommand*{\Appendixautorefname}{Appendix} % add name for appendix refs
 
 \usepackage{amsfonts} % for mathbb
@@ -43,6 +43,10 @@
 \usepackage{relsize} % for \mathlarger
 
 \usepackage[noabbrev,nameinlink]{cleveref} % \Cref command (this must come after amsmath)
+\usepackage{autonum}  % show only referenced equations
+\makeatletter
+\autonum@generatePatchedReferenceCSL{Cref}
+\makeatother
 \usepackage{enumitem} % control item labels in lists
 \usepackage{etoolbox} % for \AtBeginEnvironment
 

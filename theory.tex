@@ -206,7 +206,7 @@ denoted by $\gls{K}\xvec$,
 that satisfies
 \begin{align}
     & \hspace{1.75em} \gls{K}\xvec \ge 0~ \forall \xvec \in W, \text{and} \label{eq:k_pos} \\%
-    & \iintW{\gls{K}\xvec} = 1 \label{eq:k_1} \text{.}%
+    & \iintW{\gls{K}\xvec} = 1 \text{.} \label{eq:k_1}%
 \end{align}
 
 \Cref{eq:k_pos,eq:k_1} are equivalent to stating that \Kdots~is a probability density on $\RS$.
@@ -402,10 +402,10 @@ and based on the equivalence of bandwidths for the \gls{kde} and the\gls{kernel 
 we begin by using Taylor's Theorem to approximate the \gls{kde}.
 Let \gls{f} be a probability density function,
 and define the \gls{kde} of \gls{f}:
-\begin{equation*}
+\begin{equation}
     \gls{f_hat} \xvec%
             = \sumSn{\gls{K}\left( \frac{\xvec-(s_1, s_2)}{h} \right)} \text{.}%
-\end{equation*}
+\end{equation}
 We make the following assumptions about $K\dotdot$
 and $f\dotdot$ \citep{silverman1986density,wand1994kernel}:
 \begin{assumptions}
@@ -504,9 +504,9 @@ which has forumula
 where $n$ is the observed number of incidents,
 $\sigma$ the arithmetic mean of $\sigma_{x_1}$ and $\sigma_{x_2}$,
 he standard deviations of the $x_1$ and $x_2$ coordinates of the sample points respectively:
-\begin{equation*}
+\begin{equation}
     \sigma = \frac{\sigma_{x_1} + \sigma_{x_1}}{2} \text{.}
-\end{equation*}
+\end{equation}
 \citet{silverman1986density} shows that for a large class of intensity functions,
 including ones based on Gaussian functions,
 this bandwidth provides a good approximation to the optimal bandwidth \gls{h_opt}. 
@@ -527,11 +527,11 @@ The technique for \gls{kernel intensity estimation} is identical to the \gls{kde
 in the sense that the bandwidths which minimize the \gls{mise} of the \gls{kernel intensity estimator} are the same \citep{brooks1991asymptotic}. 
 \Citet{brooks1991asymptotic} show that the \gls{cv} error computed with the selected bandwidth approximates the optimal \gls{ise} very well,
 in the sense that
-\begin{equation*}
+\begin{equation}
     \frac   {\mbox{\gls{ise}}(\gls{lambda_hat}; h_{\gls{cv}})}%
             {\mbox{\gls{ise}}(\gls{lambda_hat}; \gls{h_opt})}%
             \to 1 ~\text{almost surely.}%
-\end{equation*}
+\end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
