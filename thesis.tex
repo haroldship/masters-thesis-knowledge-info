@@ -33,7 +33,7 @@
     Faculty of Management\\%
     The Department of Information and Knowledge Management
 }
-\date{\today}
+\date{\printdayoff\today}
 
 % will appear in footer
 \newcommand\docversion{Draft 1--}
@@ -67,6 +67,7 @@
 \cleardoublepage
 \listoffigures
 \printglossaries
+
 
 \mainmatter                             % only in book class (arabic page #s)
 
@@ -121,6 +122,19 @@
 
 \end{appendices}
 
+\resetpath
 
+\cleardoublepage
+\includepdf{abstract-hebrew.pdf}
+
+\cleardoublepage
+\begin{titlepage}
+\includepdf{inner-cover-hebrew.pdf}
+\end{titlepage}
+
+\cleardoublepage
+\begin{titlepage}
+\includepdf{outer-cover-hebrew.pdf}
+\end{titlepage}
 
 \end{document}

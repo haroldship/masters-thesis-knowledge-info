@@ -92,6 +92,10 @@
 \newcommand{\setpath}[1]{
     \renewcommand{\mypath}{#1}
 }
+\newcommand{\resetpath}{
+    \setpath{}
+    \renewcommand{\includegraphics}{\includegraphicsOld}
+}
 
 \let\includegraphicsOld\includegraphics
 \renewcommand{\includegraphics}[2][]{\includegraphicsOld[#1]{\mypath#2}}
