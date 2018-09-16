@@ -581,10 +581,16 @@ based on \citet{lewis1979simulation}.
 However,
 because we are dealing with a \textit{rate} that affects members of a \textit{population},
 our algorithm is slightly different.
+To be more specific,
+the algorithm mentioned in the aforementioned book consists of simulating a Poisson process on \gls{W}
+with intensity $\lambda_0$ equal to the maximum value of $\gls{lambda}(x_1, x_2)$ within \gls{W},
+and retaining an event at $(x_1, x_2)$ with
+probability $\gls{lambda}(x_1, x_2)/\lambda_0$.
+Our data generation algorithm differs from the one suggested by \citet{lewis1979simulation} in the following way.
 In our case,
-the \glspl{incident} are members of the population that have something happen to them such as falling ill.
-Therefore,
-we generate \glspl{incident} by applying the incidence rate to a pre-generated population.
+we are interested in both the \glspl{incident} and the population as a whole.
+We therefore first generate a population according to our chosen population distribution,
+and apply the \gls{incident} rate function to each ``person'' to determine which ones ``fell ill''.
 We proceed in two parts.
 First, we generate a population \gls{P} of the chosen size $N_p$ as follows:
 \begin{itemize}
