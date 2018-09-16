@@ -21,10 +21,29 @@ smooth function \citep{bithell1990application},
 and the value of \gls{lambda} at any point is the quotient of the values of
 \gls{lambda_I} and \gls{lambda_P}.
 
-Researchers have recently been motivated to use the \gls{dkd} due to information loss due to data aggregation of incidents into geographical areas such as cities or neighborhoods.
+Researchers have recently been motivated to use the \gls{dkd} because of information loss
+due to data aggregation of incidents into geographical areas such as cities or neighborhoods.
 This aggregation has been deemed necessary both
 to reduce the effects of variance on the relative errors of the results,
 and to preserve the privacy of individuals who have been stricken with disease.
+Use of the \gls{dkd} also allows for the linking of location data with other data sources,
+such as welfare levels, air pollution and other attributes not available for individuals.
+
+However,
+as far as we know,
+the statistical properties of the \gls{dkd} are not yet fully understood.
+We would like to know whether or not the estimates for \gls{risk} or \gls{incidence rate}
+obtained using the \gls{dkd} are accurate or misleading in several ways.
+It is also not known under what conditions we can expect reasonable results from these estimates.
+For example,
+we do not know if the \gls{dkd} accurately estimates the true \gls{risk}
+for both small and large numbers of incidents.
+We would also like to know how the shape of the underlying \gls{risk} function affects this accuracy.
+Of particular concern are the peaks of the true risk function.
+These peaks indicate a point around which the risk of contracting a disease is at its highest.
+While the accuracy of the estimate of the magnitude of these peaks is important,
+it is critical that the location estimate be accurate so as not create any misleading associations
+with other, nearby points of interest.
 
 This study examines some of the statistical properties of the \gls{dkd}.
 In particular,
@@ -51,7 +70,8 @@ The contribution of this study will be to answer the following research question
     how accurate is the \gls{dkd}:
     \begin{subquestions}
         \item globally, over the study area as a whole, \label[question]{thm:accuracy-scale:global}%
-        \item and pointwise at the peaks. \label[question]{thm:accuracy-scale:peaks}%
+        \item in magnitude, pointwise at the peaks, \label[question]{thm:accuracy-scale:peaks}%
+        \item location of the peaks. \label[question]{thm:accuracy-scale:peaks-location}%
     \end{subquestions}
 \end{question}
 

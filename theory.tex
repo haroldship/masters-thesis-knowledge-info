@@ -591,6 +591,11 @@ In our case,
 we are interested in both the \glspl{incident} and the population as a whole.
 We therefore first generate a population according to our chosen population distribution,
 and apply the \gls{incident} rate function to each ``person'' to determine which ones ``fell ill''.
+
+Essentially, their algorithm chooses $N_p$ points at random in \gls{W}.
+Our algorithm uses a fixed set of $N_p$ points, generated one time per experiment according to the chosen population distribution.
+Both algorithms apply \gls{lambda} to the ``persons'' in order to generate incidents.
+
 We proceed in two parts.
 First, we generate a population \gls{P} of the chosen size $N_p$ as follows:
 \begin{itemize}
