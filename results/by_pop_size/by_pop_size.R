@@ -115,6 +115,6 @@ df.alpha.latex <- latex(df.alpha,
                         booktabs=TRUE,
                         cdec=c(0,3),
                         caption.loc="bottom",
-                        caption="NMISE convergence rate by sample size for different bandwidth selectors for a fixed, single-peak risk function with expected number of incidents 100 on a uniform population.",
+                        caption="NMISE convergence rate by sample size for different bandwidth selectors for a fixed, single-peak risk function with expected number of incidents proportional to population size on a uniform population.",
                         caption.lot="NMISE Convergence rate by sample size")
 
