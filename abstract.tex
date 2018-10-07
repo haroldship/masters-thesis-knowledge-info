@@ -91,14 +91,18 @@ and \glsentryname{centroid drift}.
 
 \paragraph*{Results:}
 
-We obtained results that show that increasing the expected number of incidents
-reduces the estimation error of the \acrlong{dkd},
-for both global and point-wise errors.
-We also observed that increases in the spread of the risk (rate) function also results in reduced estimation error.
+We obtained results that show that increasing the expected number of incidents $N$,
+such as what would occur when increasing the duration of the study,
+reduces the selected bandwidth by a factor of around $N^{-1/6}$.
+It also reduces the estimation error of the double kernel density in the relative sense
+for global errors by a factor of around $N^{-3/4}$ and also for point-wise magnitude and peak errors.
+However, in this case the absolute errors increased with the expected number of incidents.
+We also observed that increases in the spread $\sigma$ of the risk (rate) function also results in reduced estimation error
+in both absolute and relative terms of approximately $\sigma^{-1.4}$.
 We also observed that increasing the expected number of incidents in tandem with the population size reduced the estimation error,
-and that having a non-uniform population increased the estimation error.
-In most cases,
-our results were similar for both Silverman and CV selected bandwidths.
+at a rate of around $N^{-2.7}$
+and that having a non-uniform population increased the estimation error slightly, 
+except when the population spread was extremely narrow.
 
 \paragraph*{Conclusion:}
 
