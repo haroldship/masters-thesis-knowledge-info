@@ -6,54 +6,20 @@
 %%
 %%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-%% Disease incidence
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Disease incidence}
-\label{sec:theory:incidence}
-
-The theory described in this section is based on \citet{rothman2008modern}.
+One of the goals of epidemiological studies is the estimation the probability,
+or ``risk'',
+of acquiring a disease during a specific period of time at different locations \citep{rothman2008modern}.
 We focus on chronic diseases in order to better understand the degree to which different groups of people are ``at risk'' of contracting a disease.
 We also are interested in discovering and describing the association between environmental factors and this ``risk''.
 For example, one could ask if air pollution emitted by a factory is associated with an increased ``risk'' of lung cancer among people that live close by.
-
-In order to be more precise, let us define
-
-\begin{defn}
-    \textbf{\Gls{risk}} is the probability of an individual person contracting a disease in a specific time period.
-\end{defn}
-
-One way to estimate the \gls{risk} is to look at the historical frequency of contracting of the disease.
-The type of study we are interested in involves incidents of a chronic disease.
-Therefore, we separately consider those people who contracted the disease under study.
-In particular, we are interested in people who did not have the disease at the beginning of the study,
-but developed the disease within the study period.
-These are new cases of the disease, which we call \textbf{\glspl{incident}}.
+One way to estimate the \gls{risk} is to look at the historical \gls{incidence rate} of contracting of the disease \citep[Chapter 3]{rothman2008modern}.
 
 \begin{defn}
-    An \textbf{\gls{incident}} is a new case of the disease during the study period.
-\end{defn}
-
-The common measure of frequency used in the literature compares the number of new cases of a disease to the total time spent by members of the population in the study.
-This measure is called the \gls{incidence rate}.
-
-\begin{equation}
-    \mbox{\Gls{incidence rate} (common definition)} = \frac{\mbox{number of new cases}}
-                                {\displaystyle\smashoperator{\sum\limits_{\mbox{persons}}}\mbox{time spent by person in population}}
-\end{equation}
-
-For our simulation study, we can simplify our definition of \gls{incidence rate} by assuming that each person in the population is exposed for the entire study period,
-which for simplicity we can set to one (1).
-Our simplified definition of incidence rate is then:
-
-\begin{defn}
-    The \textbf{\gls{incidence rate}} is the number of new cases in the study period divided by the total population.
+    The \textbf{\gls{incidence rate}} is the number of new cases in the study period divided by the total time spent in the population.
     \begin{equation}
         \label{eq:incidencerate}
-        \mbox{\Gls{incidence rate}} = \frac{\mbox{number of new cases in a time period}}
-                                        {\mbox{number of persons}}
+        \mbox{\Gls{incidence rate}} = \frac{\mbox{number of new cases}}
+                                {\displaystyle\smashoperator{\sum\limits_{\mbox{persons}}}\mbox{time spent by person in population}}
     \end{equation}
 \end{defn}
 
@@ -190,7 +156,6 @@ Dividing the value obtained from first by the value obtained from the second res
 \section{Kernel estimation of the intensity}
 \label{sec:theory:kernelestimation}
 
-This section is based on \citet{silverman1986density} and \citet{wand1994kernel}.
 The usual case in practice is to start with a set of \glspl{event} that have been observed in a study area.
 For example, we can have new cases of a disease in a city that were diagnosed over the course of a defined time period.
 By our \Cref{defn:event},
@@ -199,9 +164,18 @@ Our goal is to estimate the \gls{intensity} function for disease cases using the
 Similarly for the population,
 we would like to estimate the population \gls{intensity} function.
 
-A common method for estimating \gls{intensity} functions is known as
-\textbf{\gls{kernel intensity estimation}}.
-This technique utilizes a special function known as a \textbf{\gls{kernel}},
+A well-known method for estimating \gls{intensity} functions is known as
+\textbf{\gls{kernel intensity estimation}} \citep[Section 6.6]{wand1994kernel},
+see also \citet{diggle1985kernel}.
+Kernel-estimation is a non-parametric technique,
+which means it does not pre-suppose any structure on the underlying true intensity function.
+This is advantageous when there is no model for the truth,
+or when the shape of the true function does not fit well with any parametric model.
+On the other hand,
+non-parametric models generally tend to converge more slowly to the truth that parametric models,
+meaning the estimation error shrinks more slowly as sample sizes increase.
+
+\gls{kernel intensity estimation} utilizes a special function known as a \textbf{\gls{kernel}},
 denoted by $\gls{K}\xvec$,
 that satisfies
 \begin{align}
