@@ -167,13 +167,19 @@ we would like to estimate the population \gls{intensity} function.
 A well-known method for estimating \gls{intensity} functions is known as
 \textbf{\gls{kernel intensity estimation}} \citep[Section 6.6]{wand1994kernel},
 see also \citet{diggle1985kernel}.
-Kernel-estimation is a non-parametric technique,
+Kernel estimation is a non-parametric technique,
 which means it does not pre-suppose any structure on the underlying true intensity function.
 This is advantageous when there is no model for the truth,
 or when the shape of the true function does not fit well with any parametric model.
 On the other hand,
 non-parametric models generally tend to converge more slowly to the truth that parametric models,
 meaning the estimation error shrinks more slowly as sample sizes increase.
+Kernel estimation has been used in epidemiology with \textit{attributeless data},
+which is data that consists of geographical information with no accompanying attributes.
+These data points are sufficient for the estimation of the \gls{intensity} over the study area,
+and kernel estimation is often a good alternative to other methods.
+For some examples,
+see \citet{bithell1990application,portnov2009studying,zusman2012residential}.
 
 \gls{kernel intensity estimation} utilizes a special function known as a \textbf{\gls{kernel}},
 denoted by $\gls{K}\xvec$,
@@ -182,7 +188,6 @@ that satisfies
     & \hspace{1.75em} \gls{K}\xvec \ge 0~ \forall \xvec \in W, \text{and} \label{eq:k_pos} \\%
     & \iintW{\gls{K}\xvec} = 1 \text{.} \label{eq:k_1}%
 \end{align}
-
 \Cref{eq:k_pos,eq:k_1} are equivalent to stating that \Kdots~is a probability density on $\RS$.
 
 Spatial analysis uses a two-dimensional version of \gls{kernel intensity estimator}
@@ -199,10 +204,12 @@ and the choice of \gls{kernel} $K_1(\cdot)$.
 The role of the \gls{kernel} function $K_1(\cdot)$~is to smooth the information obtained
 from the observed \glspl{event} to an area around their locations.
 Choosing different \glspl{kernel} results in different shapes to this smoothing.
-However, this has only a small effect on the resulting \gls{intensity} estimate.
+However, this has only a small effect on the resulting \gls{intensity} estimate, as
+``most unimodal densities perform about the same as each other when used as a kernel.'' \citep[p. 31]{wand1994kernel}
 On the other hand,
 the choice of bandwidth \gls{h} has a major effect on the \gls{intensity} estimate.
 The bandwidth controls the width of the area smoothed by the \gls{kernel} function and hence on the overall amount of smoothing.
+``The problem of choosing how much to smooth is of crucial importance'' \citep[p. 43]{silverman1986density}.
 
 \begin{figure}[H]
     \centering
@@ -287,12 +294,15 @@ The advantage over the Gaussian kernel is that it much faster to compute.
 \section{Measuring the accuracy of the estimate}
 \label{sec:theory:accuracy}
 
-This section is based on \citet{silverman1986density} and \citet{wand1994kernel}.
-A common statistical problem is to find the ``best'' estimate \gls{lambda_hat}
+In \gls{kernel intensity estimation},
+the main statistical problem is to find the ``best'' estimate \gls{lambda_hat}
 for the \gls{intensity} of an unknown \gls{spp}
 based on a set of observed \glspl{event}.
-In order to do this using \gls{kernel intensity estimation},
-we must select the ``best'' bandwidth.
+In order to do this,
+we choose the biweight kernel because it is more computationally efficient than the Gaussian kernel,
+and has higher differentiablity than the Epanechnikov kernel \citep[p. 77]{silverman1986density}.
+\textcolor{red}{tbd put a table above when discussing kernels and refer to it here.}
+Now we must select the ``best'' bandwidth \citep[p. 43]{silverman1986density} based on the data.
 From \Cref{fig:theory:kernel1d} we can see that different values of bandwidth \gls{h} result in different estimates for the \gls{intensity}.
 Our goal is to find a decision procedure that gives us the ``best'' result.
 While there is a great deal of research in \gls{kde},
