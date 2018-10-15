@@ -565,3 +565,58 @@ followed by the effect of the population spread.
 Finally,
 we examine how the distance between two peaks in a bimodal risk function affects the accuracy of the estimate.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Section: Experimental setup
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Experimental setup}
+\label{sec:results:setup}
+
+Each experiment was run on one of \textit{c4.2xlarge} or \textit{c4.4xlarge} instance in Amazon AWS \citep{aws:instancetypes}.
+These virtual machines have 8 and 16 virtual CPUs respectively.
+This allowed the monte carlo simulations to be sped up by running in 7 or 15 parallel threads using the \texttt{parallel} package in \texttt{R} \citep{r:parallel}.
+Randomization in parallel requires the random number stream to be split into separate sub-streams for each thread. 
+This was done using the L'Ecuyer-CMRG method \citep{lecuyer2002random}.
+
+Each experiment was run according to a set of parameters that comprised the particular setup.
+The parameters (\Cref{tab:experimental_parameters}) that define the study area remained fixed throughout the study.
+In particular, we set \texttt{x1.min} to -4, \texttt{x1.max} to 4, \texttt{x2.min} to -4, \texttt{x2.max} to 4, and \texttt{buffer} to 0.5.
+This gave us a study area with dimensions $8 \times 8$, with incidents concentrated in an area of $7 \times 7$.
+For evaluating the \gls{dkd} we used a grid size of 0.5.
+
+A table similar to \Cref{tab:params:template}, describing the parameter ranges used in the related experiments appears at the beginning of each section below.
+This table summarizes the values from \Cref{tab:experimental_parameters} that are used to run the experiments in that section.
+The first row in the table contains the \textit{population size} or \textit{sizes} used in the experiment.
+The second row contains the \textit{population \gls{spread}}, which controls how quickly the population density drops from the peak.
+We use the standard deviation $\sigma$ of an independent, bivariate normal distribution with equal variances for this.
+The third row in the the table contains the \textit{population center}, which is the point $\xvec$ of the peak of the population distribution.
+For a uniform population distribution, the word ``uniform'' appears.
+The next row in the table is the \gls{factor}.
+This value is used to increase the expected number of cases for each simulation in the experiment.
+It is the same \gls{mu} found in \Cref{ch:method}.
+The fifth row contains the \textit{incident \gls{spread}}, which controls how quickly the incidence risk drops from the peak.
+We use the standard deviation $\sigma$ of an independent, bivariate normal distribution with equal variances for this.
+The sixth and last row in the the table contains the \textit{incident center}, which is the point $\xvec$ of the peak of the incident risk function.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Parameter table - template
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{ll}
+        \toprule
+        Parameter & Value \\
+        \midrule
+        Population size & 10,000 \\
+        Population \glsentryname{spread} & 1.0 \\
+        Population center & (0,0) \\
+        \Glsentryname{factor} & 100, 200 \\
+        Incident \glsentryname{spread} & 1.0 \\
+        Incident center & (0,0) \\
+        \bottomrule
+    \end{tabular}
+    \caption{Experimental parameters template and example values}
+    \label{tab:params:template}
+\end{table}
+
