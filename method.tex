@@ -6,7 +6,17 @@
 %%
 %%
 
-In this chapter, we describe the methods used to examine the statistical performance of the \gls{dkd}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Section: Goal
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Study goal}
+\label{sec:method:goal}
+
+In this chapter, we describe the methods used to examine the statistical performance of the \gls{dkd},
+as it is used to estimate the \gls{incidence rate} of a chronic disease.
+Our methodology is based on monte marlo simulations under different experimental setups.
 The basic unit is the \textit{experiment},
 a set of simulations run with the same initial setup with the same measurements taken.
 Each experiment is run with a fixed set of parameters,
@@ -66,6 +76,41 @@ Statistically these are modeled as \glspl{spp},
 in particular as inhomogeneous Poisson processes
 as defined in \Cref{defn:inhomogenouspoissonprocess} in \Cref{sec:theory:spatial_point_processes}.
 
+The goal of this study is to examine the statistical properties of the \gls{dkd}.
+In particular,
+we empirically analyse how different factors of the population and incidence distributions
+affect the \textit{accuracy} of the \gls{dkd}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Section: Objectives
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Research objectives}
+\label{sec:method:objectives}
+
+The objectives of this study are to answer the following research questions:
+\begin{question}
+    \label{thm:accuracy-affected}
+    How is the accuracy of the \gls{dkd} affected by:
+    \begin{subquestions}
+        \item the duration of the study, \label[question]{thm:accuracy-affected:duration}%
+        \item different rate functions, \label[question]{thm:accuracy-affected:rates}%
+        \item the size of the population, \label[question]{thm:accuracy-affected:popsize}%
+        \item and different population distributions. \label[question]{thm:accuracy-affected:popdist}%
+    \end{subquestions}
+\end{question}
+\begin{question}
+    \label{thm:accuracy-scale}
+    When looking at the the factors in \Cref{thm:accuracy-affected},
+    how accurate is the \gls{dkd}:
+    \begin{subquestions}
+        \item globally, over the study area as a whole, \label[question]{thm:accuracy-scale:global}%
+        \item in magnitude, pointwise at the peaks, \label[question]{thm:accuracy-scale:peaks}%
+        \item location of the peaks. \label[question]{thm:accuracy-scale:peaks-location}%
+    \end{subquestions}
+\end{question}
+
 The rest of this chapter is organized as follows:
 \Cref{sec:method:computing} describes how an estimate \gls{lambda_hat} for a risk function \gls{lambda} in the plane is estimated using the \gls{dkd}.
 In \Cref{sec:method:accuracy}, we define the measures of accuracy we use to evaluate the \gls{dkd}.
@@ -85,8 +130,12 @@ The \gls{dkd} is computed over the study area \gls{W} as the ratio of two positi
 Recall from \Cref{defn:studyarea} that \gls{W} is the region in the plane where we make observations.
 At any given point $\xvec$ in the plane, we can compute \gls{lambda_I}$\xvec$, the \gls{factor} at that point.
 We call \gls{lambda_I}$\xvec$ the \textit{incident intensity} at $\xvec$.
-Next, at the same point, we can compute \gls{lambda_P}$\xvec$, the \textit{population intensity} at $\xvec$.
-Ideally, we would know how to compute these functions exactly, and we would then compute $\lambda\xvec$ the risk,
+Next, at the same point, we can compute \gls{lambda_P}$\xvec$,
+the \textit{population intensity} at $\xvec$.
+Note that in the special case where the population is distributed uniformly over \gls{W},
+computing the \gls{dkd} is equivalent to computing a kernel intensity estimate.
+Ideally, we would know how to compute these functions exactly,
+and we would then compute $\lambda\xvec$ the risk,
 or probability of an incident at $\xvec$ with the ratio:
 \begin{equation}
     \lambda\xvec = \frac{\gls{lambda_I}\xvec}{\gls{lambda_P}\xvec}.
@@ -120,11 +169,20 @@ we use several accuracy measures.
 \label{subsec:method:mise}
 
 \Gls{mise} is a measure of the expected squared difference between an estimated risk function \gls{lambda_hat},
-computed using the \gls{dkd}, and the true risk function \gls{lambda}.
-\Gls{mise} allows for additional analysis by being broken down into the mean integrated squared bias and mean integrated variance.
-It can also be easily approximated by cross-validation error.
+\begin{equation}
+    \mbox{MISE} = \E \iintW{\left(\gls{lambda_hat}\xvec - \gls{lambda}\xvec\right)^2}
+\end{equation}
+computed using the \gls{dkd} \gls{lambda_hat} and the true risk function \gls{lambda}.
+\Gls{mise} allows for additional analysis by being broken down into the mean integrated squared bias and mean integrated variance \citep[p. 36]{silverman1986density}.
+It can also be easily approximated by \gls{cv} error.
+Then we can easily select the bandwidth that minimizes the \gls{cv} error,
+which gives us an approximation of the bandwidth which minimizes \gls{mise} \citep[p. 63]{wand1994kernel}.
+It is this property which motivates the computation of \gls{mise}.
+Furthermore,
+the \gls{silverman} rule of thumb is designed to minimize \gls{mise}.
 
-For any given data sample, we can use the \gls{dkd} to compute the estimated risk function \gls{lambda_hat}.
+For any given data sample,
+we can use the \gls{dkd} to compute the estimated risk function \gls{lambda_hat}.
 We wish to compute the \gls{mise} as described in \Cref{eq:mise}.
 However, it is computationally impractical to compute this integral.
 Instead,
@@ -180,7 +238,8 @@ since the \gls{mise} describes the absolute accuracy of the estimate and its val
 computed using the \gls{dkd}, and the true risk function \gls{lambda}.
 \Gls{miae} differs from \gls{mise} by on the one hand providing a more intuitive comparison,
 since we are comparing the absolute difference instead of the squared difference.
-On the other hand, it lacks some of the nice mathematical properties of the \gls{mise}.
+The \gls{miae} is the expected value of the average absolute error of the \gls{dkd} over \gls{W}.
+On the other hand, it is not as easy to find bandwidth selection techniques that minimize \gls{miae}.
 
 As we did in \autoref{subsec:method:mise}, for any given data sample we use the \gls{dkd} to compute the estimated risk function \gls{lambda_hat}.
 We then integrate the absolute value of the error in the estimate over the plane to obtain the \gls{ise}.
