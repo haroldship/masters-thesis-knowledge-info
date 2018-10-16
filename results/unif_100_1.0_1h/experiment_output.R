@@ -93,13 +93,13 @@ error_hist <- function(df, title, e, m, filename) {
   g <- ggplot(df) +
 #    ggtitle(title) +
     theme_classic() +
-    theme(axis.ticks.y=element_blank(), axis.text.y=element_blank()) +
+#    theme(axis.ticks.y=element_blank(), axis.text.y=element_blank()) +
     theme(legend.text=element_text(size=16, family='NewCenturySchoolbook'),
           legend.title=element_text(size=16, family='NewCenturySchoolbook'),
           legend.key.size=unit(1.5, 'cm')) +
-    ylab(NULL) +
+    ylab("Probability density") +
     xlab(NULL) +
-    scale_linetype_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
+    scale_linetype_manual(name="Bandwidth\nSelector", labels=c("Cross validation (CV)", "Oracle", "Silverman"),
                           values=c("twodash", "solid", "dashed")) +
 #    scale_colour_manual(name="Bandwidth\nSelector", labels=c("CV", "Oracle", "Silverman"),
 #                        values=gray.colors(3)) +

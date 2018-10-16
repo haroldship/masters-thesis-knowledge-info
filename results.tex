@@ -37,14 +37,15 @@ while keeping the risk function fixed.
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section
-    {Single experiment with single peak risk function with \glsentryname{spread} 1.0 and \glsentryname{factor} of 100 on a fixed, uniform population of 10,000}
+    {A single experiment with single peak risk function with \glsentryname{spread} 1.0 and \glsentryname{factor} of 100 on a fixed, uniform population of 10,000}
 \label{sec:results:unif_100_1.0_1h}
 
 \setpath{results/unif_100_1.0_1h/}
 
 In this section, we look at how well the \gls{dkd} performs when there is a single, central cause of disease incidents.
 The strength of this source to generate incidents degrades with the distance from it.
-We simulate this phenomenon with a risk function having a single peak with \glsentryname{spread} 1.0 and \glsentryname{factor} of 100 on a fixed, uniform population of 10,000.
+We simulate this phenomenon with a \gls{risk} function having a single peak with \glsentryname{spread} 1.0 and \glsentryname{factor} of 100.
+We use a fixed, uniform population of 10,000, and so the estimated function is equivalent to a kernel intensity estimate.
 These parameters are summarized in \Cref{tab:params:unif_100_1.0_1h}.
 \Cref{fig:cases_scatter:unif_100_1.0_1h} shows a realization, generated from the model.
 The distribution of the population is shown in \subref{fig:cases_scatter:unif_100_1.0_1h:popdist},
@@ -185,7 +186,9 @@ The \gls{silverman} bandwidth, on the other hand, produced a positive value,
 which may indicate under-smoothing.
 This requires further study.
 
-In \Cref{fig:ise:unif_100_1.0_1h}, we look at the distribution of the \gls{ise}.
+We now look at global accuracy measures of the \gls{dkd}.
+\Cref{fig:ise:unif_100_1.0_1h},
+shows the distribution of the \gls{ise}.
 As described in \Cref{subsec:method:mise},
 the \gls{ise} gives a summary of the error of the estimate over all of \gls{W},
 that penalizes higher error values.
@@ -194,8 +197,11 @@ We also observe that the distributions are skewed to the right,
 indicating that for this simple setup,
 the median and mode of the \gls{ise} of the \gls{dkd} estimate are below the \gls{mise}.
 This means that more replications had \gls{ise} accuracy below the \gls{mise}.
-Finally, we note that the estimates calculated with \gls{silverman} and \gls{cv}
+Finally, we note that the estimates calculated with the easily computed \gls{silverman} and \gls{cv}
 selected bandwidths and their corresponding mean values had similar performance in \gls{ise}.
+Both bandwidth selectors performed worse than the \gls{oracle} bandwidth,
+which is the best value that can be achieved,
+but requires knowledge of the true function to select.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ISE distribution - unif_100_1.0_1h
@@ -300,7 +306,6 @@ For both of the peak distance errors (\Cref{fig:peaks:unif_100_1.0_1h:dist}) and
 we see the \gls{cv} bandwidth selection outperforms the \gls{silverman} rule of thumb, and that the \gls{oracle} seems to outperform them both.
 In fact, the \gls{peak bias}, which we estimate using the mean \gls{peak error},
 is positive for \gls{silverman}.
-This indicates a tendency towards under-smoothing.
 We note that all three of bandwidth selection techniques are designed to minimize \gls{mise}.
 We also note the multi-modal peak distance distributions.
 We believe this is an artifact of the experimental design,
@@ -336,7 +341,7 @@ That is, the centroid technique improves both the estimated location and estimat
         \subcaption{Silverman Bandwidths}
         \label{fig:bandwidths:unif_100_1.0_1h:silverman}
     \end{subfigure}
-    \caption[Bandwidths: Single-peak of 100 on uniform population]{\glsentryname{cv} bandwidths: $x_1$, $x_2$ and difference and \glsentryname{silverman} bandwidth histograms for  a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population}
+    \caption[Bandwidths: Single-peak of 100 on uniform population]{\glsentryname{cv} bandwidths: $x_1$, $x_2$ and difference and \glsentryname{silverman} bandwidth histograms for a single-peak intensity with \glsentryname{spread} of 1.0 and \glsentryname{factor} of 100 on a uniform population}
     \label{fig:bandwidths:unif_100_1.0_1h}
 \end{figure}
 
