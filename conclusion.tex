@@ -12,16 +12,26 @@
 
 In this study,
 we examined the performance of the \acrfull{dkd} as an estimator of an incidence rate function in a variety of test scenarios.
-Our results show that under reasonable conditions,
-the \gls{dkd} can give a good approximation of a true \gls{incidence rate} function.
+Our simulation results show that for the \gls{incidence rate} functions we chose,
+the estimation error of the \gls{dkd} is reasonable.
 We find that this is so in two ways:
 \begin{enumerate}
     \item In answer to \Cref{thm:accuracy-scale:global},
-    the global accuracy of the rate over the study area improves when the number of incidents increases.
+    the normalized global accuracy
+    of the rate over the study area as indicated by \gls{nmise}
+    is less than 5\% for uniform populations,
+    and less than 5\% for most of the peaked populations.
+    Furthermore, \gls{nmise} improves when the number of incidents increases.
     This is so regardless of whether this is due to an increase in the rate or in the population size.
     Also, the global accuracy increases when the spread of the rate increases.
     \item In answer to \Cref{thm:accuracy-scale:peaks},
-    the location and magnitude of the point with the highest rate (the peak) can be reasonably estimated with the \gls{dkd}.
+    the magnitude of the point with the highest rate (the peak) can be estimated with the \gls{dkd}
+    within 10\% for uniform populations,
+    but overestimates the peak for peaked populations.
+    \item In answer to \Cref{thm:accuracy-scale:peak-locations},
+    the location of the point with the highest rate (the peak) can be estimated with the \gls{dkd}
+    within 10\% of the size of the study area for uniform populations,
+    and withing 15\% for peaked populations.
 \end{enumerate}
 
 For each experiment,
@@ -110,6 +120,9 @@ the estimation errors observed for the uniform populations were much lower than 
     When the population density is highly variable,
     we do not recommend computing the \gls{dkd} over the entire study area.
 \end{rec}
+As we stated in \Cref{ch:further},
+it is possible that for such cases,
+an adaptive bandwidth selection technique would improve the estimate.
 
 In summary,
 under the conditions we studied,

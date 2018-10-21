@@ -30,28 +30,39 @@
 There are many examples in epidemiology of data that occur as points distributed in the plane.
 One example is
 the home addresses of persons in a neighborhood and,
-in particular, whether or not they have a particular medical condition.
+in particular,
+whether or not exposed individuals have developed a particular medical condition during a specific time period.
 These data allow one to compute the \textit{incidence rate} of this condition.
-Recently,
-a technique known as the \acrlong{dkd} has been used for estimating \glsentryname{incidence rate} functions.
+Recently, a technique known as the \acrlong{dkd} has been used for estimating \acrlong{incidence rate} functions
+$\gls{lambda} := \gls{lambda}\dotdot$.
+The function \gls{lambda} is the ratio of two other functions \gls{lambda_I} and \gls{lambda_P}.
+Each one of the above functions \gls{lambda_I} and \gls{lambda_P}
+is itself estimated by smoothing a set of point observations into a continuous,
+smooth function using \gls{kernel intensity estimation},
+and the value of \gls{lambda} at any point is the estimate of \gls{lambda_I} at that point
+divided by the estimate of \gls{lambda_P} at the same point.
 
 Researchers have recently been motivated to use the \acrlong{dkd} due to information loss due to data aggregation of incidents into geographical areas such as cities or neighborhoods.
 This aggregation has been deemed necessary both
 to reduce the effects of variance on the relative errors of the results,
 and to preserve the privacy of individuals who have been stricken with disease.
+Use of the \acrlong{dkd} also allows for the linking of location data with other data sources,
+such as welfare levels, air pollution and other attributes not available for individuals.
+
+As far as we know,
+the statistical properties of the \acrlong{dkd} are not yet fully understood.
+We would like to know whether or not the estimates for \gls{risk} or \gls{incidence rate}
+obtained using the \acrlong{dkd} are accurate or misleading under different conditions.
+Of particular concern are the peaks of the true risk function.
+These peaks indicate a point around which the risk of contracting a disease is at its highest.
+While the accuracy of the estimate of the magnitude of these peaks is important,
+it is critical that the location estimate be accurate so as not create any misleading associations
+with other, nearby points of interest.
 
 This study examines some of the statistical properties of the \acrlong{dkd}.
 In particular,
 we empirically analyse how different factors of the population and incidence distributions
 affect the \textit{accuracy} of the \acrlong{dkd}.
-
-The contribution of this study will be to answer the following research questions:
-\begin{enumerate}
-    \item How is the accuracy of the \acrlong{dkd} affected by different factors?
-    \item How accurate is the \acrlong{dkd} \textit{globally},
-        over the study area as a whole,
-        and \textit{pointwise}, at the peaks?
-\end{enumerate}
 
 \paragraph*{Theory and method:}
 
@@ -88,6 +99,24 @@ for each experiment we measure \acrlong{mise},
 \glsentryname{peak drift},
 \glsentryname{centroid bias},
 and \glsentryname{centroid drift}.
+
+The contribution of this study will be to answer the following research questions:
+\begin{itemize}
+    \item How is the accuracy of the \acrlong{dkd} affected by:
+    \begin{itemize}
+        \item the duration of the study,%
+        \item different rate functions,%
+        \item the size of the population,%
+        \item and different population distributions.%
+    \end{itemize}
+    \item When looking at the the above factors,
+    how accurate is the \acrlong{dkd}:
+    \begin{itemize}
+        \item globally, over the study area as a whole,%
+        \item in magnitude, pointwise at the peaks,%
+        \item location of the peaks.%
+    \end{itemize}
+\end{itemize}
 
 \paragraph*{Results:}
 
