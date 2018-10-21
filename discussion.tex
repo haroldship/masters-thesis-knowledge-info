@@ -18,7 +18,8 @@ as described in \Cref{sec:method:accuracy}.
 We ran several scenarios to examine how variations in these factors which affect the incidence risk function,
 the population distribution, and the sample size affect the accuracy of \gls{dkd} for estimation.
 We compared two bandwidth selection techniques, \gls{silverman}'s rule of thumb,
-and least-squares \glsentrylong{cv}.
+and least-squares \glsentrylong{cv},
+both optimized to minimize \gls{mise}.
 We also compared these two techniques to an \gls{oracle},
 which is an approximation of the theoretical optimal bandwidth,
 keeping in mind that the oracle is only computable for simulations because we know the true function we wish to estimate.
@@ -40,35 +41,24 @@ and so required re-running the experiment several times.
 We added \textit{momentum} to our gradient descent implementation but it did not help in every case,
 and so we changed our strategy to use parallelizaiton as described in \Cref{sec:method:experiment_structure}.
 
+We observed that the estimation errors observed using the \gls{silverman} Rule of Thumb bandwidth selection method
+were nearly as good as \gls{cv} in every case.
+Since computing the \gls{silverman} bandwidth is much simpler than \gls{cv},
+it would seem that using \gls{silverman} is warranted as a preliminary step such as for exploratory analysis.
+However,
+we note that in \Cref{tab:mean_error_rates:p0.7_100_1.0_1h} the accuracy measure \gls{mise} using the \gls{silverman} rule of thumb is even better than was obtained using the \gls{oracle}.
+We tried to run with an additional experiment using 499 monte carlo simulations instead of 49 to compute the oracle bandwidth,
+and found that in this case the \gls{silverman} rule did not outperform the \gls{oracle}.
 
+We found that estimating the peak of the true function using the global maximum value can be improved upon.
+Our method of using the 5\% centroid gave better results for both the magnitude and location of the peak most of the time.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-%% Section: Accuracy using Silverman
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Accuracy using Silverman}
-
-In \Cref{tab:mean_error_rates:p0.7_100_1.0_1h} we see that the accuracy measure \gls{mise} using the \gls{silverman} rule of thumb is even better than was obtained using the \gls{oracle}.
-We tried to run with an additional experiment with 499 monte carlo simulations, and found that in this case the \gls{silverman} rule did not outperform the \gls{oracle}.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-%% Section: Summary
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Summary}
-
-We used monte carlo simulations to empirically estimate the accuracy of the \acrlong{dkd} estimate of simulated disease risk intensity functions.
-For this, we used several accuracy measures that measure the overall accuracy as well as the accuracy of the peak.
-We also used two bandwidth selection methods to choose the bandwidth of the \gls{dkd}.
-We did this while varying several factors.
-In \Cref{sec:results:number_of_incidents} increasing the \gls{factor} resulted in decreased selected bandwidths
-and increase relative accuracy, although absolute accuracy decreased.
-Increasing the incidence \gls{spread} also resulted in increased relative accuracy.
-Increasing the population size also resulted in increased accuracy,
-while changing the population \gls{spread} resulted in unpredictable accuracy measures.
-These results are interesting,
-and there are are many opportunities for further work.
+Our results for those experiments which consist of different \gls{risk} functions on
+\textbf{uniform populations},
+that is,
+for those for which the \gls{dkd} reduces to a kernel intensity estimate
+have lower estimation errors than those which estimate
+\gls{risk} functions on population distributions with a single peak.
+This indicates that the population distribution has a noticeable negative effect on the accuracy of the \gls{dkd}.
 
 
