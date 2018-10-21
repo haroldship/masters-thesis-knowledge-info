@@ -65,6 +65,7 @@ and the incidents as triangles on top of the population are shown in \subref{fig
         Population \glsentryname{spread} & uniform \\
         Population center & uniform \\
         \Glsentryname{factor} & 100 \\
+        \Glsentryname{factor} as percent of population & 1\% \\
         Incident \glsentryname{spread} & 1.0 \\
         Incident center & (0,0) \\
         \bottomrule
@@ -314,6 +315,10 @@ since our estimate of the peak will always be at one of a fixed discrete number 
 In \Cref{fig:centroids:unif_100_1.0_1h} we see the distributions of \gls{peak error} and \gls{peak drift} using the centroid estimation technique.
 We note that the scales of both types of error are markedly improved.
 That is, the centroid technique improves both the estimated location and estimated height of the peak.
+While the mean error in the estimated peak height was improved $11\%$ by the centroid technique for the \gls{oracle} bandwidth,
+the \gls{silverman} and \gls{cv} bandwidths showed improvements of $40\%$ and $70\%$ respectively.
+Regarding the estimated peak drift, the centroid technique gave more accurate results $66\%$ of the time for the \gls{oracle} bandwidth,
+while the \gls{silverman} and \gls{cv} bandwidths showed improvements of $83\%$ and $72\%$ of the time, respectively.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bandwidths - unif_100_1.0_1h
@@ -380,6 +385,7 @@ This results in a slightly under-smoothed \gls{silverman} estimate.
         Population \glsentryname{spread} & uniform \\
         Population center & uniform \\
         \Glsentryname{factor} & 50, 100, 200, 500, 1,000 \\
+        \Glsentryname{factor} as percent of population & 0.5\%, 1\%, 2\%, 5\%, 10\% \\
         Incident \glsentryname{spread} & 1.0 \\
         Incident center & (0,0) \\
         \bottomrule
@@ -557,6 +563,7 @@ They are all near to $-0.75$.
         Population \glsentryname{spread} & uniform \\
         Population center & uniform \\
         \Glsentryname{factor} & 100 \\
+        \Glsentryname{factor} as percent of population & 1\% \\
         Incident \glsentryname{spread} & 0.7, 1.0, 1.4, 2.0, 2.8 \\
         Incident center & (0,0) \\
         \bottomrule
@@ -696,6 +703,7 @@ However, we did not observe a monotonic growth rate of the exponent with the spr
         Population \gls{spread} & uniform \\
         Population center & uniform \\
         \Gls{factor} & 50, 100, 200, 500, 1000 \\
+        \Glsentryname{factor} as percent of population & 1\% \\
         Incident \gls{spread} & 1.0 \\
         Incident center & (0,0) \\
         \bottomrule
@@ -817,6 +825,7 @@ but consistently underestimates the \gls{peak bias} by a greater value.
         Population \gls{spread} & 0.7, 1.0, 1.4, 2.0, 2.8 \\
         Population center & (0,0) \\
         Scaling factor & 100 \\
+        Scaling factor as percent of population & 1\% \\
         Incident \gls{spread} & 1.0 \\
         Incident center & (0,0) \\
         \bottomrule
@@ -949,6 +958,7 @@ as seen in \Cref{fig:other_measures:pop_spread}.
         Population \gls{spread} & uniform \\
         Population center & uniform \\
         \Gls{factor} & 40, 60 \\
+        \Glsentryname{factor} as percent of population & 0.4\%, 0.6\% \\
         Incident \gls{spread} & 1.0 \\
         Incident center & \{(0.5,0), (-0.5,0)\},  \{(1,0), (-1,0)\}, \{(1.5,0), (-1.5,0)\}, \{(2,0), (-2,0)\}\\
         \bottomrule
