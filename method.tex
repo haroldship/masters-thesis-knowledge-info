@@ -132,6 +132,7 @@ At any given point $\xvec$ in the plane, we can compute \gls{lambda_I}$\xvec$, t
 We call \gls{lambda_I}$\xvec$ the \textit{incident intensity} at $\xvec$.
 Next, at the same point, we can compute \gls{lambda_P}$\xvec$,
 the \textit{population intensity} at $\xvec$.
+
 Note that in the special case where the population is distributed uniformly over \gls{W},
 computing the \gls{dkd} is equivalent to computing a kernel intensity estimate.
 Ideally, we would know how to compute these functions exactly,
@@ -144,11 +145,20 @@ or probability of an incident at $\xvec$ with the ratio:
 In practice, these functions are not known and we cannot compute \gls{lambda_I}$\xvec$ and \gls{lambda_P}$\xvec$ exactly, 
 so we estimate them from observational data,
 using a \gls{kernel intensity estimator} as described in \Cref{eq:lambda_hat},
-but with separate bandwidths $h_1$, $h_2$.
+but with separate bandwidths $h_1$, $h_2$ corresponding to the $x_1, x_2$ directions.
 As noted in \Cref{sec:theory:kernelestimation},
 we use the biweight or quartic kernel found in \Cref{tab:sample-kernels}.
 
 For simplicity of computation, we do not account for edge effects.
+One further note due to computational issues:
+in all results in the sequel we implictly assume that we have enough data
+for accurately estimating the population density and therefore used a fixed function
+for that in the denominator of the \gls{dkd}.
+This means that we are working under the ideal scenario where there is no uncertainty in estimating the population density.
+Note that our calculations still involve a ratio,
+namely the estimator of incidence intensity $\gls{lambda_hat}_I$ divided by the population intensity \gls{lambda_P}.
+Therefore, the main characteristics of the \gls{dkd} that we study will show up in our research.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
