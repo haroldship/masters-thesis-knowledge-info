@@ -117,6 +117,6 @@ df.alpha.latex <- latex(df.alpha,
                         booktabs=TRUE,
                         cdec=c(0,3),
                         caption.loc="bottom",
-                        caption="NMISE onvergence rate by number of cases for different bandwidth selectors for a single-peak risk function with spread of 1.0 on a uniform population of 10,000.",
+                        caption="NMISE convergence rate by number of cases for different bandwidth selectors for a single-peak risk function with spread of 1.0 on a uniform population of 10,000.",
                         caption.lot="NMISE Convergence rate by number of cases for spread 1.0")
 

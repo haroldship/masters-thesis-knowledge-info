@@ -26,7 +26,7 @@ keeping in mind that the oracle is only computable for simulations because we kn
 
 Each scenario consisted of a set of experiments,
 with each experiment consisting of 1,000 monte carlo simulations.
-Each simulation was a random realization of the experimenatal setup.
+Each simulation was a random realization of the experimental setup.
 In this way,
 we obtained empirical estimates of each of the above accuracy measures for the \gls{dkd}
 for each bandwidth selection technique.
@@ -39,7 +39,7 @@ as the cross-validation error would decrease slowly as the bandwidth increased.
 This required a lot of manual tuning of the learning rate parameter,
 and so required re-running the experiment several times.
 We added \textit{momentum} to our gradient descent implementation but it did not help in every case,
-and so we changed our strategy to use parallelizaiton as described in \Cref{sec:method:experiment_structure}.
+and so we changed our strategy to use parallelization as described in \Cref{sec:method:experiment_structure}.
 
 We observed that the estimation errors observed using the \gls{silverman} Rule of Thumb bandwidth selection method
 were nearly as good as \gls{cv} in every case.
@@ -71,7 +71,7 @@ This indicates that the population distribution has a noticeable negative effect
 
 This study uses simulated data,
 sampled from a known ``true'' incidence rate function in order to measure the accuracy of the \gls{dkd} estimator.
-This is quite different from what is done in a typical epidemiolgical study,
+This is quite different from what is done in a typical epidemiological study,
 where population and incident locations are acquired from such sources as government and medical records,
 while the rate is estimated using statistical inference.
 This allows us,
@@ -93,7 +93,7 @@ but do not provide any guarantees about the accuracy of the \gls{dkd} in any spe
 
 Another limitation of this study is that we compared only two bandwidth selection techniques.
 There are several techniques available that we did not consider,
-including adaptive bandwith selectors which may give better results especially under highly variable population distributions.
+including adaptive bandwidth selectors which may give better results especially under highly variable population distributions.
 
 Finally,
 our experiments studied the randomness associated with incident locations that are sampled from various risk functions in the plane.

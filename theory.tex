@@ -324,7 +324,7 @@ for the \gls{intensity} of an unknown \gls{spp}
 based on a set of observed \glspl{event}.
 In order to do this,
 we choose the biweight kernel from amongst the kernels in \Cref{tab:sample-kernels} because it is more computationally efficient than the Gaussian kernel,
-and has higher differentiablity than the Epanechnikov kernel \citep[p. 77]{silverman1986density}.
+and has higher differentiability than the Epanechnikov kernel \citep[p. 77]{silverman1986density}.
 
 Now we must select the ``best'' bandwidth \citep[p. 43]{silverman1986density} based on the data.
 From \Cref{fig:theory:kernel1d} we can see that different values of bandwidth \gls{h} result in different estimates for the \gls{intensity}.
@@ -332,7 +332,7 @@ Our goal is to find a decision procedure for the bandwidth that gives us the ``b
 Since we are dealing in two dimensions,
 it is possible to choose separate bandwidths along the $x_1$ and $x_2$ axes,
 as well as along the diagonals forming a bandwidth matrix.
-Since we will control the true intensithy functions in our experiments,
+Since we will control the true intensity functions in our experiments,
 we can simplify our calculations by using just the bandwidths along the axes.
 Similarly, we also use a fixed bandwidth for the entire study area,
 rather than an \textit{adaptive} bandwidth \citep{breiman1977variable},
@@ -385,7 +385,7 @@ Therefore, by Fubini's Theorem, we can change the order of integration and expec
         & = \iintW{ \mbox{\gls{mse}}(\gls{lambda_hat}, \xvec) } \nonumber
 \end{align}
 
-We decompose \gls{mse} into the squared bias and squared variance% (\Cref{eq:mse:biasvariance}),
+We decompose \gls{mse} into the squared bias and squared variance,
 giving us
 \begin{align}
     \mbox{\gls{mise}}(\gls{lambda_hat}) 
@@ -414,7 +414,7 @@ This allows us to analyze the behavior of the \gls{mise} asymptotically,
 with dependence only on the true function $\gls{lambda}\dotdot$ and the kernel $K\dotdot$.
 
 Following \citep{silverman1986density,wand1994kernel},
-and based on the equivalence of bandwidths for the \gls{kde} and the\gls{kernel intensity estimator} \citep{diggle1988equivalence},
+and based on the equivalence of bandwidths for the \gls{kde} and the \gls{kernel intensity estimator} \citep{diggle1988equivalence},
 we begin by using Taylor's Theorem to approximate the \gls{kde}.
 Let \gls{f} be a probability density function,
 and define the \gls{kde} of \gls{f}:
@@ -512,7 +512,7 @@ The selected bandwidth may or may not be close to \gls{h_opt},
 depending on the particular sample.
 The first technique we will use is known as \textbf{\Gls{silverman}'s Rule of Thumb}.
 We use the version for selecting bandwidth in $\RS$,
-which has forumula
+which has formula
 \begin{equation}
     \label{eq:silverman}
     h_S = 2.04 * \sigma * n^{-1/6}%
@@ -569,7 +569,7 @@ to both the time frame of the study or the size of the study area.
 Therefore,
 in order to discuss the asymptotic behavior of an intensity function,
 it makes sense to look at $\gls{mu} \to \infty$.
-We describe the behaviour of the \gls{dkd} as \gls{mu} increases in \Cref{sec:results:unifNpop_1h}.
+We describe the behavior of the \gls{dkd} as \gls{mu} increases in \Cref{sec:results:unifNpop_1h}.
 Along these lines,
 \citet{guan2008consistent} note that the \gls{kernel intensity estimator}
 ``is not a consistent estimator of the true intensity''.
