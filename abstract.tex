@@ -123,7 +123,7 @@ The contribution of this study will be to answer the following research question
 We obtained results that show that increasing the expected number of incidents $N$,
 such as what would occur when increasing the duration of the study,
 reduces the selected bandwidth by a factor of around $N^{-1/6}$.
-It also reduces the estimation error of the double kernel density in the relative sense
+It also reduces the estimation error of the \acrlong{dkd} in the relative sense
 for global errors by a factor of around $N^{-3/4}$ and also for point-wise magnitude and peak errors.
 However, in this case the absolute errors increased with the expected number of incidents.
 We also observed that increases in the spread $\sigma$ of the risk (rate) function also results in reduced estimation error
@@ -145,7 +145,28 @@ except for in determining the location of the peak.
 Both schemes chose bandwidths between 5\% and 20\% of the size of the study area.
 Because the accuracy improves with the number of observations,
 it is prudent to increase the time frame of the study when the number of observations in a given year is smaller than 50.
+In our experiments this was an incidence rate of between 0.1\% and 0.5\%.
 In cases where the population density varies greatly over a study area,
 the \acrlong{dkd} is less accurate than for smoother varying populations.
+
+\paragraph*{Limitations:}
+
+This study uses simulated data,
+sampled from a known ``true'' incidence rate function in order to measure the accuracy of the \acrlong{dkd} estimator.
+However,
+our population and incidence rate functions,
+which allow us to compute the population and incidents at points in the plane,
+do not completely represent any actual population or incidents.
+This means that our results describe the sensitivity of the \acrlong{dkd} to the factors we are interested in,
+but do not provide any guarantees about the accuracy of the \acrlong{dkd} in any specific study where it has been used.
+
+Another limitation of this study is that we compared only two bandwidth selection techniques.
+There are several techniques available that we did not consider,
+including adaptive bandwith selectors which may give better results especially under highly variable population distributions.
+
+Also, due to computational issues,
+we assume that we have enough data for accurately estimating the population density and therefore used a fixed function for that in the denominator of the \gls{dkd}.
+This means that we are working under the ideal scenario where there is no uncertainty in estimating the population density.
+
 
 \end{onehalfspace}

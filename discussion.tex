@@ -61,4 +61,47 @@ have lower estimation errors than those which estimate
 \gls{risk} functions on population distributions with a single peak.
 This indicates that the population distribution has a noticeable negative effect on the accuracy of the \gls{dkd}.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Section: Limitations
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Limitations}
+\label{sec:discussion:limitations}
+
+This study uses simulated data,
+sampled from a known ``true'' incidence rate function in order to measure the accuracy of the \gls{dkd} estimator.
+This is quite different from what is done in a typical epidemiolgical study,
+where population and incident locations are acquired from such sources as government and medical records,
+while the rate is estimated using statistical inference.
+This allows us,
+in our study,
+to precisely compute the measures of accuracy as deviations from the true values,
+which cannot be done in scientific studies where the true incidence rate function is not known beforehand.
+
+However,
+our population and incidence rate functions,
+which allow us to compute the population and incidents at points in the plane,
+do not completely represent any actual population or incidents.
+Nor is our study area representative of any actual populated area.
+Rather,
+these simplifications allow us to examine the effects of different attributes of the above functions,
+by allowing us to control these factors in different experimental setups.
+However,
+this means that our results describe the sensitivity of the \gls{dkd} to these factors in general,
+but do not provide any guarantees about the accuracy of the \gls{dkd} in any specific study where it has been used.
+
+Another limitation of this study is that we compared only two bandwidth selection techniques.
+There are several techniques available that we did not consider,
+including adaptive bandwith selectors which may give better results especially under highly variable population distributions.
+
+Finally,
+our experiments studied the randomness associated with incident locations that are sampled from various risk functions in the plane.
+However,
+due to computational issues,
+we used fixed functions in the denominator,
+under the assumption that we have enough data to accurately estimate the population density.
+This means that we are working under the ideal scenario where there is no uncertainty in estimating the population density.
+
+
 
