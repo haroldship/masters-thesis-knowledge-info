@@ -139,7 +139,12 @@ In the examples we studied,
 we found that statistically,
 the \acrlong{dkd} can give a good approximation of a true risk or incidence rate function.
 This is so in terms of the general accuracy of the rate at any given point,
-as well as for the location of the peak.
+where the \acrlong{nmise} was nearly always less than 5\% of the truth except for cases with extreme variation of the population density.
+It was also a good estimator for the location of the peak,
+where on average it was within 5-7\% of the size of the study area for uniform populations and 15\% for peaked populations.
+For the most part,
+the \acrlong{dkd} underestimated the magnitude of the peak,
+in particular when using \acrlong{cv} to select the bandwidth. 
 Our results did not show a large difference between the Silverman and \acrlong{cv} bandwidth selection schemes,
 except for in determining the location of the peak.
 Both schemes chose bandwidths between 5\% and 20\% of the size of the study area.
@@ -165,7 +170,7 @@ There are several techniques available that we did not consider,
 including adaptive bandwidth selectors which may give better results especially under highly variable population distributions.
 
 Also, due to computational issues,
-we assume that we have enough data for accurately estimating the population density and therefore used a fixed function for that in the denominator of the \gls{dkd}.
+we assume that we have enough data for accurately estimating the population density and therefore used a fixed function for that in the denominator of the \acrlong{dkd}.
 This means that we are working under the ideal scenario where there is no uncertainty in estimating the population density.
 
 
