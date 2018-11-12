@@ -140,7 +140,7 @@ From above, we can see that for an infinitesimal area \ds~ around a point \xvec,
 we can think of $\lambda \xvec \ds$ as nearly constant in \ds~so
 $$\iint\limits_{\xvec \in A}{\hspace{-1em}\lambda \xvec \diff{x_2} \diff{x_1}} \approx \lambda \xvec \ds \text{.}$$
 By \cref{defn:inhomogenouspoissonprocess:1} of \Cref{defn:inhomogenouspoissonprocess},
-the probability that the are \ds~ contains exactly one point is
+the probability that the area \ds~ contains exactly one point is
 $\exp(-\lambda \xvec |\!\ds|) \lambda \xvec \ds \text{.}$
 Since we take \ds~ to be infinitesimal,
 $\exp(-\lambda \xvec |\!\ds|) \allowbreak \approx 1$ and so we can think of
@@ -186,7 +186,7 @@ which means it does not pre-suppose any structure on the underlying true intensi
 This is advantageous when there is no model for the truth,
 or when the shape of the true function does not fit well with any parametric model.
 On the other hand,
-non-parametric models generally tend to converge more slowly to the truth that parametric models,
+non-parametric models generally tend to converge more slowly to the truth than parametric models,
 meaning the estimation error shrinks more slowly as sample sizes increase.
 Kernel estimation has been used in epidemiology with \textit{attributeless data},
 which is data that consists of geographical information with no accompanying attributes.
@@ -208,9 +208,9 @@ Spatial analysis uses a two-dimensional version of \gls{kernel intensity estimat
 which is a natural extension to $\RS$ of the one dimensional \gls{kernel intensity estimator} $\gls{lambda_hat}_{1,h}$.
 \begin{equation}
     \label{eq:lambda_hat_1}
-    \gls{lambda_hat}_{1,h} = \sumSone{K_1\left( \frac{x - s}{h} \right)} \text{.}%
+    \gls{lambda_hat}_{1,h}(x) = \sumSone{K_1\left( \frac{x - S}{h} \right)} \text{.}%
 \end{equation}
-Here, $K_1(x)$ is a one-dimensional kernel function.
+Here, $K_1(x)$ is a one-dimensional kernel function and the random variables $S \in N$ are the observed points.
 
 In order to compute $\gls{lambda_hat}_{1,h}$ using \Cref{eq:lambda_hat_1},
 there are two choices to be made: the choice of the bandwidth \gls{h}
@@ -273,11 +273,12 @@ we define the the \gls{kernel intensity estimator} as follows:
     \begin{equation}
         \label{eq:lambda_hat}
         \gls{lambda_hat}_h \xvec%
-            = \sumS{\gls{K}\left( \frac{\xvec-(s_1, s_2)}{h} \right)} \text{.}%
+            = \sumS{\gls{K}\left( \frac{\xvec-(S_1, S_2)}{h} \right)} \text{.}%
     \end{equation}
 \end{defn}
-where $\xvec-(s_1, s_2)$ is ordinary vector subtraction,
-and $\frac{\xvec-(s_1, s_2)}{h}$ is scalar multiplication by $\frac{1}{h}$.
+where $(S_1, S_2) \in N$ are the observed points,
+$\xvec-(S_1, S_2)$ is ordinary vector subtraction,
+and $\frac{\xvec-(S_1, S_2)}{h}$ is scalar multiplication by $\frac{1}{h}$.
 For the remainder of this section we treat $h$ as a scalar for ease of explanation.
 However, with no loss of generality we will use separate bandwidths in each coordinate,
 that is $\mathbf{h}=(h_1, h_2)$.
@@ -324,6 +325,26 @@ The effect of the bandwidth $h$ is to change the radius of that circle to $h$.
 The advantage of the kernels over the Epanechnikov kernel is that it twice-differentiable.
 The advantage over the Gaussian kernel is that it much faster to compute.
 
+As mentioned,
+we estimate the \gls{risk} using the \gls{incidence rate} function.
+In order to estimate the \gls{incidence rate} function,
+we compute two kernel intensity estimates,
+$\hat{\gls{lambda_I}}$ and $\hat{\gls{lambda_P}}$,
+and take the quotient.
+This gives us the following formal definition for the \gls{dkd} at any point $\xvec \in \R$:
+\begin{defn}
+    \label{defn:dkd-formula}
+    The \textbf{\acrfull{dkd}} $\gls{lambda_hat} \xvec$
+    is a technique for estimating the incidence rate
+    using two \glspl{kernel intensity estimator}
+    from observed \glspl{incident} and population \glspl{event} \gls{I} and \gls{P}.
+    The formula for computing the \gls{dkd} is:
+    \begin{equation}
+        \label{eq:dkd-formula}
+        \hat{\gls{lambda}}\xvec = \frac{\hat{\gls{lambda_I}}\xvec}{\hat{\gls{lambda_P}}\xvec}%
+        \text{.}%
+    \end{equation}
+\end{defn}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% Measuring the accuracy of the estimate
@@ -473,7 +494,7 @@ giving us the optimal bandwidth \gls{h_opt}:
 \end{align}
 where $C$ is a constant that depends on $\lambda$ and $K$.
 \begin{defn}
-    The \gls{mise} \textbf{optimal bandwidth} $\mathbf{\gls{h_opt}}$ is the value of $h$ that minimizes the \gls{mise} of the \gls{kde} for a given probability density function $f$ and kernel function $K$.
+    The \gls{mise} \textbf{optimal bandwidth} $\mathbf{\gls{h_opt}}$ is the value of $h$ that minimizes the \gls{mise} of the \gls{kde} for a specific probability density function $f$ and kernel function $K$.
 \end{defn}
 As noted above,
 the optimal bandwidth of the \gls{kde} in the \gls{mise} sense is the same for the \gls{kernel intensity estimator}.
@@ -535,7 +556,7 @@ where $n$ is the observed number of incidents,
 $\sigma$ the arithmetic mean of $\sigma_{x_1}$ and $\sigma_{x_2}$,
 he standard deviations of the $x_1$ and $x_2$ coordinates of the sample points respectively:
 \begin{equation}
-    \sigma = \frac{\sigma_{x_1} + \sigma_{x_1}}{2} \text{.}
+    \sigma = \frac{\sigma_{x_1} + \sigma_{x_2}}{2} \text{.}
 \end{equation}
 \citet{silverman1986density} shows that for a large class of intensity functions,
 including ones based on Gaussian functions,
@@ -545,7 +566,7 @@ Our second technique is to use leave-one-out \textbf{\gls{cv}} over a set of ban
 We select the bandwidth which minimizes the \gls{cv} error,
 which approximates the \gls{mise} (\Cref{eq:mise}).
 For the \gls{kde},
-he formula for the \gls{cv} error of bandwidth $h$ for \gls{lambda_hat} is
+the formula for the \gls{cv} error of bandwidth $h$ for \gls{lambda_hat} is
 \begin{equation}
     \label{eq:cverror}
     \mbox{\Gls{cv}}%
@@ -689,9 +710,16 @@ in order to perform the experiments in a reasonable amount of time.
 Therefore,
 we do not study the randomness in the population distribution in this study.
 
-Our $\gls{lambda}(x_1, x_2) \leq 1$ is a probability at every $(x_1, x_2) \in \gls{W}$,
-so the number of \glspl{incident} follow a Poisson-Binomial distribution which,
-according to Le Cam's Theorem, approximates the Poisson Distribution.
+Our $\gls{lambda}(x_1, x_2) \leq 1$ is a risk function,
+and therefore a probability at every $(x_1, x_2) \in \gls{W}$.
+These probabilities are independent of each other.
+Therefore,
+the number of \glspl{incident} is a sum of independent Bernoulli random variables,
+although they have different distributions.
+The distribution of the sum of independent Bernoulli random variables is a random variable
+with a Poisson-Binomial distribution.
+According to Le Cam's Theorem \citep{lecam1960},
+this distribution approximates the Poisson Distribution for a large number of trials.
 Therefore, this method that generates \glspl{incident} approximates an Inhomogeneous Poisson Process,
 with mean $\sum\limits_{i=1}^{N_p}{\frac{N_i}{N_p \times \mu_f} f(p_{i1}, p_{i2})} = N_i$.
 

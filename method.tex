@@ -148,6 +148,7 @@ using a \gls{kernel intensity estimator} as described in \Cref{eq:lambda_hat},
 but with separate bandwidths $h_1$, $h_2$ corresponding to the $x_1, x_2$ directions.
 As noted in \Cref{sec:theory:kernelestimation},
 we use the biweight or quartic kernel found in \Cref{tab:sample-kernels}.
+We take the quotient of these estimates as described in \Cref{eq:dkd-formula}.
 
 For simplicity of computation, we do not account for edge effects.
 One further note due to computational issues:
@@ -200,7 +201,7 @@ we run $M$ monte carlo simulations and approximate the \gls{mise} by taking the 
 
 \begin{equation}
     \label{eq:mise_tilde}
-    \widetilde{\mbox{MISE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{ISE}(\hat{\lambda_I})
+    \widetilde{\mbox{MISE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{ISE}(\hat{\lambda_i})
 \end{equation}
 
 In many of our analyses, we compare the accuracy of several experiments.
@@ -271,7 +272,7 @@ As above, we run $M$ monte carlo simulations,
 and approximate the \gls{miae} by taking the empirical average of the \glspl{iae}.
 
 \begin{equation}
-    \widetilde{\mbox{MIAE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{IAE}(\hat{\lambda_I})
+    \widetilde{\mbox{MIAE}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{IAE}(\hat{\lambda_i})
 \end{equation}
 
 As with \gls{mise}, we need to compare experiments with different values of \gls{mu}.
@@ -313,7 +314,7 @@ We define the \gls{supremum error} as follows:
 As in the previous accuracy measures, we run $M$ monte carlo simulations, and approximate the \mbox{supremum error}, by taking the empirical average of the supremum error of the estimates.
 
 \begin{equation}
-    \widetilde{\mbox{\gls{supremum error}}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{supremum error}(\hat{\lambda_I})
+    \widetilde{\mbox{\gls{supremum error}}} = \frac{1}{M} \sum_{i=1}^{M} \mbox{supremum error}(\hat{\lambda_i})
 \end{equation}
 
 Furthermore, we need to compare experiments with different values of \gls{mu}.
@@ -357,8 +358,9 @@ Then,
 we evaluate \gls{lambda_hat}\xvec on each of the points in $\xvec \in G$, and take the maximum.
 This gives us the location and value of the peak of the \gls{dkd}.
 \begin{equation}
-    \widetilde{\mbox{peak}} = (p_1, p_2) \in G \|%
-        \xvec \in G \Longrightarrow \gls{lambda_hat}\xvec \leq \gls{lambda_hat}(p_1, p_2) \text{.}%
+    \widetilde{\mbox{peak}} = (p_1, p_2) \in G \hspace{0.7em}\| \hspace{0.4em}%
+        \xvec \in G \Longrightarrow \gls{lambda_hat}\xvec \leq \gls{lambda_hat}(p_1, p_2)
+        ~\text{for all}~(x_1,x_2)~\text{in}~G~\text{.}%
 \end{equation}
 
 The \gls{peak error} is defined to be difference between the maximum value of the \gls{dkd} estimate \gls{lambda_hat} and the maximum of the true risk function \gls{lambda}.
@@ -367,13 +369,14 @@ which we estimate with the sample mean over the monte carlo simulations of the \
 The \gls{peak bias} gives us a feel for how much the \gls{dkd} tends to over or underestimate the worst case of the true risk \gls{lambda}.
 
 \begin{align}
-    \mbox{\gls{peak bias}}(\gls{lambda_hat})  & = \E \left[
-                                \max_{(x_1,x_2) \in W} \left[
-                                    {\gls{lambda_hat}\xvec} - \gls{lambda}\xvec
-                                \right]
-                            \right]
-                            \\
-    \widetilde{\mbox{\gls{peak bias}}} & = \frac{1}{M} \sum_{i=1}^{M} \mbox{peak bias}(\hat{\lambda_i})%
+    \mbox{\gls{peak bias}}(\gls{lambda_hat})  & = \E \left[%
+                                \gls{lambda_hat}\widehat{(p_1, p_2)} - \lambda{(p_1, p_2)}%
+                            \right] \\%
+    \widetilde{\mbox{\gls{peak bias}}} & = \frac{1}{M} \sum_{i=1}^{M} \left[%
+                                \gls{lambda_hat}_i\widehat{(p_{1,i}, p_{2,i})} - \lambda{(p_1, p_2)}%
+                            \right] \\%
+                            & \text{where}~\widehat{(p_{1,i}, p_{2,i})}~\text{and}~(p_1, p_2)%
+                            ~\text{are the estimated and true peaks}%
 \end{align}
 
 The second measure associated with the peak we call the \gls{peak drift}.
@@ -381,10 +384,13 @@ It is defined as the expected value of the distance in $\RS$ between the locatio
 
 \begin{align}
     \mbox{\gls{peak drift}}(\gls{lambda_hat}) & = \E \left[%
-                            |\widehat{(p_1, p_2)} - (p_1, p_2)|%
+                            \norm{\widehat{(p_1, p_2)} - (p_1, p_2)}%
                         \right] \\%
     \widetilde{\mbox{\gls{peak drift}}}
-        & = \frac{1}{M} \sum_{i=1}^{M} \mbox{peak drift}(\hat{\lambda_i})%
+        & = \frac{1}{M} \sum_{i=1}^{M} \left[%
+                            \norm{\widehat{(p_{1,i}, p_{2,i})} - (p_1, p_2)}%
+                        \right] \\%
+                        & \text{where}~\norm{\cdot}~\text{is the Euclidean distance}%
 \end{align}
 
 The \gls{relative peak bias} is the \gls{peak bias} divided by the value of the true peak.
@@ -423,13 +429,15 @@ which is based on the idea that in our samples,
 we expect to observe some clustering of events around the mode.
 \begin{align}
     \mbox{\gls{centroid bias}}(\gls{lambda_hat})%
-        & = \gls{lambda_hat}(c_1, c_2) - \mbox{true maximum} \\%
+        & = \E \left[ \gls{lambda_hat}(c_1, c_2) - \gls{lambda}(p_1, p_2) \right] \\%
     \widetilde{\mbox{centroid bias}}%
-        & = \frac{1}{M} \sum_{i=1}^{M} \mbox{centroid bias}(\hat{\lambda_i}) \\%
+        & = \frac{1}{M} \sum_{i=1}^{M} \left[ \gls{lambda_hat}_i(c_{1,i}, c_{2,i}) - \gls{lambda}(p_1, p_2) \right] \\%
+        & \text{where}~(c_{1,i}, c_{2,i})~\text{are the centroid peak estimates,}\\%
+        & ~\text{and}~(p_1, p_2)~\text{is the true peak}\\%
     \mbox{\gls{centroid drift}}(\gls{lambda_hat})%
-        & = \norm{(c_1, c_2) - \mbox{location of true maximum}} \\%
+        & = \E \left[ \norm{(c_1, c_2) - (p_1, p_2)} \right] \\%
     \widetilde{\mbox{centroid drift}}%
-        & = \frac{1}{M} \sum_{i=1}^{M} \mbox{centroid drift}(\hat{\lambda_i})%
+        & = \frac{1}{M} \sum_{i=1}^{M} \left[ \norm{(c_{1,i}, c_{2,i}) - (p_1, p_2)} \right] \\%
 \end{align}
 
 The \gls{relative centroid bias} is the \gls{centroid bias} divided by the value of the true peak.

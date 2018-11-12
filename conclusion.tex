@@ -16,7 +16,7 @@ Our simulation results show that for the \gls{incidence rate} functions we chose
 the estimation error of the \gls{dkd} is reasonable.
 We find that this is so in two ways:
 \begin{enumerate}
-    \item In answer to \Cref{thm:accuracy-scale:global},
+    \item In answer to \Cref{thm:accuracy-scale:global} (\cpageref{thm:accuracy-scale:global}),
     the normalized global accuracy
     of the rate over the study area as indicated by \gls{nmise}
     is less than 5\% for uniform populations,
@@ -24,11 +24,11 @@ We find that this is so in two ways:
     Furthermore, \gls{nmise} improves when the number of incidents increases.
     This is so regardless of whether this is due to an increase in the rate or in the population size.
     Also, the global accuracy increases when the spread of the rate increases.
-    \item In answer to \Cref{thm:accuracy-scale:peaks},
+    \item In answer to \Cref{thm:accuracy-scale:peaks} (\cpageref{thm:accuracy-scale:peaks}),
     the magnitude of the point with the highest rate (the peak) can be estimated with the \gls{dkd}
     within 10\% for uniform populations,
     but overestimates the peak for peaked populations.
-    \item In answer to \Cref{thm:accuracy-scale:peaks-location},
+    \item In answer to \Cref{thm:accuracy-scale:peaks-location} (\cpageref{thm:accuracy-scale:peaks-location}),
     the location of the point with the highest rate (the peak) can be estimated with the \gls{dkd}
     within 10\% of the size of the study area for uniform populations,
     and within 15\% for peaked populations.
@@ -61,7 +61,7 @@ leading us to consider preference for the \gls{silverman} method due to its grea
 While the \gls{mise} increased as the expected number of incidents \gls{mu} grew,
 the \acrfull{nmise} decreased at a similar rate
 in the examples we considered
-for \gls{silverman} $(n^{-0.741})$ and \gls{cv} $(n^{-0.775})$ in answer to \Cref{thm:accuracy-affected:duration}.
+for \gls{silverman} $(n^{-0.741})$ and \gls{cv} $(n^{-0.775})$ in answer to \Cref{thm:accuracy-affected:duration} (\cpageref{thm:accuracy-affected:duration}).
 In other words,
 one can expect that using two years worth of data
 to result in the global error \gls{mise} to be about 60\% of a single year.
@@ -85,7 +85,7 @@ with increasing average accuracy as the number of incidents grows.
     this is an overall rate of 1.0\%.
 \end{rec}
 
-In order to answer \Cref{thm:accuracy-affected:rates} we studied a range of spreads for different single-peak incident rate functions.
+In order to answer \Cref{thm:accuracy-affected:rates} (\cpageref{thm:accuracy-affected:rates}) we studied a range of spreads for different single-peak incident rate functions.
 Our results using Gaussian shaped incidence functions show that the \gls{dkd} accuracy was affected by the spread,
 in that the \gls{mise} decreased sharply
 as the incidence rate spread increased and the height of the peak was lower.
@@ -93,7 +93,7 @@ In this case,
 \gls{cv} performed better at $\gls{sigma_i}^{-1.576}$ than $\gls{sigma_i}^{-1.421}$ for \gls{silverman}.
 In a similar manner,
 our examples of increasing the population spread saw a sharp decrease in the \gls{mise},
-in answer to \Cref{thm:accuracy-affected:popdist}.
+in answer to \Cref{thm:accuracy-affected:popdist} (\cpageref{thm:accuracy-affected:popdist}).
 
 In the examples we studied
 in contrast to the average accuracy,
@@ -109,7 +109,7 @@ The centroid measures were much more accurate than the simple peak.
     However, if the location of the peak is important, we recommend least squares cross-validation.
 \end{rec}
 
-When we examine the behavior under different population distributions in consideration of \Cref{thm:accuracy-affected:popsize},
+When we examine the behavior under different population distributions in consideration of \Cref{thm:accuracy-affected:popsize} (\cpageref{thm:accuracy-affected:popsize}),
 we observed that the \gls{dkd} is sensitive to large variations in population density.
 This was true for all types of measures.
 What we found was that for population densities with a very sharp peak,

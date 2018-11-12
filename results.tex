@@ -20,7 +20,8 @@ In each case, we compare the results of 1,000 simulations using several accuracy
 \Cref{sec:results:unif_100_1.0_1h} describes the results of a single experiment in detail.
 Each of
 \Cref{sec:results:number_of_incidents,sec:results:spread,sec:results:unifNpop_1h,sec:results:pop_spread,sec:results:p1.4_100_G}
-describes a set of experiments, which, together, examine the effect of changes to a single factor on the performance of the \gls{dkd}.
+describes a set of experiments, which, together,
+examine the effect of changes to a single factor on the performance of the \gls{dkd}.
 Each section examines the effect of a different variable on the \gls{dkd} accuracy,
 on the selected bandwidths, and on other statistical properties of the \gls{dkd}.
 \Cref{sec:results:number_of_incidents} describes the relationship between the accuracy of the \gls{dkd} and the magnitude of the risk function for a fixed population.
@@ -400,7 +401,7 @@ of a single-peak risk function.
 The unknown information that one is trying to discover,
 is the risk of a person catching a specific disease over a defined time period.
 This is analogous to a real-world researcher combining the several years worth of incident data from the same population,
-and answers our \Cref{thm:accuracy-affected:duration}.
+and answers our \Cref{thm:accuracy-affected:duration} (\cpageref{thm:accuracy-affected:duration}).
 In particular,
 our question is,
 will extending the number of years of a study lead to more accurate results for the \gls{dkd}?
@@ -579,7 +580,7 @@ The unknown information that one is trying to discover is,
 how far away from a source of disease risk is safe.
 Our question is, under different \glspl{spread},
 how accurate is the \gls{dkd}?
-This will help us answer \Cref{thm:accuracy-affected:rates}.
+This will help us answer \Cref{thm:accuracy-affected:rates} (\cpageref{thm:accuracy-affected:rates}).
 Differing \glspl{spread} are analogous to different levels of concentration of the risk of disease is in a specific location.
 Another way to look at it is, is how quickly the risk dissipates in space as one moves further away from a single source of disease risk.
 We keep the population size constant at 10,000, distributed uniformly throughout the study area.
@@ -717,7 +718,7 @@ Unlike what we did in \Cref{sec:results:number_of_incidents} where we fixed the 
 here we fix the risk function and change the population size.
 This is analogous to increasing the size of the population under study,
 for example by increasing the study area,
-and will provide us answers to our \Cref{thm:accuracy-affected:popsize}.
+and will provide us answers to our \Cref{thm:accuracy-affected:popsize} (\cpageref{thm:accuracy-affected:popsize}).
 In order to do this, we increase the population size and the \gls{factor} proportionately.
 For example, in one experiment \gls{factor} is 50 and the population is 5,000,
 and in the next experiment the \gls{factor} is 100 and the population is 10,000.
@@ -836,7 +837,7 @@ but consistently underestimates the \gls{peak bias} by a greater value.
 
 In this section
 we compare the effect of different population distributions on the estimation of a single,
-fixed risk function in order to answer our \Cref{thm:accuracy-affected:popdist}.
+fixed risk function in order to answer our \Cref{thm:accuracy-affected:popdist} (\cpageref{thm:accuracy-affected:popdist}).
 In particular, we vary the \gls{spread} of the population \gls{sigma_p}.
 The population size is fixed at 10,000 and centered around the origin (0,0).
 We conduct five experiments, using the values 0.7, 1.0, 1.4, 2.0, and 2.8 for \gls{sigma_p}.
@@ -969,7 +970,7 @@ as seen in \Cref{fig:other_measures:pop_spread}.
 \end{table}
 
 In this section, we look at incident risk functions that have two peaks,
-in order to provide more answers to our \Cref{thm:accuracy-affected:rates}.
+in order to provide more answers to our \Cref{thm:accuracy-affected:rates} (\cpageref{thm:accuracy-affected:rates}).
 The motivation for this experiment is to check how a secondary source of pollution such as a major highway affects the accuracy of the \gls{dkd}
 globally and in finding the source of interest, such as a factory.
 The major peak has \gls{factor} of 60, while the second, minor peak has \gls{factor} of 40.
