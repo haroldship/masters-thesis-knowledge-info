@@ -1,6 +1,6 @@
 % !TEX root = thesis.tex
 
-\documentclass[a4paper,12pt,titlepage,twoside,openany]{book}
+\documentclass[a4paper,12pt,titlepage,oneside,openany]{book}
 
 \usepackage{graphicx}
 \graphicspath{ {img/} }
@@ -71,9 +71,12 @@
 \cleardoublepage
 \listoffigures
 \printglossaries
+\cleardoublepage
 
 
 \mainmatter                             % only in book class (arabic page #s)
+
+\newgeometry{twoside}
 
 \onehalfspacing
 \chapter{Introduction}
@@ -125,6 +128,9 @@
 \resetpath
 
 \cleardoublepage
+
+\restoregeometry
+
 \includepdf[pages=-]{abstract-hebrew.pdf}
 
 \cleardoublepage
